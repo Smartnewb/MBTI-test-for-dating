@@ -1,0 +1,54 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+dev-debug.log
+
+# Dependency directories
+node_modules/
+
+# Environment variables and sensitive configuration
+.env
+.env.*
+.taskmasterconfig
+
+# Editor directories and files
+.idea
+.vscode
+.cursor
+.cursor/mcp.json
+.roo/
+.roomodes
+.windsurfrules
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+
+# OS specific
+.DS_Store
+
+# Task files
+tasks.json
+tasks/
+tasks/*.json
+tasks/*.bak
+
+# Supabase local development
+.supabase/
+supabase/.branches/
+supabase/.temp/
+
+# Local development files
+scripts/task-complexity-report.json
+
+# Next.js build output
+.next/
+out/
+
+# Added by Claude Task Master
+# Environment variables
