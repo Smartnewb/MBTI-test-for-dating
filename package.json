@@ -20,6 +20,7 @@
     "task:parse-prd": "node scripts/dev.js parse-prd",
     "push-to-github": "node scripts/push-to-github.js",
     "setup-git": "node scripts/setup-git-credentials.js",
+    "setup-github-secrets": "node scripts/setup-github-secrets.js",
     "setup-sentry": "node scripts/setup-sentry.js",
     "security-audit": "node scripts/security-audit.js",
     "deploy": "node scripts/deploy.js",
