@@ -15,8 +15,8 @@ const TitleContainer = styled(Box)(({ theme, align }) => ({
 
 // 스타일링된 메인 타이틀
 const MainTitle = styled(Typography)(({ theme, color, hasGradient }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.bold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 700,
   fontSize: '2.5rem',
   marginBottom: theme.spacing(1),
   position: 'relative',
@@ -29,7 +29,7 @@ const MainTitle = styled(Typography)(({ theme, color, hasGradient }) => ({
     backgroundClip: 'text',
   }),
   textShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
-  
+
   [theme.breakpoints.down('md')]: {
     fontSize: '2rem',
   },
@@ -37,11 +37,11 @@ const MainTitle = styled(Typography)(({ theme, color, hasGradient }) => ({
 
 // 스타일링된 서브 타이틀
 const SubTitle = styled(Typography)(({ theme, color }) => ({
-  fontFamily: theme.typography.fontFamily.primary,
-  fontWeight: theme.typography.fontWeight.medium,
+  fontFamily: '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontWeight: 500,
   fontSize: '1.2rem',
   color: color || theme.palette.text.secondary,
-  
+
   [theme.breakpoints.down('md')]: {
     fontSize: '1rem',
   },
@@ -60,9 +60,9 @@ const Decoration = styled(Box)(({ theme, align }) => ({
 
 /**
  * 신비로운 타이틀 컴포넌트
- * 
+ *
  * 신비로운 타로 테마에 어울리는 타이틀 컴포넌트를 제공합니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} props.title - 메인 타이틀
  * @param {string} [props.subtitle] - 서브 타이틀
@@ -90,20 +90,20 @@ export default function MysticalTitle({
   return (
     <AnimatedElement animation={animation} duration="normal" onScroll={onScroll}>
       <TitleContainer align={align} sx={sx}>
-        <MainTitle 
-          variant="h2" 
+        <MainTitle
+          variant="h2"
           color={titleColor}
           hasGradient={hasGradient}
           align={align}
         >
           {title}
         </MainTitle>
-        
+
         {hasDecoration && <Decoration align={align} />}
-        
+
         {subtitle && (
-          <SubTitle 
-            variant="subtitle1" 
+          <SubTitle
+            variant="subtitle1"
             color={subtitleColor}
             align={align}
           >

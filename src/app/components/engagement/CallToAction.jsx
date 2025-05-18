@@ -9,55 +9,54 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 // 스타일링된 CTA 컨테이너
 const CtaContainer = styled(Paper)(({ theme, variant }) => {
   // 변형에 따른 스타일 설정
-  let variantStyles = {};
-
-  switch (variant) {
-    case 'primary':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.primary.main}40 100%)`,
-        color: theme.palette.common.white
-      };
-      break;
-
-    case 'secondary':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.secondary.dark}80 0%, ${theme.palette.secondary.main}40 100%)`,
-        color: theme.palette.common.white
-      };
-      break;
-
-    case 'mystical':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.secondary.dark}80 100%)`,
-        color: theme.palette.common.white
-      };
-      break;
-
-    case 'light':
-      variantStyles = {
-        background: theme.palette.background.paper,
-        color: theme.palette.text.primary,
-        border: `1px solid ${theme.palette.divider}`
-      };
-      break;
-
-    default:
-      variantStyles = {
-        background: theme.palette.background.default,
-        color: theme.palette.text.primary
-      };
-      break;
-  }
-
-  return {
+  const baseStyles = {
     padding: theme.spacing(4),
     borderRadius: theme.shape.borderRadius * 2,
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden',
-    position: 'relative',
-    ...variantStyles
+    position: 'relative'
   };
-}));
+
+  if (variant === 'primary') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.primary.main}40 100%)`,
+      color: theme.palette.common.white
+    };
+  }
+
+  if (variant === 'secondary') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.secondary.dark}80 0%, ${theme.palette.secondary.main}40 100%)`,
+      color: theme.palette.common.white
+    };
+  }
+
+  if (variant === 'mystical') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.secondary.dark}80 100%)`,
+      color: theme.palette.common.white
+    };
+  }
+
+  if (variant === 'light') {
+    return {
+      ...baseStyles,
+      background: theme.palette.background.paper,
+      color: theme.palette.text.primary,
+      border: `1px solid ${theme.palette.divider}`
+    };
+  }
+
+  // Default
+  return {
+    ...baseStyles,
+    background: theme.palette.background.default,
+    color: theme.palette.text.primary
+  };
+});
 
 // 스타일링된 배경 장식
 const BackgroundDecoration = styled(Box)(({ theme }) => ({
@@ -69,7 +68,7 @@ const BackgroundDecoration = styled(Box)(({ theme }) => ({
   borderRadius: '50%',
   background: `radial-gradient(circle, ${theme.palette.primary.main}20 0%, transparent 70%)`,
   opacity: 0.5,
-  zIndex: 0,
+  zIndex: 0
 }));
 
 /**

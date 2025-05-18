@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Box, Typography, Button, Snackbar, Alert, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AnimatedElement } from '../components/animations';
@@ -18,7 +18,7 @@ import EmailIcon from '@mui/icons-material/Email';
  *
  * 테스트 결과를 표시합니다.
  */
-export default function ResultPage() {
+function ResultContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { result, idealType, worstMatch, handleRestartTest, isTestCompleted } = useMbtiTest();
@@ -241,7 +241,6 @@ export default function ResultPage() {
             이메일을 입력하시면 결과를 저장하고 언제든지 다시 확인할 수 있습니다.
           </Typography>
           <TextField
-            autoFocus
             margin="dense"
             label="이메일"
             type="email"
@@ -275,5 +274,19 @@ export default function ResultPage() {
         </Alert>
       </Snackbar>
     </PageLayout>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense fallback={
+      <PageLayout variant="result">
+        <Section centered fullHeight>
+          <Typography variant="h4">결과를 불러오는 중...</Typography>
+        </Section>
+      </PageLayout>
+    }>
+      <ResultContent />
+    </Suspense>
   );
 }

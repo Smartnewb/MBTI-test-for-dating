@@ -39,8 +39,8 @@ const HeroContainer = styled(Box)(({ theme }) => ({
 
 // 스타일링된 로고 타이틀
 const LogoTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.bold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 700,
   fontSize: '3.5rem',
   textAlign: 'center',
   marginBottom: theme.spacing(1),
@@ -58,8 +58,8 @@ const LogoTitle = styled(Typography)(({ theme }) => ({
 
 // 스타일링된 서브타이틀
 const Subtitle = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.primary,
-  fontWeight: theme.typography.fontWeight.medium,
+  fontFamily: '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontWeight: 500,
   fontSize: '1.5rem',
   textAlign: 'center',
   marginBottom: theme.spacing(4),

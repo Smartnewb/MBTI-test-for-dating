@@ -7,59 +7,59 @@ import { Section } from '../layout';
 
 // 스타일링된 섹션 컨테이너
 const SectionContainer = styled(Box)(({ theme, variant }) => {
-  // 변형에 따른 스타일 설정
-  let variantStyles = {};
-
-  switch (variant) {
-    case 'dark':
-      variantStyles = {
-        background: theme.palette.background.default,
-        color: theme.palette.common.white
-      };
-      break;
-
-    case 'light':
-      variantStyles = {
-        background: theme.palette.background.paper,
-        color: theme.palette.text.primary
-      };
-      break;
-
-    case 'primary':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.primary.main}40 100%)`,
-        color: theme.palette.common.white
-      };
-      break;
-
-    case 'secondary':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.secondary.dark}80 0%, ${theme.palette.secondary.main}40 100%)`,
-        color: theme.palette.common.white
-      };
-      break;
-
-    case 'mystical':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.secondary.dark}80 100%)`,
-        color: theme.palette.common.white
-      };
-      break;
-
-    default:
-      variantStyles = {
-        background: 'transparent'
-      };
-      break;
-  }
-
-  return {
+  // 기본 스타일
+  const baseStyles = {
     position: 'relative',
     padding: theme.spacing(8, 0),
-    overflow: 'hidden',
-    ...variantStyles
+    overflow: 'hidden'
   };
-}));
+
+  if (variant === 'dark') {
+    return {
+      ...baseStyles,
+      background: theme.palette.background.default,
+      color: theme.palette.common.white
+    };
+  }
+
+  if (variant === 'light') {
+    return {
+      ...baseStyles,
+      background: theme.palette.background.paper,
+      color: theme.palette.text.primary
+    };
+  }
+
+  if (variant === 'primary') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.primary.main}40 100%)`,
+      color: theme.palette.common.white
+    };
+  }
+
+  if (variant === 'secondary') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.secondary.dark}80 0%, ${theme.palette.secondary.main}40 100%)`,
+      color: theme.palette.common.white
+    };
+  }
+
+  if (variant === 'mystical') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.secondary.dark}80 100%)`,
+      color: theme.palette.common.white
+    };
+  }
+
+  // Default
+  return {
+    ...baseStyles,
+    background: 'transparent'
+  };
+});
 
 /**
  * 신비로운 섹션 컴포넌트

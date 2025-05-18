@@ -1,13 +1,14 @@
 'use client';
 
+import { useCallback } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 /**
  * 반응형 디자인을 위한 커스텀 훅
- * 
+ *
  * 현재 화면 크기에 따른 반응형 값을 제공하는 훅입니다.
- * 
+ *
  * @returns {Object} 반응형 유틸리티 객체
  * @returns {boolean} returns.isMobile - 모바일 화면 여부 (sm 이하)
  * @returns {boolean} returns.isTablet - 태블릿 화면 여부 (md 이하)
@@ -21,42 +22,50 @@ import useMediaQuery from '@mui/material/useMediaQuery';
  */
 export default function useResponsive() {
   const theme = useTheme();
-  
+
   // 기본 브레이크포인트 쿼리
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
   const isLargeDesktop = useMediaQuery(theme.breakpoints.up('xl'));
-  
+
   /**
    * 특정 브레이크포인트 이상인지 확인
    * @param {string} breakpoint - 브레이크포인트 ('xs', 'sm', 'md', 'lg', 'xl')
    * @returns {boolean} 해당 브레이크포인트 이상인지 여부
    */
-  const up = (breakpoint) => useMediaQuery(theme.breakpoints.up(breakpoint));
-  
+  const up = useCallback((breakpoint) => {
+    return theme.breakpoints.up(breakpoint);
+  }, [theme.breakpoints]);
+
   /**
    * 특정 브레이크포인트 이하인지 확인
    * @param {string} breakpoint - 브레이크포인트 ('xs', 'sm', 'md', 'lg', 'xl')
    * @returns {boolean} 해당 브레이크포인트 이하인지 여부
    */
-  const down = (breakpoint) => useMediaQuery(theme.breakpoints.down(breakpoint));
-  
+  const down = useCallback((breakpoint) => {
+    return theme.breakpoints.down(breakpoint);
+  }, [theme.breakpoints]);
+
   /**
    * 두 브레이크포인트 사이인지 확인
    * @param {string} start - 시작 브레이크포인트 ('xs', 'sm', 'md', 'lg', 'xl')
    * @param {string} end - 종료 브레이크포인트 ('xs', 'sm', 'md', 'lg', 'xl')
    * @returns {boolean} 두 브레이크포인트 사이인지 여부
    */
-  const between = (start, end) => useMediaQuery(theme.breakpoints.between(start, end));
-  
+  const between = useCallback((start, end) => {
+    return theme.breakpoints.between(start, end);
+  }, [theme.breakpoints]);
+
   /**
    * 특정 브레이크포인트에만 해당하는지 확인
    * @param {string} breakpoint - 브레이크포인트 ('xs', 'sm', 'md', 'lg', 'xl')
    * @returns {boolean} 특정 브레이크포인트에만 해당하는지 여부
    */
-  const only = (breakpoint) => useMediaQuery(theme.breakpoints.only(breakpoint));
-  
+  const only = useCallback((breakpoint) => {
+    return theme.breakpoints.only(breakpoint);
+  }, [theme.breakpoints]);
+
   /**
    * 화면 크기에 따라 다른 값 반환
    * @param {Object} values - 브레이크포인트별 값 객체
@@ -69,14 +78,14 @@ export default function useResponsive() {
    */
   const width = (values) => {
     const { xs, sm, md, lg, xl } = values;
-    
+
     if (isLargeDesktop && xl !== undefined) return xl;
     if (isDesktop && lg !== undefined) return lg;
     if (!isTablet && md !== undefined) return md;
     if (!isMobile && sm !== undefined) return sm;
     return xs;
   };
-  
+
   return {
     isMobile,
     isTablet,

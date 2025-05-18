@@ -48,8 +48,8 @@ const AdviceContainer = styled(Box)(({ theme }) => ({
 
 // 스타일링된 조언 제목
 const AdviceTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.semibold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 600, // semibold 값을 직접 사용
   fontSize: '1.5rem',
   marginBottom: theme.spacing(2),
   color: theme.palette.secondary.main,

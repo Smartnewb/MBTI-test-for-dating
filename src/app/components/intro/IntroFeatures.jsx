@@ -31,8 +31,8 @@ const FeaturesContainer = styled(Box)(({ theme }) => ({
 
 // 스타일링된 섹션 제목
 const SectionTitle = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.bold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 700,
   fontSize: '2.5rem',
   textAlign: 'center',
   marginBottom: theme.spacing(2),

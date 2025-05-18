@@ -10,23 +10,29 @@ import Container from './Container';
 import MysticalButton from '../MysticalButton';
 
 // 스타일링된 앱바 컴포넌트
-const StyledAppBar = styled(AppBar)(({ theme, transparent, scrolled }) => ({
-  backgroundColor: transparent && !scrolled ? 'transparent' : theme.palette.background.paper,
-  boxShadow: transparent && !scrolled ? 'none' : theme.shadows[3],
-  transition: 'all 0.3s ease',
-  
-  // 배경 그라데이션
-  backgroundImage: transparent && !scrolled ? 'none' : 
-    `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
-  
-  // 테두리
-  borderBottom: transparent && !scrolled ? 'none' : `1px solid ${theme.palette.divider}`,
-}));
+const StyledAppBar = styled(AppBar)(({ theme, transparent, scrolled }) => {
+  // 불리언 값을 문자열로 변환하지 않고 직접 사용
+  const isTransparent = transparent === true;
+  const isScrolled = scrolled === true;
+
+  return {
+    backgroundColor: isTransparent && !isScrolled ? 'transparent' : theme.palette.background.paper,
+    boxShadow: isTransparent && !isScrolled ? 'none' : theme.shadows[3],
+    transition: 'all 0.3s ease',
+
+    // 배경 그라데이션
+    backgroundImage: isTransparent && !isScrolled ? 'none' :
+      `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
+
+    // 테두리
+    borderBottom: isTransparent && !isScrolled ? 'none' : `1px solid ${theme.palette.divider}`,
+  };
+});
 
 // 스타일링된 로고 컴포넌트
 const Logo = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.bold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 700,
   fontSize: '1.5rem',
   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
   WebkitBackgroundClip: 'text',
@@ -36,33 +42,38 @@ const Logo = styled(Typography)(({ theme }) => ({
 }));
 
 // 스타일링된 네비게이션 링크
-const NavLink = styled(Typography)(({ theme, active }) => ({
-  margin: theme.spacing(0, 2),
-  padding: theme.spacing(0.5, 0),
-  position: 'relative',
-  cursor: 'pointer',
-  fontWeight: active ? theme.typography.fontWeight.medium : theme.typography.fontWeight.regular,
-  color: active ? theme.palette.primary.main : theme.palette.text.primary,
-  
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: active ? '100%' : '0%',
-    height: '2px',
-    backgroundColor: theme.palette.primary.main,
-    transition: 'width 0.3s ease',
-  },
-  
-  '&:hover': {
-    color: theme.palette.primary.main,
-    
+const NavLink = styled(Typography)(({ theme, active }) => {
+  // 불리언 값을 직접 사용
+  const isActive = active === true;
+
+  return {
+    margin: theme.spacing(0, 2),
+    padding: theme.spacing(0.5, 0),
+    position: 'relative',
+    cursor: 'pointer',
+    fontWeight: isActive ? 500 : 400,
+    color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
+
     '&::after': {
-      width: '100%',
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: isActive ? '100%' : '0%',
+      height: '2px',
+      backgroundColor: theme.palette.primary.main,
+      transition: 'width 0.3s ease',
     },
-  },
-}));
+
+    '&:hover': {
+      color: theme.palette.primary.main,
+
+      '&::after': {
+        width: '100%',
+      },
+    },
+  };
+});
 
 // 스타일링된 모바일 드로어
 const MobileDrawer = styled(Drawer)(({ theme }) => ({
@@ -76,26 +87,31 @@ const MobileDrawer = styled(Drawer)(({ theme }) => ({
 }));
 
 // 스타일링된 모바일 네비게이션 링크
-const MobileNavLink = styled(ListItem)(({ theme, active }) => ({
-  borderRadius: theme.shape.borderRadius,
-  marginBottom: theme.spacing(1),
-  backgroundColor: active ? `${theme.palette.primary.main}10` : 'transparent',
-  
-  '& .MuiListItemText-primary': {
-    color: active ? theme.palette.primary.main : theme.palette.text.primary,
-    fontWeight: active ? theme.typography.fontWeight.medium : theme.typography.fontWeight.regular,
-  },
-  
-  '&:hover': {
-    backgroundColor: `${theme.palette.primary.main}10`,
-  },
-}));
+const MobileNavLink = styled(ListItem)(({ theme, active }) => {
+  // 불리언 값을 직접 사용
+  const isActive = active === true;
+
+  return {
+    borderRadius: theme.shape.borderRadius,
+    marginBottom: theme.spacing(1),
+    backgroundColor: isActive ? `${theme.palette.primary.main}10` : 'transparent',
+
+    '& .MuiListItemText-primary': {
+      color: isActive ? theme.palette.primary.main : theme.palette.text.primary,
+      fontWeight: isActive ? 500 : 400,
+    },
+
+    '&:hover': {
+      backgroundColor: `${theme.palette.primary.main}10`,
+    },
+  };
+});
 
 /**
  * 헤더 컴포넌트
- * 
+ *
  * 페이지 상단에 표시되는 헤더 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {boolean} [props.transparent=false] - 투명 배경 여부
  * @param {Object} [props.sx] - 추가 스타일
@@ -103,36 +119,36 @@ const MobileNavLink = styled(ListItem)(({ theme, active }) => ({
 export default function Header({ transparent = false, sx = {} }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activePage, setActivePage] = useState('/');
-  
+
   // 스크롤 이벤트 처리
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
     };
-    
+
     window.addEventListener('scroll', handleScroll);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  
+
   // 현재 페이지 설정
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setActivePage(window.location.pathname);
     }
   }, []);
-  
+
   // 모바일 드로어 토글
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  
+
   // 네비게이션 링크
   const navLinks = [
     { text: '홈', href: '/' },
@@ -140,7 +156,7 @@ export default function Header({ transparent = false, sx = {} }) {
     { text: 'MBTI 유형', href: '/types' },
     { text: '궁합 확인', href: '/compatibility' },
   ];
-  
+
   // 모바일 드로어 내용
   const drawer = (
     <Box sx={{ textAlign: 'center' }}>
@@ -150,16 +166,28 @@ export default function Header({ transparent = false, sx = {} }) {
           <CloseIcon />
         </IconButton>
       </Box>
-      
+
       <List>
-        {navLinks.map((link) => (
-          <Link href={link.href} key={link.href} passHref style={{ textDecoration: 'none' }}>
-            <MobileNavLink button active={activePage === link.href} onClick={handleDrawerToggle}>
-              <ListItemText primary={link.text} />
-            </MobileNavLink>
-          </Link>
-        ))}
-        
+        {navLinks.map((link) => {
+          // 불리언 속성을 문자열로 변환하지 않고 조건부로 전달
+          const isActive = activePage === link.href;
+          const navLinkProps = {
+            button: true,
+            onClick: handleDrawerToggle
+          };
+
+          // 불리언 값이 true인 경우에만 속성 추가
+          if (isActive) navLinkProps.active = isActive;
+
+          return (
+            <Link href={link.href} key={link.href} passHref style={{ textDecoration: 'none' }}>
+              <MobileNavLink {...navLinkProps}>
+                <ListItemText primary={link.text} />
+              </MobileNavLink>
+            </Link>
+          );
+        })}
+
         <Box sx={{ mt: 2, px: 2 }}>
           <MysticalButton variant="mystical" fullWidth>
             테스트 시작하기
@@ -168,21 +196,26 @@ export default function Header({ transparent = false, sx = {} }) {
       </List>
     </Box>
   );
-  
+
+  // 불리언 속성을 문자열로 변환하지 않고 조건부로 전달
+  const appBarProps = {
+    position: "sticky",
+    elevation: 0,
+    sx
+  };
+
+  // 불리언 값이 true인 경우에만 속성 추가
+  if (transparent) appBarProps.transparent = transparent;
+  if (scrolled) appBarProps.scrolled = scrolled;
+
   return (
-    <StyledAppBar 
-      position="sticky" 
-      transparent={transparent} 
-      scrolled={scrolled}
-      elevation={0}
-      sx={sx}
-    >
+    <StyledAppBar {...appBarProps}>
       <Container>
         <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
           <Link href="/" passHref style={{ textDecoration: 'none' }}>
             <Logo variant="h6">달빛 연애 연구소</Logo>
           </Link>
-          
+
           {isMobile ? (
             <IconButton
               color="inherit"
@@ -195,15 +228,24 @@ export default function Header({ transparent = false, sx = {} }) {
           ) : (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ display: 'flex' }}>
-                {navLinks.map((link) => (
-                  <Link href={link.href} key={link.href} passHref style={{ textDecoration: 'none' }}>
-                    <NavLink variant="body2" active={activePage === link.href}>
-                      {link.text}
-                    </NavLink>
-                  </Link>
-                ))}
+                {navLinks.map((link) => {
+                  // 불리언 속성을 문자열로 변환하지 않고 조건부로 전달
+                  const isActive = activePage === link.href;
+                  const navLinkProps = { variant: "body2" };
+
+                  // 불리언 값이 true인 경우에만 속성 추가
+                  if (isActive) navLinkProps.active = isActive;
+
+                  return (
+                    <Link href={link.href} key={link.href} passHref style={{ textDecoration: 'none' }}>
+                      <NavLink {...navLinkProps}>
+                        {link.text}
+                      </NavLink>
+                    </Link>
+                  );
+                })}
               </Box>
-              
+
               <Box sx={{ ml: 2 }}>
                 <MysticalButton variant="mystical" size="small">
                   테스트 시작하기
@@ -213,7 +255,7 @@ export default function Header({ transparent = false, sx = {} }) {
           )}
         </Toolbar>
       </Container>
-      
+
       <MobileDrawer
         anchor="right"
         open={mobileOpen}

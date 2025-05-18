@@ -1,9 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
-import { Box, Fade, Grow, Slide, Zoom } from '@mui/material';
+import { Box } from '@mui/material';
 import { keyframes } from '@mui/system';
 import { styled } from '@mui/material/styles';
+import AnimatedGroup from './animations/AnimatedGroup';
 
 // 애니메이션 지속 시간 (ms)
 const DURATIONS = {
@@ -113,7 +113,7 @@ const pulse = keyframes`
 // 애니메이션 스타일 매핑
 const getAnimationStyle = (animation, duration) => {
   const durationMs = DURATIONS[duration] || DURATIONS.normal;
-  
+
   switch (animation) {
     case 'tarotFlip':
       return {
@@ -172,9 +172,9 @@ const AnimationContainer = styled(Box)(({ theme, animation, duration, delay = 0 
 
 /**
  * 애니메이션 요소 컴포넌트
- * 
+ *
  * 다양한 애니메이션 효과를 적용할 수 있는 래퍼 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {React.ReactNode} props.children - 자식 요소
  * @param {string} props.animation - 애니메이션 유형 ('fadeIn', 'slideUp', 'tarotFlip', 'tarotReveal', 'shine', 'slideRight', 'slideLeft', 'pulse')
@@ -182,13 +182,13 @@ const AnimationContainer = styled(Box)(({ theme, animation, duration, delay = 0 
  * @param {number} props.delay - 애니메이션 시작 지연 시간 (ms)
  * @param {Object} props.sx - 추가 스타일 속성
  */
-export function AnimatedElement({ 
-  children, 
-  animation = 'fadeIn', 
-  duration = 'normal', 
+export function AnimatedElement({
+  children,
+  animation = 'fadeIn',
+  duration = 'normal',
   delay = 0,
   sx = {},
-  ...props 
+  ...props
 }) {
   return (
     <AnimationContainer
@@ -202,3 +202,5 @@ export function AnimatedElement({
     </AnimationContainer>
   );
 }
+
+export { AnimatedGroup };

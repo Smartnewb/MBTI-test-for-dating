@@ -8,9 +8,12 @@ import { PageLayout, Section } from '../../components/layout';
 import QuestionCard from '../../components/test/QuestionCard';
 import useMbtiTest from '../../hooks/useMbtiTest';
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 /**
  * MBTI 테스트 질문 페이지
- * 
+ *
  * 테스트 질문을 표시하고 사용자 응답을 처리합니다.
  */
 export default function QuestionPage() {
@@ -27,14 +30,14 @@ export default function QuestionPage() {
     goToPreviousQuestion,
     handleCompleteTest
   } = useMbtiTest();
-  
+
   // 테스트 완료 시 결과 페이지로 이동
   useEffect(() => {
     if (isTestCompleted) {
       router.push('/result');
     }
   }, [isTestCompleted, router]);
-  
+
   // 로딩 중 표시
   if (loading) {
     return (
@@ -45,7 +48,7 @@ export default function QuestionPage() {
       </PageLayout>
     );
   }
-  
+
   // 에러 표시
   if (error) {
     return (
@@ -57,7 +60,7 @@ export default function QuestionPage() {
       </PageLayout>
     );
   }
-  
+
   // 질문이 없는 경우
   if (!questions || questions.length === 0) {
     return (
@@ -71,7 +74,7 @@ export default function QuestionPage() {
       </PageLayout>
     );
   }
-  
+
   // 현재 질문 인덱스가 범위를 벗어난 경우
   if (currentQuestionIndex < 0 || currentQuestionIndex >= questions.length) {
     return (
@@ -85,7 +88,7 @@ export default function QuestionPage() {
       </PageLayout>
     );
   }
-  
+
   // 응답 처리 핸들러
   const handleAnswer = (answer) => {
     // 마지막 질문인 경우 테스트 완료 처리
@@ -97,7 +100,7 @@ export default function QuestionPage() {
       saveAnswer(currentQuestion.id, answer);
     }
   };
-  
+
   return (
     <PageLayout variant="test">
       <Section>

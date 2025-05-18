@@ -30,6 +30,9 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
   // 라우터
   const router = useRouter();
 
+  // Supabase 컨텍스트 사용
+  const { user, sessionId: supabaseSessionId } = useSupabase();
+
   // Zustand 스토어에서 상태 및 액션 가져오기
   const {
     questions,
@@ -177,9 +180,6 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
       setLoading(false);
     }
   }, [questions.length, fetchQuestions]);
-
-  // Supabase 컨텍스트 사용
-  const { user, sessionId: supabaseSessionId } = useSupabase();
 
   // 세션 ID 설정
   useEffect(() => {

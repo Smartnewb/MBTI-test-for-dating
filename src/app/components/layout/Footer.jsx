@@ -16,10 +16,10 @@ const StyledFooter = styled(Box)(({ theme }) => ({
   borderTop: `1px solid ${theme.palette.divider}`,
   padding: theme.spacing(6, 0),
   position: 'relative',
-  
+
   // 배경 그라데이션
   backgroundImage: `linear-gradient(to top, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
-  
+
   // 배경 효과
   '&::before': {
     content: '""',
@@ -39,8 +39,8 @@ const StyledFooter = styled(Box)(({ theme }) => ({
 
 // 스타일링된 푸터 로고
 const FooterLogo = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.bold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 700,
   fontSize: '1.5rem',
   marginBottom: theme.spacing(2),
   background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
@@ -57,7 +57,7 @@ const FooterLink = styled(MuiLink)(({ theme }) => ({
   marginBottom: theme.spacing(1),
   display: 'block',
   transition: 'color 0.2s ease',
-  
+
   '&:hover': {
     color: theme.palette.primary.main,
   },
@@ -67,7 +67,7 @@ const FooterLink = styled(MuiLink)(({ theme }) => ({
 const SocialIconButton = styled(IconButton)(({ theme }) => ({
   color: theme.palette.text.secondary,
   transition: 'all 0.2s ease',
-  
+
   '&:hover': {
     color: theme.palette.primary.main,
     backgroundColor: `${theme.palette.primary.main}10`,
@@ -76,11 +76,11 @@ const SocialIconButton = styled(IconButton)(({ theme }) => ({
 
 // 스타일링된 푸터 섹션 제목
 const FooterSectionTitle = styled(Typography)(({ theme }) => ({
-  fontWeight: theme.typography.fontWeight.bold,
+  fontWeight: 700,
   marginBottom: theme.spacing(2),
   position: 'relative',
   paddingBottom: theme.spacing(1),
-  
+
   '&::after': {
     content: '""',
     position: 'absolute',
@@ -94,9 +94,9 @@ const FooterSectionTitle = styled(Typography)(({ theme }) => ({
 
 /**
  * 푸터 컴포넌트
- * 
+ *
  * 페이지 하단에 표시되는 푸터 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {Object} [props.sx] - 추가 스타일
  */
@@ -104,10 +104,10 @@ export default function Footer({ sx = {} }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   // 현재 연도
   const currentYear = new Date().getFullYear();
-  
+
   return (
     <StyledFooter component="footer" sx={sx}>
       <Container>
@@ -118,7 +118,7 @@ export default function Footer({ sx = {} }) {
               MBTI 기반의 연애 성향 분석과 궁합 정보를 제공하는 서비스입니다.
               나와 잘 맞는 연인을 찾고, 더 나은 연애를 위한 인사이트를 얻어보세요.
             </Typography>
-            
+
             <Box sx={{ display: 'flex', mt: 2 }}>
               <SocialIconButton aria-label="facebook">
                 <FacebookIcon />
@@ -134,7 +134,7 @@ export default function Footer({ sx = {} }) {
               </SocialIconButton>
             </Box>
           </GridItem>
-          
+
           <GridItem xs={6} md={2}>
             <FooterSectionTitle variant="subtitle2">
               서비스
@@ -152,7 +152,7 @@ export default function Footer({ sx = {} }) {
               <FooterLink>궁합 확인</FooterLink>
             </Link>
           </GridItem>
-          
+
           <GridItem xs={6} md={2}>
             <FooterSectionTitle variant="subtitle2">
               정보
@@ -170,7 +170,7 @@ export default function Footer({ sx = {} }) {
               <FooterLink>이용약관</FooterLink>
             </Link>
           </GridItem>
-          
+
           <GridItem xs={12} md={4}>
             <FooterSectionTitle variant="subtitle2">
               뉴스레터 구독
@@ -178,15 +178,15 @@ export default function Footer({ sx = {} }) {
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               최신 MBTI 연애 팁과 관계 심리학 정보를 받아보세요.
             </Typography>
-            
+
             {/* 뉴스레터 구독 폼은 추후 구현 */}
           </GridItem>
         </Grid>
-        
+
         <Divider sx={{ my: 4 }} />
-        
-        <Box sx={{ 
-          display: 'flex', 
+
+        <Box sx={{
+          display: 'flex',
           flexDirection: isMobile ? 'column' : 'row',
           justifyContent: 'space-between',
           alignItems: isMobile ? 'center' : 'flex-start',
@@ -195,7 +195,7 @@ export default function Footer({ sx = {} }) {
           <Typography variant="body2" color="text.secondary">
             © {currentYear} 달빛 연애 연구소. All rights reserved.
           </Typography>
-          
+
           {!isMobile && (
             <Box sx={{ display: 'flex' }}>
               <Link href="/privacy" passHref>

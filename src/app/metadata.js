@@ -1,6 +1,6 @@
 /**
  * 애플리케이션 메타데이터
- * 
+ *
  * 페이지별 메타데이터를 정의합니다.
  */
 
@@ -12,6 +12,7 @@ export const defaultMetadata = {
   authors: [{ name: '달빛 연애 연구소' }],
   creator: '달빛 연애 연구소',
   publisher: '달빛 연애 연구소',
+  metadataBase: new URL('https://mbti-dating-test.vercel.app'),
   openGraph: {
     title: '달빛 연애 연구소 - MBTI 연애 테스트',
     description: 'MBTI 기반 연애 성향 테스트로 당신의 연애 스타일과 이상형을 알아보세요.',
@@ -34,11 +35,6 @@ export const defaultMetadata = {
     description: 'MBTI 기반 연애 성향 테스트로 당신의 연애 스타일과 이상형을 알아보세요.',
     images: ['/images/og-image.jpg'],
   },
-  viewport: {
-    width: 'device-width',
-    initialScale: 1,
-    maximumScale: 1,
-  },
   robots: {
     index: true,
     follow: true,
@@ -55,7 +51,6 @@ export const defaultMetadata = {
     apple: '/apple-touch-icon.png',
   },
   manifest: '/manifest.json',
-  themeColor: '#6B3FA0',
 };
 
 // 홈페이지 메타데이터
@@ -79,9 +74,11 @@ export const resultMetadata = {
   description: '당신의 MBTI 연애 유형 결과입니다. 당신의 연애 스타일과 이상형을 확인해보세요.',
 };
 
-export default {
+const metadata = {
   defaultMetadata,
   homeMetadata,
   testMetadata,
   resultMetadata,
 };
+
+export default metadata;

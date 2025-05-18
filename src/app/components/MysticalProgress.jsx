@@ -18,7 +18,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme, variant }) => ({
   backgroundColor: theme.palette.background.paper,
   position: 'relative',
   overflow: 'hidden',
-  
+
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -29,7 +29,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme, variant }) => ({
     background: 'rgba(255, 255, 255, 0.05)',
     zIndex: 1,
   },
-  
+
   // Primary 변형
   ...(variant === 'primary' && {
     '& .MuiLinearProgress-bar': {
@@ -37,7 +37,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme, variant }) => ({
       borderRadius: 5,
     },
   }),
-  
+
   // Secondary 변형
   ...(variant === 'secondary' && {
     '& .MuiLinearProgress-bar': {
@@ -45,7 +45,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme, variant }) => ({
       borderRadius: 5,
     },
   }),
-  
+
   // Mystical 변형
   ...(variant === 'mystical' && {
     '& .MuiLinearProgress-bar': {
@@ -54,7 +54,7 @@ const StyledLinearProgress = styled(LinearProgress)(({ theme, variant }) => ({
       boxShadow: `0 0 10px ${theme.palette.primary.main}80`,
       animation: 'glow 1.5s ease-in-out infinite alternate',
     },
-    
+
     '@keyframes glow': {
       '0%': {
         boxShadow: `0 0 5px ${theme.palette.primary.main}40`,
@@ -80,19 +80,19 @@ const StepIndicator = styled(Box)(({ theme, active, completed }) => ({
   borderRadius: '50%',
   margin: '0 2px',
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
-  
+
   // 완료된 단계
   ...(completed && {
     backgroundColor: theme.palette.primary.main,
     boxShadow: `0 0 5px ${theme.palette.primary.main}`,
   }),
-  
+
   // 활성 단계
   ...(active && !completed && {
     backgroundColor: theme.palette.secondary.main,
     boxShadow: `0 0 5px ${theme.palette.secondary.main}`,
   }),
-  
+
   // 미완료 단계
   ...(!active && !completed && {
     backgroundColor: theme.palette.background.paper,
@@ -102,9 +102,9 @@ const StepIndicator = styled(Box)(({ theme, active, completed }) => ({
 
 /**
  * 신비로운 진행 상태 표시기 컴포넌트
- * 
+ *
  * 신비로운 타로 카드 컨셉을 적용한 진행 상태 표시기 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {number} props.value - 진행 상태 값 (0-100)
  * @param {string} [props.variant='primary'] - 진행 상태 표시기 변형 ('primary', 'secondary', 'mystical')
@@ -115,25 +115,25 @@ const StepIndicator = styled(Box)(({ theme, active, completed }) => ({
  * @param {Object} [props.sx] - 추가 스타일
  */
 const MysticalProgress = forwardRef(function MysticalProgress(props, ref) {
-  const { 
-    value, 
-    variant = 'primary', 
+  const {
+    value,
+    variant = 'primary',
     label,
     showPercentage = true,
     totalSteps,
     currentStep,
-    sx = {}, 
-    ...other 
+    sx = {},
+    ...other
   } = props;
-  
+
   // 단계 표시기 렌더링
   const renderStepIndicators = () => {
     if (!totalSteps || !currentStep) return null;
-    
+
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', mt: 1 }}>
         {Array.from({ length: totalSteps }).map((_, index) => (
-          <StepIndicator 
+          <StepIndicator
             key={index}
             active={index + 1 === currentStep}
             completed={index + 1 < currentStep}
@@ -142,7 +142,7 @@ const MysticalProgress = forwardRef(function MysticalProgress(props, ref) {
       </Box>
     );
   };
-  
+
   return (
     <ProgressContainer ref={ref} sx={sx}>
       {(label || showPercentage) && (
@@ -159,14 +159,13 @@ const MysticalProgress = forwardRef(function MysticalProgress(props, ref) {
           )}
         </ProgressLabel>
       )}
-      
-      <StyledLinearProgress 
-        variant="determinate" 
-        value={value} 
-        variant={variant}
+
+      <StyledLinearProgress
+        value={value}
+        variant={variant || "determinate"}
         {...other}
       />
-      
+
       {renderStepIndicators()}
     </ProgressContainer>
   );

@@ -7,55 +7,51 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 
 // 스타일링된 후기 카드 컨테이너
 const CardContainer = styled(Box)(({ theme, variant }) => {
-  // 변형에 따른 스타일 설정
-  let variantStyles = {};
-
-  switch (variant) {
-    case 'primary':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.primary.main}10 100%)`,
-        borderLeft: `4px solid ${theme.palette.primary.main}`
-      };
-      break;
-
-    case 'secondary':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.secondary.dark}20 0%, ${theme.palette.secondary.main}10 100%)`,
-        borderLeft: `4px solid ${theme.palette.secondary.main}`
-      };
-      break;
-
-    case 'mystical':
-      variantStyles = {
-        background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.secondary.dark}20 100%)`,
-        borderLeft: `4px solid ${theme.palette.secondary.main}`
-      };
-      break;
-
-    default:
-      variantStyles = {
-        background: theme.palette.background.paper,
-        borderLeft: `4px solid ${theme.palette.primary.main}`
-      };
-      break;
-  }
-
-  return {
+  // 기본 스타일
+  const baseStyles = {
     padding: theme.spacing(3),
     borderRadius: theme.shape.borderRadius,
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
     position: 'relative',
     overflow: 'hidden',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-
     '&:hover': {
       transform: 'translateY(-5px)',
       boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
-    },
-
-    ...variantStyles
+    }
   };
-}));
+
+  if (variant === 'primary') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.primary.main}10 100%)`,
+      borderLeft: `4px solid ${theme.palette.primary.main}`
+    };
+  }
+
+  if (variant === 'secondary') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.secondary.dark}20 0%, ${theme.palette.secondary.main}10 100%)`,
+      borderLeft: `4px solid ${theme.palette.secondary.main}`
+    };
+  }
+
+  if (variant === 'mystical') {
+    return {
+      ...baseStyles,
+      background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.secondary.dark}20 100%)`,
+      borderLeft: `4px solid ${theme.palette.secondary.main}`
+    };
+  }
+
+  // Default
+  return {
+    ...baseStyles,
+    background: theme.palette.background.paper,
+    borderLeft: `4px solid ${theme.palette.primary.main}`
+  };
+});
 
 // 스타일링된 인용 아이콘
 const QuoteIcon = styled(FormatQuoteIcon)(({ theme }) => ({
@@ -65,14 +61,14 @@ const QuoteIcon = styled(FormatQuoteIcon)(({ theme }) => ({
   fontSize: 40,
   color: theme.palette.primary.main,
   opacity: 0.2,
-  transform: 'rotate(180deg)',
+  transform: 'rotate(180deg)'
 }));
 
 // 스타일링된 사용자 정보 컨테이너
 const UserInfoContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
-  marginTop: theme.spacing(2),
+  marginTop: theme.spacing(2)
 }));
 
 /**

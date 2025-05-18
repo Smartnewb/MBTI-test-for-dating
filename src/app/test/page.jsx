@@ -9,6 +9,9 @@ import MysticalButton from '../components/MysticalButton';
 import TarotCard from '../components/TarotCard';
 import useMbtiTest from '../hooks/useMbtiTest';
 
+// Force dynamic rendering for this page
+export const dynamic = 'force-dynamic';
+
 /**
  * MBTI 테스트 시작 페이지
  *

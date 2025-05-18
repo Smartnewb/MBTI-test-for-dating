@@ -18,8 +18,8 @@ const QuestionContainer = styled(Box)(({ theme }) => ({
 
 // 스타일링된 질문 번호
 const QuestionNumber = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.medium,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 500, // medium 값을 직접 사용
   fontSize: '1rem',
   color: theme.palette.secondary.main,
   marginBottom: theme.spacing(2),
@@ -27,8 +27,8 @@ const QuestionNumber = styled(Typography)(({ theme }) => ({
 
 // 스타일링된 질문 텍스트
 const QuestionText = styled(Typography)(({ theme }) => ({
-  fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.semibold,
+  fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+  fontWeight: 600, // semibold 값을 직접 사용
   fontSize: '1.5rem',
   marginBottom: theme.spacing(4),
   textAlign: 'center',
@@ -49,17 +49,17 @@ const StyledFormControlLabel = styled(FormControlLabel)(({ theme, selected }) =>
   border: `1px solid ${selected ? theme.palette.primary.main : theme.palette.divider}`,
   backgroundColor: selected ? `${theme.palette.primary.main}10` : 'transparent',
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
-  
+
   '&:hover': {
     backgroundColor: `${theme.palette.primary.main}10`,
     borderColor: theme.palette.primary.light,
   },
-  
+
   '& .MuiFormControlLabel-label': {
     width: '100%',
-    fontWeight: selected ? theme.typography.fontWeight.medium : theme.typography.fontWeight.regular,
+    fontWeight: selected ? 500 : 400, // medium(500)과 regular(400) 값을 직접 사용
   },
-  
+
   '& .MuiRadio-root': {
     color: selected ? theme.palette.primary.main : theme.palette.text.secondary,
   },
@@ -74,9 +74,9 @@ const ButtonContainer = styled(Box)(({ theme }) => ({
 
 /**
  * 질문 카드 컴포넌트
- * 
+ *
  * MBTI 테스트 질문을 표시하는 카드 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {number} props.questionNumber - 질문 번호
  * @param {number} props.totalQuestions - 전체 질문 수
@@ -99,28 +99,28 @@ export default function QuestionCard({
 }) {
   // 내부 상태
   const [localSelectedOption, setLocalSelectedOption] = useState(selectedOption);
-  
+
   // 외부 상태가 변경되면 내부 상태도 업데이트
   useEffect(() => {
     setLocalSelectedOption(selectedOption);
   }, [selectedOption]);
-  
+
   // 옵션 변경 핸들러
   const handleOptionChange = (event) => {
     const value = event.target.value;
     setLocalSelectedOption(value);
   };
-  
+
   // 다음 버튼 클릭 핸들러
   const handleNextClick = () => {
     if (localSelectedOption) {
       onAnswer(localSelectedOption);
     }
   };
-  
+
   // 진행률 계산
   const progress = ((questionNumber - 1) / totalQuestions) * 100;
-  
+
   // 질문이 없는 경우 로딩 표시
   if (!question) {
     return (
@@ -133,26 +133,26 @@ export default function QuestionCard({
       </TarotCard>
     );
   }
-  
+
   return (
     <TarotCard variant="primary" sx={{ maxWidth: 600, mx: 'auto', minHeight: 500 }}>
       <QuestionContainer>
-        <MysticalProgress 
-          value={progress} 
-          variant="mystical" 
+        <MysticalProgress
+          value={progress}
+          variant="mystical"
           label={`질문 ${questionNumber}/${totalQuestions}`}
           totalSteps={totalQuestions}
           currentStep={questionNumber}
         />
-        
+
         <QuestionNumber variant="subtitle2">
           질문 {questionNumber}
         </QuestionNumber>
-        
+
         <QuestionText variant="h4">
           {question.question}
         </QuestionText>
-        
+
         <OptionsContainer>
           <FormControl component="fieldset" fullWidth>
             <RadioGroup
@@ -176,7 +176,7 @@ export default function QuestionCard({
             </RadioGroup>
           </FormControl>
         </OptionsContainer>
-        
+
         <ButtonContainer>
           {!isFirst && onPrevious && (
             <MysticalButton
@@ -186,9 +186,9 @@ export default function QuestionCard({
               이전 질문
             </MysticalButton>
           )}
-          
+
           {isFirst && <Box />}
-          
+
           <MysticalButton
             variant="mystical"
             disabled={!localSelectedOption}
