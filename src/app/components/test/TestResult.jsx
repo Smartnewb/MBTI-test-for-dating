@@ -1,13 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Box, Typography, Divider, Chip, Button, Grid, LinearProgress, Tabs, Tab, Fade } from '@mui/material';
+import { Box, Typography, Divider, Chip, Button, Grid, LinearProgress, Tabs, Tab, Fade, useTheme } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TarotCard from '../TarotCard';
 import MysticalButton from '../MysticalButton';
 import RelationshipAdvice from './RelationshipAdvice';
 import { AnimatedElement } from '../animations';
 import { getMbtiDescription } from '../../utils/mbti';
+import useResponsive from '../../hooks/useResponsive';
 
 // 스타일링된 결과 컨테이너
 const ResultContainer = styled(Box)(({ theme }) => ({
@@ -29,6 +30,14 @@ const MbtiType = styled(Typography)(({ theme, mbtiColor }) => ({
   backgroundClip: 'text',
   color: 'transparent',
   textShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+
+  // 반응형 폰트 크기
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '2rem',
+  },
+  [theme.breakpoints.down('xs')]: {
+    fontSize: '1.75rem',
+  },
 }));
 
 // 스타일링된 MBTI 설명 제목
@@ -39,6 +48,12 @@ const DescriptionTitle = styled(Typography)(({ theme }) => ({
   marginTop: theme.spacing(3),
   marginBottom: theme.spacing(1),
   color: theme.palette.secondary.main,
+
+  // 반응형 폰트 크기 및 여백
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '1.1rem',
+    marginTop: theme.spacing(2),
+  },
 }));
 
 // 스타일링된 특성 칩
@@ -48,6 +63,15 @@ const TraitChip = styled(Chip)(({ theme }) => ({
   border: `1px solid ${theme.palette.primary.main}`,
   '& .MuiChip-label': {
     color: theme.palette.text.primary,
+  },
+
+  // 모바일에서 더 작은 크기로 조정
+  [theme.breakpoints.down('sm')]: {
+    height: 28,
+    fontSize: '0.75rem',
+    '& .MuiChip-label': {
+      padding: '0 8px',
+    },
   },
 }));
 
@@ -79,6 +103,15 @@ const ScoreBar = styled(LinearProgress)(({ theme, dimension }) => {
       backgroundColor: color,
       borderRadius: 5,
     },
+
+    // 모바일에서 더 작은 크기로 조정
+    [theme.breakpoints.down('sm')]: {
+      height: 8,
+      borderRadius: 4,
+      '& .MuiLinearProgress-bar': {
+        borderRadius: 4,
+      },
+    },
   };
 });
 
@@ -105,6 +138,8 @@ export default function TestResult({
 }) {
   const [activeTab, setActiveTab] = useState(0);
   const [showAdvice, setShowAdvice] = useState(false);
+  const theme = useTheme();
+  const responsive = useResponsive();
 
   // MBTI 유형 설명 가져오기
   const mbtiDescription = getMbtiDescription(mbtiType);
@@ -121,12 +156,15 @@ export default function TestResult({
 
   // 결과 로드 후 일정 시간 후에 조언 표시
   useEffect(() => {
+    // 모바일에서는 조언 표시 시간을 더 짧게 설정
+    const delay = responsive.isMobile ? 1000 : 1500;
+
     const timer = setTimeout(() => {
       setShowAdvice(true);
-    }, 1500);
+    }, delay);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [responsive.isMobile]);
 
   // 점수 계산
   const calculateScore = (dimension) => {
@@ -222,7 +260,15 @@ export default function TestResult({
                 value={activeTab}
                 onChange={handleTabChange}
                 centered
-                sx={{ mb: 3 }}
+                variant={responsive.isMobile ? "fullWidth" : "standard"}
+                sx={{
+                  mb: 3,
+                  '& .MuiTab-root': {
+                    fontSize: responsive.isMobile ? '0.75rem' : 'inherit',
+                    minWidth: responsive.isMobile ? 'auto' : 90,
+                    padding: responsive.isMobile ? '6px 8px' : '12px 16px',
+                  }
+                }}
               >
                 <Tab label="성격 특성" />
                 <Tab label="점수 분석" />
@@ -428,13 +474,34 @@ export default function TestResult({
         )}
 
         <AnimatedElement animation="fadeIn" duration="normal" delay={1200}>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4, gap: 2 }}>
-            <MysticalButton variant="tarot" onClick={onRestart}>
+          <Box sx={{
+            display: 'flex',
+            flexDirection: responsive.isMobile ? 'column' : 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            mt: 4,
+            gap: responsive.isMobile ? 1.5 : 2
+          }}>
+            <MysticalButton
+              variant="tarot"
+              onClick={onRestart}
+              sx={{
+                width: responsive.isMobile ? '100%' : 'auto',
+                fontSize: responsive.isMobile ? '0.875rem' : 'inherit'
+              }}
+            >
               테스트 다시 하기
             </MysticalButton>
 
             {onShare && (
-              <MysticalButton variant="mystical" onClick={onShare}>
+              <MysticalButton
+                variant="mystical"
+                onClick={onShare}
+                sx={{
+                  width: responsive.isMobile ? '100%' : 'auto',
+                  fontSize: responsive.isMobile ? '0.875rem' : 'inherit'
+                }}
+              >
                 결과 공유하기
               </MysticalButton>
             )}
