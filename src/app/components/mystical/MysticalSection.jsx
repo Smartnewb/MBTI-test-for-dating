@@ -53,12 +53,12 @@ const SectionContainer = styled(Box)(({ theme, variant }) => {
       break;
   }
 
-  return {
+  return ({
     position: 'relative',
     padding: theme.spacing(8, 0),
     overflow: 'hidden',
     ...variantStyles
-  };
+  });
 }));
 
 /**

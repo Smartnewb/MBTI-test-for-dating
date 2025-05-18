@@ -49,14 +49,14 @@ const CtaContainer = styled(Paper)(({ theme, variant }) => {
       break;
   }
 
-  return {
+  return ({
     padding: theme.spacing(4),
     borderRadius: theme.shape.borderRadius * 2,
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden',
     position: 'relative',
     ...variantStyles
-  };
+  });
 }));
 
 // 스타일링된 배경 장식

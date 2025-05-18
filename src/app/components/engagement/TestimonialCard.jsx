@@ -40,7 +40,7 @@ const CardContainer = styled(Box)(({ theme, variant }) => {
       break;
   }
 
-  return {
+  return ({
     padding: theme.spacing(3),
     borderRadius: theme.shape.borderRadius,
     boxShadow: '0 4px 15px rgba(0, 0, 0, 0.1)',
@@ -54,7 +54,7 @@ const CardContainer = styled(Box)(({ theme, variant }) => {
     },
 
     ...variantStyles
-  };
+  });
 }));
 
 // 스타일링된 인용 아이콘
