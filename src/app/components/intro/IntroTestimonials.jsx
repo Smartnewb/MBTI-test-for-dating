@@ -3,7 +3,8 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Box, Typography, Container, IconButton } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { AnimatedElement, AnimatedIcon } from '../animations';
+import AnimatedElement from '../animations/AnimatedElement';
+import AnimatedIcon from '../animations/AnimatedIcon';
 import { Section } from '../layout';
 import { MysticalDivider } from '../layout';
 import { TestimonialCard } from '../engagement';
@@ -96,44 +97,63 @@ const QuoteIcon = styled(Box)(({ theme, position }) => ({
  */
 export default function IntroTestimonials() {
   // 후기 데이터 (메모이제이션)
-  const testimonials = useMemo(() => [
-    {
-      id: 1,
-      name: '김지민',
-      mbtiType: 'ENFP',
-      avatarSrc: optimizeImageUrl('/images/avatars/avatar1.jpg', { width: 100, height: 100, quality: 80 }),
-      text: '정말 재미있는 테스트였어요! 제 MBTI 유형과 연애 스타일이 정확하게 맞아서 놀랐습니다. 이상형으로 나온 INTJ 유형의 친구를 소개받았는데, 정말 잘 맞네요!',
-      rating: 5,
-      color: '#6B3FA0',
-    },
-    {
-      id: 2,
-      name: '이현우',
-      mbtiType: 'ISTJ',
-      avatarSrc: optimizeImageUrl('/images/avatars/avatar2.jpg', { width: 100, height: 100, quality: 80 }),
-      text: '처음에는 그냥 재미로 시작했는데, 결과가 너무 정확해서 깜짝 놀랐어요. 제 연애 패턴과 약점을 정확히 짚어주어서 많은 도움이 되었습니다. 친구들에게도 추천했어요!',
-      rating: 4,
-      color: '#E91E63',
-    },
-    {
-      id: 3,
-      name: '박소연',
-      mbtiType: 'INFJ',
-      avatarSrc: optimizeImageUrl('/images/avatars/avatar3.jpg', { width: 100, height: 100, quality: 80 }),
-      text: '타로 카드 테마가 정말 신비롭고 예뻐요! 결과도 상세하게 나와서 만족스러웠습니다. 특히 이상형 매칭 부분이 흥미로웠어요. 연인과 함께 테스트해보니 더 재미있었습니다.',
-      rating: 5,
-      color: '#FF9800',
-    },
-    {
-      id: 4,
-      name: '정민준',
-      mbtiType: 'ENTP',
-      avatarSrc: optimizeImageUrl('/images/avatars/avatar4.jpg', { width: 100, height: 100, quality: 80 }),
-      text: '다른 MBTI 테스트와는 다르게 연애 관점에서 분석해주는 점이 특별했어요. 제 성격과 연애 스타일을 정확하게 파악해주었고, 이상형 추천도 도움이 되었습니다!',
-      rating: 5,
-      color: '#2196F3',
-    },
-  ], []);
+  const testimonials = useMemo(
+    () => [
+      {
+        id: 1,
+        name: '김지민',
+        mbtiType: 'ENFP',
+        avatarSrc: optimizeImageUrl('/images/avatars/avatar1.jpg', {
+          width: 100,
+          height: 100,
+          quality: 80,
+        }),
+        text: '정말 재미있는 테스트였어요! 제 MBTI 유형과 연애 스타일이 정확하게 맞아서 놀랐습니다. 이상형으로 나온 INTJ 유형의 친구를 소개받았는데, 정말 잘 맞네요!',
+        rating: 5,
+        color: '#6B3FA0',
+      },
+      {
+        id: 2,
+        name: '이현우',
+        mbtiType: 'ISTJ',
+        avatarSrc: optimizeImageUrl('/images/avatars/avatar2.jpg', {
+          width: 100,
+          height: 100,
+          quality: 80,
+        }),
+        text: '처음에는 그냥 재미로 시작했는데, 결과가 너무 정확해서 깜짝 놀랐어요. 제 연애 패턴과 약점을 정확히 짚어주어서 많은 도움이 되었습니다. 친구들에게도 추천했어요!',
+        rating: 4,
+        color: '#E91E63',
+      },
+      {
+        id: 3,
+        name: '박소연',
+        mbtiType: 'INFJ',
+        avatarSrc: optimizeImageUrl('/images/avatars/avatar3.jpg', {
+          width: 100,
+          height: 100,
+          quality: 80,
+        }),
+        text: '타로 카드 테마가 정말 신비롭고 예뻐요! 결과도 상세하게 나와서 만족스러웠습니다. 특히 이상형 매칭 부분이 흥미로웠어요. 연인과 함께 테스트해보니 더 재미있었습니다.',
+        rating: 5,
+        color: '#FF9800',
+      },
+      {
+        id: 4,
+        name: '정민준',
+        mbtiType: 'ENTP',
+        avatarSrc: optimizeImageUrl('/images/avatars/avatar4.jpg', {
+          width: 100,
+          height: 100,
+          quality: 80,
+        }),
+        text: '다른 MBTI 테스트와는 다르게 연애 관점에서 분석해주는 점이 특별했어요. 제 성격과 연애 스타일을 정확하게 파악해주었고, 이상형 추천도 도움이 되었습니다!',
+        rating: 5,
+        color: '#2196F3',
+      },
+    ],
+    []
+  );
 
   // 현재 표시 중인 후기 인덱스
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -146,7 +166,7 @@ export default function IntroTestimonials() {
     if (!autoSlide) return;
 
     const timer = setInterval(() => {
-      setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      setCurrentIndex(prev => (prev === testimonials.length - 1 ? 0 : prev + 1));
     }, 5000);
 
     return () => clearInterval(timer);
@@ -168,7 +188,7 @@ export default function IntroTestimonials() {
   const handlePrevious = useCallback(
     throttle(() => {
       pauseAutoSlide();
-      setCurrentIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1));
+      setCurrentIndex(prev => (prev === 0 ? testimonials.length - 1 : prev - 1));
     }, 300),
     [testimonials.length, pauseAutoSlide]
   );
@@ -177,16 +197,19 @@ export default function IntroTestimonials() {
   const handleNext = useCallback(
     throttle(() => {
       pauseAutoSlide();
-      setCurrentIndex((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1));
+      setCurrentIndex(prev => (prev === testimonials.length - 1 ? 0 : prev + 1));
     }, 300),
     [testimonials.length, pauseAutoSlide]
   );
 
   // 특정 후기로 이동
-  const handleGoToIndex = useCallback((index) => {
-    pauseAutoSlide();
-    setCurrentIndex(index);
-  }, [pauseAutoSlide]);
+  const handleGoToIndex = useCallback(
+    index => {
+      pauseAutoSlide();
+      setCurrentIndex(index);
+    },
+    [pauseAutoSlide]
+  );
 
   // 슬라이더 오프셋 계산
   const sliderOffset = -currentIndex * 100;
@@ -242,7 +265,8 @@ export default function IntroTestimonials() {
                             zIndex: 2,
                             boxShadow: `0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px ${testimonial.color}30`,
                             transition: 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)',
-                            transform: index === currentIndex ? 'translateY(0)' : 'translateY(20px)',
+                            transform:
+                              index === currentIndex ? 'translateY(0)' : 'translateY(20px)',
                             opacity: index === currentIndex ? 1 : 0.5,
                           }}
                         />
@@ -257,16 +281,18 @@ export default function IntroTestimonials() {
               </SliderContainer>
 
               {/* 화살표 버튼 */}
-              <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                position: 'absolute',
-                top: '50%',
-                left: { xs: -10, md: -20 },
-                right: { xs: -10, md: -20 },
-                transform: 'translateY(-50%)',
-                zIndex: 10,
-              }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  position: 'absolute',
+                  top: '50%',
+                  left: { xs: -10, md: -20 },
+                  right: { xs: -10, md: -20 },
+                  transform: 'translateY(-50%)',
+                  zIndex: 10,
+                }}
+              >
                 <AnimatedElement animation="fadeIn" duration="fast">
                   <ArrowButton
                     onClick={handlePrevious}
@@ -320,7 +346,8 @@ export default function IntroTestimonials() {
                       cursor: 'pointer',
                       transition: 'all 0.3s ease',
                       transform: index === currentIndex ? 'scale(1.2)' : 'scale(1)',
-                      boxShadow: index === currentIndex ? `0 0 10px ${testimonial.color}80` : 'none',
+                      boxShadow:
+                        index === currentIndex ? `0 0 10px ${testimonial.color}80` : 'none',
                       '&:hover': {
                         transform: 'scale(1.3)',
                         bgcolor: testimonial.color,

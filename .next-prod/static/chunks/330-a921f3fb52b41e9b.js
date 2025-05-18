@@ -1,0 +1,1252 @@
+'use strict';
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+  [330],
+  {
+    '(app-pages-browser)/./src/app/components/MysticalButton.jsx': function (e, a, t) {
+      var r = t('(app-pages-browser)/./node_modules/next/dist/compiled/react/jsx-runtime.js'),
+        n = t('(app-pages-browser)/./node_modules/next/dist/compiled/react/index.js'),
+        i = t('(app-pages-browser)/./node_modules/@mui/material/Button/Button.js'),
+        o = t(
+          '(app-pages-browser)/./node_modules/@mui/material/CircularProgress/CircularProgress.js'
+        );
+      let s = (0, t('(app-pages-browser)/./node_modules/@mui/material/styles/styled.js').ZP)(i.Z)(
+          e => {
+            let { theme: a, variant: t, size: r, color: n } = e;
+            return {
+              position: 'relative',
+              borderRadius: 2 * a.shape.borderRadius,
+              textTransform: 'none',
+              fontFamily:
+                '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 500,
+              letterSpacing: '0.05em',
+              transition: 'all '
+                .concat(a.transitions.duration.standard, 'ms ')
+                .concat(a.transitions.easing.easeInOut),
+              overflow: 'hidden',
+              ...('small' === r && { padding: '6px 16px', fontSize: '0.75rem' }),
+              ...('medium' === r && { padding: '8px 24px', fontSize: '0.875rem' }),
+              ...('large' === r && { padding: '12px 32px', fontSize: '1rem' }),
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'rgba(255, 255, 255, 0.1)',
+                transform: 'translateX(-100%)',
+                transition: 'transform 0.5s ease-in-out',
+                zIndex: 0,
+              },
+              '&:hover::before': { transform: 'translateX(0)' },
+              '&:focus-visible': {
+                outline: 'none',
+                boxShadow: '0 0 0 3px '
+                  .concat(a.palette.primary.main, '40, 0 0 0 1px ')
+                  .concat(a.palette.primary.main),
+              },
+              ...('mystical' === t && {
+                background: 'linear-gradient(135deg, '
+                  .concat(a.palette.primary.main, ' 0%, ')
+                  .concat(a.palette.secondary.main, ' 100%)'),
+                color: a.palette.common.white,
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+                '&:hover': {
+                  boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)',
+                  background: 'linear-gradient(135deg, '
+                    .concat(a.palette.primary.dark, ' 0%, ')
+                    .concat(a.palette.secondary.dark, ' 100%)'),
+                },
+                '&:active': {
+                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+                  transform: 'translateY(1px)',
+                },
+                '&:focus-visible': {
+                  boxShadow: '0 0 0 3px '
+                    .concat(a.palette.primary.main, '40, 0 0 0 1px ')
+                    .concat(a.palette.primary.main, ', 0 4px 10px rgba(0, 0, 0, 0.3)'),
+                },
+              }),
+              ...('tarot' === t && {
+                background: a.palette.background.paper,
+                color: a.palette.primary.main,
+                border: '2px solid '.concat(a.palette.primary.main),
+                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+                '&:hover': {
+                  background: a.palette.background.default,
+                  borderColor: a.palette.primary.light,
+                  color: a.palette.primary.light,
+                  boxShadow: '0 6px 15px rgba(0, 0, 0, 0.3)',
+                },
+                '&:active': {
+                  boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                  transform: 'translateY(1px)',
+                },
+                '&:focus-visible': {
+                  boxShadow: '0 0 0 3px '
+                    .concat(a.palette.primary.main, '40, 0 0 0 1px ')
+                    .concat(a.palette.primary.main, ', 0 4px 10px rgba(0, 0, 0, 0.2)'),
+                },
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: -2,
+                  left: -2,
+                  right: -2,
+                  bottom: -2,
+                  borderRadius: 'inherit',
+                  background: 'linear-gradient(135deg, '
+                    .concat(a.palette.primary.main, ' 0%, ')
+                    .concat(a.palette.secondary.main, ' 100%)'),
+                  zIndex: -1,
+                  opacity: 0.5,
+                },
+              }),
+              ...('glow' === t && {
+                background: a.palette.background.paper,
+                color: a.palette.secondary.main,
+                border: '1px solid '.concat(a.palette.secondary.main),
+                boxShadow: '0 0 10px '.concat(a.palette.secondary.main, '80'),
+                '&:hover': {
+                  boxShadow: '0 0 20px '.concat(a.palette.secondary.main),
+                  background: a.palette.background.default,
+                },
+                '&:active': {
+                  boxShadow: '0 0 5px '.concat(a.palette.secondary.main, '80'),
+                  transform: 'translateY(1px)',
+                },
+                '&:focus-visible': {
+                  boxShadow: '0 0 0 3px '
+                    .concat(a.palette.secondary.main, '40, 0 0 0 1px ')
+                    .concat(a.palette.secondary.main, ', 0 0 10px ')
+                    .concat(a.palette.secondary.main, '80'),
+                },
+              }),
+              ...('text' === t && {
+                background: 'transparent',
+                color: a.palette.primary.main,
+                boxShadow: 'none',
+                padding: 'small' === r ? '4px 8px' : 'medium' === r ? '6px 12px' : '8px 16px',
+                '&:hover': {
+                  background: ''.concat(a.palette.primary.main, '10'),
+                  color: a.palette.primary.dark,
+                },
+                '&:active': { background: ''.concat(a.palette.primary.main, '20') },
+                '&:focus-visible': {
+                  boxShadow: '0 0 0 3px '
+                    .concat(a.palette.primary.main, '40, 0 0 0 1px ')
+                    .concat(a.palette.primary.main),
+                },
+              }),
+              '&.Mui-disabled': {
+                background: a.palette.action.disabledBackground,
+                color: a.palette.action.disabled,
+                boxShadow: 'none',
+                border: 'none',
+                '&::after': { opacity: 0.1 },
+              },
+            };
+          }
+        ),
+        l = (0, n.forwardRef)(function (e, a) {
+          let {
+            variant: t = 'mystical',
+            size: n = 'medium',
+            loading: i = !1,
+            children: l,
+            disabled: d,
+            sx: p = {},
+            'aria-label': c,
+            ...m
+          } = e;
+          return (0, r.jsx)(s, {
+            ref: a,
+            variant: t,
+            size: n,
+            disabled: d || i,
+            'aria-label': c,
+            sx: p,
+            ...(i ? { 'aria-busy': !0, 'aria-live': 'polite' } : {}),
+            ...m,
+            children: i
+              ? (0, r.jsxs)(r.Fragment, {
+                  children: [
+                    (0, r.jsx)(o.Z, {
+                      size: 'small' === n ? 16 : 'medium' === n ? 20 : 24,
+                      color: 'inherit',
+                      sx: { mr: 1 },
+                      'aria-hidden': 'true',
+                    }),
+                    l,
+                  ],
+                })
+              : l,
+          });
+        });
+      a.Z = l;
+    },
+    '(app-pages-browser)/./src/app/components/layout/index.js': function (e, a, t) {
+      t.d(a, {
+        Gg: function () {
+          return eo;
+        },
+        Xg: function () {
+          return $;
+        },
+        $0: function () {
+          return h;
+        },
+      });
+      var r = t('(app-pages-browser)/./node_modules/next/dist/compiled/react/jsx-runtime.js'),
+        n = t('(app-pages-browser)/./node_modules/next/dist/compiled/react/index.js'),
+        i = t('(app-pages-browser)/./node_modules/@mui/material/Box/Box.js'),
+        o = t('(app-pages-browser)/./node_modules/@mui/material/styles/styled.js');
+      let s = (0, o.ZP)(i.Z)(e => {
+          let { theme: a, maxWidth: t, centered: r, fullHeight: n } = e;
+          return {
+            width: '100%',
+            marginLeft: 'auto',
+            marginRight: 'auto',
+            paddingLeft: a.spacing(2),
+            paddingRight: a.spacing(2),
+            ...('xs' === t && { maxWidth: a.breakpoints.values.xs }),
+            ...('sm' === t && { maxWidth: a.breakpoints.values.sm }),
+            ...('md' === t && { maxWidth: a.breakpoints.values.md }),
+            ...('lg' === t && { maxWidth: a.breakpoints.values.lg }),
+            ...('xl' === t && { maxWidth: a.breakpoints.values.xl }),
+            ...(!0 === r && {
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }),
+            ...(!0 === n && { minHeight: '100vh' }),
+            [a.breakpoints.up('sm')]: { paddingLeft: a.spacing(3), paddingRight: a.spacing(3) },
+            [a.breakpoints.up('md')]: { paddingLeft: a.spacing(4), paddingRight: a.spacing(4) },
+          };
+        }),
+        l = (0, n.forwardRef)(function (e, a) {
+          let {
+              maxWidth: t = 'lg',
+              centered: n = !1,
+              fullHeight: i = !1,
+              children: o,
+              sx: l = {},
+              ...d
+            } = e,
+            p = { ref: a, maxWidth: t, sx: l, ...d };
+          return (
+            n && (p.centered = n), i && (p.fullHeight = i), (0, r.jsx)(s, { ...p, children: o })
+          );
+        });
+      var d = t('(app-pages-browser)/./node_modules/@mui/material/Grid/Grid.js');
+      let p = (0, o.ZP)(d.ZP)(e => {
+          let { theme: a, gutter: t } = e;
+          return {
+            ...('small' === t && {
+              '& > .MuiGrid-item': { paddingTop: a.spacing(1), paddingLeft: a.spacing(1) },
+              margin: a.spacing(-1, 0, 0, -1),
+            }),
+            ...('medium' === t && {
+              '& > .MuiGrid-item': { paddingTop: a.spacing(2), paddingLeft: a.spacing(2) },
+              margin: a.spacing(-2, 0, 0, -2),
+            }),
+            ...('large' === t && {
+              '& > .MuiGrid-item': { paddingTop: a.spacing(3), paddingLeft: a.spacing(3) },
+              margin: a.spacing(-3, 0, 0, -3),
+            }),
+          };
+        }),
+        c = (0, n.forwardRef)(function (e, a) {
+          let { gutter: t = 'medium', children: n, sx: i = {}, ...o } = e;
+          return (0, r.jsx)(p, { ref: a, container: !0, gutter: t, sx: i, ...o, children: n });
+        }),
+        m = (0, n.forwardRef)(function (e, a) {
+          let { xs: t = 12, children: n, sx: i = {}, ...o } = e;
+          return (0, r.jsx)(d.ZP, { ref: a, item: !0, xs: t, sx: i, ...o, children: n });
+        });
+      var g = t('(app-pages-browser)/./node_modules/@mui/material/Typography/Typography.js');
+      let u = (0, o.ZP)(i.Z)(e => {
+          let { theme: a, variant: t, fullHeight: r } = e;
+          return {
+            position: 'relative',
+            paddingTop: a.spacing(6),
+            paddingBottom: a.spacing(6),
+            ...(r && {
+              minHeight: '100vh',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }),
+            ...('default' === t && { backgroundColor: 'transparent' }),
+            ...('primary' === t && {
+              backgroundColor: a.palette.background.default,
+              backgroundImage: 'radial-gradient(circle at 25% 25%, '.concat(
+                a.palette.primary.main,
+                '15 0%, transparent 50%)'
+              ),
+            }),
+            ...('secondary' === t && {
+              backgroundColor: a.palette.background.paper,
+              backgroundImage: 'radial-gradient(circle at 75% 75%, '.concat(
+                a.palette.secondary.main,
+                '15 0%, transparent 50%)'
+              ),
+            }),
+            ...('mystical' === t && {
+              backgroundColor: a.palette.background.default,
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                backgroundImage: 'url("/images/tarot-pattern.png")',
+                backgroundSize: '200px',
+                backgroundRepeat: 'repeat',
+                opacity: 0.03,
+                zIndex: 0,
+                pointerEvents: 'none',
+              },
+            }),
+            [a.breakpoints.up('sm')]: { paddingTop: a.spacing(8), paddingBottom: a.spacing(8) },
+            [a.breakpoints.up('md')]: { paddingTop: a.spacing(10), paddingBottom: a.spacing(10) },
+          };
+        }),
+        x = (0, o.ZP)(g.Z)(e => {
+          let { theme: a, centered: t } = e;
+          return {
+            position: 'relative',
+            marginBottom: a.spacing(4),
+            fontFamily: a.typography.fontFamily.secondary,
+            fontWeight: a.typography.fontWeight.bold,
+            ...(t && { textAlign: 'center' }),
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: -8,
+              left: t ? '50%' : 0,
+              transform: t ? 'translateX(-50%)' : 'none',
+              width: t ? '80px' : '60px',
+              height: '3px',
+              background: 'linear-gradient(90deg, '
+                .concat(a.palette.primary.main, ' 0%, ')
+                .concat(a.palette.secondary.main, ' 100%)'),
+              borderRadius: '3px',
+            },
+          };
+        }),
+        b = (0, o.ZP)(g.Z)(e => {
+          let { theme: a, centered: t } = e;
+          return {
+            marginBottom: a.spacing(6),
+            color: a.palette.text.secondary,
+            ...(t && { textAlign: 'center' }),
+          };
+        });
+      var h = (0, n.forwardRef)(function (e, a) {
+          let {
+            variant: t = 'default',
+            title: n,
+            subtitle: i,
+            centered: o = !1,
+            fullHeight: s = !1,
+            maxWidth: d = 'lg',
+            children: p,
+            sx: c = {},
+            ...m
+          } = e;
+          return (0, r.jsx)(u, {
+            ref: a,
+            variant: t,
+            fullHeight: s,
+            component: 'section',
+            sx: c,
+            ...m,
+            children: (0, r.jsxs)(l, {
+              maxWidth: d,
+              children: [
+                n && (0, r.jsx)(x, { variant: 'h2', centered: o, children: n }),
+                i && (0, r.jsx)(b, { variant: 'subtitle1', centered: o, children: i }),
+                p,
+              ],
+            }),
+          });
+        }),
+        f = t('(app-pages-browser)/./node_modules/@mui/material/AppBar/AppBar.js'),
+        y = t('(app-pages-browser)/./node_modules/@mui/material/Drawer/Drawer.js'),
+        j = t('(app-pages-browser)/./node_modules/@mui/material/ListItem/ListItem.js'),
+        v = t('(app-pages-browser)/./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js'),
+        w = t('(app-pages-browser)/./node_modules/@mui/material/IconButton/IconButton.js'),
+        k = t('(app-pages-browser)/./node_modules/@mui/material/List/List.js'),
+        Z = t('(app-pages-browser)/./node_modules/@mui/material/ListItemText/ListItemText.js'),
+        F = t('(app-pages-browser)/./node_modules/@mui/material/Toolbar/Toolbar.js'),
+        I = t('(app-pages-browser)/./node_modules/@mui/material/styles/useTheme.js'),
+        C = t('(app-pages-browser)/./node_modules/@mui/icons-material/Menu.js'),
+        S = t('(app-pages-browser)/./node_modules/@mui/icons-material/Close.js'),
+        P = t('(app-pages-browser)/./node_modules/next/dist/api/link.js'),
+        _ = t('(app-pages-browser)/./src/app/components/MysticalButton.jsx');
+      let B = (0, o.ZP)(f.Z)(e => {
+          let { theme: a, transparent: t, scrolled: r } = e,
+            n = !0 === t,
+            i = !0 === r;
+          return {
+            backgroundColor: n && !i ? 'transparent' : a.palette.background.paper,
+            boxShadow: n && !i ? 'none' : a.shadows[3],
+            transition: 'all 0.3s ease',
+            backgroundImage:
+              n && !i
+                ? 'none'
+                : 'linear-gradient(to bottom, '
+                    .concat(a.palette.background.default, ', ')
+                    .concat(a.palette.background.paper, ')'),
+            borderBottom: n && !i ? 'none' : '1px solid '.concat(a.palette.divider),
+          };
+        }),
+        R = (0, o.ZP)(g.Z)(e => {
+          let { theme: a } = e;
+          return {
+            fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            background: 'linear-gradient(135deg, '
+              .concat(a.palette.primary.main, ' 0%, ')
+              .concat(a.palette.secondary.main, ' 100%)'),
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: 'transparent',
+          };
+        }),
+        T = (0, o.ZP)(g.Z)(e => {
+          let { theme: a, active: t } = e,
+            r = !0 === t;
+          return {
+            margin: a.spacing(0, 2),
+            padding: a.spacing(0.5, 0),
+            position: 'relative',
+            cursor: 'pointer',
+            fontWeight: r ? 500 : 400,
+            color: r ? a.palette.primary.main : a.palette.text.primary,
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: r ? '100%' : '0%',
+              height: '2px',
+              backgroundColor: a.palette.primary.main,
+              transition: 'width 0.3s ease',
+            },
+            '&:hover': { color: a.palette.primary.main, '&::after': { width: '100%' } },
+          };
+        }),
+        D = (0, o.ZP)(y.ZP)(e => {
+          let { theme: a } = e;
+          return {
+            '& .MuiDrawer-paper': {
+              width: '80%',
+              maxWidth: '300px',
+              backgroundColor: a.palette.background.paper,
+              backgroundImage: 'linear-gradient(135deg, '
+                .concat(a.palette.background.paper, ' 0%, ')
+                .concat(a.palette.background.default, ' 100%)'),
+              padding: a.spacing(2),
+            },
+          };
+        }),
+        z = (0, o.ZP)(j.ZP)(e => {
+          let { theme: a, active: t } = e,
+            r = !0 === t;
+          return {
+            borderRadius: a.shape.borderRadius,
+            marginBottom: a.spacing(1),
+            backgroundColor: r ? ''.concat(a.palette.primary.main, '10') : 'transparent',
+            '& .MuiListItemText-primary': {
+              color: r ? a.palette.primary.main : a.palette.text.primary,
+              fontWeight: r ? 500 : 400,
+            },
+            '&:hover': { backgroundColor: ''.concat(a.palette.primary.main, '10') },
+          };
+        });
+      function W(e) {
+        let { transparent: a = !1, sx: t = {} } = e,
+          o = (0, I.Z)(),
+          s = (0, v.Z)(o.breakpoints.down('md')),
+          [d, p] = (0, n.useState)(!1),
+          [c, m] = (0, n.useState)(!1),
+          [g, u] = (0, n.useState)('/');
+        (0, n.useEffect)(() => {
+          let e = () => {
+            p(window.scrollY > 50);
+          };
+          return (
+            window.addEventListener('scroll', e),
+            () => {
+              window.removeEventListener('scroll', e);
+            }
+          );
+        }, []),
+          (0, n.useEffect)(() => {
+            u(window.location.pathname);
+          }, []);
+        let x = () => {
+            m(!c);
+          },
+          b = [
+            { text: '홈', href: '/' },
+            { text: 'MBTI 테스트', href: '/test' },
+            { text: 'MBTI 유형', href: '/types' },
+            { text: '궁합 확인', href: '/compatibility' },
+          ],
+          h = (0, r.jsxs)(i.Z, {
+            sx: { textAlign: 'center' },
+            children: [
+              (0, r.jsxs)(i.Z, {
+                sx: {
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  p: 2,
+                },
+                children: [
+                  (0, r.jsx)(R, { variant: 'h6', children: '달빛 연애 연구소' }),
+                  (0, r.jsx)(w.Z, { onClick: x, color: 'inherit', children: (0, r.jsx)(S.Z, {}) }),
+                ],
+              }),
+              (0, r.jsxs)(k.Z, {
+                children: [
+                  b.map(e => {
+                    let a = g === e.href,
+                      t = { button: !0, onClick: x };
+                    return (
+                      a && (t.active = a),
+                      (0, r.jsx)(
+                        P.default,
+                        {
+                          href: e.href,
+                          passHref: !0,
+                          style: { textDecoration: 'none' },
+                          children: (0, r.jsx)(z, {
+                            ...t,
+                            children: (0, r.jsx)(Z.Z, { primary: e.text }),
+                          }),
+                        },
+                        e.href
+                      )
+                    );
+                  }),
+                  (0, r.jsx)(i.Z, {
+                    sx: { mt: 2, px: 2 },
+                    children: (0, r.jsx)(_.Z, {
+                      variant: 'mystical',
+                      fullWidth: !0,
+                      children: '테스트 시작하기',
+                    }),
+                  }),
+                ],
+              }),
+            ],
+          }),
+          f = { position: 'sticky', elevation: 0, sx: t };
+        return (
+          a && (f.transparent = a),
+          d && (f.scrolled = d),
+          (0, r.jsxs)(B, {
+            ...f,
+            children: [
+              (0, r.jsx)(l, {
+                children: (0, r.jsxs)(F.Z, {
+                  disableGutters: !0,
+                  sx: { justifyContent: 'space-between' },
+                  children: [
+                    (0, r.jsx)(P.default, {
+                      href: '/',
+                      passHref: !0,
+                      style: { textDecoration: 'none' },
+                      children: (0, r.jsx)(R, { variant: 'h6', children: '달빛 연애 연구소' }),
+                    }),
+                    s
+                      ? (0, r.jsx)(w.Z, {
+                          color: 'inherit',
+                          'aria-label': 'open drawer',
+                          edge: 'end',
+                          onClick: x,
+                          children: (0, r.jsx)(C.Z, {}),
+                        })
+                      : (0, r.jsxs)(i.Z, {
+                          sx: { display: 'flex', alignItems: 'center' },
+                          children: [
+                            (0, r.jsx)(i.Z, {
+                              sx: { display: 'flex' },
+                              children: b.map(e => {
+                                let a = g === e.href,
+                                  t = { variant: 'body2' };
+                                return (
+                                  a && (t.active = a),
+                                  (0, r.jsx)(
+                                    P.default,
+                                    {
+                                      href: e.href,
+                                      passHref: !0,
+                                      style: { textDecoration: 'none' },
+                                      children: (0, r.jsx)(T, { ...t, children: e.text }),
+                                    },
+                                    e.href
+                                  )
+                                );
+                              }),
+                            }),
+                            (0, r.jsx)(i.Z, {
+                              sx: { ml: 2 },
+                              children: (0, r.jsx)(_.Z, {
+                                variant: 'mystical',
+                                size: 'small',
+                                children: '테스트 시작하기',
+                              }),
+                            }),
+                          ],
+                        }),
+                  ],
+                }),
+              }),
+              (0, r.jsx)(D, {
+                anchor: 'right',
+                open: c,
+                onClose: x,
+                ModalProps: { keepMounted: !0 },
+                children: h,
+              }),
+            ],
+          })
+        );
+      }
+      var H = t('(app-pages-browser)/./node_modules/@mui/material/Link/Link.js'),
+        M = t('(app-pages-browser)/./node_modules/@mui/material/Divider/Divider.js'),
+        L = t('(app-pages-browser)/./node_modules/@mui/icons-material/Facebook.js'),
+        A = t('(app-pages-browser)/./node_modules/@mui/icons-material/Twitter.js'),
+        G = t('(app-pages-browser)/./node_modules/@mui/icons-material/Instagram.js'),
+        E = t('(app-pages-browser)/./node_modules/@mui/icons-material/GitHub.js');
+      let N = (0, o.ZP)(i.Z)(e => {
+          let { theme: a } = e;
+          return {
+            backgroundColor: a.palette.background.paper,
+            borderTop: '1px solid '.concat(a.palette.divider),
+            padding: a.spacing(6, 0),
+            position: 'relative',
+            backgroundImage: 'linear-gradient(to top, '
+              .concat(a.palette.background.default, ', ')
+              .concat(a.palette.background.paper, ')'),
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: 'url("/images/tarot-pattern.png")',
+              backgroundSize: '200px',
+              backgroundRepeat: 'repeat',
+              opacity: 0.02,
+              zIndex: 0,
+              pointerEvents: 'none',
+            },
+          };
+        }),
+        Y = (0, o.ZP)(g.Z)(e => {
+          let { theme: a } = e;
+          return {
+            fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+            fontWeight: 700,
+            fontSize: '1.5rem',
+            marginBottom: a.spacing(2),
+            background: 'linear-gradient(135deg, '
+              .concat(a.palette.primary.main, ' 0%, ')
+              .concat(a.palette.secondary.main, ' 100%)'),
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            color: 'transparent',
+          };
+        }),
+        X = (0, o.ZP)(H.Z)(e => {
+          let { theme: a } = e;
+          return {
+            color: a.palette.text.secondary,
+            textDecoration: 'none',
+            marginBottom: a.spacing(1),
+            display: 'block',
+            transition: 'color 0.2s ease',
+            '&:hover': { color: a.palette.primary.main },
+          };
+        }),
+        K = (0, o.ZP)(w.Z)(e => {
+          let { theme: a } = e;
+          return {
+            color: a.palette.text.secondary,
+            transition: 'all 0.2s ease',
+            '&:hover': {
+              color: a.palette.primary.main,
+              backgroundColor: ''.concat(a.palette.primary.main, '10'),
+            },
+          };
+        }),
+        Q = (0, o.ZP)(g.Z)(e => {
+          let { theme: a } = e;
+          return {
+            fontWeight: 700,
+            marginBottom: a.spacing(2),
+            position: 'relative',
+            paddingBottom: a.spacing(1),
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: '30px',
+              height: '2px',
+              backgroundColor: a.palette.primary.main,
+            },
+          };
+        });
+      function q(e) {
+        let { sx: a = {} } = e,
+          t = (0, I.Z)(),
+          n = (0, v.Z)(t.breakpoints.down('sm'));
+        (0, v.Z)(t.breakpoints.down('md'));
+        let o = new Date().getFullYear();
+        return (0, r.jsx)(N, {
+          component: 'footer',
+          sx: a,
+          children: (0, r.jsxs)(l, {
+            children: [
+              (0, r.jsxs)(c, {
+                gutter: 'large',
+                children: [
+                  (0, r.jsxs)(m, {
+                    xs: 12,
+                    md: 4,
+                    children: [
+                      (0, r.jsx)(Y, { variant: 'h6', children: '달빛 연애 연구소' }),
+                      (0, r.jsx)(g.Z, {
+                        variant: 'body2',
+                        color: 'text.secondary',
+                        sx: { mb: 2 },
+                        children:
+                          'MBTI 기반의 연애 성향 분석과 궁합 정보를 제공하는 서비스입니다. 나와 잘 맞는 연인을 찾고, 더 나은 연애를 위한 인사이트를 얻어보세요.',
+                      }),
+                      (0, r.jsxs)(i.Z, {
+                        sx: { display: 'flex', mt: 2 },
+                        children: [
+                          (0, r.jsx)(K, {
+                            'aria-label': 'facebook',
+                            children: (0, r.jsx)(L.Z, {}),
+                          }),
+                          (0, r.jsx)(K, { 'aria-label': 'twitter', children: (0, r.jsx)(A.Z, {}) }),
+                          (0, r.jsx)(K, {
+                            'aria-label': 'instagram',
+                            children: (0, r.jsx)(G.Z, {}),
+                          }),
+                          (0, r.jsx)(K, { 'aria-label': 'github', children: (0, r.jsx)(E.Z, {}) }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, r.jsxs)(m, {
+                    xs: 6,
+                    md: 2,
+                    children: [
+                      (0, r.jsx)(Q, { variant: 'subtitle2', children: '서비스' }),
+                      (0, r.jsx)(P.default, {
+                        href: '/',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: '홈' }),
+                      }),
+                      (0, r.jsx)(P.default, {
+                        href: '/test',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: 'MBTI 테스트' }),
+                      }),
+                      (0, r.jsx)(P.default, {
+                        href: '/types',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: 'MBTI 유형' }),
+                      }),
+                      (0, r.jsx)(P.default, {
+                        href: '/compatibility',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: '궁합 확인' }),
+                      }),
+                    ],
+                  }),
+                  (0, r.jsxs)(m, {
+                    xs: 6,
+                    md: 2,
+                    children: [
+                      (0, r.jsx)(Q, { variant: 'subtitle2', children: '정보' }),
+                      (0, r.jsx)(P.default, {
+                        href: '/about',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: '소개' }),
+                      }),
+                      (0, r.jsx)(P.default, {
+                        href: '/faq',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: '자주 묻는 질문' }),
+                      }),
+                      (0, r.jsx)(P.default, {
+                        href: '/privacy',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: '개인정보처리방침' }),
+                      }),
+                      (0, r.jsx)(P.default, {
+                        href: '/terms',
+                        passHref: !0,
+                        children: (0, r.jsx)(X, { children: '이용약관' }),
+                      }),
+                    ],
+                  }),
+                  (0, r.jsxs)(m, {
+                    xs: 12,
+                    md: 4,
+                    children: [
+                      (0, r.jsx)(Q, { variant: 'subtitle2', children: '뉴스레터 구독' }),
+                      (0, r.jsx)(g.Z, {
+                        variant: 'body2',
+                        color: 'text.secondary',
+                        sx: { mb: 2 },
+                        children: '최신 MBTI 연애 팁과 관계 심리학 정보를 받아보세요.',
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              (0, r.jsx)(M.Z, { sx: { my: 4 } }),
+              (0, r.jsxs)(i.Z, {
+                sx: {
+                  display: 'flex',
+                  flexDirection: n ? 'column' : 'row',
+                  justifyContent: 'space-between',
+                  alignItems: n ? 'center' : 'flex-start',
+                  textAlign: n ? 'center' : 'left',
+                },
+                children: [
+                  (0, r.jsxs)(g.Z, {
+                    variant: 'body2',
+                    color: 'text.secondary',
+                    children: ['\xa9 ', o, ' 달빛 연애 연구소. All rights reserved.'],
+                  }),
+                  !n &&
+                    (0, r.jsxs)(i.Z, {
+                      sx: { display: 'flex' },
+                      children: [
+                        (0, r.jsx)(P.default, {
+                          href: '/privacy',
+                          passHref: !0,
+                          children: (0, r.jsx)(H.Z, {
+                            variant: 'body2',
+                            color: 'text.secondary',
+                            sx: { mx: 1 },
+                            children: '개인정보처리방침',
+                          }),
+                        }),
+                        (0, r.jsx)(P.default, {
+                          href: '/terms',
+                          passHref: !0,
+                          children: (0, r.jsx)(H.Z, {
+                            variant: 'body2',
+                            color: 'text.secondary',
+                            sx: { mx: 1 },
+                            children: '이용약관',
+                          }),
+                        }),
+                      ],
+                    }),
+                ],
+              }),
+            ],
+          }),
+        });
+      }
+      let O = (0, o.ZP)(i.Z)(e => {
+          let { theme: a, variant: t } = e;
+          return {
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: '100vh',
+            backgroundColor: a.palette.background.default,
+            position: 'relative',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: 'radial-gradient(circle at 25% 25%, '
+                .concat(
+                  a.palette.primary.main,
+                  '15 0%, transparent 50%), \n       radial-gradient(circle at 75% 75%, '
+                )
+                .concat(a.palette.secondary.main, '10 0%, transparent 50%)'),
+              zIndex: 0,
+              pointerEvents: 'none',
+            },
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage:
+                'radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 0.1%),\n       radial-gradient(circle at 35% 45%, #FFFFFF 0%, transparent 0.05%),\n       radial-gradient(circle at 55% 25%, #FFFFFF 0%, transparent 0.08%),\n       radial-gradient(circle at 75% 65%, #FFFFFF 0%, transparent 0.05%),\n       radial-gradient(circle at 85% 15%, #FFFFFF 0%, transparent 0.07%),\n       radial-gradient(circle at 25% 65%, #FFFFFF 0%, transparent 0.06%),\n       radial-gradient(circle at 65% 85%, #FFFFFF 0%, transparent 0.08%)',
+              opacity: 0.3,
+              zIndex: 0,
+              pointerEvents: 'none',
+            },
+            ...('default' === t && {}),
+            ...('test' === t && {
+              '&::before': {
+                backgroundImage: 'radial-gradient(circle at 25% 25%, '
+                  .concat(
+                    a.palette.primary.main,
+                    '20 0%, transparent 60%), \n         radial-gradient(circle at 75% 75%, '
+                  )
+                  .concat(a.palette.secondary.main, '15 0%, transparent 60%)'),
+              },
+            }),
+            ...('result' === t && {
+              '&::before': {
+                backgroundImage: 'radial-gradient(circle at 50% 50%, '.concat(
+                  a.palette.secondary.main,
+                  '20 0%, transparent 70%)'
+                ),
+              },
+            }),
+          };
+        }),
+        U = (0, o.ZP)(i.Z)(e => {
+          let { theme: a } = e;
+          return { flexGrow: 1, position: 'relative', zIndex: 1 };
+        });
+      var $ = (0, n.forwardRef)(function (e, a) {
+        let {
+          variant: t = 'default',
+          hideHeader: n = !1,
+          hideFooter: i = !1,
+          children: o,
+          sx: s = {},
+          ...l
+        } = e;
+        return (0, r.jsxs)(O, {
+          ref: a,
+          variant: t,
+          sx: s,
+          ...l,
+          children: [
+            !n && (0, r.jsx)(W, {}),
+            (0, r.jsx)(U, { component: 'main', children: o }),
+            !i && (0, r.jsx)(q, {}),
+          ],
+        });
+      });
+      (0, o.ZP)(i.Z)(e => {
+        let {
+          theme: a,
+          direction: t,
+          wrap: r,
+          justify: n,
+          align: i,
+          gap: o,
+          rowGap: s,
+          columnGap: l,
+          grow: d,
+          shrink: p,
+          basis: c,
+          responsive: m,
+        } = e;
+        return {
+          display: 'flex',
+          flexDirection: t,
+          flexWrap: r,
+          justifyContent: n,
+          alignItems: i,
+          gap: void 0 !== o ? a.spacing(o) : void 0,
+          rowGap: void 0 !== s ? a.spacing(s) : void 0,
+          columnGap: void 0 !== l ? a.spacing(l) : void 0,
+          flexGrow: d,
+          flexShrink: p,
+          flexBasis: c,
+          ...(m && {
+            [a.breakpoints.down('sm')]: {
+              flexDirection: 'row' === t ? 'column' : 'column' === t ? 'column' : t,
+            },
+          }),
+        };
+      }),
+        (0, o.ZP)(i.Z)(e => {
+          let {
+            theme: a,
+            direction: t,
+            spacing: r,
+            align: n,
+            justify: i,
+            divider: o,
+            responsive: s,
+          } = e;
+          return {
+            display: 'flex',
+            flexDirection: t,
+            gap: a.spacing(r),
+            alignItems: n,
+            justifyContent: i,
+            width: '100%',
+            ...(s && {
+              [a.breakpoints.down('sm')]: {
+                flexDirection: 'row' === t ? 'column' : 'column' === t ? 'column' : t,
+              },
+            }),
+            ...(o && {
+              '& > *:not(:last-child)': {
+                ...('column' === t && {
+                  borderBottom: '1px solid '.concat(a.palette.divider),
+                  paddingBottom: a.spacing(r / 2),
+                  marginBottom: a.spacing(r / 2),
+                }),
+                ...('row' === t && {
+                  borderRight: '1px solid '.concat(a.palette.divider),
+                  paddingRight: a.spacing(r / 2),
+                  marginRight: a.spacing(r / 2),
+                }),
+              },
+            }),
+          };
+        }),
+        (0, o.ZP)(i.Z)(e => {
+          let { theme: a, ...t } = e,
+            {
+              displayXs: r,
+              displaySm: n,
+              displayMd: i,
+              displayLg: o,
+              displayXl: s,
+              paddingXs: l,
+              paddingSm: d,
+              paddingMd: p,
+              paddingLg: c,
+              paddingXl: m,
+              marginXs: g,
+              marginSm: u,
+              marginMd: x,
+              marginLg: b,
+              marginXl: h,
+              textAlignXs: f,
+              textAlignSm: y,
+              textAlignMd: j,
+              textAlignLg: v,
+              textAlignXl: w,
+              flexDirectionXs: k,
+              flexDirectionSm: Z,
+              flexDirectionMd: F,
+              flexDirectionLg: I,
+              flexDirectionXl: C,
+              orderXs: S,
+              orderSm: P,
+              orderMd: _,
+              orderLg: B,
+              orderXl: R,
+              ...T
+            } = t;
+          return {
+            ...T,
+            ...(void 0 !== r && { display: r }),
+            ...(void 0 !== l && { padding: a.spacing(l) }),
+            ...(void 0 !== g && { margin: a.spacing(g) }),
+            ...(void 0 !== f && { textAlign: f }),
+            ...(void 0 !== k && { flexDirection: k }),
+            ...(void 0 !== S && { order: S }),
+            [a.breakpoints.up('sm')]: {
+              ...(void 0 !== n && { display: n }),
+              ...(void 0 !== d && { padding: a.spacing(d) }),
+              ...(void 0 !== u && { margin: a.spacing(u) }),
+              ...(void 0 !== y && { textAlign: y }),
+              ...(void 0 !== Z && { flexDirection: Z }),
+              ...(void 0 !== P && { order: P }),
+            },
+            [a.breakpoints.up('md')]: {
+              ...(void 0 !== i && { display: i }),
+              ...(void 0 !== p && { padding: a.spacing(p) }),
+              ...(void 0 !== x && { margin: a.spacing(x) }),
+              ...(void 0 !== j && { textAlign: j }),
+              ...(void 0 !== F && { flexDirection: F }),
+              ...(void 0 !== _ && { order: _ }),
+            },
+            [a.breakpoints.up('lg')]: {
+              ...(void 0 !== o && { display: o }),
+              ...(void 0 !== c && { padding: a.spacing(c) }),
+              ...(void 0 !== b && { margin: a.spacing(b) }),
+              ...(void 0 !== v && { textAlign: v }),
+              ...(void 0 !== I && { flexDirection: I }),
+              ...(void 0 !== B && { order: B }),
+            },
+            [a.breakpoints.up('xl')]: {
+              ...(void 0 !== s && { display: s }),
+              ...(void 0 !== m && { padding: a.spacing(m) }),
+              ...(void 0 !== h && { margin: a.spacing(h) }),
+              ...(void 0 !== w && { textAlign: w }),
+              ...(void 0 !== C && { flexDirection: C }),
+              ...(void 0 !== R && { order: R }),
+            },
+          };
+        });
+      var J = t('(app-pages-browser)/./node_modules/@mui/icons-material/Star.js'),
+        V = t('(app-pages-browser)/./node_modules/@mui/icons-material/AutoAwesome.js'),
+        ee = t('(app-pages-browser)/./node_modules/@mui/icons-material/WbTwilight.js');
+      let ea = (0, o.ZP)(i.Z)(e => {
+          let { theme: a, orientation: t, spacing: r } = e;
+          return {
+            position: 'relative',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            margin: 'horizontal' === t ? ''.concat(a.spacing(r), ' 0') : 0,
+            padding: 0,
+          };
+        }),
+        et = (0, o.ZP)(M.Z)(e => {
+          let { theme: a, variant: t, thickness: r, glow: n } = e;
+          return {
+            width: '100%',
+            ...('primary' === t && { backgroundColor: a.palette.primary.main, opacity: 0.7 }),
+            ...('secondary' === t && { backgroundColor: a.palette.secondary.main, opacity: 0.7 }),
+            ...('mystical' === t && {
+              background: 'linear-gradient(90deg, transparent, '
+                .concat(a.palette.primary.main, ', ')
+                .concat(a.palette.secondary.main, ', transparent)'),
+              height: r,
+              border: 'none',
+            }),
+            ...(r && { height: r, border: 'none' }),
+            ...(n && {
+              boxShadow: '0 0 8px '.concat(
+                'primary' === t
+                  ? a.palette.primary.main
+                  : 'secondary' === t
+                    ? a.palette.secondary.main
+                    : ''
+                        .concat(a.palette.primary.main, ', 0 0 12px ')
+                        .concat(a.palette.secondary.main)
+              ),
+            }),
+          };
+        }),
+        er = (0, o.ZP)(i.Z)(e => {
+          let { theme: a } = e;
+          return {
+            position: 'absolute',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: a.spacing(0, 2),
+            backgroundColor: a.palette.background.default,
+            zIndex: 1,
+          };
+        }),
+        en = (0, o.ZP)(i.Z)(e => {
+          let { theme: a, variant: t } = e;
+          return {
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: a.spacing(0, 1),
+            color: 'primary' === t ? a.palette.primary.main : a.palette.secondary.main,
+          };
+        }),
+        ei = (0, o.ZP)(i.Z)(e => {
+          let { theme: a, variant: t, position: r } = e;
+          return {
+            position: 'absolute',
+            width: 6,
+            height: 6,
+            borderRadius: '50%',
+            backgroundColor: 'primary' === t ? a.palette.primary.main : a.palette.secondary.main,
+            boxShadow: '0 0 5px '.concat(
+              'primary' === t ? a.palette.primary.main : a.palette.secondary.main
+            ),
+            ...('left' === r && { left: '20%' }),
+            ...('right' === r && { right: '20%' }),
+          };
+        });
+      var eo = (0, n.forwardRef)(function (e, a) {
+        let {
+          variant: t = 'default',
+          orientation: n = 'horizontal',
+          text: i,
+          icon: o,
+          thickness: s,
+          glow: l = !1,
+          decorated: d = !1,
+          spacing: p = 3,
+          sx: c = {},
+          ...m
+        } = e;
+        return (0, r.jsxs)(ea, {
+          ref: a,
+          orientation: n,
+          spacing: p,
+          sx: c,
+          ...m,
+          children: [
+            (0, r.jsx)(et, { variant: t, orientation: n, thickness: s, glow: l }),
+            (i || o) &&
+              (0, r.jsxs)(er, {
+                children: [
+                  o &&
+                    (0, r.jsx)(en, {
+                      variant: t,
+                      children:
+                        o ||
+                        ('primary' === t
+                          ? (0, r.jsx)(V.Z, { fontSize: 'small' })
+                          : 'secondary' === t
+                            ? (0, r.jsx)(J.Z, { fontSize: 'small' })
+                            : 'mystical' === t
+                              ? (0, r.jsx)(ee.Z, { fontSize: 'small' })
+                              : null),
+                    }),
+                  i &&
+                    (0, r.jsx)(g.Z, {
+                      variant: 'body2',
+                      color: 'default' === t ? 'text.secondary' : 'inherit',
+                      sx: {
+                        color:
+                          'primary' === t
+                            ? 'primary.main'
+                            : 'secondary' === t
+                              ? 'secondary.main'
+                              : 'mystical' === t
+                                ? 'secondary.main'
+                                : 'text.secondary',
+                        fontFamily: e => e.typography.fontFamily.secondary,
+                      },
+                      children: i,
+                    }),
+                ],
+              }),
+            d &&
+              (0, r.jsxs)(r.Fragment, {
+                children: [
+                  (0, r.jsx)(ei, { variant: t, position: 'left' }),
+                  (0, r.jsx)(ei, { variant: t, position: 'right' }),
+                ],
+              }),
+          ],
+        });
+      });
+    },
+  },
+]);

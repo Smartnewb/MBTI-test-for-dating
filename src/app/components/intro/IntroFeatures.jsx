@@ -2,7 +2,8 @@
 
 import { Box, Typography, Container, Grid, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { AnimatedElement, AnimatedIcon } from '../animations';
+import AnimatedElement from '../animations/AnimatedElement';
+import AnimatedIcon from '../animations/AnimatedIcon';
 import { Section } from '../layout';
 import { MysticalTitle } from '../mystical';
 import { MysticalDivider } from '../layout';
@@ -156,7 +157,8 @@ export default function IntroFeatures() {
       icon: <PsychologyIcon />,
       decorationIcon: <StarIcon />,
       title: '정확한 MBTI 분석',
-      description: '24개의 질문을 통해 당신의 MBTI 유형을 정확하게 분석합니다. 연애 상황에 특화된 질문으로 더 정확한 결과를 제공합니다.',
+      description:
+        '24개의 질문을 통해 당신의 MBTI 유형을 정확하게 분석합니다. 연애 상황에 특화된 질문으로 더 정확한 결과를 제공합니다.',
       color: '#6B3FA0',
       animation: 'pulse',
     },
@@ -165,7 +167,8 @@ export default function IntroFeatures() {
       icon: <FavoriteIcon />,
       decorationIcon: <WbTwilightIcon />,
       title: '이상형 매칭',
-      description: '당신의 MBTI 유형과 가장 잘 맞는 이상형을 알려드립니다. MBTI 궁합 이론을 바탕으로 당신과 가장 잘 맞는 유형을 찾아보세요.',
+      description:
+        '당신의 MBTI 유형과 가장 잘 맞는 이상형을 알려드립니다. MBTI 궁합 이론을 바탕으로 당신과 가장 잘 맞는 유형을 찾아보세요.',
       color: '#E91E63',
       animation: 'heartbeat',
     },
@@ -174,7 +177,8 @@ export default function IntroFeatures() {
       icon: <AutoAwesomeIcon />,
       decorationIcon: <StarIcon />,
       title: '연애 성향 분석',
-      description: '당신의 연애 강점과 약점, 연애 스타일을 상세하게 분석해드립니다. 자신의 연애 패턴을 이해하고 더 나은 관계를 만들어보세요.',
+      description:
+        '당신의 연애 강점과 약점, 연애 스타일을 상세하게 분석해드립니다. 자신의 연애 패턴을 이해하고 더 나은 관계를 만들어보세요.',
       color: '#FF9800',
       animation: 'float',
     },
@@ -183,7 +187,8 @@ export default function IntroFeatures() {
       icon: <ShareIcon />,
       decorationIcon: <WbTwilightIcon />,
       title: '결과 공유',
-      description: '테스트 결과를 친구나 연인과 공유할 수 있습니다. 서로의 MBTI 유형을 비교하고 더 깊이 이해해보세요.',
+      description:
+        '테스트 결과를 친구나 연인과 공유할 수 있습니다. 서로의 MBTI 유형을 비교하고 더 깊이 이해해보세요.',
       color: '#2196F3',
       animation: 'bounce',
     },
@@ -269,14 +274,16 @@ export default function IntroFeatures() {
                         {feature.description}
                       </Typography>
 
-                      <Box sx={{
-                        position: 'absolute',
-                        bottom: -10,
-                        right: -10,
-                        opacity: 0.1,
-                        transform: 'rotate(-15deg)',
-                        color: feature.color,
-                      }}>
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          bottom: -10,
+                          right: -10,
+                          opacity: 0.1,
+                          transform: 'rotate(-15deg)',
+                          color: feature.color,
+                        }}
+                      >
                         {feature.decorationIcon}
                       </Box>
                     </Box>

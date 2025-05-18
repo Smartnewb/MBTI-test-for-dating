@@ -1,0 +1,165 @@
+'use strict';
+(() => {
+  var e = {};
+  (e.id = 550),
+    (e.ids = [550]),
+    (e.modules = {
+      'next/dist/compiled/next-server/app-page.runtime.prod.js': e => {
+        e.exports = require('next/dist/compiled/next-server/app-page.runtime.prod.js');
+      },
+      'next/dist/compiled/next-server/app-route.runtime.prod.js': e => {
+        e.exports = require('next/dist/compiled/next-server/app-route.runtime.prod.js');
+      },
+      buffer: e => {
+        e.exports = require('buffer');
+      },
+      crypto: e => {
+        e.exports = require('crypto');
+      },
+      events: e => {
+        e.exports = require('events');
+      },
+      http: e => {
+        e.exports = require('http');
+      },
+      https: e => {
+        e.exports = require('https');
+      },
+      net: e => {
+        e.exports = require('net');
+      },
+      punycode: e => {
+        e.exports = require('punycode');
+      },
+      stream: e => {
+        e.exports = require('stream');
+      },
+      tls: e => {
+        e.exports = require('tls');
+      },
+      url: e => {
+        e.exports = require('url');
+      },
+      zlib: e => {
+        e.exports = require('zlib');
+      },
+      '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Fapi%2Fsession%2Finit%2Froute&name=app%2Fapi%2Fsession%2Finit%2Froute&pagePath=private-next-app-dir%2Fapi%2Fsession%2Finit%2Froute.js&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Fapi%2Fsession%2Finit%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!':
+        (e, s, t) => {
+          t.r(s),
+            t.d(s, {
+              originalPathname: () => g,
+              patchFetch: () => F,
+              requestAsyncStorage: () => l,
+              routeModule: () => c,
+              serverHooks: () => m,
+              staticGenerationAsyncStorage: () => x,
+            });
+          var r = {};
+          t.r(r), t.d(r, { GET: () => u, POST: () => d });
+          var i = t(
+              '(rsc)/./node_modules/next/dist/server/future/route-modules/app-route/module.compiled.js'
+            ),
+            n = t('(rsc)/./node_modules/next/dist/server/future/route-kind.js'),
+            o = t('(rsc)/./node_modules/next/dist/server/lib/patch-fetch.js'),
+            a = t('(rsc)/./node_modules/next/dist/api/server.js'),
+            p = t('(rsc)/./src/app/utils/supabase.js');
+          async function u(e) {
+            try {
+              let s = e.headers.get('x-session-id');
+              if (!s) return a.NextResponse.json({ error: '세션 ID가 없습니다.' }, { status: 400 });
+              let { searchParams: t } = new URL(e.url),
+                r = t.get('redirect') || '/',
+                { error: i } = await p.OQ.from('sessions').upsert(
+                  [
+                    {
+                      id: s,
+                      created_at: new Date().toISOString(),
+                      last_active: new Date().toISOString(),
+                      data: {},
+                    },
+                  ],
+                  { onConflict: 'id' }
+                );
+              return (
+                i && console.error('Error initializing session:', i),
+                a.NextResponse.redirect(new URL(r, e.url))
+              );
+            } catch (e) {
+              return (
+                console.error('Session initialization error:', e),
+                a.NextResponse.json(
+                  { error: '세션 초기화 중 오류가 발생했습니다.' },
+                  { status: 500 }
+                )
+              );
+            }
+          }
+          async function d(e) {
+            try {
+              let s = e.headers.get('x-session-id');
+              if (!s) return a.NextResponse.json({ error: '세션 ID가 없습니다.' }, { status: 400 });
+              let t = await e.json(),
+                { error: r } = await p.OQ.from('sessions')
+                  .update({ last_active: new Date().toISOString(), data: t.data || {} })
+                  .eq('id', s);
+              if (r)
+                return (
+                  console.error('Error updating session:', r),
+                  a.NextResponse.json(
+                    { error: '세션 업데이트 중 오류가 발생했습니다.' },
+                    { status: 500 }
+                  )
+                );
+              return a.NextResponse.json({ success: !0 });
+            } catch (e) {
+              return (
+                console.error('Session update error:', e),
+                a.NextResponse.json(
+                  { error: '세션 업데이트 중 오류가 발생했습니다.' },
+                  { status: 500 }
+                )
+              );
+            }
+          }
+          let c = new i.AppRouteRouteModule({
+              definition: {
+                kind: n.x.APP_ROUTE,
+                page: '/api/session/init/route',
+                pathname: '/api/session/init',
+                filename: 'route',
+                bundlePath: 'app/api/session/init/route',
+              },
+              resolvedPagePath:
+                'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\api\\session\\init\\route.js',
+              nextConfigOutput: 'standalone',
+              userland: r,
+            }),
+            { requestAsyncStorage: l, staticGenerationAsyncStorage: x, serverHooks: m } = c,
+            g = '/api/session/init/route';
+          function F() {
+            return (0, o.patchFetch)({ serverHooks: m, staticGenerationAsyncStorage: x });
+          }
+        },
+      '(rsc)/./src/app/utils/supabase.js': (e, s, t) => {
+        t.d(s, { OQ: () => o });
+        var r = t('(rsc)/./node_modules/@supabase/supabase-js/dist/module/index.js');
+        let i = 'https://uboblerxqhlkwesjmvbo.supabase.co',
+          n =
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVib2JsZXJ4cWhsa3dlc2ptdmJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc0ODU2MTUsImV4cCI6MjA2MzA2MTYxNX0.UoMDiFnu_vEaxMsVxAOQAj8tnVQ4-c0fbkx6HW_hfww';
+        (i && n) ||
+          console.error(
+            'Supabase URL or Anonymous Key is missing. Please check your environment variables.'
+          );
+        let o = (0, r.eI)(i, n);
+      },
+    });
+  var s = require('../../../../webpack-runtime.js');
+  s.C(e);
+  var t = e => s((s.s = e)),
+    r = s.X(0, [276, 135], () =>
+      t(
+        '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Fapi%2Fsession%2Finit%2Froute&name=app%2Fapi%2Fsession%2Finit%2Froute&pagePath=private-next-app-dir%2Fapi%2Fsession%2Finit%2Froute.js&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Fapi%2Fsession%2Finit%2Froute&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!'
+      )
+    );
+  module.exports = r;
+})();

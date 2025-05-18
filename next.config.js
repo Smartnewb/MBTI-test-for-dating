@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: ['localhost'],
+    unoptimized: true,
   },
   // Skip type checking to speed up the build
   typescript: {
@@ -12,7 +13,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Disable static generation for all pages
+  // Use standalone output for better compatibility with Vercel
   output: 'standalone',
   // Configure dynamic rendering for all pages
   experimental: {
@@ -23,6 +24,23 @@ const nextConfig = {
   // Skip prerendering for all pages
   skipTrailingSlashRedirect: true,
   skipMiddlewareUrlNormalize: true,
+  // Exclude problematic pages from static generation
+  excludeDefaultMomentLocales: true,
+  // Disable static generation for problematic design system pages
+  distDir: process.env.NODE_ENV === 'production' ? '.next-prod' : '.next',
+  onDemandEntries: {
+    // Keep pages in memory longer during development
+    maxInactiveAge: 60 * 60 * 1000,
+    // Number of pages to keep in memory
+    pagesBufferLength: 5,
+  },
+  // Configure webpack to handle Symbol values properly
+  webpack: (config, { isServer }) => {
+    // Handle Symbol serialization issues
+    config.optimization.moduleIds = 'named';
+
+    return config;
+  },
 };
 
 export default nextConfig;

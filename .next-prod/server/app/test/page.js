@@ -1,0 +1,858 @@
+(() => {
+  var e = {};
+  (e.id = 928),
+    (e.ids = [928]),
+    (e.modules = {
+      '../../client/components/action-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/action-async-storage.external.js');
+      },
+      '../../client/components/request-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/request-async-storage.external.js');
+      },
+      '../../client/components/static-generation-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/static-generation-async-storage.external.js');
+      },
+      'next/dist/compiled/next-server/app-page.runtime.prod.js': e => {
+        'use strict';
+        e.exports = require('next/dist/compiled/next-server/app-page.runtime.prod.js');
+      },
+      buffer: e => {
+        'use strict';
+        e.exports = require('buffer');
+      },
+      crypto: e => {
+        'use strict';
+        e.exports = require('crypto');
+      },
+      events: e => {
+        'use strict';
+        e.exports = require('events');
+      },
+      http: e => {
+        'use strict';
+        e.exports = require('http');
+      },
+      https: e => {
+        'use strict';
+        e.exports = require('https');
+      },
+      net: e => {
+        'use strict';
+        e.exports = require('net');
+      },
+      punycode: e => {
+        'use strict';
+        e.exports = require('punycode');
+      },
+      stream: e => {
+        'use strict';
+        e.exports = require('stream');
+      },
+      tls: e => {
+        'use strict';
+        e.exports = require('tls');
+      },
+      url: e => {
+        'use strict';
+        e.exports = require('url');
+      },
+      zlib: e => {
+        'use strict';
+        e.exports = require('zlib');
+      },
+      '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Ftest%2Fpage&name=app%2Ftest%2Fpage&pagePath=private-next-app-dir%2Ftest%2Fpage.jsx&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Ftest%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!':
+        (e, t, s) => {
+          'use strict';
+          s.r(t),
+            s.d(t, {
+              GlobalError: () => n.a,
+              __next_app__: () => c,
+              originalPathname: () => u,
+              pages: () => p,
+              routeModule: () => m,
+              tree: () => l,
+            }),
+            s('(rsc)/./src/app/test/page.jsx'),
+            s('(rsc)/./src/app/layout.js'),
+            s('(rsc)/./node_modules/next/dist/client/components/not-found-error.js');
+          var r = s(
+              '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/module.compiled.js?d969'
+            ),
+            o = s('(rsc)/./node_modules/next/dist/server/future/route-kind.js'),
+            a = s('(rsc)/./node_modules/next/dist/client/components/error-boundary.js'),
+            n = s.n(a),
+            i = s('(rsc)/./node_modules/next/dist/server/app-render/entry-base.js'),
+            d = {};
+          for (let e in i)
+            0 >
+              [
+                'default',
+                'tree',
+                'pages',
+                'GlobalError',
+                'originalPathname',
+                '__next_app__',
+                'routeModule',
+              ].indexOf(e) && (d[e] = () => i[e]);
+          s.d(t, d);
+          let l = [
+              '',
+              {
+                children: [
+                  'test',
+                  {
+                    children: [
+                      '__PAGE__',
+                      {},
+                      {
+                        page: [
+                          () => Promise.resolve().then(s.bind(s, '(rsc)/./src/app/test/page.jsx')),
+                          'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\test\\page.jsx',
+                        ],
+                      },
+                    ],
+                  },
+                  {},
+                ],
+              },
+              {
+                layout: [
+                  () => Promise.resolve().then(s.bind(s, '(rsc)/./src/app/layout.js')),
+                  'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\layout.js',
+                ],
+                'not-found': [
+                  () =>
+                    Promise.resolve().then(
+                      s.t.bind(
+                        s,
+                        '(rsc)/./node_modules/next/dist/client/components/not-found-error.js',
+                        23
+                      )
+                    ),
+                  'next/dist/client/components/not-found-error',
+                ],
+              },
+            ],
+            p = [
+              'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\test\\page.jsx',
+            ],
+            u = '/test/page',
+            c = { require: s, loadChunk: () => Promise.resolve() },
+            m = new r.AppPageRouteModule({
+              definition: {
+                kind: o.x.APP_PAGE,
+                page: '/test/page',
+                pathname: '/test',
+                bundlePath: '',
+                filename: '',
+                appPaths: [],
+              },
+              userland: { loaderTree: l },
+            });
+        },
+      '(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5C%EC%A0%84%EC%A4%80%EC%98%81%5C%5CDocuments%5C%5Caugment-projects%5C%5CMBTI%20test%20for%20dating%5C%5Csrc%5C%5Capp%5C%5Ctest%5C%5Cpage.jsx%22%2C%22ids%22%3A%5B%5D%7D&server=true!':
+        (e, t, s) => {
+          Promise.resolve().then(s.bind(s, '(ssr)/./src/app/test/page.jsx'));
+        },
+      '(ssr)/./node_modules/@mui/material/CardContent/CardContent.js': (e, t, s) => {
+        'use strict';
+        s.d(t, { Z: () => f });
+        var r = s('(ssr)/./node_modules/@babel/runtime/helpers/esm/extends.js'),
+          o = s('(ssr)/./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'),
+          a = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          n = s('(ssr)/./node_modules/clsx/dist/clsx.mjs'),
+          i = s('(ssr)/./node_modules/@mui/utils/esm/composeClasses/composeClasses.js'),
+          d = s('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          l = s('(ssr)/./node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.js'),
+          p = s(
+            '(ssr)/./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js'
+          ),
+          u = s('(ssr)/./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js');
+        function c(e) {
+          return (0, u.ZP)('MuiCardContent', e);
+        }
+        (0, p.Z)('MuiCardContent', ['root']);
+        var m = s(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        );
+        let x = ['className', 'component'],
+          g = e => {
+            let { classes: t } = e;
+            return (0, i.Z)({ root: ['root'] }, c, t);
+          },
+          b = (0, d.ZP)('div', {
+            name: 'MuiCardContent',
+            slot: 'Root',
+            overridesResolver: (e, t) => t.root,
+          })(() => ({ padding: 16, '&:last-child': { paddingBottom: 24 } })),
+          f = a.forwardRef(function (e, t) {
+            let s = (0, l.i)({ props: e, name: 'MuiCardContent' }),
+              { className: a, component: i = 'div' } = s,
+              d = (0, o.Z)(s, x),
+              p = (0, r.Z)({}, s, { component: i }),
+              u = g(p);
+            return (0, m.jsx)(
+              b,
+              (0, r.Z)({ as: i, className: (0, n.Z)(u.root, a), ownerState: p, ref: t }, d)
+            );
+          });
+      },
+      '(ssr)/./node_modules/@mui/material/Card/Card.js': (e, t, s) => {
+        'use strict';
+        s.d(t, { Z: () => j });
+        var r = s('(ssr)/./node_modules/@babel/runtime/helpers/esm/extends.js'),
+          o = s('(ssr)/./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'),
+          a = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          n = s('(ssr)/./node_modules/clsx/dist/clsx.mjs'),
+          i = s('(ssr)/./node_modules/@mui/utils/esm/composeClasses/composeClasses.js'),
+          d = s('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          l = s('(ssr)/./node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.js'),
+          p = s('(ssr)/./node_modules/@mui/material/Paper/Paper.js'),
+          u = s(
+            '(ssr)/./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js'
+          ),
+          c = s('(ssr)/./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js');
+        function m(e) {
+          return (0, c.ZP)('MuiCard', e);
+        }
+        (0, u.Z)('MuiCard', ['root']);
+        var x = s(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        );
+        let g = ['className', 'raised'],
+          b = e => {
+            let { classes: t } = e;
+            return (0, i.Z)({ root: ['root'] }, m, t);
+          },
+          f = (0, d.ZP)(p.Z, {
+            name: 'MuiCard',
+            slot: 'Root',
+            overridesResolver: (e, t) => t.root,
+          })(() => ({ overflow: 'hidden' })),
+          j = a.forwardRef(function (e, t) {
+            let s = (0, l.i)({ props: e, name: 'MuiCard' }),
+              { className: a, raised: i = !1 } = s,
+              d = (0, o.Z)(s, g),
+              p = (0, r.Z)({}, s, { raised: i }),
+              u = b(p);
+            return (0, x.jsx)(
+              f,
+              (0, r.Z)(
+                {
+                  className: (0, n.Z)(u.root, a),
+                  elevation: i ? 8 : void 0,
+                  ref: t,
+                  ownerState: p,
+                },
+                d
+              )
+            );
+          });
+      },
+      '(ssr)/./node_modules/next/dist/api/navigation.js': (e, t, s) => {
+        'use strict';
+        var r = s('(ssr)/./node_modules/next/dist/client/components/navigation.js');
+        s.o(r, 'useRouter') &&
+          s.d(t, {
+            useRouter: function () {
+              return r.useRouter;
+            },
+          }),
+          s.o(r, 'useSearchParams') &&
+            s.d(t, {
+              useSearchParams: function () {
+                return r.useSearchParams;
+              },
+            });
+      },
+      '(ssr)/./src/app/components/TarotCard.jsx': (e, t, s) => {
+        'use strict';
+        s.d(t, { Z: () => m });
+        var r = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          ),
+          o = s('(ssr)/./node_modules/@mui/material/Card/Card.js'),
+          a = s('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+          n = s('(ssr)/./node_modules/@mui/material/CardContent/CardContent.js'),
+          i = s('(ssr)/./node_modules/@mui/material/Typography/Typography.js'),
+          d = s('(ssr)/./node_modules/@mui/material/styles/styled.js');
+        let l = (0, d.ZP)(o.Z)(({ theme: e, variant: t, interactive: s = !0 }) => ({
+            borderRadius: 16,
+            maxWidth: 350,
+            minHeight: 450,
+            margin: '0 auto',
+            position: 'relative',
+            overflow: 'visible',
+            transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+            ...('primary' === t && {
+              background: `linear-gradient(135deg, ${e.palette.primary.main}, ${e.palette.primary.dark})`,
+              color: e.palette.primary.contrastText,
+            }),
+            ...('secondary' === t && {
+              background: `linear-gradient(135deg, ${e.palette.secondary.main}, ${e.palette.secondary.dark})`,
+              color: e.palette.secondary.contrastText,
+            }),
+            ...('mystical' === t && {
+              background: 'linear-gradient(135deg, #2C3E50, #4A235A)',
+              color: '#FFFFFF',
+            }),
+            ...('result' === t && {
+              background: 'linear-gradient(135deg, #1A1A2E, #16213E)',
+              color: '#FFFFFF',
+              boxShadow: '0 10px 30px rgba(106, 27, 154, 0.4)',
+            }),
+            ...('default' === t && {
+              background: `linear-gradient(135deg, ${e.palette.background.paper}, ${e.palette.background.default})`,
+              color: e.palette.text.primary,
+            }),
+            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)',
+            border: `1px solid ${e.palette.primary.dark}`,
+            ...(s && {
+              '&:hover': {
+                transform: 'translateY(-5px)',
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.7)',
+              },
+              cursor: 'pointer',
+            }),
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: 16,
+              background: 'url(/images/card-texture.png)',
+              backgroundSize: 'cover',
+              opacity: 0.1,
+              pointerEvents: 'none',
+            },
+            ...(('mystical' === t || 'result' === t) && {
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                borderRadius: 16,
+                background:
+                  'radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%)',
+                pointerEvents: 'none',
+              },
+            }),
+          })),
+          p = (0, d.ZP)(a.Z)(({ theme: e, variant: t }) => ({
+            position: 'absolute',
+            top: 8,
+            left: 8,
+            right: 8,
+            bottom: 8,
+            border: `1px solid ${'result' === t ? '#D4AF37' : e.palette.secondary.main}`,
+            borderRadius: 12,
+            pointerEvents: 'none',
+            ...('result' === t && { boxShadow: '0 0 10px rgba(212, 175, 55, 0.3) inset' }),
+            ...('mystical' === t && { boxShadow: '0 0 15px rgba(156, 39, 176, 0.3) inset' }),
+          })),
+          u = (0, d.ZP)(a.Z)(({ theme: e, position: t, variant: s }) => ({
+            position: 'absolute',
+            width: 20,
+            height: 20,
+            border: `1px solid ${'result' === s ? '#D4AF37' : e.palette.secondary.main}`,
+            ...('top-left' === t && {
+              top: 4,
+              left: 4,
+              borderRight: 'none',
+              borderBottom: 'none',
+              borderTopLeftRadius: 8,
+            }),
+            ...('top-right' === t && {
+              top: 4,
+              right: 4,
+              borderLeft: 'none',
+              borderBottom: 'none',
+              borderTopRightRadius: 8,
+            }),
+            ...('bottom-left' === t && {
+              bottom: 4,
+              left: 4,
+              borderRight: 'none',
+              borderTop: 'none',
+              borderBottomLeftRadius: 8,
+            }),
+            ...('bottom-right' === t && {
+              bottom: 4,
+              right: 4,
+              borderLeft: 'none',
+              borderTop: 'none',
+              borderBottomRightRadius: 8,
+            }),
+            pointerEvents: 'none',
+            ...(('result' === s || 'mystical' === s) && {
+              width: 25,
+              height: 25,
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                width: 5,
+                height: 5,
+                borderRadius: '50%',
+                background: 'result' === s ? '#D4AF37' : e.palette.secondary.main,
+                ...('top-left' === t && { top: 3, left: 3 }),
+                ...('top-right' === t && { top: 3, right: 3 }),
+                ...('bottom-left' === t && { bottom: 3, left: 3 }),
+                ...('bottom-right' === t && { bottom: 3, right: 3 }),
+              },
+            }),
+          })),
+          c = (0, d.ZP)(a.Z)(({ theme: e, variant: t }) => ({
+            position: 'absolute',
+            width: 40,
+            height: 40,
+            opacity: 0.2,
+            pointerEvents: 'none',
+            ...('result' === t && {
+              top: 20,
+              right: 20,
+              background: 'url(/images/tarot-back.svg)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              opacity: 0.15,
+            }),
+            ...('mystical' === t && {
+              bottom: 20,
+              left: 20,
+              background: 'url(/images/tarot-back.svg)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              opacity: 0.15,
+              transform: 'rotate(180deg)',
+            }),
+          }));
+        function m({
+          children: e,
+          title: t,
+          variant: s = 'default',
+          interactive: o = !0,
+          onClick: a,
+          ariaLabel: d,
+          sx: m = {},
+        }) {
+          return (0, r.jsxs)(l, {
+            variant: s,
+            interactive: o,
+            onClick: a,
+            onKeyDown: e => {
+              a && ('Enter' === e.key || ' ' === e.key) && (e.preventDefault(), a());
+            },
+            tabIndex: a ? 0 : void 0,
+            role: a ? 'button' : void 0,
+            'aria-label': d || t,
+            sx: m,
+            children: [
+              r.jsx(p, { variant: s }),
+              r.jsx(u, { position: 'top-left', variant: s }),
+              r.jsx(u, { position: 'top-right', variant: s }),
+              r.jsx(u, { position: 'bottom-left', variant: s }),
+              r.jsx(u, { position: 'bottom-right', variant: s }),
+              ('result' === s || 'mystical' === s) && r.jsx(c, { variant: s }),
+              (0, r.jsxs)(n.Z, {
+                sx: { p: 4, height: '100%', display: 'flex', flexDirection: 'column' },
+                children: [
+                  t &&
+                    r.jsx(i.Z, {
+                      variant: 'h5',
+                      component: 'h2',
+                      sx: {
+                        textAlign: 'center',
+                        mb: 3,
+                        fontWeight: 'bold',
+                        color:
+                          'primary' === s || 'secondary' === s || 'mystical' === s || 'result' === s
+                            ? 'white'
+                            : 'text.primary',
+                        textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                        ...('result' === s && { color: '#D4AF37', letterSpacing: '0.05em' }),
+                      },
+                      children: t,
+                    }),
+                  e,
+                ],
+              }),
+            ],
+          });
+        }
+      },
+      '(ssr)/./src/app/components/animations.jsx': (e, t, s) => {
+        'use strict';
+        s.d(t, { F: () => v, K: () => l });
+        var r = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          ),
+          o = s('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+          a = s('(ssr)/./node_modules/@emotion/react/dist/emotion-react.esm.js'),
+          n = s('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          i = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          );
+        let d = (0, n.ZP)(o.Z)(({ theme: e }) => ({ position: 'relative' })),
+          l = (0, i.forwardRef)(function (e, t) {
+            let {
+                animation: s = 'fadeIn',
+                duration: o = 'normal',
+                easing: a = 'easeInOut',
+                staggerDelay: n = 100,
+                initialDelay: l = 0,
+                onScroll: p = !1,
+                threshold: u = 0.2,
+                children: c,
+                sx: m = {},
+                ...x
+              } = e,
+              g = (0, i.useRef)(null),
+              b = t || g,
+              [f, j] = (0, i.useState)(!p);
+            (0, i.useEffect)(() => {}, [p, b, u]);
+            let h = i.Children.map(c, (e, t) =>
+              e && 'object' == typeof e
+                ? (0, i.cloneElement)(e, {
+                    animation: f ? s : null,
+                    duration: o,
+                    delay: l + t * n,
+                    easing: a,
+                    style: { ...e.props.style, opacity: f ? 1 : 0 },
+                  })
+                : e
+            );
+            return r.jsx(d, { ref: b, sx: m, ...x, children: h });
+          }),
+          p = { fast: 300, normal: 500, slow: 800, verySlow: 1200 },
+          u = (0, a.F4)`
+  0% {
+    transform: perspective(1200px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg);
+    opacity: 1;
+  }
+`,
+          c = (0, a.F4)`
+  0% {
+    transform: perspective(1200px) rotateY(90deg) scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: perspective(1200px) rotateY(45deg) scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+`,
+          m = (0, a.F4)`
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`,
+          x = (0, a.F4)`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`,
+          g = (0, a.F4)`
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`,
+          b = (0, a.F4)`
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`,
+          f = (0, a.F4)`
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`,
+          j = (0, a.F4)`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`,
+          h = (e, t) => {
+            let s = p[t] || p.normal;
+            switch (e) {
+              case 'tarotFlip':
+                return { animation: `${u} ${s}ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards` };
+              case 'tarotReveal':
+                return { animation: `${c} ${s}ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards` };
+              case 'shine':
+                return {
+                  position: 'relative',
+                  overflow: 'hidden',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                    animation: `${m} ${2 * s}ms linear infinite`,
+                  },
+                };
+              case 'fadeIn':
+                return { animation: `${x} ${s}ms ease-in-out forwards` };
+              case 'slideUp':
+                return { animation: `${g} ${s}ms ease-out forwards` };
+              case 'slideRight':
+                return { animation: `${b} ${s}ms ease-out forwards` };
+              case 'slideLeft':
+                return { animation: `${f} ${s}ms ease-out forwards` };
+              case 'pulse':
+                return { animation: `${j} ${s}ms ease-in-out infinite` };
+              default:
+                return {};
+            }
+          },
+          y = (0, n.ZP)(o.Z)(({ theme: e, animation: t, duration: s, delay: r = 0 }) => ({
+            opacity: 0,
+            ...h(t, s),
+            animationDelay: `${r}ms`,
+          }));
+        function v({
+          children: e,
+          animation: t = 'fadeIn',
+          duration: s = 'normal',
+          delay: o = 0,
+          sx: a = {},
+          ...n
+        }) {
+          return r.jsx(y, { animation: t, duration: s, delay: o, sx: a, ...n, children: e });
+        }
+      },
+      '(ssr)/./src/app/test/page.jsx': (e, t, s) => {
+        'use strict';
+        s.r(t), s.d(t, { default: () => g, dynamic: () => x });
+        var r = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          ),
+          o = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          a = s('(ssr)/./node_modules/@mui/material/Typography/Typography.js'),
+          n = s('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+          i = s('(ssr)/./node_modules/@mui/material/Paper/Paper.js'),
+          d = s('(ssr)/./node_modules/next/dist/api/navigation.js'),
+          l = s('(ssr)/./src/app/components/animations.jsx'),
+          p = s('(ssr)/./src/app/components/layout/index.js'),
+          u = s('(ssr)/./src/app/components/MysticalButton.jsx'),
+          c = s('(ssr)/./src/app/components/TarotCard.jsx'),
+          m = s('(ssr)/./src/app/hooks/useMbtiTest.js');
+        let x = 'force-dynamic';
+        function g() {
+          let e = (0, d.useRouter)(),
+            { handleStartTest: t, resetStore: s, isTestStarted: x } = (0, m.Z)(),
+            [g, b] = (0, o.useState)(!0);
+          return g
+            ? r.jsx(p.Xg, {
+                variant: 'test',
+                children: r.jsx(p.$0, {
+                  centered: !0,
+                  fullHeight: !0,
+                  children: r.jsx(a.Z, { variant: 'h4', children: '로딩 중...' }),
+                }),
+              })
+            : r.jsx(p.Xg, {
+                variant: 'test',
+                children: (0, r.jsxs)(p.$0, {
+                  centered: !0,
+                  children: [
+                    r.jsx(l.F, {
+                      animation: 'fadeIn',
+                      duration: 'normal',
+                      children: (0, r.jsxs)(c.Z, {
+                        variant: 'mystical',
+                        sx: { maxWidth: 800, mx: 'auto', my: 4, p: 4 },
+                        children: [
+                          r.jsx(a.Z, {
+                            variant: 'h3',
+                            sx: { mb: 4, textAlign: 'center' },
+                            children: '달빛 연애 연구소의 MBTI 연애 테스트',
+                          }),
+                          r.jsx(a.Z, {
+                            variant: 'body1',
+                            sx: { mb: 3 },
+                            children:
+                              '당신의 MBTI 유형을 기반으로 연애 스타일과 이상형을 알아보세요. 24개의 질문에 답하면 당신의 MBTI 유형과 연애 성향, 그리고 가장 잘 맞는 이상형을 알려드립니다.',
+                          }),
+                          r.jsx(a.Z, {
+                            variant: 'body1',
+                            sx: { mb: 3 },
+                            children:
+                              '각 질문에는 정답이 없습니다. 평소 연애 상황에서 당신의 생각과 행동에 가장 가까운 답변을 선택해주세요. 솔직하게 답변할수록 더 정확한 결과를 얻을 수 있습니다.',
+                          }),
+                          r.jsx(a.Z, {
+                            variant: 'body1',
+                            sx: { mb: 5 },
+                            children:
+                              '테스트는 약 5-10분 정도 소요됩니다. 중간에 테스트를 중단해도 진행 상황은 저장됩니다.',
+                          }),
+                          r.jsx(n.Z, {
+                            sx: { display: 'flex', justifyContent: 'center' },
+                            children: r.jsx(u.Z, {
+                              variant: 'mystical',
+                              size: 'large',
+                              onClick: () => {
+                                t(), e.push('/test/question');
+                              },
+                              children: '테스트 시작하기',
+                            }),
+                          }),
+                        ],
+                      }),
+                    }),
+                    r.jsx(l.F, {
+                      animation: 'slideUp',
+                      duration: 'normal',
+                      delay: 300,
+                      children: (0, r.jsxs)(i.Z, {
+                        sx: { maxWidth: 800, mx: 'auto', my: 4, p: 4, bgcolor: 'background.paper' },
+                        children: [
+                          r.jsx(a.Z, {
+                            variant: 'h5',
+                            sx: { mb: 3 },
+                            children: 'MBTI란 무엇인가요?',
+                          }),
+                          r.jsx(a.Z, {
+                            variant: 'body1',
+                            sx: { mb: 2 },
+                            children:
+                              'MBTI(Myers-Briggs Type Indicator)는 개인의 성격 유형을 16가지로 분류하는 성격 유형 지표입니다. 각 유형은 4가지 선호 경향의 조합으로 이루어집니다:',
+                          }),
+                          (0, r.jsxs)(n.Z, {
+                            component: 'ul',
+                            sx: { mb: 3 },
+                            children: [
+                              r.jsx(n.Z, {
+                                component: 'li',
+                                sx: { mb: 1 },
+                                children: (0, r.jsxs)(a.Z, {
+                                  variant: 'body1',
+                                  children: [
+                                    r.jsx('strong', { children: '에너지 방향(E/I)' }),
+                                    ': 외향형(Extraversion) vs 내향형(Introversion)',
+                                  ],
+                                }),
+                              }),
+                              r.jsx(n.Z, {
+                                component: 'li',
+                                sx: { mb: 1 },
+                                children: (0, r.jsxs)(a.Z, {
+                                  variant: 'body1',
+                                  children: [
+                                    r.jsx('strong', { children: '인식 기능(S/N)' }),
+                                    ': 감각형(Sensing) vs 직관형(iNtuition)',
+                                  ],
+                                }),
+                              }),
+                              r.jsx(n.Z, {
+                                component: 'li',
+                                sx: { mb: 1 },
+                                children: (0, r.jsxs)(a.Z, {
+                                  variant: 'body1',
+                                  children: [
+                                    r.jsx('strong', { children: '판단 기능(T/F)' }),
+                                    ': 사고형(Thinking) vs 감정형(Feeling)',
+                                  ],
+                                }),
+                              }),
+                              r.jsx(n.Z, {
+                                component: 'li',
+                                sx: { mb: 1 },
+                                children: (0, r.jsxs)(a.Z, {
+                                  variant: 'body1',
+                                  children: [
+                                    r.jsx('strong', { children: '생활 양식(J/P)' }),
+                                    ': 판단형(Judging) vs 인식형(Perceiving)',
+                                  ],
+                                }),
+                              }),
+                            ],
+                          }),
+                          r.jsx(a.Z, {
+                            variant: 'body1',
+                            children:
+                              '이 테스트는 연애 관계에서의 선호 경향을 중심으로 질문이 구성되어 있어, 당신의 연애 스타일과 이상형을 더 정확하게 파악할 수 있습니다.',
+                          }),
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+              });
+        }
+      },
+      '(rsc)/./src/app/test/page.jsx': (e, t, s) => {
+        'use strict';
+        s.r(t), s.d(t, { default: () => a, dynamic: () => o });
+        var r = s(
+          '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js'
+        );
+        let o = (0, r.createProxy)(
+            String.raw`C:\Users\전준영\Documents\augment-projects\MBTI test for dating\src\app\test\page.jsx#dynamic`
+          ),
+          a = (0, r.createProxy)(
+            String.raw`C:\Users\전준영\Documents\augment-projects\MBTI test for dating\src\app\test\page.jsx#default`
+          );
+      },
+    });
+  var t = require('../../webpack-runtime.js');
+  t.C(e);
+  var s = e => t((t.s = e)),
+    r = t.X(0, [276, 576, 5, 541, 521, 246, 687, 171, 863], () =>
+      s(
+        '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Ftest%2Fpage&name=app%2Ftest%2Fpage&pagePath=private-next-app-dir%2Ftest%2Fpage.jsx&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Ftest%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!'
+      )
+    );
+  module.exports = r;
+})();

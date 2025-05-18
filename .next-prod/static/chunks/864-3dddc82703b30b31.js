@@ -1,0 +1,468 @@
+'use strict';
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+  [864],
+  {
+    '(app-pages-browser)/./src/app/components/TarotCard.jsx': function (t, e, n) {
+      n.d(e, {
+        Z: function () {
+          return m;
+        },
+      });
+      var r = n('(app-pages-browser)/./node_modules/next/dist/compiled/react/jsx-runtime.js'),
+        o = n('(app-pages-browser)/./node_modules/@mui/material/Card/Card.js'),
+        a = n('(app-pages-browser)/./node_modules/@mui/material/Box/Box.js'),
+        i = n('(app-pages-browser)/./node_modules/@mui/material/CardContent/CardContent.js'),
+        s = n('(app-pages-browser)/./node_modules/@mui/material/Typography/Typography.js'),
+        c = n('(app-pages-browser)/./node_modules/@mui/material/styles/styled.js');
+      let l = (0, c.ZP)(o.Z)(t => {
+          let { theme: e, variant: n, interactive: r = !0 } = t;
+          return {
+            borderRadius: 16,
+            maxWidth: 350,
+            minHeight: 450,
+            margin: '0 auto',
+            position: 'relative',
+            overflow: 'visible',
+            transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+            ...('primary' === n && {
+              background: 'linear-gradient(135deg, '
+                .concat(e.palette.primary.main, ', ')
+                .concat(e.palette.primary.dark, ')'),
+              color: e.palette.primary.contrastText,
+            }),
+            ...('secondary' === n && {
+              background: 'linear-gradient(135deg, '
+                .concat(e.palette.secondary.main, ', ')
+                .concat(e.palette.secondary.dark, ')'),
+              color: e.palette.secondary.contrastText,
+            }),
+            ...('mystical' === n && {
+              background: 'linear-gradient(135deg, #2C3E50, #4A235A)',
+              color: '#FFFFFF',
+            }),
+            ...('result' === n && {
+              background: 'linear-gradient(135deg, #1A1A2E, #16213E)',
+              color: '#FFFFFF',
+              boxShadow: '0 10px 30px rgba(106, 27, 154, 0.4)',
+            }),
+            ...('default' === n && {
+              background: 'linear-gradient(135deg, '
+                .concat(e.palette.background.paper, ', ')
+                .concat(e.palette.background.default, ')'),
+              color: e.palette.text.primary,
+            }),
+            boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)',
+            border: '1px solid '.concat(e.palette.primary.dark),
+            ...(r && {
+              '&:hover': {
+                transform: 'translateY(-5px)',
+                boxShadow: '0 15px 30px rgba(0, 0, 0, 0.7)',
+              },
+              cursor: 'pointer',
+            }),
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: 16,
+              background: 'url(/images/card-texture.png)',
+              backgroundSize: 'cover',
+              opacity: 0.1,
+              pointerEvents: 'none',
+            },
+            ...(('mystical' === n || 'result' === n) && {
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                borderRadius: 16,
+                background:
+                  'radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%)',
+                pointerEvents: 'none',
+              },
+            }),
+          };
+        }),
+        p = (0, c.ZP)(a.Z)(t => {
+          let { theme: e, variant: n } = t;
+          return {
+            position: 'absolute',
+            top: 8,
+            left: 8,
+            right: 8,
+            bottom: 8,
+            border: '1px solid '.concat('result' === n ? '#D4AF37' : e.palette.secondary.main),
+            borderRadius: 12,
+            pointerEvents: 'none',
+            ...('result' === n && { boxShadow: '0 0 10px rgba(212, 175, 55, 0.3) inset' }),
+            ...('mystical' === n && { boxShadow: '0 0 15px rgba(156, 39, 176, 0.3) inset' }),
+          };
+        }),
+        d = (0, c.ZP)(a.Z)(t => {
+          let { theme: e, position: n, variant: r } = t;
+          return {
+            position: 'absolute',
+            width: 20,
+            height: 20,
+            border: '1px solid '.concat('result' === r ? '#D4AF37' : e.palette.secondary.main),
+            ...('top-left' === n && {
+              top: 4,
+              left: 4,
+              borderRight: 'none',
+              borderBottom: 'none',
+              borderTopLeftRadius: 8,
+            }),
+            ...('top-right' === n && {
+              top: 4,
+              right: 4,
+              borderLeft: 'none',
+              borderBottom: 'none',
+              borderTopRightRadius: 8,
+            }),
+            ...('bottom-left' === n && {
+              bottom: 4,
+              left: 4,
+              borderRight: 'none',
+              borderTop: 'none',
+              borderBottomLeftRadius: 8,
+            }),
+            ...('bottom-right' === n && {
+              bottom: 4,
+              right: 4,
+              borderLeft: 'none',
+              borderTop: 'none',
+              borderBottomRightRadius: 8,
+            }),
+            pointerEvents: 'none',
+            ...(('result' === r || 'mystical' === r) && {
+              width: 25,
+              height: 25,
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                width: 5,
+                height: 5,
+                borderRadius: '50%',
+                background: 'result' === r ? '#D4AF37' : e.palette.secondary.main,
+                ...('top-left' === n && { top: 3, left: 3 }),
+                ...('top-right' === n && { top: 3, right: 3 }),
+                ...('bottom-left' === n && { bottom: 3, left: 3 }),
+                ...('bottom-right' === n && { bottom: 3, right: 3 }),
+              },
+            }),
+          };
+        }),
+        u = (0, c.ZP)(a.Z)(t => {
+          let { theme: e, variant: n } = t;
+          return {
+            position: 'absolute',
+            width: 40,
+            height: 40,
+            opacity: 0.2,
+            pointerEvents: 'none',
+            ...('result' === n && {
+              top: 20,
+              right: 20,
+              background: 'url(/images/tarot-back.svg)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              opacity: 0.15,
+            }),
+            ...('mystical' === n && {
+              bottom: 20,
+              left: 20,
+              background: 'url(/images/tarot-back.svg)',
+              backgroundSize: 'contain',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+              opacity: 0.15,
+              transform: 'rotate(180deg)',
+            }),
+          };
+        });
+      function m(t) {
+        let {
+          children: e,
+          title: n,
+          variant: o = 'default',
+          interactive: a = !0,
+          onClick: c,
+          ariaLabel: m,
+          sx: b = {},
+        } = t;
+        return (0, r.jsxs)(l, {
+          variant: o,
+          interactive: a,
+          onClick: c,
+          onKeyDown: t => {
+            c && ('Enter' === t.key || ' ' === t.key) && (t.preventDefault(), c());
+          },
+          tabIndex: c ? 0 : void 0,
+          role: c ? 'button' : void 0,
+          'aria-label': m || n,
+          sx: b,
+          children: [
+            (0, r.jsx)(p, { variant: o }),
+            (0, r.jsx)(d, { position: 'top-left', variant: o }),
+            (0, r.jsx)(d, { position: 'top-right', variant: o }),
+            (0, r.jsx)(d, { position: 'bottom-left', variant: o }),
+            (0, r.jsx)(d, { position: 'bottom-right', variant: o }),
+            ('result' === o || 'mystical' === o) && (0, r.jsx)(u, { variant: o }),
+            (0, r.jsxs)(i.Z, {
+              sx: { p: 4, height: '100%', display: 'flex', flexDirection: 'column' },
+              children: [
+                n &&
+                  (0, r.jsx)(s.Z, {
+                    variant: 'h5',
+                    component: 'h2',
+                    sx: {
+                      textAlign: 'center',
+                      mb: 3,
+                      fontWeight: 'bold',
+                      color:
+                        'primary' === o || 'secondary' === o || 'mystical' === o || 'result' === o
+                          ? 'white'
+                          : 'text.primary',
+                      textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                      ...('result' === o && { color: '#D4AF37', letterSpacing: '0.05em' }),
+                    },
+                    children: n,
+                  }),
+                e,
+              ],
+            }),
+          ],
+        });
+      }
+    },
+    '(app-pages-browser)/./src/app/components/animations.jsx': function (t, e, n) {
+      n.d(e, {
+        F: function () {
+          return S;
+        },
+        K: function () {
+          return p;
+        },
+      });
+      var r = n('(app-pages-browser)/./node_modules/@swc/helpers/esm/_tagged_template_literal.js'),
+        o = n('(app-pages-browser)/./node_modules/next/dist/compiled/react/jsx-runtime.js'),
+        a = n('(app-pages-browser)/./node_modules/@mui/material/Box/Box.js'),
+        i = n(
+          '(app-pages-browser)/./node_modules/@emotion/react/dist/emotion-react.browser.esm.js'
+        ),
+        s = n('(app-pages-browser)/./node_modules/@mui/material/styles/styled.js'),
+        c = n('(app-pages-browser)/./node_modules/next/dist/compiled/react/index.js');
+      let l = (0, s.ZP)(a.Z)(t => {
+        let { theme: e } = t;
+        return { position: 'relative' };
+      });
+      var p = (0, c.forwardRef)(function (t, e) {
+        let {
+            animation: n = 'fadeIn',
+            duration: r = 'normal',
+            easing: a = 'easeInOut',
+            staggerDelay: i = 100,
+            initialDelay: s = 0,
+            onScroll: p = !1,
+            threshold: d = 0.2,
+            children: u,
+            sx: m = {},
+            ...b
+          } = t,
+          g = (0, c.useRef)(null),
+          f = e || g,
+          [x, h] = (0, c.useState)(!p);
+        (0, c.useEffect)(() => {
+          if (!p) return;
+          let t = new IntersectionObserver(
+            e => {
+              let [n] = e;
+              n.isIntersecting && (h(!0), t.disconnect());
+            },
+            { threshold: d }
+          );
+          return (
+            f.current && t.observe(f.current),
+            () => {
+              f.current && t.unobserve(f.current);
+            }
+          );
+        }, [p, f, d]);
+        let y = c.Children.map(u, (t, e) =>
+          t && 'object' == typeof t
+            ? (0, c.cloneElement)(t, {
+                animation: x ? n : null,
+                duration: r,
+                delay: s + e * i,
+                easing: a,
+                style: { ...t.props.style, opacity: x ? 1 : 0 },
+              })
+            : t
+        );
+        return (0, o.jsx)(l, { ref: f, sx: m, ...b, children: y });
+      });
+      function d() {
+        let t = (0, r._)([
+          '\n  0% {\n    transform: perspective(1200px) rotateY(90deg);\n    opacity: 0;\n  }\n  100% {\n    transform: perspective(1200px) rotateY(0deg);\n    opacity: 1;\n  }\n',
+        ]);
+        return (
+          (d = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function u() {
+        let t = (0, r._)([
+          '\n  0% {\n    transform: perspective(1200px) rotateY(90deg) scale(0.9);\n    opacity: 0;\n  }\n  50% {\n    transform: perspective(1200px) rotateY(45deg) scale(0.95);\n    opacity: 0.5;\n  }\n  100% {\n    transform: perspective(1200px) rotateY(0deg) scale(1);\n    opacity: 1;\n  }\n',
+        ]);
+        return (
+          (u = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function m() {
+        let t = (0, r._)([
+          '\n  0% {\n    background-position: -100% 0;\n  }\n  100% {\n    background-position: 200% 0;\n  }\n',
+        ]);
+        return (
+          (m = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function b() {
+        let t = (0, r._)(['\n  0% {\n    opacity: 0;\n  }\n  100% {\n    opacity: 1;\n  }\n']);
+        return (
+          (b = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function g() {
+        let t = (0, r._)([
+          '\n  0% {\n    transform: translateY(20px);\n    opacity: 0;\n  }\n  100% {\n    transform: translateY(0);\n    opacity: 1;\n  }\n',
+        ]);
+        return (
+          (g = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function f() {
+        let t = (0, r._)([
+          '\n  0% {\n    transform: translateX(-20px);\n    opacity: 0;\n  }\n  100% {\n    transform: translateX(0);\n    opacity: 1;\n  }\n',
+        ]);
+        return (
+          (f = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function x() {
+        let t = (0, r._)([
+          '\n  0% {\n    transform: translateX(20px);\n    opacity: 0;\n  }\n  100% {\n    transform: translateX(0);\n    opacity: 1;\n  }\n',
+        ]);
+        return (
+          (x = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      function h() {
+        let t = (0, r._)([
+          '\n  0% {\n    transform: scale(1);\n  }\n  50% {\n    transform: scale(1.05);\n  }\n  100% {\n    transform: scale(1);\n  }\n',
+        ]);
+        return (
+          (h = function () {
+            return t;
+          }),
+          t
+        );
+      }
+      let y = { fast: 300, normal: 500, slow: 800, verySlow: 1200 },
+        w = (0, i.F4)(d()),
+        v = (0, i.F4)(u()),
+        k = (0, i.F4)(m()),
+        j = (0, i.F4)(b()),
+        _ = (0, i.F4)(g()),
+        F = (0, i.F4)(f()),
+        R = (0, i.F4)(x()),
+        Z = (0, i.F4)(h()),
+        E = (t, e) => {
+          let n = y[e] || y.normal;
+          switch (t) {
+            case 'tarotFlip':
+              return {
+                animation: ''
+                  .concat(w, ' ')
+                  .concat(n, 'ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards'),
+              };
+            case 'tarotReveal':
+              return {
+                animation: ''
+                  .concat(v, ' ')
+                  .concat(n, 'ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards'),
+              };
+            case 'shine':
+              return {
+                position: 'relative',
+                overflow: 'hidden',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  background:
+                    'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                  animation: ''.concat(k, ' ').concat(2 * n, 'ms linear infinite'),
+                },
+              };
+            case 'fadeIn':
+              return { animation: ''.concat(j, ' ').concat(n, 'ms ease-in-out forwards') };
+            case 'slideUp':
+              return { animation: ''.concat(_, ' ').concat(n, 'ms ease-out forwards') };
+            case 'slideRight':
+              return { animation: ''.concat(F, ' ').concat(n, 'ms ease-out forwards') };
+            case 'slideLeft':
+              return { animation: ''.concat(R, ' ').concat(n, 'ms ease-out forwards') };
+            case 'pulse':
+              return { animation: ''.concat(Z, ' ').concat(n, 'ms ease-in-out infinite') };
+            default:
+              return {};
+          }
+        },
+        C = (0, s.ZP)(a.Z)(t => {
+          let { theme: e, animation: n, duration: r, delay: o = 0 } = t;
+          return { opacity: 0, ...E(n, r), animationDelay: ''.concat(o, 'ms') };
+        });
+      function S(t) {
+        let {
+          children: e,
+          animation: n = 'fadeIn',
+          duration: r = 'normal',
+          delay: a = 0,
+          sx: i = {},
+          ...s
+        } = t;
+        return (0, o.jsx)(C, { animation: n, duration: r, delay: a, sx: i, ...s, children: e });
+      }
+    },
+  },
+]);

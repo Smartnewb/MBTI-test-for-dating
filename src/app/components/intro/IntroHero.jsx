@@ -4,7 +4,9 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { Box, Typography, Container, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useRouter } from 'next/navigation';
-import { AnimatedElement, AnimatedBackground, AnimatedIcon } from '../animations';
+import AnimatedElement from '../animations/AnimatedElement';
+import AnimatedBackground from '../animations/AnimatedBackground';
+import AnimatedIcon from '../animations/AnimatedIcon';
 import { Section } from '../layout';
 import TarotCard from '../TarotCard';
 import MysticalButton from '../MysticalButton';
@@ -109,7 +111,8 @@ const LogoTitle = styled(Typography)(({ theme }) => ({
 
 // 스타일링된 서브타이틀
 const Subtitle = styled(Typography)(({ theme }) => ({
-  fontFamily: '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+  fontFamily:
+    '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
   fontWeight: 500,
   fontSize: '1.5rem',
   textAlign: 'center',
@@ -246,7 +249,7 @@ export default function IntroHero() {
   // 별 생성 (메모이제이션)
   useEffect(() => {
     // 별 생성 함수
-    const generateStars = (count) => {
+    const generateStars = count => {
       const newStars = [];
       const colors = ['#D4AF37', '#9C27B0', '#6B3FA0', '#FFFFFF'];
 
@@ -265,7 +268,7 @@ export default function IntroHero() {
     };
 
     // 유성 생성 함수
-    const generateShootingStars = (count) => {
+    const generateShootingStars = count => {
       const newShootingStars = [];
 
       for (let i = 0; i < count; i++) {
@@ -310,7 +313,7 @@ export default function IntroHero() {
 
   // 카드 3D 효과 처리
   useEffect(() => {
-    const handleMouseMove = (e) => {
+    const handleMouseMove = e => {
       if (!cardRef.current) return;
 
       const card = cardRef.current;
@@ -378,14 +381,16 @@ export default function IntroHero() {
       {/* 달 장식 */}
       <Moon>
         <AnimatedIcon animation="pulse" duration="slow" infinite>
-          <NightsStayIcon sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            fontSize: 40,
-            color: 'rgba(255,255,255,0.1)'
-          }} />
+          <NightsStayIcon
+            sx={{
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              fontSize: 40,
+              color: 'rgba(255,255,255,0.1)',
+            }}
+          />
         </AnimatedIcon>
       </Moon>
 
@@ -395,24 +400,23 @@ export default function IntroHero() {
             {/* 왼쪽 텍스트 영역 */}
             <Grid item xs={12} md={6}>
               <AnimatedElement animation="fadeIn" duration="normal">
-                <LogoTitle variant="h1">
-                  달빛 연애 연구소
-                </LogoTitle>
+                <LogoTitle variant="h1">달빛 연애 연구소</LogoTitle>
 
-                <Subtitle variant="h2">
-                  당신의 MBTI로 알아보는 연애 유형과 이상형
-                </Subtitle>
+                <Subtitle variant="h2">당신의 MBTI로 알아보는 연애 유형과 이상형</Subtitle>
 
                 <AnimatedElement animation="slideUp" duration="normal" delay={300}>
-                  <Typography variant="body1" sx={{
-                    mb: 4,
-                    textAlign: { xs: 'center', md: 'left' },
-                    position: 'relative',
-                    zIndex: 2,
-                    textShadow: '0 2px 4px rgba(0,0,0,0.1)'
-                  }}>
-                    타로 카드의 신비로운 힘으로 당신의 MBTI 연애 유형을 분석해드립니다.
-                    24개의 질문에 답하고 당신의 연애 스타일과 가장 잘 맞는 이상형을 찾아보세요.
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      mb: 4,
+                      textAlign: { xs: 'center', md: 'left' },
+                      position: 'relative',
+                      zIndex: 2,
+                      textShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                    }}
+                  >
+                    타로 카드의 신비로운 힘으로 당신의 MBTI 연애 유형을 분석해드립니다. 24개의
+                    질문에 답하고 당신의 연애 스타일과 가장 잘 맞는 이상형을 찾아보세요.
                   </Typography>
 
                   <Box sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
@@ -427,7 +431,8 @@ export default function IntroHero() {
                           zIndex: 2,
                           '&:hover': {
                             transform: 'translateY(-3px)',
-                            boxShadow: theme => `0 10px 20px -5px ${theme.palette.primary.main}40, 0 0 15px ${theme.palette.secondary.main}30`,
+                            boxShadow: theme =>
+                              `0 10px 20px -5px ${theme.palette.primary.main}40, 0 0 15px ${theme.palette.secondary.main}30`,
                           },
                           transition: 'all 0.3s ease-in-out',
                         }}
@@ -455,68 +460,95 @@ export default function IntroHero() {
                         mx: 'auto',
                         transition: 'all 0.5s ease-in-out',
                         transform: `rotateY(${mousePosition.x}deg) rotateX(${mousePosition.y}deg)`,
-                        className: 'card'
+                        className: 'card',
                       }}
                     >
-                      <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        height: '100%',
-                        p: 2,
-                        position: 'relative',
-                        overflow: 'hidden',
-                      }}>
-                        <AnimatedIcon animation="pulse" duration="slow" infinite size="large" color="white">
-                          <FavoriteIcon fontSize="inherit" sx={{
-                            filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))'
-                          }} />
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          height: '100%',
+                          p: 2,
+                          position: 'relative',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        <AnimatedIcon
+                          animation="pulse"
+                          duration="slow"
+                          infinite
+                          size="large"
+                          color="white"
+                        >
+                          <FavoriteIcon
+                            fontSize="inherit"
+                            sx={{
+                              filter: 'drop-shadow(0 0 10px rgba(255, 255, 255, 0.5))',
+                            }}
+                          />
                         </AnimatedIcon>
 
-                        <Typography variant="h4" sx={{
-                          color: 'white',
-                          textAlign: 'center',
-                          mb: 2,
-                          textShadow: '0 2px 10px rgba(0,0,0,0.3)',
-                          fontFamily: theme => theme.typography.fontFamily.secondary,
-                        }}>
+                        <Typography
+                          variant="h4"
+                          sx={{
+                            color: 'white',
+                            textAlign: 'center',
+                            mb: 2,
+                            textShadow: '0 2px 10px rgba(0,0,0,0.3)',
+                            fontFamily: theme => theme.typography.fontFamily.secondary,
+                          }}
+                        >
                           MBTI 연애 테스트
                         </Typography>
 
-                        <Typography variant="body1" sx={{
-                          color: 'white',
-                          textAlign: 'center',
-                          mb: 4,
-                          textShadow: '0 1px 3px rgba(0,0,0,0.2)'
-                        }}>
+                        <Typography
+                          variant="body1"
+                          sx={{
+                            color: 'white',
+                            textAlign: 'center',
+                            mb: 4,
+                            textShadow: '0 1px 3px rgba(0,0,0,0.2)',
+                          }}
+                        >
                           당신의 MBTI 유형을 기반으로 연애 성향과 이상형을 분석해드립니다.
                         </Typography>
 
-                        <Box sx={{
-                          position: 'relative',
-                          width: '100%',
-                          display: 'flex',
-                          justifyContent: 'center'
-                        }}>
-                          <AnimatedIcon animation="float" duration="slow" infinite size="large" color="white">
+                        <Box
+                          sx={{
+                            position: 'relative',
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <AnimatedIcon
+                            animation="float"
+                            duration="slow"
+                            infinite
+                            size="large"
+                            color="white"
+                          >
                             <WbTwilightIcon fontSize="inherit" sx={{ opacity: 0.8 }} />
                           </AnimatedIcon>
                         </Box>
 
                         {/* 카드 장식 요소 */}
-                        <Box sx={{
-                          position: 'absolute',
-                          top: 0,
-                          left: 0,
-                          right: 0,
-                          bottom: 0,
-                          background: 'url("/images/tarot-pattern.png")',
-                          backgroundSize: '200px',
-                          backgroundRepeat: 'repeat',
-                          opacity: 0.05,
-                          zIndex: -1,
-                        }} />
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            bottom: 0,
+                            background: 'url("/images/tarot-pattern.png")',
+                            backgroundSize: '200px',
+                            backgroundRepeat: 'repeat',
+                            opacity: 0.05,
+                            zIndex: -1,
+                          }}
+                        />
                       </Box>
                     </TarotCard>
 
@@ -533,7 +565,7 @@ export default function IntroHero() {
                         zIndex: -1,
                         opacity: 0.7,
                         transition: 'transform 0.5s ease-in-out',
-                        className: 'card-back'
+                        className: 'card-back',
                       }}
                     />
                   </Box>
@@ -545,7 +577,7 @@ export default function IntroHero() {
       </Section>
 
       {/* 별 장식 */}
-      {stars.map((star) => (
+      {stars.map(star => (
         <Star
           key={star.id}
           size={star.size}
@@ -557,7 +589,7 @@ export default function IntroHero() {
       ))}
 
       {/* 유성 장식 */}
-      {shootingStars.map((star) => (
+      {shootingStars.map(star => (
         <ShootingStar
           key={star.id}
           top={star.top}

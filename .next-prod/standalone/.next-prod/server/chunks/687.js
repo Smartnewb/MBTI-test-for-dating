@@ -1,0 +1,1099 @@
+'use strict';
+(exports.id = 687),
+  (exports.ids = [687]),
+  (exports.modules = {
+    '(ssr)/./src/app/components/MysticalButton.jsx': (e, a, t) => {
+      t.d(a, { Z: () => l });
+      var r = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        ),
+        i = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+        ),
+        n = t('(ssr)/./node_modules/@mui/material/Button/Button.js'),
+        o = t('(ssr)/./node_modules/@mui/material/CircularProgress/CircularProgress.js');
+      let s = (0, t('(ssr)/./node_modules/@mui/material/styles/styled.js').ZP)(n.Z)(
+          ({ theme: e, variant: a, size: t, color: r }) => ({
+            position: 'relative',
+            borderRadius: 2 * e.shape.borderRadius,
+            textTransform: 'none',
+            fontFamily:
+              '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontWeight: 500,
+            letterSpacing: '0.05em',
+            transition: `all ${e.transitions.duration.standard}ms ${e.transitions.easing.easeInOut}`,
+            overflow: 'hidden',
+            ...('small' === t && { padding: '6px 16px', fontSize: '0.75rem' }),
+            ...('medium' === t && { padding: '8px 24px', fontSize: '0.875rem' }),
+            ...('large' === t && { padding: '12px 32px', fontSize: '1rem' }),
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              background: 'rgba(255, 255, 255, 0.1)',
+              transform: 'translateX(-100%)',
+              transition: 'transform 0.5s ease-in-out',
+              zIndex: 0,
+            },
+            '&:hover::before': { transform: 'translateX(0)' },
+            '&:focus-visible': {
+              outline: 'none',
+              boxShadow: `0 0 0 3px ${e.palette.primary.main}40, 0 0 0 1px ${e.palette.primary.main}`,
+            },
+            ...('mystical' === a && {
+              background: `linear-gradient(135deg, ${e.palette.primary.main} 0%, ${e.palette.secondary.main} 100%)`,
+              color: e.palette.common.white,
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.3)',
+              '&:hover': {
+                boxShadow: '0 6px 15px rgba(0, 0, 0, 0.4)',
+                background: `linear-gradient(135deg, ${e.palette.primary.dark} 0%, ${e.palette.secondary.dark} 100%)`,
+              },
+              '&:active': {
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.2)',
+                transform: 'translateY(1px)',
+              },
+              '&:focus-visible': {
+                boxShadow: `0 0 0 3px ${e.palette.primary.main}40, 0 0 0 1px ${e.palette.primary.main}, 0 4px 10px rgba(0, 0, 0, 0.3)`,
+              },
+            }),
+            ...('tarot' === a && {
+              background: e.palette.background.paper,
+              color: e.palette.primary.main,
+              border: `2px solid ${e.palette.primary.main}`,
+              boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
+              '&:hover': {
+                background: e.palette.background.default,
+                borderColor: e.palette.primary.light,
+                color: e.palette.primary.light,
+                boxShadow: '0 6px 15px rgba(0, 0, 0, 0.3)',
+              },
+              '&:active': {
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+                transform: 'translateY(1px)',
+              },
+              '&:focus-visible': {
+                boxShadow: `0 0 0 3px ${e.palette.primary.main}40, 0 0 0 1px ${e.palette.primary.main}, 0 4px 10px rgba(0, 0, 0, 0.2)`,
+              },
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                top: -2,
+                left: -2,
+                right: -2,
+                bottom: -2,
+                borderRadius: 'inherit',
+                background: `linear-gradient(135deg, ${e.palette.primary.main} 0%, ${e.palette.secondary.main} 100%)`,
+                zIndex: -1,
+                opacity: 0.5,
+              },
+            }),
+            ...('glow' === a && {
+              background: e.palette.background.paper,
+              color: e.palette.secondary.main,
+              border: `1px solid ${e.palette.secondary.main}`,
+              boxShadow: `0 0 10px ${e.palette.secondary.main}80`,
+              '&:hover': {
+                boxShadow: `0 0 20px ${e.palette.secondary.main}`,
+                background: e.palette.background.default,
+              },
+              '&:active': {
+                boxShadow: `0 0 5px ${e.palette.secondary.main}80`,
+                transform: 'translateY(1px)',
+              },
+              '&:focus-visible': {
+                boxShadow: `0 0 0 3px ${e.palette.secondary.main}40, 0 0 0 1px ${e.palette.secondary.main}, 0 0 10px ${e.palette.secondary.main}80`,
+              },
+            }),
+            ...('text' === a && {
+              background: 'transparent',
+              color: e.palette.primary.main,
+              boxShadow: 'none',
+              padding: 'small' === t ? '4px 8px' : 'medium' === t ? '6px 12px' : '8px 16px',
+              '&:hover': {
+                background: `${e.palette.primary.main}10`,
+                color: e.palette.primary.dark,
+              },
+              '&:active': { background: `${e.palette.primary.main}20` },
+              '&:focus-visible': {
+                boxShadow: `0 0 0 3px ${e.palette.primary.main}40, 0 0 0 1px ${e.palette.primary.main}`,
+              },
+            }),
+            '&.Mui-disabled': {
+              background: e.palette.action.disabledBackground,
+              color: e.palette.action.disabled,
+              boxShadow: 'none',
+              border: 'none',
+              '&::after': { opacity: 0.1 },
+            },
+          })
+        ),
+        l = (0, i.forwardRef)(function (e, a) {
+          let {
+            variant: t = 'mystical',
+            size: i = 'medium',
+            loading: n = !1,
+            children: l,
+            disabled: d,
+            sx: p = {},
+            'aria-label': c,
+            ...m
+          } = e;
+          return r.jsx(s, {
+            ref: a,
+            variant: t,
+            size: i,
+            disabled: d || n,
+            'aria-label': c,
+            sx: p,
+            ...(n ? { 'aria-busy': !0, 'aria-live': 'polite' } : {}),
+            ...m,
+            children: n
+              ? (0, r.jsxs)(r.Fragment, {
+                  children: [
+                    r.jsx(o.Z, {
+                      size: 'small' === i ? 16 : 'medium' === i ? 20 : 24,
+                      color: 'inherit',
+                      sx: { mr: 1 },
+                      'aria-hidden': 'true',
+                    }),
+                    l,
+                  ],
+                })
+              : l,
+          });
+        });
+    },
+    '(ssr)/./src/app/components/layout/index.js': (e, a, t) => {
+      t.d(a, { Gg: () => eo, Xg: () => U, $0: () => f });
+      var r = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        ),
+        i = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+        ),
+        n = t('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+        o = t('(ssr)/./node_modules/@mui/material/styles/styled.js');
+      let s = (0, o.ZP)(n.Z)(({ theme: e, maxWidth: a, centered: t, fullHeight: r }) => ({
+          width: '100%',
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          paddingLeft: e.spacing(2),
+          paddingRight: e.spacing(2),
+          ...('xs' === a && { maxWidth: e.breakpoints.values.xs }),
+          ...('sm' === a && { maxWidth: e.breakpoints.values.sm }),
+          ...('md' === a && { maxWidth: e.breakpoints.values.md }),
+          ...('lg' === a && { maxWidth: e.breakpoints.values.lg }),
+          ...('xl' === a && { maxWidth: e.breakpoints.values.xl }),
+          ...(!0 === t && {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }),
+          ...(!0 === r && { minHeight: '100vh' }),
+          [e.breakpoints.up('sm')]: { paddingLeft: e.spacing(3), paddingRight: e.spacing(3) },
+          [e.breakpoints.up('md')]: { paddingLeft: e.spacing(4), paddingRight: e.spacing(4) },
+        })),
+        l = (0, i.forwardRef)(function (e, a) {
+          let {
+              maxWidth: t = 'lg',
+              centered: i = !1,
+              fullHeight: n = !1,
+              children: o,
+              sx: l = {},
+              ...d
+            } = e,
+            p = { ref: a, maxWidth: t, sx: l, ...d };
+          return i && (p.centered = i), n && (p.fullHeight = n), r.jsx(s, { ...p, children: o });
+        });
+      var d = t('(ssr)/./node_modules/@mui/material/Grid/Grid.js');
+      let p = (0, o.ZP)(d.ZP)(({ theme: e, gutter: a }) => ({
+          ...('small' === a && {
+            '& > .MuiGrid-item': { paddingTop: e.spacing(1), paddingLeft: e.spacing(1) },
+            margin: e.spacing(-1, 0, 0, -1),
+          }),
+          ...('medium' === a && {
+            '& > .MuiGrid-item': { paddingTop: e.spacing(2), paddingLeft: e.spacing(2) },
+            margin: e.spacing(-2, 0, 0, -2),
+          }),
+          ...('large' === a && {
+            '& > .MuiGrid-item': { paddingTop: e.spacing(3), paddingLeft: e.spacing(3) },
+            margin: e.spacing(-3, 0, 0, -3),
+          }),
+        })),
+        c = (0, i.forwardRef)(function (e, a) {
+          let { gutter: t = 'medium', children: i, sx: n = {}, ...o } = e;
+          return r.jsx(p, { ref: a, container: !0, gutter: t, sx: n, ...o, children: i });
+        }),
+        m = (0, i.forwardRef)(function (e, a) {
+          let { xs: t = 12, children: i, sx: n = {}, ...o } = e;
+          return r.jsx(d.ZP, { ref: a, item: !0, xs: t, sx: n, ...o, children: i });
+        });
+      var g = t('(ssr)/./node_modules/@mui/material/Typography/Typography.js');
+      let u = (0, o.ZP)(n.Z)(({ theme: e, variant: a, fullHeight: t }) => ({
+          position: 'relative',
+          paddingTop: e.spacing(6),
+          paddingBottom: e.spacing(6),
+          ...(t && {
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }),
+          ...('default' === a && { backgroundColor: 'transparent' }),
+          ...('primary' === a && {
+            backgroundColor: e.palette.background.default,
+            backgroundImage: `radial-gradient(circle at 25% 25%, ${e.palette.primary.main}15 0%, transparent 50%)`,
+          }),
+          ...('secondary' === a && {
+            backgroundColor: e.palette.background.paper,
+            backgroundImage: `radial-gradient(circle at 75% 75%, ${e.palette.secondary.main}15 0%, transparent 50%)`,
+          }),
+          ...('mystical' === a && {
+            backgroundColor: e.palette.background.default,
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '100%',
+              backgroundImage: 'url("/images/tarot-pattern.png")',
+              backgroundSize: '200px',
+              backgroundRepeat: 'repeat',
+              opacity: 0.03,
+              zIndex: 0,
+              pointerEvents: 'none',
+            },
+          }),
+          [e.breakpoints.up('sm')]: { paddingTop: e.spacing(8), paddingBottom: e.spacing(8) },
+          [e.breakpoints.up('md')]: { paddingTop: e.spacing(10), paddingBottom: e.spacing(10) },
+        })),
+        x = (0, o.ZP)(g.Z)(({ theme: e, centered: a }) => ({
+          position: 'relative',
+          marginBottom: e.spacing(4),
+          fontFamily: e.typography.fontFamily.secondary,
+          fontWeight: e.typography.fontWeight.bold,
+          ...(a && { textAlign: 'center' }),
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: -8,
+            left: a ? '50%' : 0,
+            transform: a ? 'translateX(-50%)' : 'none',
+            width: a ? '80px' : '60px',
+            height: '3px',
+            background: `linear-gradient(90deg, ${e.palette.primary.main} 0%, ${e.palette.secondary.main} 100%)`,
+            borderRadius: '3px',
+          },
+        })),
+        h = (0, o.ZP)(g.Z)(({ theme: e, centered: a }) => ({
+          marginBottom: e.spacing(6),
+          color: e.palette.text.secondary,
+          ...(a && { textAlign: 'center' }),
+        })),
+        f = (0, i.forwardRef)(function (e, a) {
+          let {
+            variant: t = 'default',
+            title: i,
+            subtitle: n,
+            centered: o = !1,
+            fullHeight: s = !1,
+            maxWidth: d = 'lg',
+            children: p,
+            sx: c = {},
+            ...m
+          } = e;
+          return r.jsx(u, {
+            ref: a,
+            variant: t,
+            fullHeight: s,
+            component: 'section',
+            sx: c,
+            ...m,
+            children: (0, r.jsxs)(l, {
+              maxWidth: d,
+              children: [
+                i && r.jsx(x, { variant: 'h2', centered: o, children: i }),
+                n && r.jsx(h, { variant: 'subtitle1', centered: o, children: n }),
+                p,
+              ],
+            }),
+          });
+        });
+      var b = t('(ssr)/./node_modules/@mui/material/AppBar/AppBar.js'),
+        y = t('(ssr)/./node_modules/@mui/material/Drawer/Drawer.js'),
+        j = t('(ssr)/./node_modules/@mui/material/ListItem/ListItem.js'),
+        v = t('(ssr)/./node_modules/@mui/system/esm/useMediaQuery/useMediaQuery.js'),
+        k = t('(ssr)/./node_modules/@mui/material/IconButton/IconButton.js'),
+        Z = t('(ssr)/./node_modules/@mui/material/List/List.js'),
+        w = t('(ssr)/./node_modules/@mui/material/ListItemText/ListItemText.js'),
+        $ = t('(ssr)/./node_modules/@mui/material/Toolbar/Toolbar.js'),
+        F = t('(ssr)/./node_modules/@mui/material/styles/useTheme.js'),
+        I = t('(ssr)/./node_modules/@mui/icons-material/Menu.js'),
+        C = t('(ssr)/./node_modules/@mui/icons-material/Close.js'),
+        S = t('(ssr)/./node_modules/next/dist/api/link.js'),
+        P = t('(ssr)/./src/app/components/MysticalButton.jsx');
+      let B = (0, o.ZP)(b.Z)(({ theme: e, transparent: a, scrolled: t }) => {
+          let r = !0 === a,
+            i = !0 === t;
+          return {
+            backgroundColor: r && !i ? 'transparent' : e.palette.background.paper,
+            boxShadow: r && !i ? 'none' : e.shadows[3],
+            transition: 'all 0.3s ease',
+            backgroundImage:
+              r && !i
+                ? 'none'
+                : `linear-gradient(to bottom, ${e.palette.background.default}, ${e.palette.background.paper})`,
+            borderBottom: r && !i ? 'none' : `1px solid ${e.palette.divider}`,
+          };
+        }),
+        _ = (0, o.ZP)(g.Z)(({ theme: e }) => ({
+          fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+          fontWeight: 700,
+          fontSize: '1.5rem',
+          background: `linear-gradient(135deg, ${e.palette.primary.main} 0%, ${e.palette.secondary.main} 100%)`,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          color: 'transparent',
+        })),
+        R = (0, o.ZP)(g.Z)(({ theme: e, active: a }) => {
+          let t = !0 === a;
+          return {
+            margin: e.spacing(0, 2),
+            padding: e.spacing(0.5, 0),
+            position: 'relative',
+            cursor: 'pointer',
+            fontWeight: t ? 500 : 400,
+            color: t ? e.palette.primary.main : e.palette.text.primary,
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width: t ? '100%' : '0%',
+              height: '2px',
+              backgroundColor: e.palette.primary.main,
+              transition: 'width 0.3s ease',
+            },
+            '&:hover': { color: e.palette.primary.main, '&::after': { width: '100%' } },
+          };
+        }),
+        T = (0, o.ZP)(y.ZP)(({ theme: e }) => ({
+          '& .MuiDrawer-paper': {
+            width: '80%',
+            maxWidth: '300px',
+            backgroundColor: e.palette.background.paper,
+            backgroundImage: `linear-gradient(135deg, ${e.palette.background.paper} 0%, ${e.palette.background.default} 100%)`,
+            padding: e.spacing(2),
+          },
+        })),
+        D = (0, o.ZP)(j.ZP)(({ theme: e, active: a }) => {
+          let t = !0 === a;
+          return {
+            borderRadius: e.shape.borderRadius,
+            marginBottom: e.spacing(1),
+            backgroundColor: t ? `${e.palette.primary.main}10` : 'transparent',
+            '& .MuiListItemText-primary': {
+              color: t ? e.palette.primary.main : e.palette.text.primary,
+              fontWeight: t ? 500 : 400,
+            },
+            '&:hover': { backgroundColor: `${e.palette.primary.main}10` },
+          };
+        });
+      function z({ transparent: e = !1, sx: a = {} }) {
+        let t = (0, F.Z)(),
+          o = (0, v.Z)(t.breakpoints.down('md')),
+          [s, d] = (0, i.useState)(!1),
+          [p, c] = (0, i.useState)(!1),
+          [m, g] = (0, i.useState)('/'),
+          u = () => {
+            c(!p);
+          },
+          x = [
+            { text: '홈', href: '/' },
+            { text: 'MBTI 테스트', href: '/test' },
+            { text: 'MBTI 유형', href: '/types' },
+            { text: '궁합 확인', href: '/compatibility' },
+          ],
+          h = (0, r.jsxs)(n.Z, {
+            sx: { textAlign: 'center' },
+            children: [
+              (0, r.jsxs)(n.Z, {
+                sx: {
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  p: 2,
+                },
+                children: [
+                  r.jsx(_, { variant: 'h6', children: '달빛 연애 연구소' }),
+                  r.jsx(k.Z, { onClick: u, color: 'inherit', children: r.jsx(C.Z, {}) }),
+                ],
+              }),
+              (0, r.jsxs)(Z.Z, {
+                children: [
+                  x.map(e => {
+                    let a = m === e.href,
+                      t = { button: !0, onClick: u };
+                    return (
+                      a && (t.active = a),
+                      r.jsx(
+                        S.default,
+                        {
+                          href: e.href,
+                          passHref: !0,
+                          style: { textDecoration: 'none' },
+                          children: r.jsx(D, { ...t, children: r.jsx(w.Z, { primary: e.text }) }),
+                        },
+                        e.href
+                      )
+                    );
+                  }),
+                  r.jsx(n.Z, {
+                    sx: { mt: 2, px: 2 },
+                    children: r.jsx(P.Z, {
+                      variant: 'mystical',
+                      fullWidth: !0,
+                      children: '테스트 시작하기',
+                    }),
+                  }),
+                ],
+              }),
+            ],
+          }),
+          f = { position: 'sticky', elevation: 0, sx: a };
+        return (
+          e && (f.transparent = e),
+          s && (f.scrolled = s),
+          (0, r.jsxs)(B, {
+            ...f,
+            children: [
+              r.jsx(l, {
+                children: (0, r.jsxs)($.Z, {
+                  disableGutters: !0,
+                  sx: { justifyContent: 'space-between' },
+                  children: [
+                    r.jsx(S.default, {
+                      href: '/',
+                      passHref: !0,
+                      style: { textDecoration: 'none' },
+                      children: r.jsx(_, { variant: 'h6', children: '달빛 연애 연구소' }),
+                    }),
+                    o
+                      ? r.jsx(k.Z, {
+                          color: 'inherit',
+                          'aria-label': 'open drawer',
+                          edge: 'end',
+                          onClick: u,
+                          children: r.jsx(I.Z, {}),
+                        })
+                      : (0, r.jsxs)(n.Z, {
+                          sx: { display: 'flex', alignItems: 'center' },
+                          children: [
+                            r.jsx(n.Z, {
+                              sx: { display: 'flex' },
+                              children: x.map(e => {
+                                let a = m === e.href,
+                                  t = { variant: 'body2' };
+                                return (
+                                  a && (t.active = a),
+                                  r.jsx(
+                                    S.default,
+                                    {
+                                      href: e.href,
+                                      passHref: !0,
+                                      style: { textDecoration: 'none' },
+                                      children: r.jsx(R, { ...t, children: e.text }),
+                                    },
+                                    e.href
+                                  )
+                                );
+                              }),
+                            }),
+                            r.jsx(n.Z, {
+                              sx: { ml: 2 },
+                              children: r.jsx(P.Z, {
+                                variant: 'mystical',
+                                size: 'small',
+                                children: '테스트 시작하기',
+                              }),
+                            }),
+                          ],
+                        }),
+                  ],
+                }),
+              }),
+              r.jsx(T, {
+                anchor: 'right',
+                open: p,
+                onClose: u,
+                ModalProps: { keepMounted: !0 },
+                children: h,
+              }),
+            ],
+          })
+        );
+      }
+      var W = t('(ssr)/./node_modules/@mui/material/Link/Link.js'),
+        H = t('(ssr)/./node_modules/@mui/material/Divider/Divider.js'),
+        M = t('(ssr)/./node_modules/@mui/icons-material/Facebook.js'),
+        L = t('(ssr)/./node_modules/@mui/icons-material/Twitter.js'),
+        A = t('(ssr)/./node_modules/@mui/icons-material/Instagram.js'),
+        G = t('(ssr)/./node_modules/@mui/icons-material/GitHub.js');
+      let E = (0, o.ZP)(n.Z)(({ theme: e }) => ({
+          backgroundColor: e.palette.background.paper,
+          borderTop: `1px solid ${e.palette.divider}`,
+          padding: e.spacing(6, 0),
+          position: 'relative',
+          backgroundImage: `linear-gradient(to top, ${e.palette.background.default}, ${e.palette.background.paper})`,
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundImage: 'url("/images/tarot-pattern.png")',
+            backgroundSize: '200px',
+            backgroundRepeat: 'repeat',
+            opacity: 0.02,
+            zIndex: 0,
+            pointerEvents: 'none',
+          },
+        })),
+        N = (0, o.ZP)(g.Z)(({ theme: e }) => ({
+          fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+          fontWeight: 700,
+          fontSize: '1.5rem',
+          marginBottom: e.spacing(2),
+          background: `linear-gradient(135deg, ${e.palette.primary.main} 0%, ${e.palette.secondary.main} 100%)`,
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          color: 'transparent',
+        })),
+        X = (0, o.ZP)(W.Z)(({ theme: e }) => ({
+          color: e.palette.text.secondary,
+          textDecoration: 'none',
+          marginBottom: e.spacing(1),
+          display: 'block',
+          transition: 'color 0.2s ease',
+          '&:hover': { color: e.palette.primary.main },
+        })),
+        Y = (0, o.ZP)(k.Z)(({ theme: e }) => ({
+          color: e.palette.text.secondary,
+          transition: 'all 0.2s ease',
+          '&:hover': {
+            color: e.palette.primary.main,
+            backgroundColor: `${e.palette.primary.main}10`,
+          },
+        })),
+        K = (0, o.ZP)(g.Z)(({ theme: e }) => ({
+          fontWeight: 700,
+          marginBottom: e.spacing(2),
+          position: 'relative',
+          paddingBottom: e.spacing(1),
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            width: '30px',
+            height: '2px',
+            backgroundColor: e.palette.primary.main,
+          },
+        }));
+      function Q({ sx: e = {} }) {
+        let a = (0, F.Z)(),
+          t = (0, v.Z)(a.breakpoints.down('sm'));
+        (0, v.Z)(a.breakpoints.down('md'));
+        let i = new Date().getFullYear();
+        return r.jsx(E, {
+          component: 'footer',
+          sx: e,
+          children: (0, r.jsxs)(l, {
+            children: [
+              (0, r.jsxs)(c, {
+                gutter: 'large',
+                children: [
+                  (0, r.jsxs)(m, {
+                    xs: 12,
+                    md: 4,
+                    children: [
+                      r.jsx(N, { variant: 'h6', children: '달빛 연애 연구소' }),
+                      r.jsx(g.Z, {
+                        variant: 'body2',
+                        color: 'text.secondary',
+                        sx: { mb: 2 },
+                        children:
+                          'MBTI 기반의 연애 성향 분석과 궁합 정보를 제공하는 서비스입니다. 나와 잘 맞는 연인을 찾고, 더 나은 연애를 위한 인사이트를 얻어보세요.',
+                      }),
+                      (0, r.jsxs)(n.Z, {
+                        sx: { display: 'flex', mt: 2 },
+                        children: [
+                          r.jsx(Y, { 'aria-label': 'facebook', children: r.jsx(M.Z, {}) }),
+                          r.jsx(Y, { 'aria-label': 'twitter', children: r.jsx(L.Z, {}) }),
+                          r.jsx(Y, { 'aria-label': 'instagram', children: r.jsx(A.Z, {}) }),
+                          r.jsx(Y, { 'aria-label': 'github', children: r.jsx(G.Z, {}) }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, r.jsxs)(m, {
+                    xs: 6,
+                    md: 2,
+                    children: [
+                      r.jsx(K, { variant: 'subtitle2', children: '서비스' }),
+                      r.jsx(S.default, {
+                        href: '/',
+                        passHref: !0,
+                        children: r.jsx(X, { children: '홈' }),
+                      }),
+                      r.jsx(S.default, {
+                        href: '/test',
+                        passHref: !0,
+                        children: r.jsx(X, { children: 'MBTI 테스트' }),
+                      }),
+                      r.jsx(S.default, {
+                        href: '/types',
+                        passHref: !0,
+                        children: r.jsx(X, { children: 'MBTI 유형' }),
+                      }),
+                      r.jsx(S.default, {
+                        href: '/compatibility',
+                        passHref: !0,
+                        children: r.jsx(X, { children: '궁합 확인' }),
+                      }),
+                    ],
+                  }),
+                  (0, r.jsxs)(m, {
+                    xs: 6,
+                    md: 2,
+                    children: [
+                      r.jsx(K, { variant: 'subtitle2', children: '정보' }),
+                      r.jsx(S.default, {
+                        href: '/about',
+                        passHref: !0,
+                        children: r.jsx(X, { children: '소개' }),
+                      }),
+                      r.jsx(S.default, {
+                        href: '/faq',
+                        passHref: !0,
+                        children: r.jsx(X, { children: '자주 묻는 질문' }),
+                      }),
+                      r.jsx(S.default, {
+                        href: '/privacy',
+                        passHref: !0,
+                        children: r.jsx(X, { children: '개인정보처리방침' }),
+                      }),
+                      r.jsx(S.default, {
+                        href: '/terms',
+                        passHref: !0,
+                        children: r.jsx(X, { children: '이용약관' }),
+                      }),
+                    ],
+                  }),
+                  (0, r.jsxs)(m, {
+                    xs: 12,
+                    md: 4,
+                    children: [
+                      r.jsx(K, { variant: 'subtitle2', children: '뉴스레터 구독' }),
+                      r.jsx(g.Z, {
+                        variant: 'body2',
+                        color: 'text.secondary',
+                        sx: { mb: 2 },
+                        children: '최신 MBTI 연애 팁과 관계 심리학 정보를 받아보세요.',
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+              r.jsx(H.Z, { sx: { my: 4 } }),
+              (0, r.jsxs)(n.Z, {
+                sx: {
+                  display: 'flex',
+                  flexDirection: t ? 'column' : 'row',
+                  justifyContent: 'space-between',
+                  alignItems: t ? 'center' : 'flex-start',
+                  textAlign: t ? 'center' : 'left',
+                },
+                children: [
+                  (0, r.jsxs)(g.Z, {
+                    variant: 'body2',
+                    color: 'text.secondary',
+                    children: ['\xa9 ', i, ' 달빛 연애 연구소. All rights reserved.'],
+                  }),
+                  !t &&
+                    (0, r.jsxs)(n.Z, {
+                      sx: { display: 'flex' },
+                      children: [
+                        r.jsx(S.default, {
+                          href: '/privacy',
+                          passHref: !0,
+                          children: r.jsx(W.Z, {
+                            variant: 'body2',
+                            color: 'text.secondary',
+                            sx: { mx: 1 },
+                            children: '개인정보처리방침',
+                          }),
+                        }),
+                        r.jsx(S.default, {
+                          href: '/terms',
+                          passHref: !0,
+                          children: r.jsx(W.Z, {
+                            variant: 'body2',
+                            color: 'text.secondary',
+                            sx: { mx: 1 },
+                            children: '이용약관',
+                          }),
+                        }),
+                      ],
+                    }),
+                ],
+              }),
+            ],
+          }),
+        });
+      }
+      let q = (0, o.ZP)(n.Z)(({ theme: e, variant: a }) => ({
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+          backgroundColor: e.palette.background.default,
+          position: 'relative',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundImage: `radial-gradient(circle at 25% 25%, ${e.palette.primary.main}15 0%, transparent 50%), 
+       radial-gradient(circle at 75% 75%, ${e.palette.secondary.main}10 0%, transparent 50%)`,
+            zIndex: 0,
+            pointerEvents: 'none',
+          },
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundImage: `radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 0.1%),
+       radial-gradient(circle at 35% 45%, #FFFFFF 0%, transparent 0.05%),
+       radial-gradient(circle at 55% 25%, #FFFFFF 0%, transparent 0.08%),
+       radial-gradient(circle at 75% 65%, #FFFFFF 0%, transparent 0.05%),
+       radial-gradient(circle at 85% 15%, #FFFFFF 0%, transparent 0.07%),
+       radial-gradient(circle at 25% 65%, #FFFFFF 0%, transparent 0.06%),
+       radial-gradient(circle at 65% 85%, #FFFFFF 0%, transparent 0.08%)`,
+            opacity: 0.3,
+            zIndex: 0,
+            pointerEvents: 'none',
+          },
+          ...('default' === a && {}),
+          ...('test' === a && {
+            '&::before': {
+              backgroundImage: `radial-gradient(circle at 25% 25%, ${e.palette.primary.main}20 0%, transparent 60%), 
+         radial-gradient(circle at 75% 75%, ${e.palette.secondary.main}15 0%, transparent 60%)`,
+            },
+          }),
+          ...('result' === a && {
+            '&::before': {
+              backgroundImage: `radial-gradient(circle at 50% 50%, ${e.palette.secondary.main}20 0%, transparent 70%)`,
+            },
+          }),
+        })),
+        O = (0, o.ZP)(n.Z)(({ theme: e }) => ({ flexGrow: 1, position: 'relative', zIndex: 1 })),
+        U = (0, i.forwardRef)(function (e, a) {
+          let {
+            variant: t = 'default',
+            hideHeader: i = !1,
+            hideFooter: n = !1,
+            children: o,
+            sx: s = {},
+            ...l
+          } = e;
+          return (0, r.jsxs)(q, {
+            ref: a,
+            variant: t,
+            sx: s,
+            ...l,
+            children: [
+              !i && r.jsx(z, {}),
+              r.jsx(O, { component: 'main', children: o }),
+              !n && r.jsx(Q, {}),
+            ],
+          });
+        });
+      (0, o.ZP)(n.Z)(
+        ({
+          theme: e,
+          direction: a,
+          wrap: t,
+          justify: r,
+          align: i,
+          gap: n,
+          rowGap: o,
+          columnGap: s,
+          grow: l,
+          shrink: d,
+          basis: p,
+          responsive: c,
+        }) => ({
+          display: 'flex',
+          flexDirection: a,
+          flexWrap: t,
+          justifyContent: r,
+          alignItems: i,
+          gap: void 0 !== n ? e.spacing(n) : void 0,
+          rowGap: void 0 !== o ? e.spacing(o) : void 0,
+          columnGap: void 0 !== s ? e.spacing(s) : void 0,
+          flexGrow: l,
+          flexShrink: d,
+          flexBasis: p,
+          ...(c && {
+            [e.breakpoints.down('sm')]: {
+              flexDirection: 'row' === a ? 'column' : 'column' === a ? 'column' : a,
+            },
+          }),
+        })
+      ),
+        (0, o.ZP)(n.Z)(
+          ({
+            theme: e,
+            direction: a,
+            spacing: t,
+            align: r,
+            justify: i,
+            divider: n,
+            responsive: o,
+          }) => ({
+            display: 'flex',
+            flexDirection: a,
+            gap: e.spacing(t),
+            alignItems: r,
+            justifyContent: i,
+            width: '100%',
+            ...(o && {
+              [e.breakpoints.down('sm')]: {
+                flexDirection: 'row' === a ? 'column' : 'column' === a ? 'column' : a,
+              },
+            }),
+            ...(n && {
+              '& > *:not(:last-child)': {
+                ...('column' === a && {
+                  borderBottom: `1px solid ${e.palette.divider}`,
+                  paddingBottom: e.spacing(t / 2),
+                  marginBottom: e.spacing(t / 2),
+                }),
+                ...('row' === a && {
+                  borderRight: `1px solid ${e.palette.divider}`,
+                  paddingRight: e.spacing(t / 2),
+                  marginRight: e.spacing(t / 2),
+                }),
+              },
+            }),
+          })
+        ),
+        (0, o.ZP)(n.Z)(({ theme: e, ...a }) => {
+          let {
+            displayXs: t,
+            displaySm: r,
+            displayMd: i,
+            displayLg: n,
+            displayXl: o,
+            paddingXs: s,
+            paddingSm: l,
+            paddingMd: d,
+            paddingLg: p,
+            paddingXl: c,
+            marginXs: m,
+            marginSm: g,
+            marginMd: u,
+            marginLg: x,
+            marginXl: h,
+            textAlignXs: f,
+            textAlignSm: b,
+            textAlignMd: y,
+            textAlignLg: j,
+            textAlignXl: v,
+            flexDirectionXs: k,
+            flexDirectionSm: Z,
+            flexDirectionMd: w,
+            flexDirectionLg: $,
+            flexDirectionXl: F,
+            orderXs: I,
+            orderSm: C,
+            orderMd: S,
+            orderLg: P,
+            orderXl: B,
+            ..._
+          } = a;
+          return {
+            ..._,
+            ...(void 0 !== t && { display: t }),
+            ...(void 0 !== s && { padding: e.spacing(s) }),
+            ...(void 0 !== m && { margin: e.spacing(m) }),
+            ...(void 0 !== f && { textAlign: f }),
+            ...(void 0 !== k && { flexDirection: k }),
+            ...(void 0 !== I && { order: I }),
+            [e.breakpoints.up('sm')]: {
+              ...(void 0 !== r && { display: r }),
+              ...(void 0 !== l && { padding: e.spacing(l) }),
+              ...(void 0 !== g && { margin: e.spacing(g) }),
+              ...(void 0 !== b && { textAlign: b }),
+              ...(void 0 !== Z && { flexDirection: Z }),
+              ...(void 0 !== C && { order: C }),
+            },
+            [e.breakpoints.up('md')]: {
+              ...(void 0 !== i && { display: i }),
+              ...(void 0 !== d && { padding: e.spacing(d) }),
+              ...(void 0 !== u && { margin: e.spacing(u) }),
+              ...(void 0 !== y && { textAlign: y }),
+              ...(void 0 !== w && { flexDirection: w }),
+              ...(void 0 !== S && { order: S }),
+            },
+            [e.breakpoints.up('lg')]: {
+              ...(void 0 !== n && { display: n }),
+              ...(void 0 !== p && { padding: e.spacing(p) }),
+              ...(void 0 !== x && { margin: e.spacing(x) }),
+              ...(void 0 !== j && { textAlign: j }),
+              ...(void 0 !== $ && { flexDirection: $ }),
+              ...(void 0 !== P && { order: P }),
+            },
+            [e.breakpoints.up('xl')]: {
+              ...(void 0 !== o && { display: o }),
+              ...(void 0 !== c && { padding: e.spacing(c) }),
+              ...(void 0 !== h && { margin: e.spacing(h) }),
+              ...(void 0 !== v && { textAlign: v }),
+              ...(void 0 !== F && { flexDirection: F }),
+              ...(void 0 !== B && { order: B }),
+            },
+          };
+        });
+      var J = t('(ssr)/./node_modules/@mui/icons-material/Star.js'),
+        V = t('(ssr)/./node_modules/@mui/icons-material/AutoAwesome.js'),
+        ee = t('(ssr)/./node_modules/@mui/icons-material/WbTwilight.js');
+      let ea = (0, o.ZP)(n.Z)(({ theme: e, orientation: a, spacing: t }) => ({
+          position: 'relative',
+          width: '100%',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: 'horizontal' === a ? `${e.spacing(t)} 0` : 0,
+          padding: 0,
+        })),
+        et = (0, o.ZP)(H.Z)(({ theme: e, variant: a, thickness: t, glow: r }) => ({
+          width: '100%',
+          ...('primary' === a && { backgroundColor: e.palette.primary.main, opacity: 0.7 }),
+          ...('secondary' === a && { backgroundColor: e.palette.secondary.main, opacity: 0.7 }),
+          ...('mystical' === a && {
+            background: `linear-gradient(90deg, transparent, ${e.palette.primary.main}, ${e.palette.secondary.main}, transparent)`,
+            height: t,
+            border: 'none',
+          }),
+          ...(t && { height: t, border: 'none' }),
+          ...(r && {
+            boxShadow: `0 0 8px ${'primary' === a ? e.palette.primary.main : 'secondary' === a ? e.palette.secondary.main : `${e.palette.primary.main}, 0 0 12px ${e.palette.secondary.main}`}`,
+          }),
+        })),
+        er = (0, o.ZP)(n.Z)(({ theme: e }) => ({
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: e.spacing(0, 2),
+          backgroundColor: e.palette.background.default,
+          zIndex: 1,
+        })),
+        ei = (0, o.ZP)(n.Z)(({ theme: e, variant: a }) => ({
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: e.spacing(0, 1),
+          color: 'primary' === a ? e.palette.primary.main : e.palette.secondary.main,
+        })),
+        en = (0, o.ZP)(n.Z)(({ theme: e, variant: a, position: t }) => ({
+          position: 'absolute',
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          backgroundColor: 'primary' === a ? e.palette.primary.main : e.palette.secondary.main,
+          boxShadow: `0 0 5px ${'primary' === a ? e.palette.primary.main : e.palette.secondary.main}`,
+          ...('left' === t && { left: '20%' }),
+          ...('right' === t && { right: '20%' }),
+        })),
+        eo = (0, i.forwardRef)(function (e, a) {
+          let {
+            variant: t = 'default',
+            orientation: i = 'horizontal',
+            text: n,
+            icon: o,
+            thickness: s,
+            glow: l = !1,
+            decorated: d = !1,
+            spacing: p = 3,
+            sx: c = {},
+            ...m
+          } = e;
+          return (0, r.jsxs)(ea, {
+            ref: a,
+            orientation: i,
+            spacing: p,
+            sx: c,
+            ...m,
+            children: [
+              r.jsx(et, { variant: t, orientation: i, thickness: s, glow: l }),
+              (n || o) &&
+                (0, r.jsxs)(er, {
+                  children: [
+                    o &&
+                      r.jsx(ei, {
+                        variant: t,
+                        children:
+                          o ||
+                          ('primary' === t
+                            ? r.jsx(V.Z, { fontSize: 'small' })
+                            : 'secondary' === t
+                              ? r.jsx(J.Z, { fontSize: 'small' })
+                              : 'mystical' === t
+                                ? r.jsx(ee.Z, { fontSize: 'small' })
+                                : null),
+                      }),
+                    n &&
+                      r.jsx(g.Z, {
+                        variant: 'body2',
+                        color: 'default' === t ? 'text.secondary' : 'inherit',
+                        sx: {
+                          color:
+                            'primary' === t
+                              ? 'primary.main'
+                              : 'secondary' === t
+                                ? 'secondary.main'
+                                : 'mystical' === t
+                                  ? 'secondary.main'
+                                  : 'text.secondary',
+                          fontFamily: e => e.typography.fontFamily.secondary,
+                        },
+                        children: n,
+                      }),
+                  ],
+                }),
+              d &&
+                (0, r.jsxs)(r.Fragment, {
+                  children: [
+                    r.jsx(en, { variant: t, position: 'left' }),
+                    r.jsx(en, { variant: t, position: 'right' }),
+                  ],
+                }),
+            ],
+          });
+        });
+    },
+  });

@@ -1,0 +1,702 @@
+(() => {
+  var e = {};
+  (e.id = 674),
+    (e.ids = [674]),
+    (e.modules = {
+      '../../client/components/action-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/action-async-storage.external.js');
+      },
+      '../../client/components/request-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/request-async-storage.external.js');
+      },
+      '../../client/components/static-generation-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/static-generation-async-storage.external.js');
+      },
+      'next/dist/compiled/next-server/app-page.runtime.prod.js': e => {
+        'use strict';
+        e.exports = require('next/dist/compiled/next-server/app-page.runtime.prod.js');
+      },
+      buffer: e => {
+        'use strict';
+        e.exports = require('buffer');
+      },
+      crypto: e => {
+        'use strict';
+        e.exports = require('crypto');
+      },
+      events: e => {
+        'use strict';
+        e.exports = require('events');
+      },
+      http: e => {
+        'use strict';
+        e.exports = require('http');
+      },
+      https: e => {
+        'use strict';
+        e.exports = require('https');
+      },
+      net: e => {
+        'use strict';
+        e.exports = require('net');
+      },
+      punycode: e => {
+        'use strict';
+        e.exports = require('punycode');
+      },
+      stream: e => {
+        'use strict';
+        e.exports = require('stream');
+      },
+      tls: e => {
+        'use strict';
+        e.exports = require('tls');
+      },
+      url: e => {
+        'use strict';
+        e.exports = require('url');
+      },
+      zlib: e => {
+        'use strict';
+        e.exports = require('zlib');
+      },
+      '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Ftest%2Fdebug%2Fpage&name=app%2Ftest%2Fdebug%2Fpage&pagePath=private-next-app-dir%2Ftest%2Fdebug%2Fpage.jsx&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Ftest%2Fdebug%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!':
+        (e, t, s) => {
+          'use strict';
+          s.r(t),
+            s.d(t, {
+              GlobalError: () => r.a,
+              __next_app__: () => l,
+              originalPathname: () => c,
+              pages: () => u,
+              routeModule: () => m,
+              tree: () => p,
+            }),
+            s('(rsc)/./src/app/test/debug/page.jsx'),
+            s('(rsc)/./src/app/layout.js'),
+            s('(rsc)/./node_modules/next/dist/client/components/not-found-error.js');
+          var i = s(
+              '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/module.compiled.js?d969'
+            ),
+            o = s('(rsc)/./node_modules/next/dist/server/future/route-kind.js'),
+            n = s('(rsc)/./node_modules/next/dist/client/components/error-boundary.js'),
+            r = s.n(n),
+            d = s('(rsc)/./node_modules/next/dist/server/app-render/entry-base.js'),
+            a = {};
+          for (let e in d)
+            0 >
+              [
+                'default',
+                'tree',
+                'pages',
+                'GlobalError',
+                'originalPathname',
+                '__next_app__',
+                'routeModule',
+              ].indexOf(e) && (a[e] = () => d[e]);
+          s.d(t, a);
+          let p = [
+              '',
+              {
+                children: [
+                  'test',
+                  {
+                    children: [
+                      'debug',
+                      {
+                        children: [
+                          '__PAGE__',
+                          {},
+                          {
+                            page: [
+                              () =>
+                                Promise.resolve().then(
+                                  s.bind(s, '(rsc)/./src/app/test/debug/page.jsx')
+                                ),
+                              'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\test\\debug\\page.jsx',
+                            ],
+                          },
+                        ],
+                      },
+                      {},
+                    ],
+                  },
+                  {},
+                ],
+              },
+              {
+                layout: [
+                  () => Promise.resolve().then(s.bind(s, '(rsc)/./src/app/layout.js')),
+                  'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\layout.js',
+                ],
+                'not-found': [
+                  () =>
+                    Promise.resolve().then(
+                      s.t.bind(
+                        s,
+                        '(rsc)/./node_modules/next/dist/client/components/not-found-error.js',
+                        23
+                      )
+                    ),
+                  'next/dist/client/components/not-found-error',
+                ],
+              },
+            ],
+            u = [
+              'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\test\\debug\\page.jsx',
+            ],
+            c = '/test/debug/page',
+            l = { require: s, loadChunk: () => Promise.resolve() },
+            m = new i.AppPageRouteModule({
+              definition: {
+                kind: o.x.APP_PAGE,
+                page: '/test/debug/page',
+                pathname: '/test/debug',
+                bundlePath: '',
+                filename: '',
+                appPaths: [],
+              },
+              userland: { loaderTree: p },
+            });
+        },
+      '(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5C%EC%A0%84%EC%A4%80%EC%98%81%5C%5CDocuments%5C%5Caugment-projects%5C%5CMBTI%20test%20for%20dating%5C%5Csrc%5C%5Capp%5C%5Ctest%5C%5Cdebug%5C%5Cpage.jsx%22%2C%22ids%22%3A%5B%5D%7D&server=true!':
+        (e, t, s) => {
+          Promise.resolve().then(s.bind(s, '(ssr)/./src/app/test/debug/page.jsx'));
+        },
+      '(ssr)/./node_modules/uuid/dist/esm-node/v4.js': (e, t, s) => {
+        'use strict';
+        s.d(t, { Z: () => p });
+        var i = s('crypto'),
+          o = s.n(i);
+        let n = { randomUUID: o().randomUUID },
+          r = new Uint8Array(256),
+          d = r.length,
+          a = [];
+        for (let e = 0; e < 256; ++e) a.push((e + 256).toString(16).slice(1));
+        let p = function (e, t, s) {
+          if (n.randomUUID && !t && !e) return n.randomUUID();
+          let i =
+            (e = e || {}).random ||
+            (
+              e.rng ||
+              function () {
+                return d > r.length - 16 && (o().randomFillSync(r), (d = 0)), r.slice(d, (d += 16));
+              }
+            )();
+          if (((i[6] = (15 & i[6]) | 64), (i[8] = (63 & i[8]) | 128), t)) {
+            s = s || 0;
+            for (let e = 0; e < 16; ++e) t[s + e] = i[e];
+            return t;
+          }
+          return (function (e, t = 0) {
+            return (
+              a[e[t + 0]] +
+              a[e[t + 1]] +
+              a[e[t + 2]] +
+              a[e[t + 3]] +
+              '-' +
+              a[e[t + 4]] +
+              a[e[t + 5]] +
+              '-' +
+              a[e[t + 6]] +
+              a[e[t + 7]] +
+              '-' +
+              a[e[t + 8]] +
+              a[e[t + 9]] +
+              '-' +
+              a[e[t + 10]] +
+              a[e[t + 11]] +
+              a[e[t + 12]] +
+              a[e[t + 13]] +
+              a[e[t + 14]] +
+              a[e[t + 15]]
+            );
+          })(i);
+        };
+      },
+      '(ssr)/./src/app/test/debug/page.jsx': (e, t, s) => {
+        'use strict';
+        s.r(t), s.d(t, { default: () => b });
+        var i = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          ),
+          o = s(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          n = s('(ssr)/./node_modules/@mui/material/Typography/Typography.js'),
+          r = s('(ssr)/./node_modules/@mui/material/Paper/Paper.js'),
+          d = s('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+          a = s('(ssr)/./node_modules/@mui/material/Button/Button.js'),
+          p = s('(ssr)/./node_modules/@mui/material/List/List.js'),
+          u = s('(ssr)/./node_modules/@mui/material/ListItem/ListItem.js'),
+          c = s('(ssr)/./node_modules/@mui/material/ListItemText/ListItemText.js'),
+          l = s('(ssr)/./node_modules/@mui/material/Divider/Divider.js'),
+          m = s('(ssr)/./src/app/components/layout/index.js'),
+          x = s('(ssr)/./src/app/utils/sampleQuestions.js'),
+          g = s('(ssr)/./src/app/utils/mbtiAnalyzer.js');
+        let j = e => {
+            let t = {
+              E: e.includes('E') ? 'A' : 'B',
+              I: e.includes('I') ? 'A' : 'B',
+              S: e.includes('S') ? 'A' : 'B',
+              N: e.includes('N') ? 'A' : 'B',
+              T: e.includes('T') ? 'A' : 'B',
+              F: e.includes('F') ? 'A' : 'B',
+              J: e.includes('J') ? 'A' : 'B',
+              P: e.includes('P') ? 'A' : 'B',
+            };
+            return x.Z.map(e => {
+              let s;
+              return (
+                'E-I' === e.dimension
+                  ? (s =
+                      'positive' === e.direction
+                        ? 'A' === t.E
+                          ? 'A'
+                          : 'B'
+                        : 'A' === t.I
+                          ? 'A'
+                          : 'B')
+                  : 'S-N' === e.dimension
+                    ? (s =
+                        'positive' === e.direction
+                          ? 'A' === t.S
+                            ? 'A'
+                            : 'B'
+                          : 'A' === t.N
+                            ? 'A'
+                            : 'B')
+                    : 'T-F' === e.dimension
+                      ? (s =
+                          'positive' === e.direction
+                            ? 'A' === t.T
+                              ? 'A'
+                              : 'B'
+                            : 'A' === t.F
+                              ? 'A'
+                              : 'B')
+                      : 'J-P' === e.dimension &&
+                        (s =
+                          'positive' === e.direction
+                            ? 'A' === t.J
+                              ? 'A'
+                              : 'B'
+                            : 'A' === t.P
+                              ? 'A'
+                              : 'B'),
+                { questionId: e.id, answer: s }
+              );
+            });
+          },
+          v = e => {
+            let t = j(e),
+              s = (0, g.wy)(x.Z, t);
+            return (
+              console.log(`예상 MBTI: ${e}`),
+              console.log(`계산된 MBTI: ${s.mbtiType}`),
+              console.log(`일치 여부: ${s.mbtiType === e ? '✅ 일치' : '❌ 불일치'}`),
+              console.log('점수:', s.scores),
+              s
+            );
+          };
+        function b() {
+          let [e, t] = (0, o.useState)(null),
+            [s, x] = (0, o.useState)(null),
+            [g, j] = (0, o.useState)(!1),
+            b = e => {
+              j(!0),
+                setTimeout(() => {
+                  try {
+                    let s = v(e);
+                    t({
+                      expectedType: e,
+                      calculatedType: s.mbtiType,
+                      match: s.mbtiType === e,
+                      scores: s.scores,
+                    });
+                  } catch (e) {
+                    console.error('테스트 실행 중 오류 발생:', e);
+                  } finally {
+                    j(!1);
+                  }
+                }, 100);
+            };
+          return i.jsx(m.Xg, {
+            children: (0, i.jsxs)(m.$0, {
+              children: [
+                i.jsx(n.Z, { variant: 'h4', sx: { mb: 4 }, children: 'MBTI 계산 디버그 페이지' }),
+                (0, i.jsxs)(r.Z, {
+                  sx: { p: 3, mb: 4 },
+                  children: [
+                    i.jsx(n.Z, { variant: 'h6', sx: { mb: 2 }, children: '단일 MBTI 유형 테스트' }),
+                    i.jsx(d.Z, {
+                      sx: { display: 'flex', flexWrap: 'wrap', gap: 1, mb: 3 },
+                      children: ['ENFP', 'INTJ', 'ISFJ', 'ESTP'].map(e =>
+                        (0, i.jsxs)(
+                          a.Z,
+                          {
+                            variant: 'outlined',
+                            onClick: () => b(e),
+                            disabled: g,
+                            children: [e, ' 테스트'],
+                          },
+                          e
+                        )
+                      ),
+                    }),
+                    e &&
+                      (0, i.jsxs)(d.Z, {
+                        sx: { mt: 2 },
+                        children: [
+                          (0, i.jsxs)(n.Z, {
+                            variant: 'subtitle1',
+                            children: ['예상 MBTI: ', e.expectedType],
+                          }),
+                          (0, i.jsxs)(n.Z, {
+                            variant: 'subtitle1',
+                            children: ['계산된 MBTI: ', e.calculatedType],
+                          }),
+                          (0, i.jsxs)(n.Z, {
+                            variant: 'subtitle1',
+                            children: ['일치 여부: ', e.match ? '✅ 일치' : '❌ 불일치'],
+                          }),
+                          i.jsx(n.Z, { variant: 'subtitle1', sx: { mt: 1 }, children: '점수:' }),
+                          (0, i.jsxs)(p.Z, {
+                            dense: !0,
+                            children: [
+                              i.jsx(u.ZP, {
+                                children: i.jsx(c.Z, {
+                                  primary: `E: ${e.scores.E.toFixed(2)} vs I: ${e.scores.I.toFixed(2)}`,
+                                }),
+                              }),
+                              i.jsx(u.ZP, {
+                                children: i.jsx(c.Z, {
+                                  primary: `S: ${e.scores.S.toFixed(2)} vs N: ${e.scores.N.toFixed(2)}`,
+                                }),
+                              }),
+                              i.jsx(u.ZP, {
+                                children: i.jsx(c.Z, {
+                                  primary: `T: ${e.scores.T.toFixed(2)} vs F: ${e.scores.F.toFixed(2)}`,
+                                }),
+                              }),
+                              i.jsx(u.ZP, {
+                                children: i.jsx(c.Z, {
+                                  primary: `J: ${e.scores.J.toFixed(2)} vs P: ${e.scores.P.toFixed(2)}`,
+                                }),
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                  ],
+                }),
+                (0, i.jsxs)(r.Z, {
+                  sx: { p: 3 },
+                  children: [
+                    i.jsx(n.Z, { variant: 'h6', sx: { mb: 2 }, children: '모든 MBTI 유형 테스트' }),
+                    i.jsx(a.Z, {
+                      variant: 'contained',
+                      color: 'primary',
+                      onClick: () => {
+                        j(!0),
+                          setTimeout(() => {
+                            try {
+                              let e = [
+                                  'ISTJ',
+                                  'ISFJ',
+                                  'INFJ',
+                                  'INTJ',
+                                  'ISTP',
+                                  'ISFP',
+                                  'INFP',
+                                  'INTP',
+                                  'ESTP',
+                                  'ESFP',
+                                  'ENFP',
+                                  'ENTP',
+                                  'ESTJ',
+                                  'ESFJ',
+                                  'ENFJ',
+                                  'ENTJ',
+                                ],
+                                t = {},
+                                s = 0;
+                              e.forEach(e => {
+                                let i = v(e);
+                                (t[e] = { calculated: i.mbtiType, match: i.mbtiType === e }),
+                                  i.mbtiType === e && s++;
+                              }),
+                                x({
+                                  results: t,
+                                  matchCount: s,
+                                  accuracy: Math.round((s / e.length) * 100),
+                                });
+                            } catch (e) {
+                              console.error('모든 유형 테스트 중 오류 발생:', e);
+                            } finally {
+                              j(!1);
+                            }
+                          }, 100);
+                      },
+                      disabled: g,
+                      children: '모든 유형 테스트 실행',
+                    }),
+                    s &&
+                      (0, i.jsxs)(d.Z, {
+                        sx: { mt: 3 },
+                        children: [
+                          (0, i.jsxs)(n.Z, {
+                            variant: 'subtitle1',
+                            sx: { mb: 2 },
+                            children: ['정확도: ', s.matchCount, '/16 (', s.accuracy, '%)'],
+                          }),
+                          i.jsx(l.Z, { sx: { mb: 2 } }),
+                          i.jsx(n.Z, {
+                            variant: 'subtitle1',
+                            sx: { mb: 1 },
+                            children: '상세 결과:',
+                          }),
+                          i.jsx(p.Z, {
+                            dense: !0,
+                            children: Object.entries(s.results).map(([e, t]) =>
+                              i.jsx(
+                                u.ZP,
+                                {
+                                  children: i.jsx(c.Z, {
+                                    primary: `${e} → ${t.calculated} (${t.match ? '✅' : '❌'})`,
+                                  }),
+                                },
+                                e
+                              )
+                            ),
+                          }),
+                        ],
+                      }),
+                  ],
+                }),
+              ],
+            }),
+          });
+        }
+      },
+      '(rsc)/./src/app/test/debug/page.jsx': (e, t, s) => {
+        'use strict';
+        s.r(t), s.d(t, { default: () => i });
+        let i = (0,
+        s('(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js')
+          .createProxy)(
+          String.raw`C:\Users\전준영\Documents\augment-projects\MBTI test for dating\src\app\test\debug\page.jsx#default`
+        );
+      },
+      '(ssr)/./src/app/utils/sampleQuestions.js': (e, t, s) => {
+        'use strict';
+        s.d(t, { Z: () => i });
+        let i = [
+          {
+            id: 1,
+            question: '연인과 함께 있을 때 나는',
+            optionA: '다양한 활동과 대화를 통해 에너지를 얻는다',
+            optionB: '조용한 시간을 함께 보내며 에너지를 얻는다',
+            dimension: 'E-I',
+            direction: 'positive',
+          },
+          {
+            id: 2,
+            question: '데이트 장소로 더 선호하는 곳은',
+            optionA: '활기찬 페스티벌이나 사람이 많은 장소',
+            optionB: '조용한 카페나 한적한 장소',
+            dimension: 'E-I',
+            direction: 'positive',
+          },
+          {
+            id: 3,
+            question: '연인과의 갈등 후 나는',
+            optionA: '바로 대화하고 해결하고 싶다',
+            optionB: '혼자 생각할 시간이 필요하다',
+            dimension: 'E-I',
+            direction: 'positive',
+          },
+          {
+            id: 4,
+            question: '연인의 친구들을 만날 때 나는',
+            optionA: '새로운 사람들과 만나는 것이 즐겁다',
+            optionB: '부담스럽고 에너지가 소모된다',
+            dimension: 'E-I',
+            direction: 'positive',
+          },
+          {
+            id: 5,
+            question: '연애 중 힘든 일이 있을 때 나는',
+            optionA: '여러 사람들과 이야기하며 해소한다',
+            optionB: '혼자 생각하거나 가까운 한두 명에게만 털어놓는다',
+            dimension: 'E-I',
+            direction: 'positive',
+          },
+          {
+            id: 6,
+            question: '연인과의 관계에서 나는',
+            optionA: '함께하는 활동과 경험을 중요시한다',
+            optionB: '깊은 대화와 정서적 연결을 중요시한다',
+            dimension: 'E-I',
+            direction: 'negative',
+          },
+          {
+            id: 7,
+            question: '연인과의 대화에서 나는',
+            optionA: '구체적인 일상과 현실적인 주제를 선호한다',
+            optionB: '미래의 가능성과 추상적인 주제를 선호한다',
+            dimension: 'S-N',
+            direction: 'positive',
+          },
+          {
+            id: 8,
+            question: '연인에게 선물을 고를 때 나는',
+            optionA: '실용적이고 당장 필요한 것을 선택한다',
+            optionB: '의미 있고 창의적인 것을 선택한다',
+            dimension: 'S-N',
+            direction: 'positive',
+          },
+          {
+            id: 9,
+            question: '연인과의 여행에서 나는',
+            optionA: '구체적인 일정과 계획을 중요시한다',
+            optionB: '새로운 가능성과 즉흥적인 경험을 중요시한다',
+            dimension: 'S-N',
+            direction: 'positive',
+          },
+          {
+            id: 10,
+            question: '연인과의 미래를 생각할 때 나는',
+            optionA: '현실적인 계획과 단계를 고려한다',
+            optionB: '관계의 성장 가능성과 비전을 그린다',
+            dimension: 'S-N',
+            direction: 'positive',
+          },
+          {
+            id: 11,
+            question: '연인의 이야기를 들을 때 나는',
+            optionA: '구체적인 사실과 세부사항에 집중한다',
+            optionB: '이야기의 의미와 패턴에 집중한다',
+            dimension: 'S-N',
+            direction: 'positive',
+          },
+          {
+            id: 12,
+            question: '연인과 함께 영화를 볼 때 나는',
+            optionA: '현실적이고 사실적인 이야기를 선호한다',
+            optionB: '상상력이 풍부하고 창의적인 이야기를 선호한다',
+            dimension: 'S-N',
+            direction: 'negative',
+          },
+          {
+            id: 13,
+            question: '연인과의 중요한 결정에서 나는',
+            optionA: '논리와 객관적인 사실을 기반으로 판단한다',
+            optionB: '감정과 가치관을 기반으로 판단한다',
+            dimension: 'T-F',
+            direction: 'positive',
+          },
+          {
+            id: 14,
+            question: '연인과의 갈등 상황에서 나는',
+            optionA: '논리적으로 문제를 분석하고 해결책을 찾는다',
+            optionB: '서로의 감정을 고려하며 조화롭게 해결하려 한다',
+            dimension: 'T-F',
+            direction: 'positive',
+          },
+          {
+            id: 15,
+            question: '연인이 힘든 일을 겪을 때 나는',
+            optionA: '문제 해결을 위한 실질적인 조언을 제공한다',
+            optionB: '공감하고 정서적 지지를 보낸다',
+            dimension: 'T-F',
+            direction: 'positive',
+          },
+          {
+            id: 16,
+            question: '연인의 의견이 나와 다를 때 나는',
+            optionA: '객관적인 사실을 바탕으로 논리적으로 접근한다',
+            optionB: '서로의 가치관과 감정을 고려하여 접근한다',
+            dimension: 'T-F',
+            direction: 'positive',
+          },
+          {
+            id: 17,
+            question: '연인에게 나의 마음을 표현할 때 나는',
+            optionA: '직접적이고 명확하게 표현한다',
+            optionB: '섬세하고 따뜻한 방식으로 표현한다',
+            dimension: 'T-F',
+            direction: 'positive',
+          },
+          {
+            id: 18,
+            question: '연인이 나에게 조언을 구할 때 나는',
+            optionA: '객관적이고 솔직한 의견을 제공한다',
+            optionB: '상대방의 감정을 고려한 조언을 제공한다',
+            dimension: 'T-F',
+            direction: 'negative',
+          },
+          {
+            id: 19,
+            question: '연애할 때 데이트 계획은',
+            optionA: '미리 계획을 세우고 준비하는 게 좋다',
+            optionB: '즉흥적으로 결정해도 괜찮다',
+            dimension: 'J-P',
+            direction: 'positive',
+          },
+          {
+            id: 20,
+            question: '연인과의 약속에 나는',
+            optionA: '정확한 시간과 장소를 미리 정해두는 것이 중요하다',
+            optionB: '상황에 따라 유연하게 변경할 수 있는 것이 좋다',
+            dimension: 'J-P',
+            direction: 'positive',
+          },
+          {
+            id: 21,
+            question: '연인과의 여행에서 나는',
+            optionA: '일정과 방문할 장소를 미리 계획한다',
+            optionB: '그때그때 끌리는 곳을 자유롭게 탐험한다',
+            dimension: 'J-P',
+            direction: 'positive',
+          },
+          {
+            id: 22,
+            question: '연인과 함께 결정을 내릴 때 나는',
+            optionA: '빠르게 결정하고 실행에 옮기는 것을 선호한다',
+            optionB: '더 많은 정보와 가능성을 탐색하는 것을 선호한다',
+            dimension: 'J-P',
+            direction: 'positive',
+          },
+          {
+            id: 23,
+            question: '연인과의 일상에서 나는',
+            optionA: '규칙적이고 체계적인 생활을 선호한다',
+            optionB: '자유롭고 융통성 있는 생활을 선호한다',
+            dimension: 'J-P',
+            direction: 'positive',
+          },
+          {
+            id: 24,
+            question: '연인과의 미래 계획에 대해 나는',
+            optionA: '구체적인 목표와 단계를 설정하는 것이 중요하다',
+            optionB: '상황에 따라 유연하게 조정하는 것이 중요하다',
+            dimension: 'J-P',
+            direction: 'negative',
+          },
+        ];
+      },
+    });
+  var t = require('../../../webpack-runtime.js');
+  t.C(e);
+  var s = e => t((t.s = e)),
+    i = t.X(0, [276, 576, 5, 541, 246, 687, 171], () =>
+      s(
+        '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Ftest%2Fdebug%2Fpage&name=app%2Ftest%2Fdebug%2Fpage&pagePath=private-next-app-dir%2Ftest%2Fdebug%2Fpage.jsx&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Ftest%2Fdebug%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!'
+      )
+    );
+  module.exports = i;
+})();

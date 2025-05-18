@@ -22,7 +22,7 @@ const QuestionContainer = styled(Box)(({ theme }) => ({
 // 스타일링된 질문 번호
 const QuestionNumber = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.medium,
+  fontWeight: 500, // medium weight (500)
   fontSize: '1rem',
   color: theme.palette.secondary.main,
   marginBottom: theme.spacing(2),
@@ -44,7 +44,7 @@ const QuestionNumber = styled(Typography)(({ theme }) => ({
 // 스타일링된 질문 텍스트
 const QuestionText = styled(Typography)(({ theme }) => ({
   fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: theme.typography.fontWeight.semibold,
+  fontWeight: 600, // semibold weight (600)
   fontSize: '1.5rem',
   marginBottom: theme.spacing(4),
   textAlign: 'center',
@@ -133,7 +133,7 @@ export default function QuestionCard({
   isFirst = false,
   isLast = false,
   transitionDirection = 'next',
-  sx = {}
+  sx = {},
 }) {
   // 내부 상태
   const [localSelectedOption, setLocalSelectedOption] = useState(selectedOption);
@@ -146,7 +146,7 @@ export default function QuestionCard({
   }, [selectedOption]);
 
   // 옵션 변경 핸들러
-  const handleOptionChange = (value) => {
+  const handleOptionChange = value => {
     setLocalSelectedOption(value);
 
     // 옵션 선택 시 애니메이션 효과
@@ -189,7 +189,7 @@ export default function QuestionCard({
         minHeight: 500,
         transition: 'transform 0.3s ease-out',
         transform: isAnimating ? 'scale(1.02)' : 'scale(1)',
-        ...sx
+        ...sx,
       }}
     >
       <QuestionContainer>
@@ -207,13 +207,9 @@ export default function QuestionCard({
           </AnimatedElement>
 
           <AnimatedElement animation="fadeIn" duration="normal" delay={100}>
-            <QuestionNumber variant="subtitle2">
-              질문 {questionNumber}
-            </QuestionNumber>
+            <QuestionNumber variant="subtitle2">질문 {questionNumber}</QuestionNumber>
 
-            <QuestionText variant="h4">
-              {question.question}
-            </QuestionText>
+            <QuestionText variant="h4">{question.question}</QuestionText>
           </AnimatedElement>
 
           <OptionsContainer>

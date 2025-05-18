@@ -20,12 +20,34 @@ let theme = createTheme({
       light: tokens.colors.primary.light,
       dark: tokens.colors.primary.dark,
       contrastText: tokens.colors.primary.contrastText,
+      // Add numbered color scales if they exist in tokens
+      ...(tokens.colors.primary[50] && { 50: tokens.colors.primary[50] }),
+      ...(tokens.colors.primary[100] && { 100: tokens.colors.primary[100] }),
+      ...(tokens.colors.primary[200] && { 200: tokens.colors.primary[200] }),
+      ...(tokens.colors.primary[300] && { 300: tokens.colors.primary[300] }),
+      ...(tokens.colors.primary[400] && { 400: tokens.colors.primary[400] }),
+      ...(tokens.colors.primary[500] && { 500: tokens.colors.primary[500] }),
+      ...(tokens.colors.primary[600] && { 600: tokens.colors.primary[600] }),
+      ...(tokens.colors.primary[700] && { 700: tokens.colors.primary[700] }),
+      ...(tokens.colors.primary[800] && { 800: tokens.colors.primary[800] }),
+      ...(tokens.colors.primary[900] && { 900: tokens.colors.primary[900] }),
     },
     secondary: {
       main: tokens.colors.secondary.main,
       light: tokens.colors.secondary.light,
       dark: tokens.colors.secondary.dark,
       contrastText: tokens.colors.secondary.contrastText,
+      // Add numbered color scales if they exist in tokens
+      ...(tokens.colors.secondary[50] && { 50: tokens.colors.secondary[50] }),
+      ...(tokens.colors.secondary[100] && { 100: tokens.colors.secondary[100] }),
+      ...(tokens.colors.secondary[200] && { 200: tokens.colors.secondary[200] }),
+      ...(tokens.colors.secondary[300] && { 300: tokens.colors.secondary[300] }),
+      ...(tokens.colors.secondary[400] && { 400: tokens.colors.secondary[400] }),
+      ...(tokens.colors.secondary[500] && { 500: tokens.colors.secondary[500] }),
+      ...(tokens.colors.secondary[600] && { 600: tokens.colors.secondary[600] }),
+      ...(tokens.colors.secondary[700] && { 700: tokens.colors.secondary[700] }),
+      ...(tokens.colors.secondary[800] && { 800: tokens.colors.secondary[800] }),
+      ...(tokens.colors.secondary[900] && { 900: tokens.colors.secondary[900] }),
     },
     background: {
       default: tokens.colors.background.default,
@@ -51,6 +73,36 @@ let theme = createTheme({
     divider: tokens.colors.misc.divider,
   },
 
+  // Add colors directly to theme for easier access
+  colors: {
+    ...tokens.colors,
+    // Ensure primary and secondary color scales are defined
+    primary: {
+      ...tokens.colors.primary,
+      100: tokens.colors.primary[100] || tokens.colors.primary.light,
+      200: tokens.colors.primary[200] || tokens.colors.primary.light,
+      300: tokens.colors.primary[300] || tokens.colors.primary.light,
+      400: tokens.colors.primary[400] || tokens.colors.primary.main,
+      500: tokens.colors.primary[500] || tokens.colors.primary.main,
+      600: tokens.colors.primary[600] || tokens.colors.primary.dark,
+      700: tokens.colors.primary[700] || tokens.colors.primary.dark,
+      800: tokens.colors.primary[800] || tokens.colors.primary.dark,
+      900: tokens.colors.primary[900] || tokens.colors.primary.dark,
+    },
+    secondary: {
+      ...tokens.colors.secondary,
+      100: tokens.colors.secondary[100] || tokens.colors.secondary.light,
+      200: tokens.colors.secondary[200] || tokens.colors.secondary.light,
+      300: tokens.colors.secondary[300] || tokens.colors.secondary.light,
+      400: tokens.colors.secondary[400] || tokens.colors.secondary.main,
+      500: tokens.colors.secondary[500] || tokens.colors.secondary.main,
+      600: tokens.colors.secondary[600] || tokens.colors.secondary.dark,
+      700: tokens.colors.secondary[700] || tokens.colors.secondary.dark,
+      800: tokens.colors.secondary[800] || tokens.colors.secondary.dark,
+      900: tokens.colors.secondary[900] || tokens.colors.secondary.dark,
+    },
+  },
+
   // 타이포그래피
   typography: {
     fontFamily: tokens.typography.fontFamily.primary,
@@ -70,7 +122,7 @@ let theme = createTheme({
   },
 
   // 간격
-  spacing: (factor) => `${tokens.spacing.unit * factor}px`,
+  spacing: factor => `${tokens.spacing.unit * factor}px`,
 
   // 반응형 브레이크포인트
   breakpoints: {
@@ -471,7 +523,8 @@ let theme = createTheme({
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
+            background:
+              'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
             animation: 'shimmer 2s infinite',
           },
           '@keyframes shimmer': {

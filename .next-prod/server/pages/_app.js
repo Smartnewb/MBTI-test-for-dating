@@ -1,0 +1,189 @@
+'use strict';
+(() => {
+  let e;
+  var t = {};
+  (t.id = 888),
+    (t.ids = [888]),
+    (t.modules = {
+      './node_modules/next/dist/pages/_app.js': (e, t, r) => {
+        Object.defineProperty(t, '__esModule', { value: !0 }),
+          Object.defineProperty(t, 'default', {
+            enumerable: !0,
+            get: function () {
+              return a;
+            },
+          });
+        let n = r('./node_modules/@swc/helpers/cjs/_interop_require_default.cjs'),
+          o = r('react/jsx-runtime'),
+          s = n._(r('react')),
+          i = r('./node_modules/next/dist/shared/lib/utils.js');
+        async function u(e) {
+          let { Component: t, ctx: r } = e;
+          return { pageProps: await (0, i.loadGetInitialProps)(t, r) };
+        }
+        class a extends s.default.Component {
+          render() {
+            let { Component: e, pageProps: t } = this.props;
+            return (0, o.jsx)(e, { ...t });
+          }
+        }
+        (a.origGetInitialProps = u),
+          (a.getInitialProps = u),
+          ('function' == typeof t.default ||
+            ('object' == typeof t.default && null !== t.default)) &&
+            void 0 === t.default.__esModule &&
+            (Object.defineProperty(t.default, '__esModule', { value: !0 }),
+            Object.assign(t.default, t),
+            (e.exports = t.default));
+      },
+      './node_modules/next/dist/shared/lib/utils.js': (e, t) => {
+        Object.defineProperty(t, '__esModule', { value: !0 }),
+          (function (e, t) {
+            for (var r in t) Object.defineProperty(e, r, { enumerable: !0, get: t[r] });
+          })(t, {
+            DecodeError: function () {
+              return g;
+            },
+            MiddlewareNotFoundError: function () {
+              return j;
+            },
+            MissingStaticPage: function () {
+              return x;
+            },
+            NormalizeError: function () {
+              return m;
+            },
+            PageNotFoundError: function () {
+              return _;
+            },
+            SP: function () {
+              return f;
+            },
+            ST: function () {
+              return p;
+            },
+            WEB_VITALS: function () {
+              return r;
+            },
+            execOnce: function () {
+              return n;
+            },
+            getDisplayName: function () {
+              return a;
+            },
+            getLocationOrigin: function () {
+              return i;
+            },
+            getURL: function () {
+              return u;
+            },
+            isAbsoluteUrl: function () {
+              return s;
+            },
+            isResSent: function () {
+              return l;
+            },
+            loadGetInitialProps: function () {
+              return d;
+            },
+            normalizeRepeatedSlashes: function () {
+              return c;
+            },
+            stringifyError: function () {
+              return P;
+            },
+          });
+        let r = ['CLS', 'FCP', 'FID', 'INP', 'LCP', 'TTFB'];
+        function n(e) {
+          let t,
+            r = !1;
+          return function () {
+            for (var n = arguments.length, o = Array(n), s = 0; s < n; s++) o[s] = arguments[s];
+            return r || ((r = !0), (t = e(...o))), t;
+          };
+        }
+        let o = /^[a-zA-Z][a-zA-Z\d+\-.]*?:/,
+          s = e => o.test(e);
+        function i() {
+          let { protocol: e, hostname: t, port: r } = window.location;
+          return e + '//' + t + (r ? ':' + r : '');
+        }
+        function u() {
+          let { href: e } = window.location,
+            t = i();
+          return e.substring(t.length);
+        }
+        function a(e) {
+          return 'string' == typeof e ? e : e.displayName || e.name || 'Unknown';
+        }
+        function l(e) {
+          return e.finished || e.headersSent;
+        }
+        function c(e) {
+          let t = e.split('?');
+          return (
+            t[0].replace(/\\/g, '/').replace(/\/\/+/g, '/') +
+            (t[1] ? '?' + t.slice(1).join('?') : '')
+          );
+        }
+        async function d(e, t) {
+          let r = t.res || (t.ctx && t.ctx.res);
+          if (!e.getInitialProps)
+            return t.ctx && t.Component ? { pageProps: await d(t.Component, t.ctx) } : {};
+          let n = await e.getInitialProps(t);
+          if (r && l(r)) return n;
+          if (!n)
+            throw Error(
+              '"' +
+                a(e) +
+                '.getInitialProps()" should resolve to an object. But found "' +
+                n +
+                '" instead.'
+            );
+          return n;
+        }
+        let f = 'undefined' != typeof performance,
+          p =
+            f &&
+            ['mark', 'measure', 'getEntriesByName'].every(e => 'function' == typeof performance[e]);
+        class g extends Error {}
+        class m extends Error {}
+        class _ extends Error {
+          constructor(e) {
+            super(),
+              (this.code = 'ENOENT'),
+              (this.name = 'PageNotFoundError'),
+              (this.message = 'Cannot find module for page: ' + e);
+          }
+        }
+        class x extends Error {
+          constructor(e, t) {
+            super(), (this.message = 'Failed to load static file for page: ' + e + ' ' + t);
+          }
+        }
+        class j extends Error {
+          constructor() {
+            super(), (this.code = 'ENOENT'), (this.message = 'Cannot find the middleware module');
+          }
+        }
+        function P(e) {
+          return JSON.stringify({ message: e.message, stack: e.stack });
+        }
+      },
+      react: e => {
+        e.exports = require('react');
+      },
+      'react/jsx-runtime': e => {
+        e.exports = require('react/jsx-runtime');
+      },
+      './node_modules/@swc/helpers/cjs/_interop_require_default.cjs': (e, t) => {
+        t._ = t._interop_require_default = function (e) {
+          return e && e.__esModule ? e : { default: e };
+        };
+      },
+    });
+  var r = require('../webpack-runtime.js');
+  r.C(t);
+  var n = ((e = './node_modules/next/dist/pages/_app.js'), r((r.s = e)));
+  module.exports = n;
+})();

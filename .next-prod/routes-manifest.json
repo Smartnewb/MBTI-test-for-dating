@@ -1,0 +1,62 @@
+{
+  "version": 3,
+  "pages404": true,
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [],
+  "headers": [],
+  "dynamicRoutes": [
+    {
+      "page": "/result/[id]",
+      "regex": "^/result/([^/]+?)(?:/)?$",
+      "routeKeys": { "nxtPid": "nxtPid" },
+      "namedRegex": "^/result/(?<nxtPid>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    { "page": "/", "regex": "^/(?:/)?$", "routeKeys": {}, "namedRegex": "^/(?:/)?$" },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/design-system",
+      "regex": "^/design\\-system(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/design\\-system(?:/)?$"
+    },
+    {
+      "page": "/result",
+      "regex": "^/result(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/result(?:/)?$"
+    },
+    { "page": "/test", "regex": "^/test(?:/)?$", "routeKeys": {}, "namedRegex": "^/test(?:/)?$" },
+    {
+      "page": "/test/debug",
+      "regex": "^/test/debug(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/test/debug(?:/)?$"
+    },
+    {
+      "page": "/test/question",
+      "regex": "^/test/question(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/test/question(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "RSC",
+    "varyHeader": "RSC, Next-Router-State-Tree, Next-Router-Prefetch",
+    "prefetchHeader": "Next-Router-Prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSuffix": ".prefetch.rsc"
+  },
+  "skipMiddlewareUrlNormalize": true,
+  "rewrites": []
+}

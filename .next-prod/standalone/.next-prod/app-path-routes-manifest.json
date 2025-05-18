@@ -1,0 +1,12 @@
+{
+  "/_not-found/page": "/_not-found",
+  "/api/session/init/route": "/api/session/init",
+  "/page": "/",
+  "/api/session/data/route": "/api/session/data",
+  "/result/page": "/result",
+  "/design-system/page": "/design-system",
+  "/result/[id]/page": "/result/[id]",
+  "/test/debug/page": "/test/debug",
+  "/test/question/page": "/test/question",
+  "/test/page": "/test"
+}

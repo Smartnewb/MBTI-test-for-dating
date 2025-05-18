@@ -1,0 +1,1146 @@
+'use strict';
+(exports.id = 191),
+  (exports.ids = [191]),
+  (exports.modules = {
+    '(ssr)/./src/app/components/TarotCard.jsx': (t, e, a) => {
+      a.d(e, { Z: () => y });
+      var r = a(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        ),
+        o = a('(ssr)/./node_modules/@mui/material/Card/Card.js'),
+        n = a('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+        i = a('(ssr)/./node_modules/@mui/material/CardContent/CardContent.js'),
+        s = a('(ssr)/./node_modules/@mui/material/Typography/Typography.js'),
+        l = a('(ssr)/./node_modules/@mui/material/styles/styled.js');
+      let p = (0, l.ZP)(o.Z)(({ theme: t, variant: e, interactive: a = !0 }) => ({
+          borderRadius: 16,
+          maxWidth: 350,
+          minHeight: 450,
+          margin: '0 auto',
+          position: 'relative',
+          overflow: 'visible',
+          transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+          ...('primary' === e && {
+            background: `linear-gradient(135deg, ${t.palette.primary.main}, ${t.palette.primary.dark})`,
+            color: t.palette.primary.contrastText,
+          }),
+          ...('secondary' === e && {
+            background: `linear-gradient(135deg, ${t.palette.secondary.main}, ${t.palette.secondary.dark})`,
+            color: t.palette.secondary.contrastText,
+          }),
+          ...('mystical' === e && {
+            background: 'linear-gradient(135deg, #2C3E50, #4A235A)',
+            color: '#FFFFFF',
+          }),
+          ...('result' === e && {
+            background: 'linear-gradient(135deg, #1A1A2E, #16213E)',
+            color: '#FFFFFF',
+            boxShadow: '0 10px 30px rgba(106, 27, 154, 0.4)',
+          }),
+          ...('default' === e && {
+            background: `linear-gradient(135deg, ${t.palette.background.paper}, ${t.palette.background.default})`,
+            color: t.palette.text.primary,
+          }),
+          boxShadow: '0 10px 20px rgba(0, 0, 0, 0.5)',
+          border: `1px solid ${t.palette.primary.dark}`,
+          ...(a && {
+            '&:hover': {
+              transform: 'translateY(-5px)',
+              boxShadow: '0 15px 30px rgba(0, 0, 0, 0.7)',
+            },
+            cursor: 'pointer',
+          }),
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            borderRadius: 16,
+            background: 'url(/images/card-texture.png)',
+            backgroundSize: 'cover',
+            opacity: 0.1,
+            pointerEvents: 'none',
+          },
+          ...(('mystical' === e || 'result' === e) && {
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              borderRadius: 16,
+              background:
+                'radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%)',
+              pointerEvents: 'none',
+            },
+          }),
+        })),
+        d = (0, l.ZP)(n.Z)(({ theme: t, variant: e }) => ({
+          position: 'absolute',
+          top: 8,
+          left: 8,
+          right: 8,
+          bottom: 8,
+          border: `1px solid ${'result' === e ? '#D4AF37' : t.palette.secondary.main}`,
+          borderRadius: 12,
+          pointerEvents: 'none',
+          ...('result' === e && { boxShadow: '0 0 10px rgba(212, 175, 55, 0.3) inset' }),
+          ...('mystical' === e && { boxShadow: '0 0 15px rgba(156, 39, 176, 0.3) inset' }),
+        })),
+        m = (0, l.ZP)(n.Z)(({ theme: t, position: e, variant: a }) => ({
+          position: 'absolute',
+          width: 20,
+          height: 20,
+          border: `1px solid ${'result' === a ? '#D4AF37' : t.palette.secondary.main}`,
+          ...('top-left' === e && {
+            top: 4,
+            left: 4,
+            borderRight: 'none',
+            borderBottom: 'none',
+            borderTopLeftRadius: 8,
+          }),
+          ...('top-right' === e && {
+            top: 4,
+            right: 4,
+            borderLeft: 'none',
+            borderBottom: 'none',
+            borderTopRightRadius: 8,
+          }),
+          ...('bottom-left' === e && {
+            bottom: 4,
+            left: 4,
+            borderRight: 'none',
+            borderTop: 'none',
+            borderBottomLeftRadius: 8,
+          }),
+          ...('bottom-right' === e && {
+            bottom: 4,
+            right: 4,
+            borderLeft: 'none',
+            borderTop: 'none',
+            borderBottomRightRadius: 8,
+          }),
+          pointerEvents: 'none',
+          ...(('result' === a || 'mystical' === a) && {
+            width: 25,
+            height: 25,
+            '&::after': {
+              content: '""',
+              position: 'absolute',
+              width: 5,
+              height: 5,
+              borderRadius: '50%',
+              background: 'result' === a ? '#D4AF37' : t.palette.secondary.main,
+              ...('top-left' === e && { top: 3, left: 3 }),
+              ...('top-right' === e && { top: 3, right: 3 }),
+              ...('bottom-left' === e && { bottom: 3, left: 3 }),
+              ...('bottom-right' === e && { bottom: 3, right: 3 }),
+            },
+          }),
+        })),
+        c = (0, l.ZP)(n.Z)(({ theme: t, variant: e }) => ({
+          position: 'absolute',
+          width: 40,
+          height: 40,
+          opacity: 0.2,
+          pointerEvents: 'none',
+          ...('result' === e && {
+            top: 20,
+            right: 20,
+            background: 'url(/images/tarot-back.svg)',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            opacity: 0.15,
+          }),
+          ...('mystical' === e && {
+            bottom: 20,
+            left: 20,
+            background: 'url(/images/tarot-back.svg)',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            opacity: 0.15,
+            transform: 'rotate(180deg)',
+          }),
+        }));
+      function y({
+        children: t,
+        title: e,
+        variant: a = 'default',
+        interactive: o = !0,
+        onClick: n,
+        ariaLabel: l,
+        sx: y = {},
+      }) {
+        return (0, r.jsxs)(p, {
+          variant: a,
+          interactive: o,
+          onClick: n,
+          onKeyDown: t => {
+            n && ('Enter' === t.key || ' ' === t.key) && (t.preventDefault(), n());
+          },
+          tabIndex: n ? 0 : void 0,
+          role: n ? 'button' : void 0,
+          'aria-label': l || e,
+          sx: y,
+          children: [
+            r.jsx(d, { variant: a }),
+            r.jsx(m, { position: 'top-left', variant: a }),
+            r.jsx(m, { position: 'top-right', variant: a }),
+            r.jsx(m, { position: 'bottom-left', variant: a }),
+            r.jsx(m, { position: 'bottom-right', variant: a }),
+            ('result' === a || 'mystical' === a) && r.jsx(c, { variant: a }),
+            (0, r.jsxs)(i.Z, {
+              sx: { p: 4, height: '100%', display: 'flex', flexDirection: 'column' },
+              children: [
+                e &&
+                  r.jsx(s.Z, {
+                    variant: 'h5',
+                    component: 'h2',
+                    sx: {
+                      textAlign: 'center',
+                      mb: 3,
+                      fontWeight: 'bold',
+                      color:
+                        'primary' === a || 'secondary' === a || 'mystical' === a || 'result' === a
+                          ? 'white'
+                          : 'text.primary',
+                      textShadow: '0 2px 4px rgba(0,0,0,0.5)',
+                      ...('result' === a && { color: '#D4AF37', letterSpacing: '0.05em' }),
+                    },
+                    children: e,
+                  }),
+                t,
+              ],
+            }),
+          ],
+        });
+      }
+    },
+    '(ssr)/./src/app/components/animations.jsx': (t, e, a) => {
+      a.d(e, { F: () => w, K: () => p });
+      var r = a(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        ),
+        o = a('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+        n = a('(ssr)/./node_modules/@emotion/react/dist/emotion-react.esm.js'),
+        i = a('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+        s = a(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+        );
+      let l = (0, i.ZP)(o.Z)(({ theme: t }) => ({ position: 'relative' })),
+        p = (0, s.forwardRef)(function (t, e) {
+          let {
+              animation: a = 'fadeIn',
+              duration: o = 'normal',
+              easing: n = 'easeInOut',
+              staggerDelay: i = 100,
+              initialDelay: p = 0,
+              onScroll: d = !1,
+              threshold: m = 0.2,
+              children: c,
+              sx: y = {},
+              ...g
+            } = t,
+            u = (0, s.useRef)(null),
+            x = e || u,
+            [f, b] = (0, s.useState)(!d);
+          (0, s.useEffect)(() => {}, [d, x, m]);
+          let h = s.Children.map(c, (t, e) =>
+            t && 'object' == typeof t
+              ? (0, s.cloneElement)(t, {
+                  animation: f ? a : null,
+                  duration: o,
+                  delay: p + e * i,
+                  easing: n,
+                  style: { ...t.props.style, opacity: f ? 1 : 0 },
+                })
+              : t
+          );
+          return r.jsx(l, { ref: x, sx: y, ...g, children: h });
+        }),
+        d = { fast: 300, normal: 500, slow: 800, verySlow: 1200 },
+        m = (0, n.F4)`
+  0% {
+    transform: perspective(1200px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg);
+    opacity: 1;
+  }
+`,
+        c = (0, n.F4)`
+  0% {
+    transform: perspective(1200px) rotateY(90deg) scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: perspective(1200px) rotateY(45deg) scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+`,
+        y = (0, n.F4)`
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`,
+        g = (0, n.F4)`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`,
+        u = (0, n.F4)`
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`,
+        x = (0, n.F4)`
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`,
+        f = (0, n.F4)`
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`,
+        b = (0, n.F4)`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`,
+        h = (t, e) => {
+          let a = d[e] || d.normal;
+          switch (t) {
+            case 'tarotFlip':
+              return { animation: `${m} ${a}ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards` };
+            case 'tarotReveal':
+              return { animation: `${c} ${a}ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards` };
+            case 'shine':
+              return {
+                position: 'relative',
+                overflow: 'hidden',
+                '&::after': {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  background:
+                    'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                  animation: `${y} ${2 * a}ms linear infinite`,
+                },
+              };
+            case 'fadeIn':
+              return { animation: `${g} ${a}ms ease-in-out forwards` };
+            case 'slideUp':
+              return { animation: `${u} ${a}ms ease-out forwards` };
+            case 'slideRight':
+              return { animation: `${x} ${a}ms ease-out forwards` };
+            case 'slideLeft':
+              return { animation: `${f} ${a}ms ease-out forwards` };
+            case 'pulse':
+              return { animation: `${b} ${a}ms ease-in-out infinite` };
+            default:
+              return {};
+          }
+        },
+        k = (0, i.ZP)(o.Z)(({ theme: t, animation: e, duration: a, delay: r = 0 }) => ({
+          opacity: 0,
+          ...h(e, a),
+          animationDelay: `${r}ms`,
+        }));
+      function w({
+        children: t,
+        animation: e = 'fadeIn',
+        duration: a = 'normal',
+        delay: o = 0,
+        sx: n = {},
+        ...i
+      }) {
+        return r.jsx(k, { animation: e, duration: a, delay: o, sx: n, ...i, children: t });
+      }
+    },
+    '(ssr)/./src/app/components/mystical/index.js': (t, e, a) => {
+      a.d(e, { py: () => b, e7: () => R, _H: () => Y, QD: () => L, Pr: () => A, I3: () => y });
+      var r = a(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        ),
+        o = a('(ssr)/./node_modules/styled-jsx/style.js'),
+        n = a.n(o),
+        i = a(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+        ),
+        s = a('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+        l = a('(ssr)/./node_modules/@mui/material/styles/styled.js');
+      let p = (0, l.ZP)(s.Z)(({ theme: t }) => ({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          overflow: 'hidden',
+          zIndex: -1,
+          background: `linear-gradient(135deg, ${t.palette.primary.dark}80 0%, ${t.palette.background.default} 100%)`,
+        })),
+        d = (0, l.ZP)(s.Z)(({ theme: t, size: e, top: a, left: r, delay: o, duration: n }) => ({
+          position: 'absolute',
+          width: e,
+          height: e,
+          top: a,
+          left: r,
+          borderRadius: '50%',
+          background: t.palette.secondary.light,
+          boxShadow: `0 0 ${e}px ${e / 2}px ${t.palette.secondary.light}`,
+          animation: `twinkle ${n}s ease-in-out ${o}s infinite`,
+          opacity: 0.7,
+        })),
+        m = (0, l.ZP)(s.Z)(({ theme: t, top: e, left: a, delay: r }) => ({
+          position: 'absolute',
+          top: e,
+          left: a,
+          width: '100px',
+          height: '2px',
+          background: `linear-gradient(to right, transparent, ${t.palette.secondary.light}, transparent)`,
+          transform: 'rotate(-45deg)',
+          animation: `shootingStar 3s linear ${r}s`,
+          animationFillMode: 'forwards',
+          opacity: 0,
+        })),
+        c = (0, l.ZP)(s.Z)(({ theme: t, top: e, left: a, size: r, opacity: o, delay: n }) => ({
+          position: 'absolute',
+          top: e,
+          left: a,
+          width: r,
+          height: r,
+          borderRadius: '50%',
+          background: `radial-gradient(circle, ${t.palette.primary.main}20 0%, transparent 70%)`,
+          opacity: o,
+          animation: `fog ${10 + 10 * Math.random()}s ease-in-out ${n}s infinite`,
+        }));
+      function y({ starCount: t = 50, shootingStarCount: e = 3, fogCount: a = 5, sx: o = {} }) {
+        let [s, l] = (0, i.useState)([]),
+          [y, g] = (0, i.useState)([]),
+          [u, x] = (0, i.useState)([]);
+        return (0, r.jsxs)(p, {
+          sx: o,
+          children: [
+            s.map(t =>
+              r.jsx(
+                d,
+                { size: t.size, top: t.top, left: t.left, delay: t.delay, duration: t.duration },
+                t.id
+              )
+            ),
+            y.map(t => r.jsx(m, { top: t.top, left: t.left, delay: t.delay }, t.id)),
+            u.map(t =>
+              r.jsx(
+                c,
+                { size: t.size, top: t.top, left: t.left, opacity: t.opacity, delay: t.delay },
+                t.id
+              )
+            ),
+            r.jsx(n(), {
+              id: 'b3bcd5e7499137f0',
+              children:
+                '@-webkit-keyframes twinkle{0%{opacity:.3;-webkit-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(1.2);transform:scale(1.2)}100%{opacity:.3;-webkit-transform:scale(1);transform:scale(1)}}@-moz-keyframes twinkle{0%{opacity:.3;-moz-transform:scale(1);transform:scale(1)}50%{opacity:1;-moz-transform:scale(1.2);transform:scale(1.2)}100%{opacity:.3;-moz-transform:scale(1);transform:scale(1)}}@-o-keyframes twinkle{0%{opacity:.3;-o-transform:scale(1);transform:scale(1)}50%{opacity:1;-o-transform:scale(1.2);transform:scale(1.2)}100%{opacity:.3;-o-transform:scale(1);transform:scale(1)}}@keyframes twinkle{0%{opacity:.3;-webkit-transform:scale(1);-moz-transform:scale(1);-o-transform:scale(1);transform:scale(1)}50%{opacity:1;-webkit-transform:scale(1.2);-moz-transform:scale(1.2);-o-transform:scale(1.2);transform:scale(1.2)}100%{opacity:.3;-webkit-transform:scale(1);-moz-transform:scale(1);-o-transform:scale(1);transform:scale(1)}}@-webkit-keyframes shootingStar{0%{-webkit-transform:translatex(0)translatey(0)rotate(-45deg);transform:translatex(0)translatey(0)rotate(-45deg);opacity:1}100%{-webkit-transform:translatex(500px)translatey(500px)rotate(-45deg);transform:translatex(500px)translatey(500px)rotate(-45deg);opacity:0}}@-moz-keyframes shootingStar{0%{-moz-transform:translatex(0)translatey(0)rotate(-45deg);transform:translatex(0)translatey(0)rotate(-45deg);opacity:1}100%{-moz-transform:translatex(500px)translatey(500px)rotate(-45deg);transform:translatex(500px)translatey(500px)rotate(-45deg);opacity:0}}@-o-keyframes shootingStar{0%{-o-transform:translatex(0)translatey(0)rotate(-45deg);transform:translatex(0)translatey(0)rotate(-45deg);opacity:1}100%{-o-transform:translatex(500px)translatey(500px)rotate(-45deg);transform:translatex(500px)translatey(500px)rotate(-45deg);opacity:0}}@keyframes shootingStar{0%{-webkit-transform:translatex(0)translatey(0)rotate(-45deg);-moz-transform:translatex(0)translatey(0)rotate(-45deg);-o-transform:translatex(0)translatey(0)rotate(-45deg);transform:translatex(0)translatey(0)rotate(-45deg);opacity:1}100%{-webkit-transform:translatex(500px)translatey(500px)rotate(-45deg);-moz-transform:translatex(500px)translatey(500px)rotate(-45deg);-o-transform:translatex(500px)translatey(500px)rotate(-45deg);transform:translatex(500px)translatey(500px)rotate(-45deg);opacity:0}}@-webkit-keyframes fog{0%{-webkit-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}50%{-webkit-transform:translatex(50px)translatey(-20px);transform:translatex(50px)translatey(-20px);opacity:.2}100%{-webkit-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}}@-moz-keyframes fog{0%{-moz-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}50%{-moz-transform:translatex(50px)translatey(-20px);transform:translatex(50px)translatey(-20px);opacity:.2}100%{-moz-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}}@-o-keyframes fog{0%{-o-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}50%{-o-transform:translatex(50px)translatey(-20px);transform:translatex(50px)translatey(-20px);opacity:.2}100%{-o-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}}@keyframes fog{0%{-webkit-transform:translatex(0)translatey(0);-moz-transform:translatex(0)translatey(0);-o-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}50%{-webkit-transform:translatex(50px)translatey(-20px);-moz-transform:translatex(50px)translatey(-20px);-o-transform:translatex(50px)translatey(-20px);transform:translatex(50px)translatey(-20px);opacity:.2}100%{-webkit-transform:translatex(0)translatey(0);-moz-transform:translatex(0)translatey(0);-o-transform:translatex(0)translatey(0);transform:translatex(0)translatey(0);opacity:.1}}',
+            }),
+          ],
+        });
+      }
+      var g = a('(ssr)/./src/app/components/TarotCard.jsx');
+      let u = (0, l.ZP)(s.Z)(({ theme: t }) => ({
+          perspective: '1000px',
+          width: '100%',
+          height: '100%',
+        })),
+        x = (0, l.ZP)(s.Z)(({ theme: t, isFlipped: e }) => ({
+          position: 'relative',
+          width: '100%',
+          height: '100%',
+          transition: 'transform 0.8s',
+          transformStyle: 'preserve-3d',
+          transform: e ? 'rotateY(180deg)' : 'rotateY(0)',
+        })),
+        f = (0, l.ZP)(s.Z)(({ theme: t, isFront: e }) => ({
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          backfaceVisibility: 'hidden',
+          transform: e ? 'rotateY(0)' : 'rotateY(180deg)',
+        }));
+      function b({
+        front: t,
+        back: e,
+        frontVariant: a = 'primary',
+        backVariant: o = 'secondary',
+        frontTitle: n,
+        backTitle: s,
+        autoFlip: l = !1,
+        autoFlipDelay: p = 3e3,
+        manualFlip: d = !0,
+        onFlip: m,
+        sx: c = {},
+      }) {
+        let [y, b] = (0, i.useState)(!1);
+        (0, i.useState)(() => {
+          if (l) {
+            let t = setTimeout(() => {
+              h();
+            }, p);
+            return () => clearTimeout(t);
+          }
+        }, [l, p]);
+        let h = () => {
+          d && (b(t => !t), m && m(!y));
+        };
+        return r.jsx(u, {
+          onClick: h,
+          sx: { cursor: d ? 'pointer' : 'default', ...c },
+          children: (0, r.jsxs)(x, {
+            isFlipped: y,
+            children: [
+              r.jsx(f, {
+                isFront: !0,
+                children: r.jsx(g.Z, { variant: a, title: n, children: t }),
+              }),
+              r.jsx(f, { children: r.jsx(g.Z, { variant: o, title: s, children: e }) }),
+            ],
+          }),
+        });
+      }
+      var h = a('(ssr)/./node_modules/@mui/material/Typography/Typography.js');
+      (0, l.ZP)(s.Z)(({ theme: t, size: e }) => ({
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: t.spacing(2),
+        width: 'small' === e ? 100 : 'medium' === e ? 150 : 200,
+        height: 'small' === e ? 100 : 'medium' === e ? 150 : 200,
+        position: 'relative',
+      })),
+        (0, l.ZP)(s.Z)(({ theme: t, size: e }) => ({
+          position: 'absolute',
+          width: '100%',
+          height: '100%',
+          borderRadius: '50%',
+          border: `2px solid ${t.palette.primary.main}30`,
+          animation: 'rotate 10s linear infinite',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: '-5px',
+            left: '50%',
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            background: t.palette.primary.main,
+            boxShadow: `0 0 10px ${t.palette.primary.main}, 0 0 20px ${t.palette.primary.main}`,
+          },
+        })),
+        (0, l.ZP)(s.Z)(({ theme: t, size: e }) => ({
+          position: 'absolute',
+          width: '80%',
+          height: '80%',
+          borderRadius: '50%',
+          border: `2px solid ${t.palette.secondary.main}30`,
+          animation: 'rotate 7s linear infinite reverse',
+          '&::before': {
+            content: '""',
+            position: 'absolute',
+            top: '-5px',
+            left: '50%',
+            width: '10px',
+            height: '10px',
+            borderRadius: '50%',
+            background: t.palette.secondary.main,
+            boxShadow: `0 0 10px ${t.palette.secondary.main}, 0 0 20px ${t.palette.secondary.main}`,
+          },
+        })),
+        (0, l.ZP)(s.Z)(({ theme: t }) => ({
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '50%',
+          height: '50%',
+          borderRadius: '50%',
+          background: t.palette.background.paper,
+          boxShadow: '0 0 20px rgba(0, 0, 0, 0.2)',
+          zIndex: 1,
+          animation: 'pulse 2s ease-in-out infinite',
+          '& svg': { fontSize: '2rem', color: t.palette.primary.main },
+        })),
+        (0, l.ZP)(h.Z)(({ theme: t }) => ({
+          marginTop: t.spacing(2),
+          fontFamily: t.typography.fontFamily.secondary,
+          fontWeight: t.typography.fontWeight.medium,
+          color: t.palette.text.secondary,
+          textAlign: 'center',
+        }));
+      var k = a('(ssr)/./node_modules/@mui/material/CircularProgress/CircularProgress.js');
+      (0, l.ZP)(s.Z)(({ theme: t, size: e, variant: a }) => ({
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        width: 'small' === e ? 60 : 'medium' === e ? 100 : 140,
+        height: 'small' === e ? 60 : 'medium' === e ? 100 : 140,
+      })),
+        (0, l.ZP)(k.Z)(({ theme: t, variant: e, size: a }) => ({
+          color:
+            'primary' === e
+              ? t.palette.primary.main
+              : 'secondary' === e
+                ? t.palette.secondary.main
+                : t.palette.primary.main,
+          ...('mystical' === e && { filter: `drop-shadow(0 0 5px ${t.palette.primary.main})` }),
+        })),
+        (0, l.ZP)(k.Z)(({ theme: t, variant: e, size: a }) => ({
+          position: 'absolute',
+          color:
+            'primary' === e
+              ? t.palette.primary.light
+              : 'secondary' === e
+                ? t.palette.secondary.light
+                : t.palette.secondary.main,
+          ...('mystical' === e && { filter: `drop-shadow(0 0 5px ${t.palette.secondary.main})` }),
+        })),
+        (0, l.ZP)(s.Z)(({ theme: t, variant: e }) => ({
+          position: 'absolute',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '50%',
+          backgroundColor: t.palette.background.paper,
+          boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
+          padding: t.spacing(1),
+          ...('primary' === e && { color: t.palette.primary.main }),
+          ...('secondary' === e && { color: t.palette.secondary.main }),
+          ...('mystical' === e && {
+            background: `linear-gradient(135deg, ${t.palette.background.paper}, ${t.palette.background.default})`,
+            color: t.palette.secondary.main,
+            animation: 'pulse 2s infinite ease-in-out',
+          }),
+        })),
+        (0, l.ZP)(h.Z)(({ theme: t, variant: e }) => ({
+          marginTop: t.spacing(2),
+          fontFamily: t.typography.fontFamily.secondary,
+          fontWeight: t.typography.fontWeight.medium,
+          textAlign: 'center',
+          ...('primary' === e && { color: t.palette.primary.main }),
+          ...('secondary' === e && { color: t.palette.secondary.main }),
+          ...('mystical' === e && {
+            color: t.palette.text.primary,
+            textShadow: `0 0 5px ${t.palette.primary.main}40`,
+          }),
+        })),
+        (0, l.ZP)(s.Z)(({ theme: t, index: e }) => ({
+          position: 'absolute',
+          width: 6,
+          height: 6,
+          borderRadius: '50%',
+          backgroundColor: t.palette.secondary.main,
+          boxShadow: `0 0 5px ${t.palette.secondary.main}`,
+          animation: `twinkle 1.5s infinite ease-in-out ${0.3 * e}s`,
+          top: `${20 + 60 * Math.random()}%`,
+          left: `${20 + 60 * Math.random()}%`,
+          transform: 'translate(-50%, -50%)',
+        }));
+      var w = a('(ssr)/./node_modules/@mui/material/Stepper/Stepper.js'),
+        j = a('(ssr)/./node_modules/@mui/material/StepConnector/StepConnector.js'),
+        Z = a('(ssr)/./node_modules/@mui/material/StepLabel/StepLabel.js');
+      (0, l.ZP)(s.Z)(({ theme: t }) => ({ width: '100%', padding: t.spacing(2, 0) })),
+        (0, l.ZP)(w.Z)(({ theme: t, variant: e }) => ({
+          '& .MuiStepConnector-line': { minHeight: 12 },
+        })),
+        (0, l.ZP)(j.Z)(({ theme: t, variant: e }) => ({
+          '& .MuiStepConnector-line': {
+            height: 2,
+            border: 0,
+            backgroundColor: t.palette.divider,
+            borderRadius: 1,
+          },
+          '&.Mui-active, &.Mui-completed': {
+            '& .MuiStepConnector-line': {
+              ...('primary' === e && { backgroundColor: t.palette.primary.main }),
+              ...('secondary' === e && { backgroundColor: t.palette.secondary.main }),
+              ...('mystical' === e && {
+                background: `linear-gradient(90deg, ${t.palette.primary.main}, ${t.palette.secondary.main})`,
+                boxShadow: `0 0 8px ${t.palette.primary.main}80`,
+              }),
+            },
+          },
+        })),
+        (0, l.ZP)('div')(({ theme: t, variant: e, active: a, completed: r }) => ({
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: 32,
+          height: 32,
+          borderRadius: '50%',
+          transition: `all ${t.transitions.duration.standard}ms ${t.transitions.easing.easeInOut}`,
+          ...(r && {
+            ...('primary' === e && {
+              backgroundColor: t.palette.primary.main,
+              color: t.palette.primary.contrastText,
+              boxShadow: `0 0 8px ${t.palette.primary.main}80`,
+            }),
+            ...('secondary' === e && {
+              backgroundColor: t.palette.secondary.main,
+              color: t.palette.secondary.contrastText,
+              boxShadow: `0 0 8px ${t.palette.secondary.main}80`,
+            }),
+            ...('mystical' === e && {
+              background: `linear-gradient(135deg, ${t.palette.primary.main}, ${t.palette.secondary.main})`,
+              color: t.palette.common.white,
+              boxShadow: `0 0 10px ${t.palette.primary.main}80`,
+            }),
+          }),
+          ...(a &&
+            !r && {
+              ...('primary' === e && {
+                backgroundColor: t.palette.primary.light,
+                color: t.palette.primary.contrastText,
+                boxShadow: `0 0 8px ${t.palette.primary.light}80`,
+              }),
+              ...('secondary' === e && {
+                backgroundColor: t.palette.secondary.light,
+                color: t.palette.secondary.contrastText,
+                boxShadow: `0 0 8px ${t.palette.secondary.light}80`,
+              }),
+              ...('mystical' === e && {
+                background: `linear-gradient(135deg, ${t.palette.primary.light}, ${t.palette.secondary.light})`,
+                color: t.palette.common.white,
+                boxShadow: `0 0 10px ${t.palette.primary.light}80`,
+                animation: 'pulse 2s infinite ease-in-out',
+              }),
+            }),
+          ...(!a &&
+            !r && {
+              backgroundColor: t.palette.background.paper,
+              color: t.palette.text.secondary,
+              border: `1px solid ${t.palette.divider}`,
+            }),
+        })),
+        (0, l.ZP)(Z.Z)(({ theme: t, variant: e, active: a, completed: r }) => ({
+          '& .MuiStepLabel-label': {
+            marginTop: t.spacing(1),
+            fontFamily: t.typography.fontFamily.secondary,
+            ...(r && {
+              color: 'mystical' === e ? t.palette.secondary.main : t.palette.primary.main,
+              fontWeight: t.typography.fontWeight.medium,
+            }),
+            ...(a &&
+              !r && {
+                color: 'mystical' === e ? t.palette.secondary.main : t.palette.primary.main,
+                fontWeight: t.typography.fontWeight.bold,
+              }),
+          },
+        }));
+      var $ = a('(ssr)/./node_modules/@mui/material/IconButton/IconButton.js'),
+        v = a('(ssr)/./node_modules/@mui/material/Tooltip/Tooltip.js'),
+        S = a('(ssr)/./node_modules/@mui/icons-material/ArrowBack.js'),
+        C = a('(ssr)/./node_modules/@mui/icons-material/ArrowForward.js'),
+        F = a('(ssr)/./src/app/components/MysticalButton.jsx');
+      let P = (0, l.ZP)(s.Z)(({ theme: t, variant: e, position: a }) => ({
+          display: 'flex',
+          justifyContent:
+            'between' === a ? 'space-between' : 'center' === a ? 'center' : 'flex-start',
+          alignItems: 'center',
+          width: '100%',
+          gap: t.spacing(2),
+        })),
+        z = (0, l.ZP)($.Z)(({ theme: t, variant: e }) => ({
+          borderRadius: '50%',
+          transition: `all ${t.transitions.duration.standard}ms ${t.transitions.easing.easeInOut}`,
+          ...('primary' === e && {
+            color: t.palette.primary.main,
+            '&:hover': { backgroundColor: `${t.palette.primary.main}20` },
+          }),
+          ...('secondary' === e && {
+            color: t.palette.secondary.main,
+            '&:hover': { backgroundColor: `${t.palette.secondary.main}20` },
+          }),
+          ...('mystical' === e && {
+            color: t.palette.primary.main,
+            '&:hover': {
+              backgroundColor: `${t.palette.primary.main}20`,
+              boxShadow: `0 0 10px ${t.palette.primary.main}40`,
+            },
+          }),
+          '&.Mui-disabled': { opacity: 0.5, color: t.palette.text.disabled },
+        })),
+        R = (0, i.forwardRef)(function (t, e) {
+          let {
+            variant: a = 'primary',
+            position: o = 'between',
+            type: n = 'button',
+            prevLabel: i = '이전',
+            nextLabel: l = '다음',
+            showPrev: p = !0,
+            showNext: d = !0,
+            disablePrev: m = !1,
+            disableNext: c = !1,
+            prevTooltip: y,
+            nextTooltip: g,
+            onPrev: u,
+            onNext: x,
+            sx: f = {},
+            ...b
+          } = t;
+          return r.jsx(P, {
+            ref: e,
+            variant: a,
+            position: o,
+            sx: f,
+            ...b,
+            children:
+              'button' === n
+                ? (0, r.jsxs)(r.Fragment, {
+                    children: [
+                      p &&
+                        r.jsx(v.Z, {
+                          title: y || '',
+                          arrow: !!y,
+                          children: r.jsx('span', {
+                            children: r.jsx(F.Z, {
+                              variant: 'mystical' === a ? 'tarot' : 'outlined',
+                              onClick: u,
+                              disabled: m,
+                              startIcon: r.jsx(S.Z, {}),
+                              'aria-label': i,
+                              children: i,
+                            }),
+                          }),
+                        }),
+                      !p && 'between' === o && r.jsx(s.Z, {}),
+                      d &&
+                        r.jsx(v.Z, {
+                          title: g || '',
+                          arrow: !!g,
+                          children: r.jsx('span', {
+                            children: r.jsx(F.Z, {
+                              variant: 'mystical' === a ? 'mystical' : 'contained',
+                              onClick: x,
+                              disabled: c,
+                              endIcon: r.jsx(C.Z, {}),
+                              'aria-label': l,
+                              children: l,
+                            }),
+                          }),
+                        }),
+                    ],
+                  })
+                : (0, r.jsxs)(r.Fragment, {
+                    children: [
+                      p &&
+                        r.jsx(v.Z, {
+                          title: y || i,
+                          arrow: !0,
+                          children: r.jsx('span', {
+                            children: r.jsx(z, {
+                              variant: a,
+                              onClick: u,
+                              disabled: m,
+                              'aria-label': i,
+                              size: 'large',
+                              children: r.jsx(S.Z, {}),
+                            }),
+                          }),
+                        }),
+                      !p && 'between' === o && r.jsx(s.Z, {}),
+                      d &&
+                        r.jsx(v.Z, {
+                          title: g || l,
+                          arrow: !0,
+                          children: r.jsx('span', {
+                            children: r.jsx(z, {
+                              variant: a,
+                              onClick: x,
+                              disabled: c,
+                              'aria-label': l,
+                              size: 'large',
+                              children: r.jsx(C.Z, {}),
+                            }),
+                          }),
+                        }),
+                    ],
+                  }),
+          });
+        });
+      var T = a('(ssr)/./src/app/components/animations.jsx');
+      let _ = (0, l.ZP)(s.Z)(({ theme: t, align: e }) => ({
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center' === e ? 'center' : 'right' === e ? 'flex-end' : 'flex-start',
+          marginBottom: t.spacing(4),
+          position: 'relative',
+        })),
+        I = (0, l.ZP)(h.Z)(({ theme: t, color: e, hasGradient: a }) => ({
+          fontFamily: '"Playfair Display", "Noto Serif KR", serif',
+          fontWeight: 700,
+          fontSize: '2.5rem',
+          marginBottom: t.spacing(1),
+          position: 'relative',
+          display: 'inline-block',
+          color: a ? 'transparent' : e || t.palette.primary.main,
+          ...(a && {
+            background: `linear-gradient(135deg, ${t.palette.primary.main} 0%, ${t.palette.secondary.main} 100%)`,
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }),
+          textShadow: '0 2px 10px rgba(0, 0, 0, 0.2)',
+          [t.breakpoints.down('md')]: { fontSize: '2rem' },
+        })),
+        B = (0, l.ZP)(h.Z)(({ theme: t, color: e }) => ({
+          fontFamily:
+            '"Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+          fontWeight: 500,
+          fontSize: '1.2rem',
+          color: e || t.palette.text.secondary,
+          [t.breakpoints.down('md')]: { fontSize: '1rem' },
+        })),
+        W = (0, l.ZP)(s.Z)(({ theme: t, align: e }) => ({
+          width: '80px',
+          height: '3px',
+          background: `linear-gradient(to right, ${t.palette.primary.main}, ${t.palette.secondary.main})`,
+          borderRadius: '3px',
+          marginTop: t.spacing(2),
+          marginBottom: t.spacing(2),
+          alignSelf: 'center' === e ? 'center' : 'right' === e ? 'flex-end' : 'flex-start',
+        }));
+      function A({
+        title: t,
+        subtitle: e,
+        align: a = 'left',
+        titleColor: o,
+        subtitleColor: n,
+        hasDecoration: i = !0,
+        hasGradient: s = !1,
+        animation: l = 'fadeIn',
+        onScroll: p = !1,
+        sx: d = {},
+      }) {
+        return r.jsx(T.F, {
+          animation: l,
+          duration: 'normal',
+          onScroll: p,
+          children: (0, r.jsxs)(_, {
+            align: a,
+            sx: d,
+            children: [
+              r.jsx(I, { variant: 'h2', color: o, hasGradient: s, align: a, children: t }),
+              i && r.jsx(W, { align: a }),
+              e && r.jsx(B, { variant: 'subtitle1', color: n, align: a, children: e }),
+            ],
+          }),
+        });
+      }
+      (0, l.ZP)(s.Z)(({ theme: t, isTyping: e, cursorColor: a }) => ({
+        display: 'inline-block',
+        position: 'relative',
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          right: '-4px',
+          top: '0',
+          height: '100%',
+          width: '2px',
+          backgroundColor: a || t.palette.primary.main,
+          animation: e ? 'none' : 'blink 1s step-end infinite',
+        },
+        '@keyframes blink': { '0%': { opacity: 1 }, '50%': { opacity: 0 }, '100%': { opacity: 1 } },
+      }));
+      var D = a('(ssr)/./src/app/components/layout/index.js');
+      let M = (0, l.ZP)(s.Z)(({ theme: t, variant: e }) => {
+        let a = { position: 'relative', padding: t.spacing(8, 0), overflow: 'hidden' };
+        return 'dark' === e
+          ? { ...a, background: t.palette.background.default, color: t.palette.common.white }
+          : 'light' === e
+            ? { ...a, background: t.palette.background.paper, color: t.palette.text.primary }
+            : 'primary' === e
+              ? {
+                  ...a,
+                  background: `linear-gradient(135deg, ${t.palette.primary.dark}80 0%, ${t.palette.primary.main}40 100%)`,
+                  color: t.palette.common.white,
+                }
+              : 'secondary' === e
+                ? {
+                    ...a,
+                    background: `linear-gradient(135deg, ${t.palette.secondary.dark}80 0%, ${t.palette.secondary.main}40 100%)`,
+                    color: t.palette.common.white,
+                  }
+                : 'mystical' === e
+                  ? {
+                      ...a,
+                      background: `linear-gradient(135deg, ${t.palette.primary.dark}80 0%, ${t.palette.secondary.dark}80 100%)`,
+                      color: t.palette.common.white,
+                    }
+                  : { ...a, background: 'transparent' };
+      });
+      function Y({
+        children: t,
+        variant: e = 'default',
+        hasStars: a = !1,
+        starCount: o = 30,
+        fullWidth: n = !1,
+        fullHeight: i = !1,
+        centered: s = !1,
+        maxWidth: l = 'lg',
+        sx: p = {},
+        containerSx: d = {},
+        ...m
+      }) {
+        return (0, r.jsxs)(M, {
+          variant: e,
+          sx: p,
+          ...m,
+          children: [
+            a && r.jsx(y, { starCount: o, shootingStarCount: 2, fogCount: 3 }),
+            r.jsx(D.$0, {
+              fullWidth: n,
+              fullHeight: i,
+              centered: s,
+              maxWidth: l,
+              sx: d,
+              children: t,
+            }),
+          ],
+        });
+      }
+      let E = (0, l.ZP)(h.Z)(
+          ({
+            theme: t,
+            variant: e,
+            textVariant: a,
+            color: r,
+            hasGradient: o,
+            hasGlow: n,
+            hasShadow: i,
+          }) => ({
+            position: 'relative',
+            fontFamily:
+              'mystical' === a
+                ? t.typography.fontFamily?.secondary || 'Cinzel, serif'
+                : t.typography.fontFamily?.primary || 'Raleway, sans-serif',
+            ...(o && {
+              background: `linear-gradient(135deg, ${t.palette.primary.main} 0%, ${t.palette.secondary.main} 100%)`,
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textFillColor: 'transparent',
+            }),
+            ...(n && {
+              textShadow: `0 0 5px ${r || t.palette.primary.main}40, 0 0 10px ${r || t.palette.primary.main}30`,
+            }),
+            ...(i && { textShadow: '2px 2px 4px rgba(0, 0, 0, 0.3)' }),
+            ...('mystical' === a && {
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                bottom: -4,
+                left: 0,
+                width: '2em',
+                height: 2,
+                background: `linear-gradient(90deg, ${t.palette.primary.main}, transparent)`,
+              },
+            }),
+            ...('tarot' === a && {
+              fontFamily: t.typography.fontFamily
+                ? t.typography.fontFamily.secondary
+                : 'Cinzel, serif',
+              fontWeight: 500,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+            }),
+            ...('quote' === a && {
+              fontStyle: 'italic',
+              borderLeft: `3px solid ${t.palette.primary.main}`,
+              paddingLeft: t.spacing(2),
+              margin: t.spacing(2, 0),
+              '&::before': {
+                content: '"\\201C"',
+                fontFamily: 'serif',
+                fontSize: '1.5em',
+                color: t.palette.primary.main,
+                marginRight: '0.2em',
+              },
+              '&::after': {
+                content: '"\\201D"',
+                fontFamily: 'serif',
+                fontSize: '1.5em',
+                color: t.palette.primary.main,
+                marginLeft: '0.2em',
+              },
+            }),
+          })
+        ),
+        L = (0, i.forwardRef)(function (t, e) {
+          let {
+            children: a,
+            variant: o = 'body1',
+            textVariant: n,
+            color: i,
+            hasGradient: s = !1,
+            hasGlow: l = !1,
+            hasShadow: p = !1,
+            sx: d = {},
+            ...m
+          } = t;
+          return r.jsx(E, {
+            ref: e,
+            variant: o,
+            textVariant: n,
+            color: i,
+            hasGradient: s,
+            hasGlow: l,
+            hasShadow: p,
+            sx: d,
+            ...m,
+            children: a,
+          });
+        });
+    },
+  });

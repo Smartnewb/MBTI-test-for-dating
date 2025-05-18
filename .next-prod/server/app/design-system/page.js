@@ -1,0 +1,1167 @@
+(() => {
+  var e = {};
+  (e.id = 7),
+    (e.ids = [7]),
+    (e.modules = {
+      '../../client/components/action-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/action-async-storage.external.js');
+      },
+      '../../client/components/request-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/request-async-storage.external.js');
+      },
+      '../../client/components/static-generation-async-storage.external': e => {
+        'use strict';
+        e.exports = require('next/dist/client/components/static-generation-async-storage.external.js');
+      },
+      'next/dist/compiled/next-server/app-page.runtime.prod.js': e => {
+        'use strict';
+        e.exports = require('next/dist/compiled/next-server/app-page.runtime.prod.js');
+      },
+      buffer: e => {
+        'use strict';
+        e.exports = require('buffer');
+      },
+      crypto: e => {
+        'use strict';
+        e.exports = require('crypto');
+      },
+      events: e => {
+        'use strict';
+        e.exports = require('events');
+      },
+      http: e => {
+        'use strict';
+        e.exports = require('http');
+      },
+      https: e => {
+        'use strict';
+        e.exports = require('https');
+      },
+      net: e => {
+        'use strict';
+        e.exports = require('net');
+      },
+      punycode: e => {
+        'use strict';
+        e.exports = require('punycode');
+      },
+      stream: e => {
+        'use strict';
+        e.exports = require('stream');
+      },
+      tls: e => {
+        'use strict';
+        e.exports = require('tls');
+      },
+      url: e => {
+        'use strict';
+        e.exports = require('url');
+      },
+      zlib: e => {
+        'use strict';
+        e.exports = require('zlib');
+      },
+      '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Fdesign-system%2Fpage&name=app%2Fdesign-system%2Fpage&pagePath=private-next-app-dir%2Fdesign-system%2Fpage.jsx&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Fdesign-system%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!':
+        (e, s, t) => {
+          'use strict';
+          t.r(s),
+            t.d(s, {
+              GlobalError: () => n.a,
+              __next_app__: () => p,
+              originalPathname: () => m,
+              pages: () => u,
+              routeModule: () => c,
+              tree: () => l,
+            }),
+            t('(rsc)/./src/app/design-system/page.jsx'),
+            t('(rsc)/./src/app/layout.js'),
+            t('(rsc)/./node_modules/next/dist/client/components/not-found-error.js');
+          var r = t(
+              '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/module.compiled.js?d969'
+            ),
+            o = t('(rsc)/./node_modules/next/dist/server/future/route-kind.js'),
+            i = t('(rsc)/./node_modules/next/dist/client/components/error-boundary.js'),
+            n = t.n(i),
+            a = t('(rsc)/./node_modules/next/dist/server/app-render/entry-base.js'),
+            d = {};
+          for (let e in a)
+            0 >
+              [
+                'default',
+                'tree',
+                'pages',
+                'GlobalError',
+                'originalPathname',
+                '__next_app__',
+                'routeModule',
+              ].indexOf(e) && (d[e] = () => a[e]);
+          t.d(s, d);
+          let l = [
+              '',
+              {
+                children: [
+                  'design-system',
+                  {
+                    children: [
+                      '__PAGE__',
+                      {},
+                      {
+                        page: [
+                          () =>
+                            Promise.resolve().then(
+                              t.bind(t, '(rsc)/./src/app/design-system/page.jsx')
+                            ),
+                          'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\design-system\\page.jsx',
+                        ],
+                      },
+                    ],
+                  },
+                  {},
+                ],
+              },
+              {
+                layout: [
+                  () => Promise.resolve().then(t.bind(t, '(rsc)/./src/app/layout.js')),
+                  'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\layout.js',
+                ],
+                'not-found': [
+                  () =>
+                    Promise.resolve().then(
+                      t.t.bind(
+                        t,
+                        '(rsc)/./node_modules/next/dist/client/components/not-found-error.js',
+                        23
+                      )
+                    ),
+                  'next/dist/client/components/not-found-error',
+                ],
+              },
+            ],
+            u = [
+              'C:\\Users\\전준영\\Documents\\augment-projects\\MBTI test for dating\\src\\app\\design-system\\page.jsx',
+            ],
+            m = '/design-system/page',
+            p = { require: t, loadChunk: () => Promise.resolve() },
+            c = new r.AppPageRouteModule({
+              definition: {
+                kind: o.x.APP_PAGE,
+                page: '/design-system/page',
+                pathname: '/design-system',
+                bundlePath: '',
+                filename: '',
+                appPaths: [],
+              },
+              userland: { loaderTree: l },
+            });
+        },
+      '(ssr)/./node_modules/next/dist/build/webpack/loaders/next-flight-client-entry-loader.js?modules=%7B%22request%22%3A%22C%3A%5C%5CUsers%5C%5C%EC%A0%84%EC%A4%80%EC%98%81%5C%5CDocuments%5C%5Caugment-projects%5C%5CMBTI%20test%20for%20dating%5C%5Csrc%5C%5Capp%5C%5Cdesign-system%5C%5Cpage.jsx%22%2C%22ids%22%3A%5B%5D%7D&server=true!':
+        (e, s, t) => {
+          Promise.resolve().then(t.bind(t, '(ssr)/./src/app/design-system/page.jsx'));
+        },
+      '(ssr)/./node_modules/@mui/icons-material/Animation.js': (e, s, t) => {
+        'use strict';
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/interopRequireDefault.js');
+        s.Z = void 0;
+        var o = r(t('(ssr)/./node_modules/@mui/icons-material/utils/createSvgIcon.js')),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          );
+        s.Z = (0, o.default)(
+          (0, i.jsx)('path', {
+            d: 'M15 2c-2.71 0-5.05 1.54-6.22 3.78-1.28.67-2.34 1.72-3 3C3.54 9.95 2 12.29 2 15c0 3.87 3.13 7 7 7 2.71 0 5.05-1.54 6.22-3.78 1.28-.67 2.34-1.72 3-3C20.46 14.05 22 11.71 22 9c0-3.87-3.13-7-7-7M9 20c-2.76 0-5-2.24-5-5 0-1.12.37-2.16 1-3 0 3.87 3.13 7 7 7-.84.63-1.88 1-3 1m3-3c-2.76 0-5-2.24-5-5 0-1.12.37-2.16 1-3 0 3.86 3.13 6.99 7 7-.84.63-1.88 1-3 1m4.7-3.3c-.53.19-1.1.3-1.7.3-2.76 0-5-2.24-5-5 0-.6.11-1.17.3-1.7.53-.19 1.1-.3 1.7-.3 2.76 0 5 2.24 5 5 0 .6-.11 1.17-.3 1.7M19 12c0-3.86-3.13-6.99-7-7 .84-.63 1.87-1 3-1 2.76 0 5 2.24 5 5 0 1.12-.37 2.16-1 3',
+          }),
+          'Animation'
+        );
+      },
+      '(ssr)/./node_modules/@mui/icons-material/ColorLens.js': (e, s, t) => {
+        'use strict';
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/interopRequireDefault.js');
+        s.Z = void 0;
+        var o = r(t('(ssr)/./node_modules/@mui/icons-material/utils/createSvgIcon.js')),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          );
+        s.Z = (0, o.default)(
+          (0, i.jsx)('path', {
+            d: 'M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8m-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12m3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8m5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8m3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5',
+          }),
+          'ColorLens'
+        );
+      },
+      '(ssr)/./node_modules/@mui/icons-material/GridView.js': (e, s, t) => {
+        'use strict';
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/interopRequireDefault.js');
+        s.Z = void 0;
+        var o = r(t('(ssr)/./node_modules/@mui/icons-material/utils/createSvgIcon.js')),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          );
+        s.Z = (0, o.default)(
+          (0, i.jsx)('path', {
+            fillRule: 'evenodd',
+            d: 'M3 3v8h8V3zm6 6H5V5h4zm-6 4v8h8v-8zm6 6H5v-4h4zm4-16v8h8V3zm6 6h-4V5h4zm-6 4v8h8v-8zm6 6h-4v-4h4z',
+          }),
+          'GridView'
+        );
+      },
+      '(ssr)/./node_modules/@mui/icons-material/TextFormat.js': (e, s, t) => {
+        'use strict';
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/interopRequireDefault.js');
+        s.Z = void 0;
+        var o = r(t('(ssr)/./node_modules/@mui/icons-material/utils/createSvgIcon.js')),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          );
+        s.Z = (0, o.default)(
+          (0, i.jsx)('path', {
+            d: 'M5 17v2h14v-2zm4.5-4.2h5l.9 2.2h2.1L12.75 4h-1.5L6.5 15h2.1zM12 5.98 13.87 11h-3.74z',
+          }),
+          'TextFormat'
+        );
+      },
+      '(ssr)/./node_modules/@mui/icons-material/Widgets.js': (e, s, t) => {
+        'use strict';
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/interopRequireDefault.js');
+        s.Z = void 0;
+        var o = r(t('(ssr)/./node_modules/@mui/icons-material/utils/createSvgIcon.js')),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          );
+        s.Z = (0, o.default)(
+          (0, i.jsx)('path', {
+            d: 'M13 13v8h8v-8zM3 21h8v-8H3zM3 3v8h8V3zm13.66-1.31L11 7.34 16.66 13l5.66-5.66z',
+          }),
+          'Widgets'
+        );
+      },
+      '(ssr)/./node_modules/@mui/material/CardContent/CardContent.js': (e, s, t) => {
+        'use strict';
+        t.d(s, { Z: () => j });
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/extends.js'),
+          o = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          n = t('(ssr)/./node_modules/clsx/dist/clsx.mjs'),
+          a = t('(ssr)/./node_modules/@mui/utils/esm/composeClasses/composeClasses.js'),
+          d = t('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          l = t('(ssr)/./node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.js'),
+          u = t(
+            '(ssr)/./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js'
+          ),
+          m = t('(ssr)/./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js');
+        function p(e) {
+          return (0, m.ZP)('MuiCardContent', e);
+        }
+        (0, u.Z)('MuiCardContent', ['root']);
+        var c = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        );
+        let x = ['className', 'component'],
+          g = e => {
+            let { classes: s } = e;
+            return (0, a.Z)({ root: ['root'] }, p, s);
+          },
+          h = (0, d.ZP)('div', {
+            name: 'MuiCardContent',
+            slot: 'Root',
+            overridesResolver: (e, s) => s.root,
+          })(() => ({ padding: 16, '&:last-child': { paddingBottom: 24 } })),
+          j = i.forwardRef(function (e, s) {
+            let t = (0, l.i)({ props: e, name: 'MuiCardContent' }),
+              { className: i, component: a = 'div' } = t,
+              d = (0, o.Z)(t, x),
+              u = (0, r.Z)({}, t, { component: a }),
+              m = g(u);
+            return (0, c.jsx)(
+              h,
+              (0, r.Z)({ as: a, className: (0, n.Z)(m.root, i), ownerState: u, ref: s }, d)
+            );
+          });
+      },
+      '(ssr)/./node_modules/@mui/material/Card/Card.js': (e, s, t) => {
+        'use strict';
+        t.d(s, { Z: () => f });
+        var r = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/extends.js'),
+          o = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          n = t('(ssr)/./node_modules/clsx/dist/clsx.mjs'),
+          a = t('(ssr)/./node_modules/@mui/utils/esm/composeClasses/composeClasses.js'),
+          d = t('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          l = t('(ssr)/./node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.js'),
+          u = t('(ssr)/./node_modules/@mui/material/Paper/Paper.js'),
+          m = t(
+            '(ssr)/./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js'
+          ),
+          p = t('(ssr)/./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js');
+        function c(e) {
+          return (0, p.ZP)('MuiCard', e);
+        }
+        (0, m.Z)('MuiCard', ['root']);
+        var x = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        );
+        let g = ['className', 'raised'],
+          h = e => {
+            let { classes: s } = e;
+            return (0, a.Z)({ root: ['root'] }, c, s);
+          },
+          j = (0, d.ZP)(u.Z, {
+            name: 'MuiCard',
+            slot: 'Root',
+            overridesResolver: (e, s) => s.root,
+          })(() => ({ overflow: 'hidden' })),
+          f = i.forwardRef(function (e, s) {
+            let t = (0, l.i)({ props: e, name: 'MuiCard' }),
+              { className: i, raised: a = !1 } = t,
+              d = (0, o.Z)(t, g),
+              u = (0, r.Z)({}, t, { raised: a }),
+              m = h(u);
+            return (0, x.jsx)(
+              j,
+              (0, r.Z)(
+                {
+                  className: (0, n.Z)(m.root, i),
+                  elevation: a ? 8 : void 0,
+                  ref: s,
+                  ownerState: u,
+                },
+                d
+              )
+            );
+          });
+      },
+      '(ssr)/./node_modules/@mui/material/Container/Container.js': (e, s, t) => {
+        'use strict';
+        t.d(s, { Z: () => z });
+        var r = t(
+            '(ssr)/./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'
+          ),
+          o = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/extends.js'),
+          i = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          n = t('(ssr)/./node_modules/clsx/dist/clsx.mjs'),
+          a = t('(ssr)/./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js'),
+          d = t('(ssr)/./node_modules/@mui/utils/esm/composeClasses/composeClasses.js'),
+          l = t('(ssr)/./node_modules/@mui/utils/esm/capitalize/capitalize.js'),
+          u = t('(ssr)/./node_modules/@mui/system/esm/useThemeProps/getThemeProps.js'),
+          m = t('(ssr)/./node_modules/@mui/system/esm/useTheme.js'),
+          p = t('(ssr)/./node_modules/@mui/styled-engine/index.js'),
+          c = t('(ssr)/./node_modules/@mui/utils/esm/deepmerge/deepmerge.js'),
+          x = t('(ssr)/./node_modules/@mui/system/esm/createTheme/createTheme.js'),
+          g = t('(ssr)/./node_modules/@mui/system/esm/styleFunctionSx/styleFunctionSx.js');
+        let h = ['ownerState'],
+          j = ['variants'],
+          f = ['name', 'slot', 'skipVariantsResolver', 'skipSx', 'overridesResolver'];
+        function v(e) {
+          return 'ownerState' !== e && 'theme' !== e && 'sx' !== e && 'as' !== e;
+        }
+        let y = (0, x.Z)(),
+          C = e => (e ? e.charAt(0).toLowerCase() + e.slice(1) : e);
+        function b({ defaultTheme: e, theme: s, themeId: t }) {
+          return 0 === Object.keys(s).length ? e : s[t] || s;
+        }
+        function _(e, s) {
+          let { ownerState: t } = s,
+            i = (0, r.Z)(s, h),
+            n = 'function' == typeof e ? e((0, o.Z)({ ownerState: t }, i)) : e;
+          if (Array.isArray(n)) return n.flatMap(e => _(e, (0, o.Z)({ ownerState: t }, i)));
+          if (n && 'object' == typeof n && Array.isArray(n.variants)) {
+            let { variants: e = [] } = n,
+              s = (0, r.Z)(n, j);
+            return (
+              e.forEach(e => {
+                let r = !0;
+                'function' == typeof e.props
+                  ? (r = e.props((0, o.Z)({ ownerState: t }, i, t)))
+                  : Object.keys(e.props).forEach(s => {
+                      (null == t ? void 0 : t[s]) !== e.props[s] && i[s] !== e.props[s] && (r = !1);
+                    }),
+                  r &&
+                    (Array.isArray(s) || (s = [s]),
+                    s.push(
+                      'function' == typeof e.style
+                        ? e.style((0, o.Z)({ ownerState: t }, i, t))
+                        : e.style
+                    ));
+              }),
+              s
+            );
+          }
+          return n;
+        }
+        let Z = (function (e = {}) {
+          let {
+              themeId: s,
+              defaultTheme: t = y,
+              rootShouldForwardProp: i = v,
+              slotShouldForwardProp: n = v,
+            } = e,
+            a = e =>
+              (0, g.Z)(
+                (0, o.Z)({}, e, { theme: b((0, o.Z)({}, e, { defaultTheme: t, themeId: s })) })
+              );
+          return (
+            (a.__mui_systemSx = !0),
+            (e, d = {}) => {
+              var l;
+              let u;
+              (0, p.internal_processStyles)(e, e =>
+                e.filter(e => !(null != e && e.__mui_systemSx))
+              );
+              let {
+                  name: m,
+                  slot: x,
+                  skipVariantsResolver: g,
+                  skipSx: h,
+                  overridesResolver: j = (l = C(x)) ? (e, s) => s[l] : null,
+                } = d,
+                y = (0, r.Z)(d, f),
+                Z = void 0 !== g ? g : (x && 'Root' !== x && 'root' !== x) || !1,
+                P = h || !1,
+                w = v;
+              'Root' === x || 'root' === x
+                ? (w = i)
+                : x
+                  ? (w = n)
+                  : 'string' == typeof e && e.charCodeAt(0) > 96 && (w = void 0);
+              let R = (0, p.default)(e, (0, o.Z)({ shouldForwardProp: w, label: u }, y)),
+                S = e =>
+                  ('function' == typeof e && e.__emotion_real !== e) || (0, c.P)(e)
+                    ? r =>
+                        _(
+                          e,
+                          (0, o.Z)({}, r, {
+                            theme: b({ theme: r.theme, defaultTheme: t, themeId: s }),
+                          })
+                        )
+                    : e,
+                M = (r, ...i) => {
+                  let n = S(r),
+                    d = i ? i.map(S) : [];
+                  m &&
+                    j &&
+                    d.push(e => {
+                      let r = b((0, o.Z)({}, e, { defaultTheme: t, themeId: s }));
+                      if (!r.components || !r.components[m] || !r.components[m].styleOverrides)
+                        return null;
+                      let i = r.components[m].styleOverrides,
+                        n = {};
+                      return (
+                        Object.entries(i).forEach(([s, t]) => {
+                          n[s] = _(t, (0, o.Z)({}, e, { theme: r }));
+                        }),
+                        j(e, n)
+                      );
+                    }),
+                    m &&
+                      !Z &&
+                      d.push(e => {
+                        var r;
+                        let i = b((0, o.Z)({}, e, { defaultTheme: t, themeId: s }));
+                        return _(
+                          {
+                            variants:
+                              null == i || null == (r = i.components) || null == (r = r[m])
+                                ? void 0
+                                : r.variants,
+                          },
+                          (0, o.Z)({}, e, { theme: i })
+                        );
+                      }),
+                    P || d.push(a);
+                  let l = d.length - i.length;
+                  if (Array.isArray(r) && l > 0) {
+                    let e = Array(l).fill('');
+                    (n = [...r, ...e]).raw = [...r.raw, ...e];
+                  }
+                  let u = R(n, ...d);
+                  return e.muiName && (u.muiName = e.muiName), u;
+                };
+              return R.withConfig && (M.withConfig = R.withConfig), M;
+            }
+          );
+        })();
+        var P = t(
+          '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+        );
+        let w = ['className', 'component', 'disableGutters', 'fixed', 'maxWidth', 'classes'],
+          R = (0, x.Z)(),
+          S = Z('div', {
+            name: 'MuiContainer',
+            slot: 'Root',
+            overridesResolver: (e, s) => {
+              let { ownerState: t } = e;
+              return [
+                s.root,
+                s[`maxWidth${(0, l.Z)(String(t.maxWidth))}`],
+                t.fixed && s.fixed,
+                t.disableGutters && s.disableGutters,
+              ];
+            },
+          }),
+          M = e =>
+            (function ({ props: e, name: s, defaultTheme: t, themeId: r }) {
+              let o = (0, m.Z)(t);
+              return r && (o = o[r] || o), (0, u.Z)({ theme: o, name: s, props: e });
+            })({ props: e, name: 'MuiContainer', defaultTheme: R }),
+          A = (e, s) => {
+            let { classes: t, fixed: r, disableGutters: o, maxWidth: i } = e,
+              n = {
+                root: [
+                  'root',
+                  i && `maxWidth${(0, l.Z)(String(i))}`,
+                  r && 'fixed',
+                  o && 'disableGutters',
+                ],
+              };
+            return (0, d.Z)(n, e => (0, a.ZP)(s, e), t);
+          };
+        var k = t('(ssr)/./node_modules/@mui/material/utils/capitalize.js'),
+          F = t('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          E = t('(ssr)/./node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.js');
+        let z = (function (e = {}) {
+          let {
+              createStyledComponent: s = S,
+              useThemeProps: t = M,
+              componentName: a = 'MuiContainer',
+            } = e,
+            d = s(
+              ({ theme: e, ownerState: s }) =>
+                (0, o.Z)(
+                  {
+                    width: '100%',
+                    marginLeft: 'auto',
+                    boxSizing: 'border-box',
+                    marginRight: 'auto',
+                    display: 'block',
+                  },
+                  !s.disableGutters && {
+                    paddingLeft: e.spacing(2),
+                    paddingRight: e.spacing(2),
+                    [e.breakpoints.up('sm')]: {
+                      paddingLeft: e.spacing(3),
+                      paddingRight: e.spacing(3),
+                    },
+                  }
+                ),
+              ({ theme: e, ownerState: s }) =>
+                s.fixed &&
+                Object.keys(e.breakpoints.values).reduce((s, t) => {
+                  let r = e.breakpoints.values[t];
+                  return (
+                    0 !== r && (s[e.breakpoints.up(t)] = { maxWidth: `${r}${e.breakpoints.unit}` }),
+                    s
+                  );
+                }, {}),
+              ({ theme: e, ownerState: s }) =>
+                (0, o.Z)(
+                  {},
+                  'xs' === s.maxWidth && {
+                    [e.breakpoints.up('xs')]: { maxWidth: Math.max(e.breakpoints.values.xs, 444) },
+                  },
+                  s.maxWidth &&
+                    'xs' !== s.maxWidth && {
+                      [e.breakpoints.up(s.maxWidth)]: {
+                        maxWidth: `${e.breakpoints.values[s.maxWidth]}${e.breakpoints.unit}`,
+                      },
+                    }
+                )
+            );
+          return i.forwardRef(function (e, s) {
+            let i = t(e),
+              {
+                className: l,
+                component: u = 'div',
+                disableGutters: m = !1,
+                fixed: p = !1,
+                maxWidth: c = 'lg',
+              } = i,
+              x = (0, r.Z)(i, w),
+              g = (0, o.Z)({}, i, { component: u, disableGutters: m, fixed: p, maxWidth: c }),
+              h = A(g, a);
+            return (0, P.jsx)(
+              d,
+              (0, o.Z)({ as: u, ownerState: g, className: (0, n.Z)(h.root, l), ref: s }, x)
+            );
+          });
+        })({
+          createStyledComponent: (0, F.ZP)('div', {
+            name: 'MuiContainer',
+            slot: 'Root',
+            overridesResolver: (e, s) => {
+              let { ownerState: t } = e;
+              return [
+                s.root,
+                s[`maxWidth${(0, k.Z)(String(t.maxWidth))}`],
+                t.fixed && s.fixed,
+                t.disableGutters && s.disableGutters,
+              ];
+            },
+          }),
+          useThemeProps: e => (0, E.i)({ props: e, name: 'MuiContainer' }),
+        });
+      },
+      '(ssr)/./node_modules/next/dist/api/navigation.js': (e, s, t) => {
+        'use strict';
+        var r = t('(ssr)/./node_modules/next/dist/client/components/navigation.js');
+        t.o(r, 'useRouter') &&
+          t.d(s, {
+            useRouter: function () {
+              return r.useRouter;
+            },
+          }),
+          t.o(r, 'useSearchParams') &&
+            t.d(s, {
+              useSearchParams: function () {
+                return r.useSearchParams;
+              },
+            });
+      },
+      '(ssr)/./src/app/components/animations.jsx': (e, s, t) => {
+        'use strict';
+        t.d(s, { F: () => C, K: () => l });
+        var r = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          ),
+          o = t('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+          i = t('(ssr)/./node_modules/@emotion/react/dist/emotion-react.esm.js'),
+          n = t('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          a = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          );
+        let d = (0, n.ZP)(o.Z)(({ theme: e }) => ({ position: 'relative' })),
+          l = (0, a.forwardRef)(function (e, s) {
+            let {
+                animation: t = 'fadeIn',
+                duration: o = 'normal',
+                easing: i = 'easeInOut',
+                staggerDelay: n = 100,
+                initialDelay: l = 0,
+                onScroll: u = !1,
+                threshold: m = 0.2,
+                children: p,
+                sx: c = {},
+                ...x
+              } = e,
+              g = (0, a.useRef)(null),
+              h = s || g,
+              [j, f] = (0, a.useState)(!u);
+            (0, a.useEffect)(() => {}, [u, h, m]);
+            let v = a.Children.map(p, (e, s) =>
+              e && 'object' == typeof e
+                ? (0, a.cloneElement)(e, {
+                    animation: j ? t : null,
+                    duration: o,
+                    delay: l + s * n,
+                    easing: i,
+                    style: { ...e.props.style, opacity: j ? 1 : 0 },
+                  })
+                : e
+            );
+            return r.jsx(d, { ref: h, sx: c, ...x, children: v });
+          }),
+          u = { fast: 300, normal: 500, slow: 800, verySlow: 1200 },
+          m = (0, i.F4)`
+  0% {
+    transform: perspective(1200px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg);
+    opacity: 1;
+  }
+`,
+          p = (0, i.F4)`
+  0% {
+    transform: perspective(1200px) rotateY(90deg) scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: perspective(1200px) rotateY(45deg) scale(0.95);
+    opacity: 0.5;
+  }
+  100% {
+    transform: perspective(1200px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
+`,
+          c = (0, i.F4)`
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+`,
+          x = (0, i.F4)`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`,
+          g = (0, i.F4)`
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`,
+          h = (0, i.F4)`
+  0% {
+    transform: translateX(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`,
+          j = (0, i.F4)`
+  0% {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+`,
+          f = (0, i.F4)`
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+`,
+          v = (e, s) => {
+            let t = u[s] || u.normal;
+            switch (e) {
+              case 'tarotFlip':
+                return { animation: `${m} ${t}ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards` };
+              case 'tarotReveal':
+                return { animation: `${p} ${t}ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards` };
+              case 'shine':
+                return {
+                  position: 'relative',
+                  overflow: 'hidden',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    background:
+                      'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
+                    animation: `${c} ${2 * t}ms linear infinite`,
+                  },
+                };
+              case 'fadeIn':
+                return { animation: `${x} ${t}ms ease-in-out forwards` };
+              case 'slideUp':
+                return { animation: `${g} ${t}ms ease-out forwards` };
+              case 'slideRight':
+                return { animation: `${h} ${t}ms ease-out forwards` };
+              case 'slideLeft':
+                return { animation: `${j} ${t}ms ease-out forwards` };
+              case 'pulse':
+                return { animation: `${f} ${t}ms ease-in-out infinite` };
+              default:
+                return {};
+            }
+          },
+          y = (0, n.ZP)(o.Z)(({ theme: e, animation: s, duration: t, delay: r = 0 }) => ({
+            opacity: 0,
+            ...v(s, t),
+            animationDelay: `${r}ms`,
+          }));
+        function C({
+          children: e,
+          animation: s = 'fadeIn',
+          duration: t = 'normal',
+          delay: o = 0,
+          sx: i = {},
+          ...n
+        }) {
+          return r.jsx(y, { animation: s, duration: t, delay: o, sx: i, ...n, children: e });
+        }
+      },
+      '(ssr)/./src/app/design-system/page.jsx': (e, s, t) => {
+        'use strict';
+        t.r(s), t.d(s, { default: () => D });
+        var r = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react-jsx-runtime.js'
+          ),
+          o = t('(ssr)/./node_modules/@mui/material/Container/Container.js'),
+          i = t('(ssr)/./node_modules/@mui/material/Typography/Typography.js'),
+          n = t('(ssr)/./node_modules/@mui/material/Paper/Paper.js'),
+          a = t('(ssr)/./node_modules/@mui/material/Box/Box.js'),
+          d = t('(ssr)/./node_modules/@mui/material/Grid/Grid.js'),
+          l = t('(ssr)/./node_modules/@mui/material/Card/Card.js'),
+          u = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/extends.js'),
+          m = t('(ssr)/./node_modules/@babel/runtime/helpers/esm/objectWithoutPropertiesLoose.js'),
+          p = t(
+            '(ssr)/./node_modules/next/dist/server/future/route-modules/app-page/vendored/ssr/react.js'
+          ),
+          c = t('(ssr)/./node_modules/clsx/dist/clsx.mjs'),
+          x = t('(ssr)/./node_modules/@mui/utils/esm/composeClasses/composeClasses.js'),
+          g = t('(ssr)/./node_modules/@mui/material/DefaultPropsProvider/DefaultPropsProvider.js'),
+          h = t('(ssr)/./node_modules/@mui/material/styles/styled.js'),
+          j = t(
+            '(ssr)/./node_modules/@mui/utils/esm/generateUtilityClasses/generateUtilityClasses.js'
+          ),
+          f = t('(ssr)/./node_modules/@mui/utils/esm/generateUtilityClass/generateUtilityClass.js');
+        function v(e) {
+          return (0, f.ZP)('MuiCardActionArea', e);
+        }
+        let y = (0, j.Z)('MuiCardActionArea', ['root', 'focusVisible', 'focusHighlight']);
+        var C = t('(ssr)/./node_modules/@mui/material/ButtonBase/ButtonBase.js');
+        let b = ['children', 'className', 'focusVisibleClassName'],
+          _ = e => {
+            let { classes: s } = e;
+            return (0, x.Z)({ root: ['root'], focusHighlight: ['focusHighlight'] }, v, s);
+          },
+          Z = (0, h.ZP)(C.Z, {
+            name: 'MuiCardActionArea',
+            slot: 'Root',
+            overridesResolver: (e, s) => s.root,
+          })(({ theme: e }) => ({
+            display: 'block',
+            textAlign: 'inherit',
+            borderRadius: 'inherit',
+            width: '100%',
+            [`&:hover .${y.focusHighlight}`]: {
+              opacity: (e.vars || e).palette.action.hoverOpacity,
+              '@media (hover: none)': { opacity: 0 },
+            },
+            [`&.${y.focusVisible} .${y.focusHighlight}`]: {
+              opacity: (e.vars || e).palette.action.focusOpacity,
+            },
+          })),
+          P = (0, h.ZP)('span', {
+            name: 'MuiCardActionArea',
+            slot: 'FocusHighlight',
+            overridesResolver: (e, s) => s.focusHighlight,
+          })(({ theme: e }) => ({
+            overflow: 'hidden',
+            pointerEvents: 'none',
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            borderRadius: 'inherit',
+            opacity: 0,
+            backgroundColor: 'currentcolor',
+            transition: e.transitions.create('opacity', { duration: e.transitions.duration.short }),
+          })),
+          w = p.forwardRef(function (e, s) {
+            let t = (0, g.i)({ props: e, name: 'MuiCardActionArea' }),
+              { children: o, className: i, focusVisibleClassName: n } = t,
+              a = (0, m.Z)(t, b),
+              d = _(t);
+            return (0, r.jsxs)(
+              Z,
+              (0, u.Z)(
+                {
+                  className: (0, c.Z)(d.root, i),
+                  focusVisibleClassName: (0, c.Z)(n, d.focusVisible),
+                  ref: s,
+                  ownerState: t,
+                },
+                a,
+                { children: [o, (0, r.jsx)(P, { className: d.focusHighlight, ownerState: t })] }
+              )
+            );
+          });
+        var R = t('(ssr)/./node_modules/@mui/material/CardContent/CardContent.js'),
+          S = t('(ssr)/./node_modules/next/dist/api/navigation.js'),
+          M = t('(ssr)/./src/app/components/animations.jsx'),
+          A = t('(ssr)/./node_modules/@mui/icons-material/ColorLens.js'),
+          k = t('(ssr)/./node_modules/@mui/icons-material/TextFormat.js'),
+          F = t('(ssr)/./node_modules/@mui/icons-material/Widgets.js'),
+          E = t('(ssr)/./node_modules/@mui/icons-material/GridView.js'),
+          z = t('(ssr)/./node_modules/@mui/icons-material/Animation.js');
+        function D() {
+          let e = (0, S.useRouter)(),
+            s = [
+              {
+                title: '색상 시스템',
+                description: '달빛 연애 연구소의 색상 팔레트와 사용 가이드라인을 확인하세요.',
+                icon: r.jsx(A.Z, { fontSize: 'large' }),
+                path: '/design-system/colors',
+                color: 'primary.main',
+              },
+              {
+                title: '타이포그래피 시스템',
+                description: '폰트, 크기, 두께 등 텍스트 스타일 가이드라인을 확인하세요.',
+                icon: r.jsx(k.Z, { fontSize: 'large' }),
+                path: '/design-system/typography',
+                color: 'secondary.main',
+              },
+              {
+                title: '컴포넌트 시스템',
+                description: '버튼, 카드, 입력 필드 등 UI 컴포넌트를 확인하세요.',
+                icon: r.jsx(F.Z, { fontSize: 'large' }),
+                path: '/design-system/components',
+                color: 'primary.dark',
+              },
+              {
+                title: '레이아웃 시스템',
+                description: '그리드, 컨테이너, 섹션 등 레이아웃 컴포넌트를 확인하세요.',
+                icon: r.jsx(E.Z, { fontSize: 'large' }),
+                path: '/design-system/layout',
+                color: 'secondary.dark',
+              },
+              {
+                title: '애니메이션 시스템',
+                description: '전환, 강조, 피드백 등 애니메이션 효과를 확인하세요.',
+                icon: r.jsx(z.Z, { fontSize: 'large' }),
+                path: '/design-system/animations',
+                color: 'primary.light',
+              },
+            ];
+          return (0, r.jsxs)(o.Z, {
+            maxWidth: 'lg',
+            sx: { py: 6 },
+            children: [
+              (0, r.jsxs)(M.F, {
+                animation: 'fadeIn',
+                duration: 'normal',
+                children: [
+                  r.jsx(i.Z, {
+                    variant: 'h2',
+                    component: 'h1',
+                    sx: { mb: 2 },
+                    children: '디자인 시스템',
+                  }),
+                  r.jsx(i.Z, {
+                    variant: 'subtitle1',
+                    sx: { mb: 6 },
+                    children:
+                      '달빛 연애 연구소의 디자인 시스템은 신비로운 타로 카드 컨셉을 기반으로 합니다. 일관된 사용자 경험을 제공하기 위한 디자인 가이드라인과 컴포넌트를 확인하세요.',
+                  }),
+                ],
+              }),
+              (0, r.jsxs)(n.Z, {
+                elevation: 3,
+                sx: {
+                  p: 4,
+                  mb: 6,
+                  background: 'linear-gradient(135deg, #121212 0%, #1E1E1E 100%)',
+                  position: 'relative',
+                  overflow: 'hidden',
+                },
+                children: [
+                  r.jsx(a.Z, {
+                    sx: {
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      bottom: 0,
+                      backgroundImage: 'url("/images/tarot-pattern.png")',
+                      backgroundSize: '200px',
+                      backgroundRepeat: 'repeat',
+                      opacity: 0.03,
+                      zIndex: 0,
+                    },
+                  }),
+                  r.jsx(a.Z, {
+                    sx: { position: 'relative', zIndex: 1 },
+                    children: (0, r.jsxs)(M.F, {
+                      animation: 'slideUp',
+                      duration: 'normal',
+                      children: [
+                        r.jsx(i.Z, { variant: 'h4', sx: { mb: 3 }, children: '디자인 원칙' }),
+                        r.jsx(i.Z, {
+                          variant: 'body1',
+                          sx: { mb: 4 },
+                          children:
+                            '달빛 연애 연구소의 디자인 시스템은 다음과 같은 원칙을 기반으로 합니다:',
+                        }),
+                        (0, r.jsxs)(d.ZP, {
+                          container: !0,
+                          spacing: 3,
+                          children: [
+                            r.jsx(d.ZP, {
+                              item: !0,
+                              xs: 12,
+                              md: 4,
+                              children: (0, r.jsxs)(a.Z, {
+                                sx: { p: 2 },
+                                children: [
+                                  r.jsx(i.Z, {
+                                    variant: 'h6',
+                                    sx: { mb: 1 },
+                                    children: '신비로움',
+                                  }),
+                                  r.jsx(i.Z, {
+                                    variant: 'body2',
+                                    color: 'text.secondary',
+                                    children:
+                                      '어두운 배경, 보라색과 골드 색상, 그라데이션 효과 등을 통해 신비로운 분위기를 연출합니다. 타로 카드의 신비로운 이미지를 디자인 요소에 반영합니다.',
+                                  }),
+                                ],
+                              }),
+                            }),
+                            r.jsx(d.ZP, {
+                              item: !0,
+                              xs: 12,
+                              md: 4,
+                              children: (0, r.jsxs)(a.Z, {
+                                sx: { p: 2 },
+                                children: [
+                                  r.jsx(i.Z, {
+                                    variant: 'h6',
+                                    sx: { mb: 1 },
+                                    children: '직관적인 사용성',
+                                  }),
+                                  r.jsx(i.Z, {
+                                    variant: 'body2',
+                                    color: 'text.secondary',
+                                    children:
+                                      '사용자가 쉽게 이해하고 사용할 수 있는 UI를 제공합니다. 명확한 시각적 계층 구조와 일관된 상호작용 패턴을 유지합니다.',
+                                  }),
+                                ],
+                              }),
+                            }),
+                            r.jsx(d.ZP, {
+                              item: !0,
+                              xs: 12,
+                              md: 4,
+                              children: (0, r.jsxs)(a.Z, {
+                                sx: { p: 2 },
+                                children: [
+                                  r.jsx(i.Z, {
+                                    variant: 'h6',
+                                    sx: { mb: 1 },
+                                    children: '감성적 경험',
+                                  }),
+                                  r.jsx(i.Z, {
+                                    variant: 'body2',
+                                    color: 'text.secondary',
+                                    children:
+                                      '부드러운 애니메이션, 세련된 타이포그래피, 감성적인 색상을 통해 사용자에게 특별한 경험을 제공합니다. MBTI 테스트의 자기 발견 여정을 디자인으로 표현합니다.',
+                                  }),
+                                ],
+                              }),
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                  }),
+                ],
+              }),
+              (0, r.jsxs)(M.K, {
+                animation: 'slideUp',
+                duration: 'normal',
+                easing: 'mystical',
+                staggerDelay: 100,
+                children: [
+                  r.jsx(i.Z, { variant: 'h4', sx: { mb: 4 }, children: '디자인 시스템 가이드' }),
+                  r.jsx(d.ZP, {
+                    container: !0,
+                    spacing: 3,
+                    children: s.map((s, t) =>
+                      r.jsx(
+                        d.ZP,
+                        {
+                          item: !0,
+                          xs: 12,
+                          sm: 6,
+                          md: 4,
+                          children: r.jsx(l.Z, {
+                            sx: {
+                              height: '100%',
+                              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+                              '&:hover': { transform: 'translateY(-5px)', boxShadow: 8 },
+                            },
+                            children: r.jsx(w, {
+                              sx: { height: '100%' },
+                              onClick: () => e.push(s.path),
+                              children: (0, r.jsxs)(R.Z, {
+                                sx: { height: '100%', display: 'flex', flexDirection: 'column' },
+                                children: [
+                                  r.jsx(a.Z, {
+                                    sx: {
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      justifyContent: 'center',
+                                      width: 60,
+                                      height: 60,
+                                      borderRadius: '50%',
+                                      bgcolor: `${s.color}20`,
+                                      color: s.color,
+                                      mb: 2,
+                                    },
+                                    children: s.icon,
+                                  }),
+                                  r.jsx(i.Z, {
+                                    variant: 'h5',
+                                    component: 'h2',
+                                    gutterBottom: !0,
+                                    children: s.title,
+                                  }),
+                                  r.jsx(i.Z, {
+                                    variant: 'body2',
+                                    color: 'text.secondary',
+                                    sx: { mb: 2, flexGrow: 1 },
+                                    children: s.description,
+                                  }),
+                                  r.jsx(i.Z, {
+                                    variant: 'button',
+                                    color: 'primary',
+                                    children: '자세히 보기',
+                                  }),
+                                ],
+                              }),
+                            }),
+                          }),
+                        },
+                        t
+                      )
+                    ),
+                  }),
+                ],
+              }),
+            ],
+          });
+        }
+      },
+      '(rsc)/./src/app/design-system/page.jsx': (e, s, t) => {
+        'use strict';
+        t.r(s), t.d(s, { default: () => r });
+        let r = (0,
+        t('(rsc)/./node_modules/next/dist/build/webpack/loaders/next-flight-loader/module-proxy.js')
+          .createProxy)(
+          String.raw`C:\Users\전준영\Documents\augment-projects\MBTI test for dating\src\app\design-system\page.jsx#default`
+        );
+      },
+    });
+  var s = require('../../webpack-runtime.js');
+  s.C(e);
+  var t = e => s((s.s = e)),
+    r = s.X(0, [276, 576, 5, 246], () =>
+      t(
+        '(rsc)/./node_modules/next/dist/build/webpack/loaders/next-app-loader.js?page=%2Fdesign-system%2Fpage&name=app%2Fdesign-system%2Fpage&pagePath=private-next-app-dir%2Fdesign-system%2Fpage.jsx&appDir=C%3A%5CUsers%5C%EC%A0%84%EC%A4%80%EC%98%81%5CDocuments%5Caugment-projects%5CMBTI%20test%20for%20dating%5Csrc%5Capp&appPaths=%2Fdesign-system%2Fpage&pageExtensions=tsx&pageExtensions=ts&pageExtensions=jsx&pageExtensions=js&basePath=&assetPrefix=&nextConfigOutput=standalone&nextConfigExperimentalUseEarlyImport=false&preferredRegion=&middlewareConfig=e30%3D!'
+      )
+    );
+  module.exports = r;
+})();
