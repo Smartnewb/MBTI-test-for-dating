@@ -1,226 +1,279 @@
 'use client';
 
-import { useEffect } from 'react';
-import { Box, Container, Typography, Button, Grid, Divider } from '@mui/material';
-import { styled } from '@mui/material/styles';
-import { useRouter } from 'next/navigation';
-import TarotCard from '../components/TarotCard';
+import { useState, useEffect } from 'react';
+import { Box, Typography, Button, Snackbar, Alert, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { AnimatedElement } from '../components/animations';
+import { PageLayout, Section } from '../components/layout';
+import TestResult from '../components/test/TestResult';
 import useMbtiTest from '../hooks/useMbtiTest';
-import Link from 'next/link';
+import { useSupabase } from '../contexts/SupabaseContext';
+import { saveTestResult, getTestResultByShareId } from '../services/resultService';
+import { getMbtiDescription } from '../utils/mbti';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import EmailIcon from '@mui/icons-material/Email';
 
-// 스타일링된 컨테이너
-const StyledContainer = styled(Container)(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  minHeight: '100vh',
-  padding: theme.spacing(4),
-  position: 'relative',
-  overflow: 'hidden',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'url(/images/stars-bg.png)',
-    backgroundSize: 'cover',
-    opacity: 0.2,
-    pointerEvents: 'none',
-    zIndex: -1,
-  },
-}));
-
-// 스타일링된 공유 버튼
-const ShareButton = styled(Button)(({ theme }) => ({
-  marginTop: theme.spacing(2),
-  padding: theme.spacing(1.2, 3),
-  borderRadius: 30,
-  background: `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
-  color: theme.palette.common.white,
-  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
-  '&:hover': {
-    background: `linear-gradient(135deg, ${theme.palette.primary.dark}, ${theme.palette.primary.main})`,
-    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.5)',
-  },
-}));
-
-// 스타일링된 CTA 버튼
-const CtaButton = styled(Button)(({ theme }) => ({
-  marginTop: theme.spacing(2),
-  padding: theme.spacing(1.2, 3),
-  borderRadius: 30,
-  background: `linear-gradient(135deg, ${theme.palette.secondary.main}, ${theme.palette.secondary.dark})`,
-  color: theme.palette.common.white,
-  boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3)',
-  '&:hover': {
-    background: `linear-gradient(135deg, ${theme.palette.secondary.dark}, ${theme.palette.secondary.main})`,
-    boxShadow: '0 6px 20px rgba(0, 0, 0, 0.5)',
-  },
-}));
-
-// MBTI 유형별 연애 성향 데이터 (일부 예시)
-const mbtiProfiles = {
-  'INFP': {
-    title: '이상적인 연애를 꿈꾸는 몽상가',
-    description: '깊이 있는 감정 교류를 중시하며, 관계의 의미를 찾으려 합니다. 진심 어린 연결을 가장 중요하게 여깁니다.',
-    strengths: '진정성 있는 감정 표현, 깊은 교감 능력',
-    weaknesses: '이상화, 감정 과몰입, 상처에 민감함',
-    conflictStyle: '감정 기반 대화 선호, 먼저 말 걸기 어려움',
-    idealPartner: '외향적이고 감정 표현이 풍부한 사람이 안정감을 줌'
-  },
-  'ENFJ': {
-    title: '따뜻한 리더십의 연애 가이드',
-    description: '따뜻한 리더십으로 관계를 주도하며, 정서적 교감을 매우 중요시합니다. 상대방의 성장을 돕고 지지하는 연애를 합니다.',
-    strengths: '상대에게 헌신적이고 감정적으로 섬세함',
-    weaknesses: '스스로를 돌보지 못하고 과하게 맞추려 함',
-    conflictStyle: '상대 감정을 먼저 고려하며 중재하려 함',
-    idealPartner: '감정 공감 능력은 있지만 자기표현이 서툰 사람'
-  }
-  // 실제 구현 시 16가지 MBTI 유형 모두 추가
-};
-
+/**
+ * MBTI 테스트 결과 페이지
+ *
+ * 테스트 결과를 표시합니다.
+ */
 export default function ResultPage() {
   const router = useRouter();
-  const { mbtiResult, idealType, worstMatch, isTestCompleted, restartTest } = useMbtiTest();
-  
-  // 테스트를 완료하지 않았으면 테스트 페이지로 리다이렉트
+  const searchParams = useSearchParams();
+  const { result, idealType, worstMatch, handleRestartTest, isTestCompleted } = useMbtiTest();
+  const { user, sessionId } = useSupabase();
+
+  const [isLoading, setIsLoading] = useState(true);
+  const [showShareAlert, setShowShareAlert] = useState(false);
+  const [shareUrl, setShareUrl] = useState('');
+  const [showEmailDialog, setShowEmailDialog] = useState(false);
+  const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [savedResult, setSavedResult] = useState(null);
+
+  // URL에서 공유 ID 가져오기
+  const shareId = searchParams.get('id');
+
+  // 페이지 로드 시 테스트 완료 여부 확인 또는 공유된 결과 가져오기
   useEffect(() => {
-    if (!isTestCompleted && !mbtiResult) {
-      router.push('/test');
+    const loadResult = async () => {
+      try {
+        setIsLoading(true);
+
+        // 공유 ID가 있는 경우 해당 결과 가져오기
+        if (shareId) {
+          const sharedResult = await getTestResultByShareId(shareId);
+
+          if (sharedResult) {
+            setSavedResult(sharedResult);
+          } else {
+            // 결과가 없는 경우 테스트 페이지로 이동
+            router.push('/test');
+          }
+        } else if (!isTestCompleted && !result) {
+          // 테스트를 완료하지 않은 경우 테스트 페이지로 이동
+          router.push('/test');
+        } else if (result && !savedResult) {
+          // 결과가 있고 아직 저장되지 않은 경우 결과 저장
+          saveResult();
+        }
+      } catch (error) {
+        console.error('Error loading result:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadResult();
+  }, [isTestCompleted, result, router, shareId]);
+
+  // 결과 저장
+  const saveResult = async (userEmail = null) => {
+    if (!result) return;
+
+    try {
+      const { success, shareId, sessionId: resultSessionId } = await saveTestResult(
+        result.scores,
+        result.mbtiType,
+        user?.id,
+        sessionId,
+        userEmail
+      );
+
+      if (success && shareId) {
+        // 공유 URL 생성
+        const url = `${window.location.origin}/result?id=${shareId}`;
+        setShareUrl(url);
+      }
+    } catch (error) {
+      console.error('Error saving result:', error);
     }
-  }, [isTestCompleted, mbtiResult, router]);
-  
-  // 테스트 결과가 없으면 로딩 표시
-  if (!mbtiResult) {
+  };
+
+  // 테스트 재시작 핸들러
+  const handleRestart = () => {
+    handleRestartTest();
+    router.push('/test');
+  };
+
+  // 결과 공유 핸들러
+  const handleShare = () => {
+    const mbtiType = savedResult?.mbtiType || result?.mbtiType;
+    const mbtiName = getMbtiName(mbtiType);
+    const shareText = `내 MBTI 연애 유형은 ${mbtiType}(${mbtiName})! 달빛 연애 연구소에서 당신의 MBTI 연애 유형도 알아보세요!`;
+    const url = shareUrl || window.location.href;
+
+    if (navigator.share) {
+      navigator.share({
+        title: `내 MBTI 연애 유형은 ${mbtiType}!`,
+        text: shareText,
+        url: url,
+      })
+      .catch((error) => {
+        console.error('공유 실패:', error);
+        copyToClipboard(shareText, url);
+      });
+    } else {
+      copyToClipboard(shareText, url);
+    }
+  };
+
+  // 클립보드에 복사
+  const copyToClipboard = (text, url) => {
+    const shareText = `${text} ${url}`;
+
+    navigator.clipboard.writeText(shareText)
+      .then(() => {
+        setShowShareAlert(true);
+      })
+      .catch((error) => {
+        console.error('클립보드 복사 실패:', error);
+      });
+  };
+
+  // 이메일 저장 핸들러
+  const handleSaveEmail = () => {
+    // 이메일 유효성 검사
+    if (!email) {
+      setEmailError('이메일을 입력해주세요.');
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailError('유효한 이메일 주소를 입력해주세요.');
+      return;
+    }
+
+    // 이메일로 결과 저장
+    saveResult(email);
+    setShowEmailDialog(false);
+  };
+
+  // MBTI 유형 이름 가져오기
+  const getMbtiName = (mbtiType) => {
+    const mbtiDescription = getMbtiDescription(mbtiType);
+    return mbtiDescription?.name || '';
+  };
+
+  // 로딩 중 표시
+  if (isLoading) {
     return (
-      <StyledContainer maxWidth="md">
-        <Typography variant="h5">결과를 분석 중입니다...</Typography>
-      </StyledContainer>
+      <PageLayout variant="result">
+        <Section centered fullHeight>
+          <Typography variant="h4">결과를 불러오는 중...</Typography>
+        </Section>
+      </PageLayout>
     );
   }
-  
-  // 임시 결과 (실제로는 useMbtiTest에서 계산된 결과 사용)
-  const result = mbtiProfiles[mbtiResult] || mbtiProfiles['INFP'];
-  const idealTypeProfile = mbtiProfiles[idealType] || mbtiProfiles['ENFJ'];
-  
-  return (
-    <StyledContainer maxWidth="lg">
-      <Typography 
-        variant="h4" 
-        component="h1" 
-        sx={{ 
-          fontWeight: 'bold',
-          color: 'primary.main',
-          textShadow: '0 2px 10px rgba(0,0,0,0.5)',
-          mb: 4,
-          textAlign: 'center'
-        }}
-      >
-        당신의 연애 운명이 밝혀졌습니다
-      </Typography>
-      
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        {/* 내 MBTI 결과 카드 */}
-        <Grid item xs={12} md={4}>
-          <TarotCard 
-            variant="primary" 
-            title={`${mbtiResult} 연애 스타일`}
+
+  // 결과가 없는 경우
+  const displayResult = savedResult || result;
+  if (!displayResult || !displayResult.mbtiType) {
+    return (
+      <PageLayout variant="result">
+        <Section centered fullHeight>
+          <Typography variant="h4">테스트 결과가 없습니다</Typography>
+          <Typography variant="body1" sx={{ mt: 2, mb: 4 }}>
+            테스트를 먼저 완료해주세요.
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => router.push('/test')}
           >
-            <Typography variant="body1" sx={{ mb: 3 }}>
-              {result.description}
-            </Typography>
-            <Divider sx={{ mb: 2 }} />
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-              연애 장점
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              {result.strengths}
-            </Typography>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-              연애 단점
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              {result.weaknesses}
-            </Typography>
-          </TarotCard>
-        </Grid>
-        
-        {/* 이상형 MBTI 카드 */}
-        <Grid item xs={12} md={4}>
-          <TarotCard 
-            variant="secondary" 
-            title={`당신의 이상형: ${idealType}`}
-          >
-            <Typography variant="body1" sx={{ mb: 3 }}>
-              {idealTypeProfile.description}
-            </Typography>
-            <Divider sx={{ mb: 2 }} />
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-              궁합이 좋은 이유
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              {mbtiResult}의 {result.weaknesses}를 {idealType}의 {idealTypeProfile.strengths}가 보완해줍니다.
-            </Typography>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-              함께하면 좋은 데이트
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              서로의 성향을 고려한 조용한 대화와 새로운 경험을 함께 할 수 있는 활동
-            </Typography>
-          </TarotCard>
-        </Grid>
-        
-        {/* 궁합 주의보 카드 */}
-        <Grid item xs={12} md={4}>
-          <TarotCard 
-            title={`궁합 주의보: ${worstMatch}`}
-            sx={{ 
-              background: 'linear-gradient(135deg, #8B0000, #4A0000)',
-              color: 'white'
-            }}
-          >
-            <Typography variant="body1" sx={{ mb: 3 }}>
-              {worstMatch} 유형과는 성향 차이로 인해 갈등이 발생할 수 있습니다.
-            </Typography>
-            <Divider sx={{ mb: 2, borderColor: 'rgba(255,255,255,0.2)' }} />
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-              주의해야 할 점
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              소통 방식의 차이, 가치관의 충돌, 일상 생활 습관의 불일치로 인한 스트레스
-            </Typography>
-            <Typography variant="subtitle2" sx={{ fontWeight: 'bold', mb: 1 }}>
-              개선 방법
-            </Typography>
-            <Typography variant="body2" sx={{ mb: 2 }}>
-              서로의 차이점을 이해하고 존중하며, 명확한 의사소통을 통해 갈등을 줄일 수 있습니다.
-            </Typography>
-          </TarotCard>
-        </Grid>
-      </Grid>
-      
-      {/* 버튼 영역 */}
-      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 2 }}>
-        <ShareButton variant="contained" size="large" sx={{ mb: 2 }}>
-          내 연애 이상형 결과 공유하기
-        </ShareButton>
-        
-        <CtaButton variant="contained" size="large" sx={{ mb: 2 }}>
-          나랑 어울리는 사람, 썸타임에서 만나볼래요?
-        </CtaButton>
-        
-        <Link href="/" passHref>
-          <Button 
-            onClick={restartTest}
-            sx={{ color: 'text.secondary', mt: 2 }}
-          >
-            처음으로 돌아가기
+            테스트 시작하기
           </Button>
-        </Link>
-      </Box>
-    </StyledContainer>
+        </Section>
+      </PageLayout>
+    );
+  }
+
+  return (
+    <PageLayout variant="result">
+      <Section centered>
+        <AnimatedElement animation="fadeIn" duration="normal">
+          <Box sx={{ maxWidth: 800, mx: 'auto', my: 4 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+              <FavoriteIcon sx={{
+                fontSize: 60,
+                color: 'secondary.main',
+                filter: 'drop-shadow(0 0 10px rgba(156, 39, 176, 0.5))'
+              }} />
+            </Box>
+
+            <Typography variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
+              당신의 MBTI 연애 유형 결과
+            </Typography>
+
+            <TestResult
+              mbtiType={displayResult.mbtiType}
+              scores={displayResult.scores}
+              idealType={savedResult?.idealType || idealType}
+              worstMatch={savedResult?.worstMatch || worstMatch}
+              onRestart={handleRestart}
+              onShare={handleShare}
+            />
+
+            {!user && !shareId && (
+              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  startIcon={<EmailIcon />}
+                  onClick={() => setShowEmailDialog(true)}
+                >
+                  이메일로 결과 저장하기
+                </Button>
+              </Box>
+            )}
+          </Box>
+        </AnimatedElement>
+      </Section>
+
+      {/* 이메일 입력 다이얼로그 */}
+      <Dialog open={showEmailDialog} onClose={() => setShowEmailDialog(false)}>
+        <DialogTitle>이메일로 결과 저장하기</DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" sx={{ mb: 2 }}>
+            이메일을 입력하시면 결과를 저장하고 언제든지 다시 확인할 수 있습니다.
+          </Typography>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="이메일"
+            type="email"
+            fullWidth
+            variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            error={!!emailError}
+            helperText={emailError}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setShowEmailDialog(false)}>취소</Button>
+          <Button onClick={handleSaveEmail} color="primary">저장</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* 공유 알림 */}
+      <Snackbar
+        open={showShareAlert}
+        autoHideDuration={3000}
+        onClose={() => setShowShareAlert(false)}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert
+          onClose={() => setShowShareAlert(false)}
+          severity="success"
+          sx={{ width: '100%' }}
+        >
+          결과 링크가 클립보드에 복사되었습니다!
+        </Alert>
+      </Snackbar>
+    </PageLayout>
   );
 }

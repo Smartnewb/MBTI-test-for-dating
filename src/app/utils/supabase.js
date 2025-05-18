@@ -48,19 +48,47 @@ export async function getCurrentUser() {
 // 모든 MBTI 질문 가져오기
 export async function getAllQuestions() {
   const { data, error } = await supabase
-    .from('questions')
+    .from('mbti_questions')
     .select('*')
     .order('id', { ascending: true });
   return { data, error };
 }
 
-// 사용자 응답 저장하기
+// 특정 MBTI 차원의 질문만 가져오기
+export async function getQuestionsByDimension(dimension) {
+  const { data, error } = await supabase
+    .from('mbti_questions')
+    .select('*')
+    .eq('dimension', dimension)
+    .order('id', { ascending: true });
+  return { data, error };
+}
+
+// 사용자 응답 저장하기 (인증된 사용자)
 export async function saveUserResponse(userId, questionId, answer) {
   const { data, error } = await supabase
     .from('user_responses')
-    .insert([
+    .upsert([
       { user_id: userId, question_id: questionId, answer }
-    ]);
+    ], { onConflict: ['user_id', 'question_id'] });
+  return { data, error };
+}
+
+// 익명 사용자 응답 저장하기
+export async function saveAnonymousResponse(sessionId, questionId, answer) {
+  const { data, error } = await supabase
+    .from('user_responses')
+    .upsert([
+      { session_id: sessionId, question_id: questionId, answer }
+    ], { onConflict: ['session_id', 'question_id'] });
+  return { data, error };
+}
+
+// 테스트 결과 저장하기
+export async function saveTestResult(resultData) {
+  const { data, error } = await supabase
+    .from('test_results')
+    .insert([resultData]);
   return { data, error };
 }
 
@@ -69,18 +97,36 @@ export async function getMbtiTypeInfo(mbtiType) {
   const { data, error } = await supabase
     .from('mbti_types')
     .select('*')
-    .eq('type', mbtiType)
+    .eq('type_code', mbtiType)
     .single();
+  return { data, error };
+}
+
+// 모든 MBTI 유형 정보 가져오기
+export async function getAllMbtiTypes() {
+  const { data, error } = await supabase
+    .from('mbti_types')
+    .select('*')
+    .order('type_code', { ascending: true });
   return { data, error };
 }
 
 // MBTI 궁합 정보 가져오기
 export async function getCompatibilityInfo(type1, type2) {
   const { data, error } = await supabase
-    .from('compatibility')
+    .from('mbti_compatibility')
     .select('*')
     .or(`and(type1.eq.${type1},type2.eq.${type2}),and(type1.eq.${type2},type2.eq.${type1})`)
     .single();
+  return { data, error };
+}
+
+// 특정 MBTI 유형의 모든 궁합 정보 가져오기
+export async function getCompatibilityByType(mbtiType) {
+  const { data, error } = await supabase
+    .from('mbti_compatibility')
+    .select('*')
+    .or(`type1.eq.${mbtiType},type2.eq.${mbtiType}`);
   return { data, error };
 }
 
