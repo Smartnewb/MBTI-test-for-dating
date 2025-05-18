@@ -6,28 +6,6 @@
 
 ### 인증 API
 
-#### 회원가입
-
-```javascript
-const { data, error } = await supabase.auth.signUp({
-  email: 'example@email.com',
-  password: 'example-password',
-});
-```
-
-#### 로그인
-
-```javascript
-const { data, error } = await supabase.auth.signInWithPassword({
-  email: 'example@email.com',
-  password: 'example-password',
-});
-```
-
-#### 로그아웃
-
-```javascript
-const { error } = await supabase.auth.signOut();
 ```
 
 #### 현재 사용자 정보 가져오기
