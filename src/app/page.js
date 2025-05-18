@@ -1,8 +1,4 @@
-import { homeMetadata } from './metadata';
 import HomePage from './components/HomePage';
-
-// 메타데이터 설정
-export const metadata = homeMetadata;
 
 /**
  * 홈페이지 컴포넌트
