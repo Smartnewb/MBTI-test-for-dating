@@ -19,7 +19,11 @@
     "task:generate": "node scripts/dev.js generate",
     "task:parse-prd": "node scripts/dev.js parse-prd",
     "push-to-github": "node scripts/push-to-github.js",
-    "setup-git": "node scripts/setup-git-credentials.js"
+    "setup-git": "node scripts/setup-git-credentials.js",
+    "setup-sentry": "node scripts/setup-sentry.js",
+    "security-audit": "node scripts/security-audit.js",
+    "deploy": "node scripts/deploy.js",
+    "deploy:vercel": "vercel --prod"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.39.0",

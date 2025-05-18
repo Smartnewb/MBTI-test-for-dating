@@ -9,37 +9,37 @@ import FormatQuoteIcon from '@mui/icons-material/FormatQuote';
 const CardContainer = styled(Box)(({ theme, variant }) => {
   // 변형에 따른 스타일 설정
   let variantStyles = {};
-  
+
   switch (variant) {
     case 'primary':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.primary.main}10 100%)`,
-        borderLeft: `4px solid ${theme.palette.primary.main}`,
+        borderLeft: `4px solid ${theme.palette.primary.main}`
       };
       break;
-    
+
     case 'secondary':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.secondary.dark}20 0%, ${theme.palette.secondary.main}10 100%)`,
-        borderLeft: `4px solid ${theme.palette.secondary.main}`,
+        borderLeft: `4px solid ${theme.palette.secondary.main}`
       };
       break;
-    
+
     case 'mystical':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}20 0%, ${theme.palette.secondary.dark}20 100%)`,
-        borderLeft: `4px solid ${theme.palette.secondary.main}`,
+        borderLeft: `4px solid ${theme.palette.secondary.main}`
       };
       break;
-    
+
     default:
       variantStyles = {
         background: theme.palette.background.paper,
-        borderLeft: `4px solid ${theme.palette.primary.main}`,
+        borderLeft: `4px solid ${theme.palette.primary.main}`
       };
       break;
   }
-  
+
   return {
     padding: theme.spacing(3),
     borderRadius: theme.shape.borderRadius,
@@ -47,13 +47,13 @@ const CardContainer = styled(Box)(({ theme, variant }) => {
     position: 'relative',
     overflow: 'hidden',
     transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-    
+
     '&:hover': {
       transform: 'translateY(-5px)',
-      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)',
+      boxShadow: '0 8px 25px rgba(0, 0, 0, 0.15)'
     },
-    
-    ...variantStyles,
+
+    ...variantStyles
   };
 }));
 
@@ -77,9 +77,9 @@ const UserInfoContainer = styled(Box)(({ theme }) => ({
 
 /**
  * 후기 카드 컴포넌트
- * 
+ *
  * 사용자 후기를 표시하는 카드 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} props.text - 후기 내용
  * @param {string} props.name - 사용자 이름
@@ -111,15 +111,15 @@ export default function TestimonialCard({
       .join('')
       .toUpperCase();
   };
-  
+
   return (
     <AnimatedElement animation={animation} duration="normal" onScroll={onScroll}>
       <CardContainer variant={variant} sx={sx}>
         <QuoteIcon />
-        
-        <Typography 
-          variant="body1" 
-          sx={{ 
+
+        <Typography
+          variant="body1"
+          sx={{
             fontStyle: 'italic',
             mb: 2,
             position: 'relative',
@@ -128,35 +128,35 @@ export default function TestimonialCard({
         >
           {text}
         </Typography>
-        
+
         <UserInfoContainer>
-          <Avatar 
-            src={avatarSrc} 
+          <Avatar
+            src={avatarSrc}
             alt={name}
-            sx={{ 
-              width: 50, 
-              height: 50, 
+            sx={{
+              width: 50,
+              height: 50,
               mr: 2,
               bgcolor: theme => !avatarSrc ? theme.palette.primary.main : undefined,
             }}
           >
             {!avatarSrc && getInitials(name)}
           </Avatar>
-          
+
           <Box>
-            <Typography 
-              variant="subtitle1" 
-              sx={{ 
+            <Typography
+              variant="subtitle1"
+              sx={{
                 fontWeight: 'bold',
               }}
             >
               {name}
             </Typography>
-            
+
             {mbtiType && (
-              <Typography 
-                variant="caption" 
-                sx={{ 
+              <Typography
+                variant="caption"
+                sx={{
                   color: 'text.secondary',
                   display: 'block',
                 }}
@@ -164,11 +164,11 @@ export default function TestimonialCard({
                 MBTI: {mbtiType}
               </Typography>
             )}
-            
+
             {rating !== undefined && (
-              <Rating 
-                value={rating} 
-                readOnly 
+              <Rating
+                value={rating}
+                readOnly
                 size="small"
                 sx={{ mt: 0.5 }}
               />

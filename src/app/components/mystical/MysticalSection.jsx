@@ -9,63 +9,63 @@ import { Section } from '../layout';
 const SectionContainer = styled(Box)(({ theme, variant }) => {
   // 변형에 따른 스타일 설정
   let variantStyles = {};
-  
+
   switch (variant) {
     case 'dark':
       variantStyles = {
         background: theme.palette.background.default,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     case 'light':
       variantStyles = {
         background: theme.palette.background.paper,
-        color: theme.palette.text.primary,
+        color: theme.palette.text.primary
       };
       break;
-    
+
     case 'primary':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.primary.main}40 100%)`,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     case 'secondary':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.secondary.dark}80 0%, ${theme.palette.secondary.main}40 100%)`,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     case 'mystical':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.secondary.dark}80 100%)`,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     default:
       variantStyles = {
-        background: 'transparent',
+        background: 'transparent'
       };
       break;
   }
-  
+
   return {
     position: 'relative',
     padding: theme.spacing(8, 0),
     overflow: 'hidden',
-    ...variantStyles,
+    ...variantStyles
   };
 }));
 
 /**
  * 신비로운 섹션 컴포넌트
- * 
+ *
  * 신비로운 배경 효과를 가진 섹션 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {React.ReactNode} props.children - 섹션 내용
  * @param {string} [props.variant='default'] - 섹션 변형 ('default', 'dark', 'light', 'primary', 'secondary', 'mystical')
@@ -95,13 +95,13 @@ export default function MysticalSection({
     <SectionContainer variant={variant} sx={sx} {...other}>
       {/* 별 배경 */}
       {hasStars && (
-        <StarryBackground 
-          starCount={starCount} 
+        <StarryBackground
+          starCount={starCount}
           shootingStarCount={2}
           fogCount={3}
         />
       )}
-      
+
       {/* 섹션 내용 */}
       <Section
         fullWidth={fullWidth}

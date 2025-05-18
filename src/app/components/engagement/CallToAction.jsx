@@ -10,52 +10,52 @@ import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
 const CtaContainer = styled(Paper)(({ theme, variant }) => {
   // 변형에 따른 스타일 설정
   let variantStyles = {};
-  
+
   switch (variant) {
     case 'primary':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.primary.main}40 100%)`,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     case 'secondary':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.secondary.dark}80 0%, ${theme.palette.secondary.main}40 100%)`,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     case 'mystical':
       variantStyles = {
         background: `linear-gradient(135deg, ${theme.palette.primary.dark}80 0%, ${theme.palette.secondary.dark}80 100%)`,
-        color: theme.palette.common.white,
+        color: theme.palette.common.white
       };
       break;
-    
+
     case 'light':
       variantStyles = {
         background: theme.palette.background.paper,
         color: theme.palette.text.primary,
-        border: `1px solid ${theme.palette.divider}`,
+        border: `1px solid ${theme.palette.divider}`
       };
       break;
-    
+
     default:
       variantStyles = {
         background: theme.palette.background.default,
-        color: theme.palette.text.primary,
+        color: theme.palette.text.primary
       };
       break;
   }
-  
+
   return {
     padding: theme.spacing(4),
     borderRadius: theme.shape.borderRadius * 2,
     boxShadow: '0 8px 20px rgba(0, 0, 0, 0.1)',
     overflow: 'hidden',
     position: 'relative',
-    ...variantStyles,
+    ...variantStyles
   };
 }));
 
@@ -74,9 +74,9 @@ const BackgroundDecoration = styled(Box)(({ theme }) => ({
 
 /**
  * 행동 촉구 컴포넌트
- * 
+ *
  * 사용자 참여를 유도하는 행동 촉구 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} props.title - 제목
  * @param {string} [props.description] - 설명
@@ -107,11 +107,11 @@ export default function CallToAction({
     <AnimatedElement animation={animation} duration="normal" onScroll={onScroll}>
       <CtaContainer variant={variant} sx={sx}>
         <BackgroundDecoration />
-        
+
         <Box sx={{ position: 'relative', zIndex: 1 }}>
-          <Typography 
-            variant="h4" 
-            sx={{ 
+          <Typography
+            variant="h4"
+            sx={{
               mb: 2,
               fontWeight: 'bold',
               fontFamily: theme => theme.typography.fontFamily.secondary,
@@ -119,11 +119,11 @@ export default function CallToAction({
           >
             {title}
           </Typography>
-          
+
           {description && (
-            <Typography 
-              variant="body1" 
-              sx={{ 
+            <Typography
+              variant="body1"
+              sx={{
                 mb: 4,
                 opacity: 0.9,
               }}
@@ -131,7 +131,7 @@ export default function CallToAction({
               {description}
             </Typography>
           )}
-          
+
           <MysticalButton
             variant={buttonVariant}
             size={buttonSize}
