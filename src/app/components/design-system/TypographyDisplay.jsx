@@ -2,6 +2,7 @@
 
 import { Box, Typography, Paper, Grid, Divider, useTheme } from '@mui/material';
 import { tokens } from '../../styles/tokens';
+import { typography as typographyTokens } from '../../styles/tokens/typography';
 
 /**
  * 타이포그래피 샘플 컴포넌트
@@ -19,19 +20,19 @@ function TypographySample({ variant, text, description }) {
           Variant: <code>{variant}</code>
         </Typography>
         <Typography variant="caption" color="text.secondary" component="div">
-          Font Family: <code>{typography.variants[variant].fontFamily}</code>
+          Font Family: <code>{typographyTokens.variants[variant].fontFamily}</code>
         </Typography>
         <Typography variant="caption" color="text.secondary" component="div">
-          Font Size: <code>{typography.variants[variant].fontSize}</code>
+          Font Size: <code>{typographyTokens.variants[variant].fontSize}</code>
         </Typography>
         <Typography variant="caption" color="text.secondary" component="div">
-          Font Weight: <code>{typography.variants[variant].fontWeight}</code>
+          Font Weight: <code>{typographyTokens.variants[variant].fontWeight}</code>
         </Typography>
         <Typography variant="caption" color="text.secondary" component="div">
-          Line Height: <code>{typography.variants[variant].lineHeight}</code>
+          Line Height: <code>{typographyTokens.variants[variant].lineHeight}</code>
         </Typography>
         <Typography variant="caption" color="text.secondary" component="div">
-          Letter Spacing: <code>{typography.variants[variant].letterSpacing}</code>
+          Letter Spacing: <code>{typographyTokens.variants[variant].letterSpacing}</code>
         </Typography>
         {description && (
           <Typography variant="body2" sx={{ mt: 1 }}>
@@ -142,13 +143,12 @@ export default function TypographyDisplay() {
   const bodyVariants = ['subtitle1', 'subtitle2', 'body1', 'body2', 'button', 'caption', 'overline'];
 
   // 특별 스타일
-  const typography = tokens.typography;
   const specialStyles = {
-    'Mystical': typography.variants.mystical,
-    'Tarot': typography.variants.tarot,
-    'Tarot Description': typography.variants.tarotDescription,
-    'Quote': typography.variants.quote,
-    'Result Title': typography.variants.resultTitle,
+    'Mystical': typographyTokens.variants.mystical,
+    'Tarot': typographyTokens.variants.tarot,
+    'Tarot Description': typographyTokens.variants.tarotDescription,
+    'Quote': typographyTokens.variants.quote,
+    'Result Title': typographyTokens.variants.resultTitle,
   };
 
   return (
@@ -163,22 +163,22 @@ export default function TypographyDisplay() {
         </Typography>
         <FontFamilySample
           name="Primary Font (본문용)"
-          fontFamily={typography.fontFamily.primary}
+          fontFamily={typographyTokens.fontFamily.primary}
           sampleText="달빛 연애 연구소에 오신 것을 환영합니다. MBTI 테스트를 통해 당신의 연애 스타일을 알아보세요."
         />
         <FontFamilySample
           name="Secondary Font (제목용)"
-          fontFamily={typography.fontFamily.secondary}
+          fontFamily={typographyTokens.fontFamily.secondary}
           sampleText="달빛 연애 연구소에 오신 것을 환영합니다. MBTI 테스트를 통해 당신의 연애 스타일을 알아보세요."
         />
         <FontFamilySample
           name="Decorative Font (장식용)"
-          fontFamily={typography.fontFamily.decorative}
+          fontFamily={typographyTokens.fontFamily.decorative}
           sampleText="달빛 연애 연구소에 오신 것을 환영합니다. MBTI 테스트를 통해 당신의 연애 스타일을 알아보세요."
         />
         <FontFamilySample
           name="Monospace Font (코드용)"
-          fontFamily={typography.fontFamily.monospace}
+          fontFamily={typographyTokens.fontFamily.monospace}
           sampleText="달빛 연애 연구소에 오신 것을 환영합니다. MBTI 테스트를 통해 당신의 연애 스타일을 알아보세요."
         />
       </Box>
@@ -190,7 +190,7 @@ export default function TypographyDisplay() {
           폰트 크기
         </Typography>
         <Grid container spacing={2}>
-          {Object.entries(typography.fontSize)
+          {Object.entries(typographyTokens.fontSize)
             .filter(([key]) => key !== 'mobile')
             .map(([name, size]) => (
               <FontSizeSample
@@ -210,7 +210,7 @@ export default function TypographyDisplay() {
           폰트 두께
         </Typography>
         <Grid container spacing={2}>
-          {Object.entries(typography.fontWeight).map(([name, weight]) => (
+          {Object.entries(typographyTokens.fontWeight).map(([name, weight]) => (
             <FontWeightSample
               key={name}
               name={name}

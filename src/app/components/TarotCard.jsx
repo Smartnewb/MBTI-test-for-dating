@@ -81,7 +81,7 @@ const StyledCard = styled(Card)(({ theme, variant, interactive = true }) => ({
       background: 'radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%)',
       pointerEvents: 'none',
     }
-  })),
+  })
 }));
 
 // 카드 테두리 장식

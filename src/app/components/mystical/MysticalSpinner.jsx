@@ -19,12 +19,12 @@ const SpinnerContainer = styled(Box)(({ theme, size, variant }) => ({
 
 // 스타일링된 원형 프로그레스
 const StyledCircularProgress = styled(CircularProgress)(({ theme, variant, size }) => ({
-  color: variant === 'primary' 
-    ? theme.palette.primary.main 
-    : variant === 'secondary' 
-      ? theme.palette.secondary.main 
+  color: variant === 'primary'
+    ? theme.palette.primary.main
+    : variant === 'secondary'
+      ? theme.palette.secondary.main
       : theme.palette.primary.main,
-  
+
   // Mystical 변형에 특별한 효과 추가
   ...(variant === 'mystical' && {
     filter: `drop-shadow(0 0 5px ${theme.palette.primary.main})`,
@@ -34,12 +34,12 @@ const StyledCircularProgress = styled(CircularProgress)(({ theme, variant, size 
 // 스타일링된 내부 원형 프로그레스
 const InnerCircularProgress = styled(CircularProgress)(({ theme, variant, size }) => ({
   position: 'absolute',
-  color: variant === 'primary' 
-    ? theme.palette.primary.light 
-    : variant === 'secondary' 
-      ? theme.palette.secondary.light 
+  color: variant === 'primary'
+    ? theme.palette.primary.light
+    : variant === 'secondary'
+      ? theme.palette.secondary.light
       : theme.palette.secondary.main,
-  
+
   // Mystical 변형에 특별한 효과 추가
   ...(variant === 'mystical' && {
     filter: `drop-shadow(0 0 5px ${theme.palette.secondary.main})`,
@@ -56,16 +56,16 @@ const IconContainer = styled(Box)(({ theme, variant }) => ({
   backgroundColor: theme.palette.background.paper,
   boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)',
   padding: theme.spacing(1),
-  
+
   // 변형에 따른 스타일
   ...(variant === 'primary' && {
     color: theme.palette.primary.main,
   }),
-  
+
   ...(variant === 'secondary' && {
     color: theme.palette.secondary.main,
   }),
-  
+
   ...(variant === 'mystical' && {
     background: `linear-gradient(135deg, ${theme.palette.background.paper}, ${theme.palette.background.default})`,
     color: theme.palette.secondary.main,
@@ -79,16 +79,16 @@ const SpinnerText = styled(Typography)(({ theme, variant }) => ({
   fontFamily: theme.typography.fontFamily.secondary,
   fontWeight: theme.typography.fontWeight.medium,
   textAlign: 'center',
-  
+
   // 변형에 따른 스타일
   ...(variant === 'primary' && {
     color: theme.palette.primary.main,
   }),
-  
+
   ...(variant === 'secondary' && {
     color: theme.palette.secondary.main,
   }),
-  
+
   ...(variant === 'mystical' && {
     color: theme.palette.text.primary,
     textShadow: `0 0 5px ${theme.palette.primary.main}40`,
@@ -104,7 +104,7 @@ const StarDecoration = styled(Box)(({ theme, index }) => ({
   backgroundColor: theme.palette.secondary.main,
   boxShadow: `0 0 5px ${theme.palette.secondary.main}`,
   animation: `twinkle 1.5s infinite ease-in-out ${index * 0.3}s`,
-  
+
   // 별 위치 랜덤 배치
   top: `${20 + Math.random() * 60}%`,
   left: `${20 + Math.random() * 60}%`,
@@ -113,9 +113,9 @@ const StarDecoration = styled(Box)(({ theme, index }) => ({
 
 /**
  * 신비로운 스피너 컴포넌트
- * 
+ *
  * 로딩 상태를 표시하기 위한 스피너 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} [props.size='medium'] - 스피너 크기 ('small', 'medium', 'large')
  * @param {string} [props.variant='primary'] - 스피너 변형 ('primary', 'secondary', 'mystical')
@@ -136,16 +136,16 @@ export default function MysticalSpinner({
   const sizeValue = size === 'small' ? 40 : size === 'medium' ? 60 : 80;
   const innerSizeValue = size === 'small' ? 20 : size === 'medium' ? 30 : 40;
   const iconSize = size === 'small' ? 'small' : size === 'medium' ? 'medium' : 'large';
-  
+
   // 아이콘 선택
   const renderIcon = () => {
     if (icon) return icon;
-    
+
     if (variant === 'primary') return <AutoAwesomeIcon fontSize={iconSize} />;
     if (variant === 'secondary') return <StarIcon fontSize={iconSize} />;
     return <WbTwilightIcon fontSize={iconSize} />;
   };
-  
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', ...sx }}>
       <SpinnerContainer size={size} variant={variant}>
@@ -153,20 +153,18 @@ export default function MysticalSpinner({
           variant="indeterminate"
           size={sizeValue}
           thickness={4}
-          variant={variant}
         />
-        
+
         <InnerCircularProgress
           variant="indeterminate"
           size={innerSizeValue}
           thickness={4}
-          variant={variant}
         />
-        
+
         <IconContainer variant={variant} sx={{ width: innerSizeValue, height: innerSizeValue }}>
           {renderIcon()}
         </IconContainer>
-        
+
         {/* 별 장식 (mystical 변형에서만 표시) */}
         {variant === 'mystical' && showStars && (
           <>
@@ -176,13 +174,13 @@ export default function MysticalSpinner({
           </>
         )}
       </SpinnerContainer>
-      
+
       {text && (
-        <SpinnerText variant="body2" variant={variant}>
+        <SpinnerText variant="body2" color={variant}>
           {text}
         </SpinnerText>
       )}
-      
+
       {/* 애니메이션 키프레임 */}
       <style jsx global>{`
         @keyframes pulse {
@@ -199,7 +197,7 @@ export default function MysticalSpinner({
             opacity: 0.8;
           }
         }
-        
+
         @keyframes twinkle {
           0% {
             opacity: 0.3;
