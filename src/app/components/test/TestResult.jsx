@@ -9,6 +9,7 @@ import RelationshipAdvice from './RelationshipAdvice';
 import { AnimatedElement } from '../animations';
 import { getMbtiDescription } from '../../utils/mbti';
 import useResponsive from '../../hooks/useResponsive';
+import { FlipCard, StarryBackground } from '../mystical';
 
 // 스타일링된 결과 컨테이너
 const ResultContainer = styled(Box)(({ theme }) => ({
@@ -230,16 +231,49 @@ export default function TestResult({
     );
   }
 
-  return (
-    <Box>
-      <AnimatedElement animation="tarotReveal" duration="slow">
-        <TarotCard variant="result" title="당신의 MBTI 유형은">
-          <ResultContainer>
-            <AnimatedElement animation="fadeIn" duration="normal" delay={300}>
-              <MbtiType variant="h2" mbtiColor={mbtiColor}>
-                {mbtiType}
-              </MbtiType>
-            </AnimatedElement>
+  // 카드 앞면 - 로딩 상태
+  const cardFront = (
+    <ResultContainer>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', py: 8 }}>
+        <Typography variant="h4" sx={{ mb: 4, textAlign: 'center' }}>
+          당신의 MBTI 유형을 분석 중입니다...
+        </Typography>
+        <Box sx={{ position: 'relative', width: 150, height: 150 }}>
+          <Box sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            animation: 'spin 2s linear infinite',
+          }}>
+            <Box component="img" src="/images/tarot-back.png" alt="타로 카드" sx={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+          </Box>
+        </Box>
+        <Typography variant="body1" sx={{ mt: 4, textAlign: 'center' }}>
+          잠시만 기다려주세요...
+        </Typography>
+      </Box>
+      <style jsx global>{`
+        @keyframes spin {
+          0% { transform: rotateY(0deg); }
+          100% { transform: rotateY(360deg); }
+        }
+      `}</style>
+    </ResultContainer>
+  );
+
+  // 카드 뒷면 - 결과 표시
+  const cardBack = (
+    <ResultContainer>
+      <AnimatedElement animation="fadeIn" duration="normal" delay={300}>
+        <MbtiType variant="h2" mbtiColor={mbtiColor}>
+          {mbtiType}
+        </MbtiType>
+      </AnimatedElement>
 
             <AnimatedElement animation="fadeIn" duration="normal" delay={600}>
               <Typography
@@ -507,9 +541,28 @@ export default function TestResult({
             )}
           </Box>
         </AnimatedElement>
-          </ResultContainer>
-        </TarotCard>
-      </AnimatedElement>
+    </ResultContainer>
+  );
+
+  return (
+    <Box>
+      {/* 별 반짝임 배경 효과 */}
+      <Box sx={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+        <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
+      </Box>
+
+      {/* 타로 카드 뒤집기 애니메이션 */}
+      <FlipCard
+        front={cardFront}
+        back={cardBack}
+        frontVariant="mystical"
+        backVariant="result"
+        frontTitle="타로 카드 해석 중..."
+        backTitle="당신의 MBTI 유형은"
+        autoFlip={true}
+        autoFlipDelay={1500}
+        sx={{ maxWidth: 800, mx: 'auto' }}
+      />
 
       {/* 연애 조언 섹션 */}
       <Fade in={showAdvice} timeout={1000}>

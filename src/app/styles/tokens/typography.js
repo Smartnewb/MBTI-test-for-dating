@@ -1,6 +1,6 @@
 /**
  * 타이포그래피 시스템
- * 
+ *
  * 달빛 연애 연구소의 타이포그래피 시스템을 정의합니다.
  * 신비로운 타로 카드 컨셉을 반영한 폰트와 텍스트 스타일입니다.
  */
@@ -8,13 +8,16 @@
 // 폰트 패밀리
 export const fontFamily = {
   // 주요 폰트 (본문용)
-  primary: '"Pretendard", "Noto Sans KR", sans-serif',
-  
-  // 보조 폰트 (제목용)
-  secondary: '"Playfair Display", "Nanum Myeongjo", serif',
-  
+  primary: '"Pretendard Variable", "Pretendard", "Noto Sans KR", -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif',
+
+  // 보조 폰트 (제목용 - 신비로운 느낌의 세리프 폰트)
+  secondary: '"Playfair Display", "Nanum Myeongjo", "Gowun Batang", Georgia, Cambria, "Times New Roman", Times, serif',
+
+  // 장식 폰트 (타로 카드 제목용)
+  decorative: '"Cinzel Decorative", "Playfair Display SC", "Nanum Myeongjo", serif',
+
   // 모노스페이스 폰트 (코드용)
-  monospace: '"Roboto Mono", monospace',
+  monospace: '"Roboto Mono", "Source Code Pro", "Consolas", monospace',
 };
 
 // 폰트 크기
@@ -30,7 +33,7 @@ export const fontSize = {
   '4xl': '2.25rem', // 36px
   '5xl': '3rem', // 48px
   '6xl': '3.75rem', // 60px
-  
+
   // 반응형 크기 (모바일)
   mobile: {
     xs: '0.75rem', // 12px
@@ -148,7 +151,7 @@ export const variants = {
     textTransform: textTransform.none,
     marginBottom: '0.5em',
   },
-  
+
   // 부제목 스타일
   subtitle1: {
     fontFamily: fontFamily.primary,
@@ -168,7 +171,7 @@ export const variants = {
     textTransform: textTransform.none,
     marginBottom: '0.5em',
   },
-  
+
   // 본문 스타일
   body1: {
     fontFamily: fontFamily.primary,
@@ -188,7 +191,7 @@ export const variants = {
     textTransform: textTransform.none,
     marginBottom: '1em',
   },
-  
+
   // 버튼 스타일
   button: {
     fontFamily: fontFamily.primary,
@@ -198,7 +201,7 @@ export const variants = {
     letterSpacing: letterSpacing.wide,
     textTransform: textTransform.none,
   },
-  
+
   // 캡션 스타일
   caption: {
     fontFamily: fontFamily.primary,
@@ -208,7 +211,7 @@ export const variants = {
     letterSpacing: letterSpacing.normal,
     textTransform: textTransform.none,
   },
-  
+
   // 오버라인 스타일
   overline: {
     fontFamily: fontFamily.primary,
@@ -218,8 +221,8 @@ export const variants = {
     letterSpacing: letterSpacing.widest,
     textTransform: textTransform.uppercase,
   },
-  
-  // 특별 스타일
+
+  // 특별 스타일 - 타로 카드 테마에 맞게 조정
   mystical: {
     fontFamily: fontFamily.secondary,
     fontSize: fontSize['2xl'],
@@ -228,15 +231,32 @@ export const variants = {
     letterSpacing: letterSpacing.wide,
     textTransform: textTransform.none,
     fontStyle: 'italic',
+    textShadow: '0 0 5px rgba(212, 175, 55, 0.3)', // 골드 글로우 효과
   },
+
+  // 타로 카드 제목 스타일
   tarot: {
-    fontFamily: fontFamily.secondary,
+    fontFamily: fontFamily.decorative, // 장식 폰트 사용
     fontSize: fontSize.xl,
-    fontWeight: fontWeight.semibold,
+    fontWeight: fontWeight.bold,
     lineHeight: lineHeight.snug,
     letterSpacing: letterSpacing.wider,
     textTransform: textTransform.uppercase,
+    color: '#D4AF37', // 골드 색상
   },
+
+  // 타로 카드 설명 스타일
+  tarotDescription: {
+    fontFamily: fontFamily.secondary,
+    fontSize: fontSize.md,
+    fontWeight: fontWeight.regular,
+    lineHeight: lineHeight.relaxed,
+    letterSpacing: letterSpacing.normal,
+    fontStyle: 'italic',
+    color: 'rgba(255, 255, 255, 0.9)',
+  },
+
+  // 인용구 스타일
   quote: {
     fontFamily: fontFamily.secondary,
     fontSize: fontSize.lg,
@@ -245,7 +265,18 @@ export const variants = {
     letterSpacing: letterSpacing.normal,
     fontStyle: 'italic',
     paddingLeft: '1em',
-    borderLeft: '3px solid',
+    borderLeft: '3px solid #D4AF37', // 골드 색상 테두리
+  },
+
+  // 결과 페이지 제목 스타일
+  resultTitle: {
+    fontFamily: fontFamily.decorative,
+    fontSize: fontSize['4xl'],
+    fontWeight: fontWeight.bold,
+    lineHeight: lineHeight.tight,
+    letterSpacing: letterSpacing.wide,
+    textTransform: textTransform.none,
+    textShadow: '0 0 10px rgba(138, 79, 255, 0.5)', // 보라색 글로우 효과
   },
 };
 
@@ -255,15 +286,19 @@ export const responsive = {
   sm: {
     h1: {
       fontSize: fontSize.mobile['5xl'],
+      lineHeight: 1.2,
     },
     h2: {
       fontSize: fontSize.mobile['4xl'],
+      lineHeight: 1.2,
     },
     h3: {
       fontSize: fontSize.mobile['3xl'],
+      lineHeight: 1.3,
     },
     h4: {
       fontSize: fontSize.mobile['2xl'],
+      lineHeight: 1.3,
     },
     h5: {
       fontSize: fontSize.mobile.xl,
@@ -274,18 +309,53 @@ export const responsive = {
     mystical: {
       fontSize: fontSize.mobile['2xl'],
     },
+    tarot: {
+      fontSize: fontSize.mobile.xl,
+      letterSpacing: letterSpacing.wide,
+    },
+    resultTitle: {
+      fontSize: fontSize.mobile['3xl'],
+    },
+    body1: {
+      fontSize: fontSize.mobile.md,
+    },
+    body2: {
+      fontSize: fontSize.mobile.sm,
+    },
   },
-  
+
   // 태블릿 (900px 이하)
   md: {
     h1: {
       fontSize: fontSize['4xl'],
+      lineHeight: 1.2,
     },
     h2: {
       fontSize: fontSize['3xl'],
+      lineHeight: 1.2,
     },
     h3: {
       fontSize: fontSize['2xl'],
+      lineHeight: 1.3,
+    },
+    mystical: {
+      fontSize: fontSize['xl'],
+    },
+    resultTitle: {
+      fontSize: fontSize['3xl'],
+    },
+  },
+
+  // 데스크탑 (1200px 이상)
+  lg: {
+    h1: {
+      fontSize: fontSize['5xl'],
+    },
+    h2: {
+      fontSize: fontSize['4xl'],
+    },
+    resultTitle: {
+      fontSize: fontSize['5xl'],
     },
   },
 };

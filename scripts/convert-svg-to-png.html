@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVG to PNG Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    canvas {
+      border: 1px solid #ccc;
+      margin: 20px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #6B3FA0;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #4A235A;
+    }
+    .instructions {
+      background-color: #f5f5f5;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>SVG to PNG Converter</h1>
+    
+    <div class="instructions">
+      <h3>Instructions:</h3>
+      <ol>
+        <li>Open this file in a browser</li>
+        <li>The SVG will be loaded and converted to PNG</li>
+        <li>Click "Download PNG" to save the image</li>
+        <li>Save the file to <code>public/images/tarot-back.png</code></li>
+      </ol>
+    </div>
+    
+    <div id="svgContainer"></div>
+    <canvas id="canvas" width="300" height="450"></canvas>
+    <button id="downloadBtn">Download PNG</button>
+  </div>
+
+  <script>
+    // SVG 파일 경로
+    const svgPath = '../public/images/tarot-back.svg';
+    
+    // DOM 요소
+    const svgContainer = document.getElementById('svgContainer');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const downloadBtn = document.getElementById('downloadBtn');
+    
+    // SVG 로드 및 변환
+    fetch(svgPath)
+      .then(response => response.text())
+      .then(svgText => {
+        // SVG 표시
+        svgContainer.innerHTML = svgText;
+        const svgElement = svgContainer.querySelector('svg');
+        
+        // SVG를 이미지로 변환
+        const img = new Image();
+        const svgBlob = new Blob([svgText], { type: 'image/svg+xml' });
+        const url = URL.createObjectURL(svgBlob);
+        
+        img.onload = function() {
+          // 캔버스에 그리기
+          ctx.fillStyle = '#1A1A2E';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          URL.revokeObjectURL(url);
+        };
+        
+        img.src = url;
+      })
+      .catch(error => console.error('SVG 로드 실패:', error));
+    
+    // PNG 다운로드
+    downloadBtn.addEventListener('click', function() {
+      const link = document.createElement('a');
+      link.download = 'tarot-back.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    });
+  </script>
+</body>
+</html>

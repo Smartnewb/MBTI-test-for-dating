@@ -100,12 +100,21 @@ export const calculateMbtiScores = (questions, responses) => {
     // 응답이 없는 질문은 건너뜀
     if (!response) return;
 
-    // 응답 점수 계산 (1~5 범위)
-    let score = parseInt(response);
+    // 응답 점수 계산
+    // 'A' 또는 'B' 형식의 응답을 처리
+    let score;
+    if (response === 'A') {
+      score = 5; // A 선택 시 최대 점수
+    } else if (response === 'B') {
+      score = 1; // B 선택 시 최소 점수
+    } else {
+      // 숫자 형식의 응답 처리 (1~5 범위)
+      score = parseInt(response);
 
-    // 유효한 점수 범위 확인
-    if (isNaN(score) || score < RESPONSE_RANGE.MIN || score > RESPONSE_RANGE.MAX) {
-      return;
+      // 유효한 점수 범위 확인
+      if (isNaN(score) || score < RESPONSE_RANGE.MIN || score > RESPONSE_RANGE.MAX) {
+        return;
+      }
     }
 
     // 차원 카운트 증가

@@ -6,8 +6,12 @@ import TarotCard from '../../components/TarotCard';
 import MysticalButton from '../../components/MysticalButton';
 import MysticalTextField from '../../components/MysticalTextField';
 import MysticalProgress from '../../components/MysticalProgress';
-import QuestionCard from '../../components/QuestionCard';
+import QuestionCard from '../../components/test/QuestionCard';
 import ResultCard from '../../components/ResultCard';
+import ButtonExample from '../../components/examples/ButtonExample';
+import CardExample from '../../components/examples/CardExample';
+import ProgressExample from '../../components/examples/ProgressExample';
+import TestQuestionExample from '../../components/examples/TestQuestionExample';
 import SearchIcon from '@mui/icons-material/Search';
 import StarIcon from '@mui/icons-material/Star';
 
@@ -40,42 +44,16 @@ export default function ComponentsPage() {
       {/* 타로 카드 컴포넌트 */}
       <Box sx={{ mb: 6 }}>
         <Typography variant="h4" sx={{ mb: 3 }}>
-          타로 카드 (TarotCard)
+          타로 카드 컴포넌트 (TarotCard, FlipCard, QuestionCard, ResultCard)
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 3 }}>
           타로 카드 컴포넌트는 콘텐츠를 담는 기본 컨테이너입니다.
           신비로운 타로 카드 디자인을 적용하여 특별한 분위기를 연출합니다.
+          다양한 변형과 애니메이션 효과를 지원합니다.
         </Typography>
 
-        <Grid container spacing={3}>
-          <Grid item xs={12} md={4}>
-            <TarotCard title="Primary 변형" variant="primary">
-              <Typography variant="body1">
-                Primary 변형은 보라색 강조 색상을 사용합니다.
-                주요 콘텐츠를 표시할 때 사용합니다.
-              </Typography>
-            </TarotCard>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <TarotCard title="Secondary 변형" variant="secondary">
-              <Typography variant="body1">
-                Secondary 변형은 골드 강조 색상을 사용합니다.
-                보조 콘텐츠를 표시할 때 사용합니다.
-              </Typography>
-            </TarotCard>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            <TarotCard title="Mystical 변형" variant="mystical">
-              <Typography variant="body1">
-                Mystical 변형은 보라색과 골드의 그라데이션을 사용합니다.
-                특별한 콘텐츠를 강조할 때 사용합니다.
-              </Typography>
-            </TarotCard>
-          </Grid>
-        </Grid>
+        <CardExample />
       </Box>
 
       <Divider sx={{ my: 4 }} />
@@ -88,64 +66,10 @@ export default function ComponentsPage() {
 
         <Typography variant="body1" sx={{ mb: 3 }}>
           신비로운 버튼 컴포넌트는 사용자 상호작용을 위한 버튼입니다.
-          다양한 변형과 크기를 지원합니다.
+          다양한 변형과 크기, 상태를 지원하며 접근성을 준수합니다.
         </Typography>
 
-        <Paper sx={{ p: 4, mb: 3 }}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            변형
-          </Typography>
-
-          <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-            <MysticalButton variant="mystical">
-              Mystical 변형
-            </MysticalButton>
-
-            <MysticalButton variant="tarot">
-              Tarot 변형
-            </MysticalButton>
-
-            <MysticalButton variant="glow">
-              Glow 변형
-            </MysticalButton>
-          </Stack>
-
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            크기
-          </Typography>
-
-          <Stack direction="row" spacing={2} sx={{ mb: 3 }}>
-            <MysticalButton variant="mystical" size="small">
-              Small
-            </MysticalButton>
-
-            <MysticalButton variant="mystical" size="medium">
-              Medium
-            </MysticalButton>
-
-            <MysticalButton variant="mystical" size="large">
-              Large
-            </MysticalButton>
-          </Stack>
-
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            상태
-          </Typography>
-
-          <Stack direction="row" spacing={2}>
-            <MysticalButton variant="mystical">
-              기본
-            </MysticalButton>
-
-            <MysticalButton variant="mystical" disabled>
-              비활성화
-            </MysticalButton>
-
-            <MysticalButton variant="mystical" loading>
-              로딩 중
-            </MysticalButton>
-          </Stack>
-        </Paper>
+        <ButtonExample />
       </Box>
 
       <Divider sx={{ my: 4 }} />
@@ -237,122 +161,37 @@ export default function ComponentsPage() {
 
       <Divider sx={{ my: 4 }} />
 
+      {/* 테스트 질문 컴포넌트 */}
+      <Box sx={{ mb: 6 }}>
+        <Typography variant="h4" sx={{ mb: 3 }}>
+          테스트 질문 컴포넌트
+        </Typography>
+
+        <Typography variant="body1" sx={{ mb: 3 }}>
+          테스트 질문 컴포넌트는 MBTI 테스트 질문과 답변 옵션을 표시하기 위한 컴포넌트입니다.
+          질문 카드, 답변 옵션, 질문 전환 등 다양한 컴포넌트를 제공합니다.
+        </Typography>
+
+        <TestQuestionExample />
+      </Box>
+
+      <Divider sx={{ my: 4 }} />
+
       {/* 진행 상태 표시기 컴포넌트 */}
       <Box sx={{ mb: 6 }}>
         <Typography variant="h4" sx={{ mb: 3 }}>
-          신비로운 진행 상태 표시기 (MysticalProgress)
+          진행 상태 표시기 컴포넌트
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 3 }}>
-          신비로운 진행 상태 표시기 컴포넌트는 진행 상태를 표시하기 위한 컴포넌트입니다.
-          다양한 변형과 옵션을 지원합니다.
+          진행 상태 표시기 컴포넌트는 다양한 로딩 상태와 진행 상태를 표시하기 위한 컴포넌트입니다.
+          선형 진행 표시기, 스텝퍼, 스피너, 로더, 네비게이션 등 다양한 컴포넌트를 제공합니다.
         </Typography>
 
-        <Paper sx={{ p: 4, mb: 3 }}>
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            변형
-          </Typography>
-
-          <Stack spacing={3} sx={{ mb: 3 }}>
-            <MysticalProgress
-              variant="primary"
-              value={progress}
-              label="Primary 변형"
-            />
-
-            <MysticalProgress
-              variant="secondary"
-              value={progress}
-              label="Secondary 변형"
-            />
-
-            <MysticalProgress
-              variant="mystical"
-              value={progress}
-              label="Mystical 변형"
-            />
-          </Stack>
-
-          <Typography variant="h6" sx={{ mb: 2 }}>
-            단계 표시기
-          </Typography>
-
-          <MysticalProgress
-            variant="mystical"
-            value={progress}
-            label="단계 표시기"
-            totalSteps={5}
-            currentStep={3}
-          />
-
-          <Box sx={{ mt: 3 }}>
-            <MysticalButton
-              variant="mystical"
-              onClick={() => setProgress(prev => Math.min(prev + 10, 100))}
-              sx={{ mr: 1 }}
-            >
-              증가 (+10%)
-            </MysticalButton>
-
-            <MysticalButton
-              variant="tarot"
-              onClick={() => setProgress(prev => Math.max(prev - 10, 0))}
-            >
-              감소 (-10%)
-            </MysticalButton>
-          </Box>
-        </Paper>
+        <ProgressExample />
       </Box>
 
-      <Divider sx={{ my: 4 }} />
 
-      {/* 질문 카드 컴포넌트 */}
-      <Box sx={{ mb: 6 }}>
-        <Typography variant="h4" sx={{ mb: 3 }}>
-          질문 카드 (QuestionCard)
-        </Typography>
-
-        <Typography variant="body1" sx={{ mb: 3 }}>
-          질문 카드 컴포넌트는 MBTI 테스트 질문을 표시하기 위한 컴포넌트입니다.
-          질문 텍스트, 선택지, 진행 상태 등을 표시합니다.
-        </Typography>
-
-        <QuestionCard
-          questionNumber={3}
-          totalQuestions={24}
-          questionText="연애할 때 데이트 계획은?"
-          optionA="함께 세우는 게 재밌어요"
-          optionB="미리 계획해주면 좋겠어요"
-          selectedOption={selectedOption}
-          onAnswer={setSelectedOption}
-          onPrevious={() => alert('이전 질문으로 이동')}
-          sx={{ mb: 3 }}
-        />
-      </Box>
-
-      <Divider sx={{ my: 4 }} />
-
-      {/* 결과 카드 컴포넌트 */}
-      <Box sx={{ mb: 6 }}>
-        <Typography variant="h4" sx={{ mb: 3 }}>
-          결과 카드 (ResultCard)
-        </Typography>
-
-        <Typography variant="body1" sx={{ mb: 3 }}>
-          결과 카드 컴포넌트는 MBTI 테스트 결과를 표시하기 위한 컴포넌트입니다.
-          MBTI 유형, 설명, 강점, 약점, 연애 스타일 등을 표시합니다.
-        </Typography>
-
-        <ResultCard
-          mbtiType="INFP"
-          mbtiName="중재자"
-          description="이상주의적이고 감성적인 당신은 깊은 감정과 진정성을 중요시합니다."
-          strengths={['공감 능력', '진실된 소통', '창의적 표현', '깊은 유대감']}
-          weaknesses={['이상적 기대', '현실과 괴리', '갈등 회피', '감정 기복']}
-          datingStyle="깊은 정서적 연결과 의미 있는 대화를 통해 파트너와 특별한 유대감을 형성합니다."
-          mbtiColor="#8E24AA"
-        />
-      </Box>
     </Container>
   );
 }

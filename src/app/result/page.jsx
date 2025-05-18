@@ -10,6 +10,7 @@ import useMbtiTest from '../hooks/useMbtiTest';
 import { useSupabase } from '../contexts/SupabaseContext';
 import { saveTestResult, getTestResultByShareId } from '../services/resultService';
 import { getMbtiDescription } from '../utils/mbti';
+import { StarryBackground } from '../components/mystical';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import EmailIcon from '@mui/icons-material/Email';
 
@@ -161,7 +162,28 @@ function ResultContent() {
   if (isLoading) {
     return (
       <PageLayout variant="result">
+        {/* 별 반짝임 배경 효과 */}
+        <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+          <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
+        </Box>
+
         <Section centered fullHeight>
+          <AnimatedElement animation="pulse" duration="slow">
+            <Box component="img"
+              src="/images/tarot-back.svg"
+              alt="타로 카드"
+              sx={{
+                width: 150,
+                height: 225,
+                mb: 4,
+                animation: 'spin 3s linear infinite',
+                '@keyframes spin': {
+                  '0%': { transform: 'rotateY(0deg)' },
+                  '100%': { transform: 'rotateY(360deg)' }
+                }
+              }}
+            />
+          </AnimatedElement>
           <Typography variant="h4">결과를 불러오는 중...</Typography>
         </Section>
       </PageLayout>
@@ -173,19 +195,32 @@ function ResultContent() {
   if (!displayResult || !displayResult.mbtiType) {
     return (
       <PageLayout variant="result">
-        <Section centered fullHeight>
-          <Typography variant="h4">테스트 결과가 없습니다</Typography>
-          <Typography variant="body1" sx={{ mt: 2, mb: 4 }}>
-            테스트를 먼저 완료해주세요.
-          </Typography>
+        {/* 별 반짝임 배경 효과 */}
+        <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+          <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
+        </Box>
 
-          <Button
-            variant="contained"
-            color="primary"
-            onClick={() => router.push('/test')}
-          >
-            테스트 시작하기
-          </Button>
+        <Section centered fullHeight>
+          <AnimatedElement animation="fadeIn" duration="normal">
+            <Typography variant="h4">테스트 결과가 없습니다</Typography>
+            <Typography variant="body1" sx={{ mt: 2, mb: 4, textAlign: 'center' }}>
+              테스트를 먼저 완료해주세요.
+            </Typography>
+
+            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+              <AnimatedElement animation="pulse" duration="slow">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => router.push('/test')}
+                  size="large"
+                  sx={{ px: 4, py: 1.5 }}
+                >
+                  테스트 시작하기
+                </Button>
+              </AnimatedElement>
+            </Box>
+          </AnimatedElement>
         </Section>
       </PageLayout>
     );
@@ -193,15 +228,22 @@ function ResultContent() {
 
   return (
     <PageLayout variant="result">
+      {/* 별 반짝임 배경 효과 */}
+      <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+        <StarryBackground starCount={50} shootingStarCount={3} fogCount={5} />
+      </Box>
+
       <Section centered>
         <AnimatedElement animation="fadeIn" duration="normal">
           <Box sx={{ maxWidth: 800, mx: 'auto', my: 4 }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
-              <FavoriteIcon sx={{
-                fontSize: 60,
-                color: 'secondary.main',
-                filter: 'drop-shadow(0 0 10px rgba(156, 39, 176, 0.5))'
-              }} />
+              <AnimatedElement animation="pulse" duration="slow">
+                <FavoriteIcon sx={{
+                  fontSize: 60,
+                  color: 'secondary.main',
+                  filter: 'drop-shadow(0 0 10px rgba(156, 39, 176, 0.5))'
+                }} />
+              </AnimatedElement>
             </Box>
 
             <Typography variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
@@ -281,7 +323,28 @@ export default function ResultPage() {
   return (
     <Suspense fallback={
       <PageLayout variant="result">
+        {/* 별 반짝임 배경 효과 */}
+        <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+          <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
+        </Box>
+
         <Section centered fullHeight>
+          <AnimatedElement animation="pulse" duration="slow">
+            <Box component="img"
+              src="/images/tarot-back.svg"
+              alt="타로 카드"
+              sx={{
+                width: 150,
+                height: 225,
+                mb: 4,
+                animation: 'spin 3s linear infinite',
+                '@keyframes spin': {
+                  '0%': { transform: 'rotateY(0deg)' },
+                  '100%': { transform: 'rotateY(360deg)' }
+                }
+              }}
+            />
+          </AnimatedElement>
           <Typography variant="h4">결과를 불러오는 중...</Typography>
         </Section>
       </PageLayout>

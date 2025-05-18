@@ -1,12 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { SupabaseProvider } from './contexts/SupabaseContext';
-import theme from './styles/theme';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 /**
  * 애플리케이션 제공자 컴포넌트
@@ -30,8 +28,7 @@ export default function Providers({ children }) {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
+      <ThemeProvider>
         <SupabaseProvider>
           {children}
         </SupabaseProvider>
