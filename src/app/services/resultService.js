@@ -1,12 +1,12 @@
 /**
  * MBTI 테스트 결과 관련 서비스
- * 
+ *
  * 테스트 결과를 저장하고 가져오는 서비스입니다.
  */
 
 import { v4 as uuidv4 } from 'uuid';
 import supabase from '../utils/supabase';
-import { calculateMbtiType } from '../utils/questions';
+import { calculateMbtiType } from '../utils/mbtiAnalyzer';
 import { getIdealType, getWorstMatch } from '../utils/mbti';
 
 /**
@@ -29,7 +29,7 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
       j_p_score: scores.J - scores.P,
       share_id: uuidv4()
     };
-    
+
     // 사용자 ID 또는 세션 ID 추가
     if (userId) {
       resultData.user_id = userId;
@@ -38,24 +38,24 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
     } else {
       resultData.session_id = uuidv4(); // 새 세션 ID 생성
     }
-    
+
     // 이메일 추가 (있는 경우)
     if (email) {
       resultData.email = email;
     }
-    
+
     // Supabase에 결과 저장
     const { data, error } = await supabase
       .from('test_results')
       .insert([resultData]);
-    
+
     if (error) {
       console.error('Error saving test result:', error);
       throw error;
     }
-    
-    return { 
-      success: true, 
+
+    return {
+      success: true,
       data: data[0],
       shareId: resultData.share_id,
       sessionId: resultData.session_id
@@ -74,37 +74,25 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
 export const getTestResultByShareId = async (shareId) => {
   try {
     const { data, error } = await supabase
-      .rpc('get_test_result_by_share_id', { p_share_id: shareId });
-    
+      .rpc('get_mbti_result_by_share_id', { share_uuid: shareId });
+
     if (error) {
       console.error('Error fetching test result by share ID:', error);
       throw error;
     }
-    
-    if (!data || data.length === 0) {
+
+    if (!data) {
       return null;
     }
-    
-    // 결과 데이터 변환
-    const result = data[0];
-    const scores = {
-      E: result.e_i_score > 0 ? result.e_i_score : 0,
-      I: result.e_i_score < 0 ? -result.e_i_score : 0,
-      S: result.s_n_score > 0 ? result.s_n_score : 0,
-      N: result.s_n_score < 0 ? -result.s_n_score : 0,
-      T: result.t_f_score > 0 ? result.t_f_score : 0,
-      F: result.t_f_score < 0 ? -result.t_f_score : 0,
-      J: result.j_p_score > 0 ? result.j_p_score : 0,
-      P: result.j_p_score < 0 ? -result.j_p_score : 0
+
+    // 결과 데이터 변환 및 추가 정보 계산
+    const result = {
+      ...data,
+      idealType: getIdealType(data.mbtiType),
+      worstMatch: getWorstMatch(data.mbtiType)
     };
-    
-    return {
-      mbtiType: result.mbti_type,
-      scores,
-      idealType: getIdealType(result.mbti_type),
-      worstMatch: getWorstMatch(result.mbti_type),
-      createdAt: result.created_at
-    };
+
+    return result;
   } catch (error) {
     console.error('Failed to fetch test result by share ID:', error);
     return null;
@@ -123,12 +111,12 @@ export const getTestResultsByUserId = async (userId) => {
       .select('*')
       .eq('user_id', userId)
       .order('created_at', { ascending: false });
-    
+
     if (error) {
       console.error('Error fetching test results by user ID:', error);
       throw error;
     }
-    
+
     return data;
   } catch (error) {
     console.error('Failed to fetch test results by user ID:', error);
@@ -148,12 +136,12 @@ export const getTestResultsBySessionId = async (sessionId) => {
       .select('*')
       .eq('session_id', sessionId)
       .order('created_at', { ascending: false });
-    
+
     if (error) {
       console.error('Error fetching test results by session ID:', error);
       throw error;
     }
-    
+
     return data;
   } catch (error) {
     console.error('Failed to fetch test results by session ID:', error);
@@ -161,9 +149,43 @@ export const getTestResultsBySessionId = async (sessionId) => {
   }
 };
 
+/**
+ * 결과 ID로 상세 테스트 결과 가져오기
+ * @param {number} resultId - 결과 ID
+ * @returns {Promise<Object>} 상세 테스트 결과
+ */
+export const getDetailedTestResult = async (resultId) => {
+  try {
+    const { data, error } = await supabase
+      .rpc('get_detailed_mbti_result', { result_id: resultId });
+
+    if (error) {
+      console.error('Error fetching detailed test result:', error);
+      throw error;
+    }
+
+    if (!data) {
+      return null;
+    }
+
+    // 결과 데이터 변환 및 추가 정보 계산
+    const result = {
+      ...data,
+      idealType: getIdealType(data.mbtiType),
+      worstMatch: getWorstMatch(data.mbtiType)
+    };
+
+    return result;
+  } catch (error) {
+    console.error('Failed to fetch detailed test result:', error);
+    return null;
+  }
+};
+
 export default {
   saveTestResult,
   getTestResultByShareId,
   getTestResultsByUserId,
-  getTestResultsBySessionId
+  getTestResultsBySessionId,
+  getDetailedTestResult
 };

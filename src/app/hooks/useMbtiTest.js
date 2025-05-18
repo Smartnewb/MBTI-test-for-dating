@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import useTestStore from '../store/testStore';
 import { getQuestions, saveUserResponse } from '../services/questionService';
 import { getIdealType, getWorstMatch } from '../utils/mbti';
+import { saveTestResult } from '../utils/mbtiAnalyzer';
 import { useSupabase } from '../contexts/SupabaseContext';
 
 /**
@@ -123,7 +124,7 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
   /**
    * 테스트 완료 및 결과 계산
    */
-  const finishTest = useCallback(() => {
+  const finishTest = useCallback(async () => {
     const testResult = completeTest();
 
     if (testResult && testResult.mbtiType) {
@@ -135,12 +136,20 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
       const worst = getWorstMatch(testResult.mbtiType);
       setWorstMatch(worst);
 
+      // Supabase에 결과 저장
+      try {
+        await saveTestResult(testResult, user?.id, sessionId);
+      } catch (err) {
+        console.error('Failed to save test result to Supabase:', err);
+        // 저장 실패 시에도 UI 흐름은 계속 진행
+      }
+
       // 결과 페이지로 이동
       router.push('/result');
     }
 
     return testResult;
-  }, [completeTest, router]);
+  }, [completeTest, router, user, sessionId]);
 
   /**
    * 테스트 시작
