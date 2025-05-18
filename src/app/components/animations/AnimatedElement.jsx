@@ -9,19 +9,58 @@ import { animations } from '../../styles/tokens/animations';
 const StyledAnimatedElement = styled(Box)(({ theme, animation, duration, delay, easing, infinite }) => {
   // 애니메이션 키프레임 선택
   const keyframe = animations.keyframes[animation];
-  
+
   // 애니메이션 지속 시간 선택
-  const animationDuration = typeof duration === 'string' 
-    ? animations.duration[duration] 
+  const animationDuration = typeof duration === 'string'
+    ? animations.duration[duration]
     : duration;
-  
+
   // 애니메이션 이징 함수 선택
   const animationEasing = animations.easing[easing] || easing;
-  
+
+  // 애니메이션 특수 스타일
+  let specialStyles = {};
+
+  // 특수 애니메이션 스타일 적용
+  if (animation) {
+    switch (animation) {
+      case 'tarotReveal':
+        specialStyles = {
+          transformStyle: 'preserve-3d',
+          perspective: '1000px',
+        };
+        break;
+
+      case 'float':
+        specialStyles = {
+          transform: 'translateY(0)',
+        };
+        break;
+
+      case 'typing':
+        specialStyles = {
+          overflow: 'hidden',
+          whiteSpace: 'nowrap',
+          borderRight: '3px solid',
+          width: '0',
+        };
+        break;
+
+      case 'glow':
+        specialStyles = {
+          transition: 'box-shadow 0.3s ease',
+        };
+        break;
+    }
+  }
+
   return {
     // 애니메이션 스타일
-    animation: keyframe && `${animation} ${animationDuration}ms ${animationEasing} ${delay}ms ${infinite ? 'infinite' : ''}`,
-    
+    animation: keyframe && `${animation} ${animationDuration}ms ${animationEasing} ${delay}ms ${infinite ? 'infinite' : 'forwards'}`,
+
+    // 특수 스타일 적용
+    ...specialStyles,
+
     // 애니메이션 키프레임 정의
     '@keyframes fadeIn': animations.keyframes.fadeIn,
     '@keyframes fadeOut': animations.keyframes.fadeOut,
@@ -37,14 +76,20 @@ const StyledAnimatedElement = styled(Box)(({ theme, animation, duration, delay, 
     '@keyframes flipCard': animations.keyframes.flipCard,
     '@keyframes ripple': animations.keyframes.ripple,
     '@keyframes gradientShift': animations.keyframes.gradientShift,
+    '@keyframes tarotReveal': animations.keyframes.tarotReveal,
+    '@keyframes mysticalShake': animations.keyframes.mysticalShake,
+    '@keyframes float': animations.keyframes.float,
+    '@keyframes flash': animations.keyframes.flash,
+    '@keyframes typing': animations.keyframes.typing,
+    '@keyframes blink': animations.keyframes.blink,
   };
 });
 
 /**
  * 애니메이션 요소 컴포넌트
- * 
+ *
  * 애니메이션 효과를 적용한 요소 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} [props.animation='fadeIn'] - 애니메이션 유형
  * @param {string|number} [props.duration='normal'] - 애니메이션 지속 시간 (ms 또는 'fast', 'normal', 'slow' 등)
@@ -57,30 +102,30 @@ const StyledAnimatedElement = styled(Box)(({ theme, animation, duration, delay, 
  * @param {Object} [props.sx] - 추가 스타일
  */
 const AnimatedElement = forwardRef(function AnimatedElement(props, ref) {
-  const { 
-    animation = 'fadeIn', 
+  const {
+    animation = 'fadeIn',
     duration = 'normal',
     delay = 0,
     easing = 'easeInOut',
     infinite = false,
     onScroll = false,
     threshold = 0.2,
-    children, 
-    sx = {}, 
-    ...other 
+    children,
+    sx = {},
+    ...other
   } = props;
-  
+
   // 내부 참조 생성
   const elementRef = useRef(null);
   const resolvedRef = ref || elementRef;
-  
+
   // 애니메이션 상태
   const [isVisible, setIsVisible] = useState(!onScroll);
-  
+
   // 스크롤 애니메이션 처리
   useEffect(() => {
     if (!onScroll || typeof window === 'undefined') return;
-    
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -90,25 +135,25 @@ const AnimatedElement = forwardRef(function AnimatedElement(props, ref) {
       },
       { threshold }
     );
-    
+
     if (resolvedRef.current) {
       observer.observe(resolvedRef.current);
     }
-    
+
     return () => {
       if (resolvedRef.current) {
         observer.unobserve(resolvedRef.current);
       }
     };
   }, [onScroll, resolvedRef, threshold]);
-  
+
   // 애니메이션 지속 시간 계산
-  const animationDuration = typeof duration === 'string' 
-    ? animations.duration[duration] 
+  const animationDuration = typeof duration === 'string'
+    ? animations.duration[duration]
     : duration;
-  
+
   return (
-    <StyledAnimatedElement 
+    <StyledAnimatedElement
       ref={resolvedRef}
       animation={isVisible ? animation : null}
       duration={animationDuration}

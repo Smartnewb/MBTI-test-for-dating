@@ -1,6 +1,6 @@
 /**
  * 애니메이션 시스템
- * 
+ *
  * 달빛 연애 연구소의 애니메이션 시스템을 정의합니다.
  * 신비로운 타로 카드 컨셉을 반영한 애니메이션과 전환 효과입니다.
  */
@@ -14,7 +14,7 @@ export const duration = {
   complex: 375,
   enteringScreen: 225,
   leavingScreen: 195,
-  
+
   // 커스텀 지속 시간
   fast: 300,
   normal: 500,
@@ -29,7 +29,7 @@ export const easing = {
   easeOut: 'cubic-bezier(0.0, 0, 0.2, 1)',
   easeIn: 'cubic-bezier(0.4, 0, 1, 1)',
   sharp: 'cubic-bezier(0.4, 0, 0.6, 1)',
-  
+
   // 커스텀 이징
   mystical: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
   magical: 'cubic-bezier(0.6, 0.01, 0.05, 1)',
@@ -48,7 +48,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 페이드 아웃
   fadeOut: {
     from: {
@@ -58,7 +58,7 @@ export const keyframes = {
       opacity: 0,
     },
   },
-  
+
   // 위로 슬라이드
   slideUp: {
     from: {
@@ -70,7 +70,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 아래로 슬라이드
   slideDown: {
     from: {
@@ -82,7 +82,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 왼쪽에서 슬라이드
   slideRight: {
     from: {
@@ -94,7 +94,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 오른쪽에서 슬라이드
   slideLeft: {
     from: {
@@ -106,7 +106,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 확대
   zoomIn: {
     from: {
@@ -118,7 +118,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 축소
   zoomOut: {
     from: {
@@ -130,7 +130,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 회전
   rotate: {
     from: {
@@ -142,7 +142,7 @@ export const keyframes = {
       opacity: 1,
     },
   },
-  
+
   // 빛나는 효과
   glow: {
     '0%': {
@@ -155,7 +155,7 @@ export const keyframes = {
       boxShadow: '0 0 5px rgba(107, 63, 160, 0.5), 0 0 10px rgba(212, 175, 55, 0.3)',
     },
   },
-  
+
   // 별 반짝임 효과
   twinkle: {
     '0%': {
@@ -171,7 +171,7 @@ export const keyframes = {
       transform: 'scale(1)',
     },
   },
-  
+
   // 카드 뒤집기 효과
   flipCard: {
     '0%': {
@@ -181,7 +181,7 @@ export const keyframes = {
       transform: 'rotateY(180deg)',
     },
   },
-  
+
   // 물결 효과
   ripple: {
     '0%': {
@@ -193,7 +193,7 @@ export const keyframes = {
       opacity: 0,
     },
   },
-  
+
   // 그라데이션 이동 효과
   gradientShift: {
     '0%': {
@@ -204,6 +204,92 @@ export const keyframes = {
     },
     '100%': {
       backgroundPosition: '0% 50%',
+    },
+  },
+
+  // 타로 카드 등장 효과
+  tarotReveal: {
+    '0%': {
+      transform: 'translateY(20px) rotateY(90deg)',
+      opacity: 0,
+    },
+    '100%': {
+      transform: 'translateY(0) rotateY(0)',
+      opacity: 1,
+    },
+  },
+
+  // 신비로운 흔들림 효과
+  mysticalShake: {
+    '0%': {
+      transform: 'translateX(0)',
+    },
+    '25%': {
+      transform: 'translateX(-5px) rotate(-1deg)',
+    },
+    '50%': {
+      transform: 'translateX(5px) rotate(1deg)',
+    },
+    '75%': {
+      transform: 'translateX(-5px) rotate(-1deg)',
+    },
+    '100%': {
+      transform: 'translateX(0)',
+    },
+  },
+
+  // 부유 효과
+  float: {
+    '0%': {
+      transform: 'translateY(0)',
+    },
+    '50%': {
+      transform: 'translateY(-10px)',
+    },
+    '100%': {
+      transform: 'translateY(0)',
+    },
+  },
+
+  // 빛 번쩍임 효과
+  flash: {
+    '0%': {
+      opacity: 1,
+    },
+    '25%': {
+      opacity: 0.5,
+    },
+    '50%': {
+      opacity: 1,
+    },
+    '75%': {
+      opacity: 0.5,
+    },
+    '100%': {
+      opacity: 1,
+    },
+  },
+
+  // 텍스트 타이핑 효과
+  typing: {
+    '0%': {
+      width: '0%',
+    },
+    '100%': {
+      width: '100%',
+    },
+  },
+
+  // 텍스트 커서 깜빡임 효과
+  blink: {
+    '0%': {
+      borderRightColor: 'transparent',
+    },
+    '50%': {
+      borderRightColor: 'currentColor',
+    },
+    '100%': {
+      borderRightColor: 'transparent',
     },
   },
 };
@@ -223,7 +309,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 위로 슬라이드
   slideUp: {
     hidden: {
@@ -239,7 +325,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 아래로 슬라이드
   slideDown: {
     hidden: {
@@ -255,7 +341,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 왼쪽에서 슬라이드
   slideRight: {
     hidden: {
@@ -271,7 +357,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 오른쪽에서 슬라이드
   slideLeft: {
     hidden: {
@@ -287,7 +373,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 확대
   zoomIn: {
     hidden: {
@@ -303,7 +389,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 축소
   zoomOut: {
     hidden: {
@@ -319,7 +405,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 회전
   rotate: {
     hidden: {
@@ -335,7 +421,7 @@ export const variants = {
       },
     },
   },
-  
+
   // 스태거 (자식 요소 순차 애니메이션)
   stagger: {
     hidden: {},
