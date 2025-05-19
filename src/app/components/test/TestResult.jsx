@@ -31,7 +31,7 @@ const colorChangeAnimation = keyframes`
   100% { background-position: 0% 50%; }
 `;
 
-// 마법 구슬 버튼 스타일 - 이제 div를 기반으로 함
+// 마법 구슬 버튼 스타일 - 이제 div를 기반으로 함 (수정됨)
 const _MagicOrbButton = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
