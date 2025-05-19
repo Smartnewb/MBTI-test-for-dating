@@ -8,18 +8,7 @@ import { PageLayout, Section } from '../../components/layout';
 import TestResult from '../../components/test/TestResult';
 import { getTestResultByShareId } from '../../services/resultService';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { MBTI_TYPES } from '../../utils/mbti';
-
-/**
- * 정적 경로 생성을 위한 함수
- * Next.js의 정적 사이트 생성(SSG)을 위해 필요
- */
-export function generateStaticParams() {
-  // 모든 MBTI 유형에 대한 샘플 ID 생성
-  return MBTI_TYPES.map(type => ({
-    id: `sample-${type.toLowerCase()}`,
-  }));
-}
+// MBTI_TYPES import 제거 (사용하지 않음)
 
 /**
  * 공유된 MBTI 테스트 결과 페이지
