@@ -62,11 +62,22 @@ jobs:
         run: npm run build
         # Using our custom build script that handles problematic pages
 
+      - name: Check build output
+        run: |
+          if [ -d ".next" ]; then
+            echo "Build output directory exists"
+            ls -la .next
+          else
+            echo "Build output directory does not exist"
+            exit 1
+          fi
+
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-output
           path: .next
+          if-no-files-found: error # Fail the workflow if no files are found
 
   deploy:
     name: Deploy to Vercel
@@ -86,11 +97,30 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: List available artifacts
+        run: |
+          echo "Listing available artifacts for this workflow run"
+          # This is just for debugging purposes
+          curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts" | \
+            jq '.artifacts[] | {name: .name, size: .size_in_bytes, expired: .expired}'
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: build-output
           path: .next
+
+      - name: Verify downloaded artifacts
+        run: |
+          if [ -d ".next" ]; then
+            echo "Build output directory exists after download"
+            ls -la .next
+          else
+            echo "Build output directory does not exist after download"
+            mkdir -p .next
+            echo "Created empty .next directory to continue workflow"
+          fi
 
       - name: Create .env file for Vercel
         run: |
@@ -104,7 +134,16 @@ jobs:
         run: npm install -g vercel
 
       - name: Deploy to Vercel
-        run: vercel deploy --prod --token ${VERCEL_TOKEN} --yes
+        run: |
+          # Check if .next directory has content
+          if [ "$(ls -A .next 2>/dev/null)" ]; then
+            echo "Using pre-built artifacts for deployment"
+            vercel deploy --prod --token ${VERCEL_TOKEN} --yes
+          else
+            echo "No build artifacts found, deploying with Vercel's build process"
+            # Let Vercel handle the build process
+            vercel deploy --prod --token ${VERCEL_TOKEN} --yes --build
+          fi
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
