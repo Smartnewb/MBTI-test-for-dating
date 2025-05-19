@@ -285,7 +285,6 @@ export default async function Image({ params }) {
               fontWeight: 'bold',
               marginBottom: 20,
               textAlign: 'center',
-              fontFamily: 'Noto Sans KR',
             }}
           >
             달빛 연애 연구소
@@ -296,7 +295,6 @@ export default async function Image({ params }) {
               color: 'white',
               fontWeight: 'bold',
               textAlign: 'center',
-              fontFamily: 'Playfair Display',
             }}
           >
             MBTI 연애 테스트 결과
@@ -305,20 +303,6 @@ export default async function Image({ params }) {
       ),
       {
         ...size,
-        fonts: [
-          {
-            name: 'Noto Sans KR',
-            data: notoSansKR,
-            style: 'normal',
-            weight: 700,
-          },
-          {
-            name: 'Playfair Display',
-            data: playfairDisplay,
-            style: 'normal',
-            weight: 700,
-          },
-        ],
       }
     );
   }
