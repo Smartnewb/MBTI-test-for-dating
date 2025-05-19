@@ -357,7 +357,6 @@ export default function TestResult({
     // 카드가 뒤집힌 후 탭이 보이도록 초기 탭 설정 - 성격 특성 탭(0)으로 설정
     setActiveTab(0);
   }, []);
-
   // 점수 계산
   const calculateScore = (dimension) => {
     let score1, score2, label1, label2;
@@ -1087,3 +1086,6 @@ export default function TestResult({
     </Box>
   );
 }
+=======
+  };
+>>>>>>> 66fb07ab3d54306f326f5bb0ce7ec9e6b7a59772
