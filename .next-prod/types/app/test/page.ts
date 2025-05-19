@@ -1,4 +1,4 @@
-// File: C:\Users\전준영\Documents\augment-projects\MBTI test for dating\src\app\test\page.jsx
+// File: /Users/smartnewbie/Desktop/MBTI-test-for-dating/src/app/test/page.jsx
 import * as entry from '../../../../src/app/test/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

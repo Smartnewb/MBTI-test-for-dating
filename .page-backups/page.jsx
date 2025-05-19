@@ -1,17 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import {
-  Box,
-  Typography,
-  Container,
-  Paper,
-  Divider,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-} from '@mui/material';
+import { Box, Typography, Container, Paper, Divider, Button, Grid, Card, CardContent } from '@mui/material';
 import { AnimatedElement, AnimatedGroup } from '../../components/animations';
 import { animations } from '../../styles/tokens/animations';
 import MysticalButton from '../../components/MysticalButton';
@@ -27,17 +17,17 @@ export default function AnimationsPage() {
   const [playAnimation, setPlayAnimation] = useState({});
 
   // 애니메이션 재생 토글
-  const toggleAnimation = animation => {
+  const toggleAnimation = (animation) => {
     setPlayAnimation(prev => ({
       ...prev,
-      [animation]: !prev[animation],
+      [animation]: !prev[animation]
     }));
 
     // 애니메이션 재생 후 상태 초기화
     setTimeout(() => {
       setPlayAnimation(prev => ({
         ...prev,
-        [animation]: false,
+        [animation]: false
       }));
     }, animations.duration.normal * 2);
   };
@@ -51,15 +41,13 @@ export default function AnimationsPage() {
             {title}
           </Typography>
 
-          <Box
-            sx={{
-              height: 120,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              mb: 2,
-            }}
-          >
+          <Box sx={{
+            height: 120,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            mb: 2
+          }}>
             <AnimatedElement
               animation={animation}
               duration="normal"
@@ -75,7 +63,7 @@ export default function AnimationsPage() {
                   alignItems: 'center',
                   justifyContent: 'center',
                   bgcolor: 'primary.main',
-                  color: 'white',
+                  color: 'white'
                 }}
               >
                 {animation}
@@ -107,8 +95,8 @@ export default function AnimationsPage() {
       </Typography>
 
       <Typography variant="subtitle1" sx={{ mb: 4 }}>
-        달빛 연애 연구소의 애니메이션 시스템은 신비로운 타로 카드 컨셉을 반영합니다. 부드럽고 우아한
-        애니메이션을 통해 사용자 경험을 향상시킵니다.
+        달빛 연애 연구소의 애니메이션 시스템은 신비로운 타로 카드 컨셉을 반영합니다.
+        부드럽고 우아한 애니메이션을 통해 사용자 경험을 향상시킵니다.
       </Typography>
 
       <AnimationExample />
@@ -122,8 +110,8 @@ export default function AnimationsPage() {
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 3 }}>
-          기본 애니메이션은 요소의 등장, 전환, 강조 등에 사용됩니다. 다양한 애니메이션 유형을
-          제공하여 상황에 맞게 사용할 수 있습니다.
+          기본 애니메이션은 요소의 등장, 전환, 강조 등에 사용됩니다.
+          다양한 애니메이션 유형을 제공하여 상황에 맞게 사용할 수 있습니다.
         </Typography>
 
         <Grid container spacing={3}>
@@ -186,26 +174,24 @@ export default function AnimationsPage() {
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 3 }}>
-          특수 애니메이션은 신비로운 타로 카드 컨셉을 강화하는 데 사용됩니다. 빛나는 효과, 별
-          반짝임, 카드 뒤집기 등 독특한 애니메이션을 제공합니다.
+          특수 애니메이션은 신비로운 타로 카드 컨셉을 강화하는 데 사용됩니다.
+          빛나는 효과, 별 반짝임, 카드 뒤집기 등 독특한 애니메이션을 제공합니다.
         </Typography>
 
         <Paper sx={{ p: 4, mb: 3, position: 'relative', overflow: 'hidden' }}>
-          <Box
-            sx={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 0,
-              background: 'linear-gradient(135deg, #6B3FA0 0%, #D4AF37 100%)',
-              backgroundSize: '200% 200%',
-              animation: 'gradientShift 5s ease infinite',
-              opacity: 0.05,
-              '@keyframes gradientShift': animations.keyframes.gradientShift,
-            }}
-          />
+          <Box sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 0,
+            background: 'linear-gradient(135deg, #6B3FA0 0%, #D4AF37 100%)',
+            backgroundSize: '200% 200%',
+            animation: 'gradientShift 5s ease infinite',
+            opacity: 0.05,
+            '@keyframes gradientShift': animations.keyframes.gradientShift,
+          }} />
 
           <Box sx={{ position: 'relative', zIndex: 1 }}>
             <Typography variant="h5" sx={{ mb: 3 }}>
@@ -230,8 +216,8 @@ export default function AnimationsPage() {
             </Box>
 
             <Typography variant="body2" color="text.secondary">
-              빛나는 효과는 중요한 요소를 강조하거나 신비로운 분위기를 연출할 때 사용됩니다. 버튼,
-              카드, 아이콘 등에 적용하여 사용자의 주의를 끌 수 있습니다.
+              빛나는 효과는 중요한 요소를 강조하거나 신비로운 분위기를 연출할 때 사용됩니다.
+              버튼, 카드, 아이콘 등에 적용하여 사용자의 주의를 끌 수 있습니다.
             </Typography>
           </Box>
         </Paper>
@@ -246,8 +232,8 @@ export default function AnimationsPage() {
         </Typography>
 
         <Typography variant="body1" sx={{ mb: 3 }}>
-          애니메이션 그룹은 여러 요소에 순차적으로 애니메이션을 적용할 때 사용됩니다. 목록, 카드
-          그리드 등에 적용하여 시각적 흐름을 만들 수 있습니다.
+          애니메이션 그룹은 여러 요소에 순차적으로 애니메이션을 적용할 때 사용됩니다.
+          목록, 카드 그리드 등에 적용하여 시각적 흐름을 만들 수 있습니다.
         </Typography>
 
         <Paper sx={{ p: 4, mb: 3 }}>
@@ -271,7 +257,7 @@ export default function AnimationsPage() {
             staggerDelay={100}
             initialDelay={0}
           >
-            {[1, 2, 3, 4, 5].map(item => (
+            {[1, 2, 3, 4, 5].map((item) => (
               <Paper
                 key={item}
                 elevation={3}
@@ -298,7 +284,9 @@ export default function AnimationsPage() {
                 >
                   {item}
                 </Box>
-                <Typography variant="body1">스태거 애니메이션 아이템 {item}</Typography>
+                <Typography variant="body1">
+                  스태거 애니메이션 아이템 {item}
+                </Typography>
               </Paper>
             ))}
           </AnimatedGroup>
