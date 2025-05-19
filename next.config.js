@@ -13,8 +13,8 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Use standard output for better compatibility with Vercel
-  output: 'export',
+  // Allow server-side rendering for dynamic routes
+  // output: 'export', // Removed to allow SSR for dynamic routes
   // Configure dynamic rendering for all pages
   experimental: {
     serverActions: {
