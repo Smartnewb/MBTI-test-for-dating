@@ -70,9 +70,43 @@ export const DIRECTIONS = {
  * @returns {Array<Question>} 프론트엔드 형식의 질문 데이터
  */
 export const formatQuestionsFromSupabase = supabaseQuestions => {
+  // 한국어 질문 매핑 (영어 질문을 한국어로 변환)
+  const koreanQuestions = {
+    'I enjoy being the center of attention': '나는 관심의 중심이 되는 것을 즐긴다',
+    'I prefer one-on-one conversations to group activities':
+      '나는 그룹 활동보다 일대일 대화를 선호한다',
+    'I feel comfortable in social situations': '나는 사회적 상황에서 편안함을 느낀다',
+    'I need quiet time to recharge after social events':
+      '나는 사회적 모임 후에 혼자만의 시간이 필요하다',
+    'I tend to think out loud': '나는 생각을 소리 내어 말하는 경향이 있다',
+    'I focus on details rather than the big picture': '나는 큰 그림보다 세부 사항에 집중한다',
+    'I trust facts and concrete information more than intuition':
+      '나는 직관보다 사실과 구체적인 정보를 더 신뢰한다',
+    'I prefer practical solutions over theoretical ones':
+      '나는 이론적인 해결책보다 실용적인 해결책을 선호한다',
+    'I often think about future possibilities': '나는 종종 미래의 가능성에 대해 생각한다',
+    'I make decisions based on logic rather than emotions':
+      '나는 감정보다 논리에 기반하여 결정을 내린다',
+    'I value truth over tact': '나는 재치보다 진실을 중요시한다',
+    'I prefer to analyze problems rather than discuss feelings':
+      '나는 감정을 논의하기보다 문제를 분석하는 것을 선호한다',
+    "I am sensitive to others' feelings": '나는 다른 사람들의 감정에 민감하다',
+    'I consider how my decisions will affect others':
+      '나는 내 결정이 다른 사람들에게 어떤 영향을 미칠지 고려한다',
+    'I prefer to have a detailed plan rather than be spontaneous':
+      '나는 즉흥적이기보다 상세한 계획을 갖는 것을 선호한다',
+    'I like to have things decided and settled': '나는 일이 결정되고 정리되는 것을 좋아한다',
+    'I find it stressful when things are disorganized':
+      '나는 일이 정리되지 않을 때 스트레스를 느낀다',
+    'I prefer to keep my options open': '나는 선택의 여지를 열어두는 것을 선호한다',
+    'I am flexible and adapt easily to new situations': '나는 유연하고 새로운 상황에 쉽게 적응한다',
+    'I enjoy thinking about abstract concepts': '나는 추상적인 개념에 대해 생각하는 것을 즐긴다',
+  };
+
   return supabaseQuestions.map(q => ({
     id: q.id,
-    question: q.question,
+    // 한국어 질문이 있으면 사용하고, 없으면 원래 영어 질문 사용
+    question: koreanQuestions[q.question] || q.question,
     optionA: q.option_a,
     optionB: q.option_b,
     dimension: q.dimension,
