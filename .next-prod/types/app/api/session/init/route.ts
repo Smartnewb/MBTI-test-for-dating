@@ -1,4 +1,4 @@
-// File: C:\Users\전준영\Documents\augment-projects\MBTI test for dating\src\app\api\session\init\route.js
+// File: /Users/smartnewbie/Desktop/MBTI-test-for-dating/src/app/api/session/init/route.js
 import * as entry from '../../../../../../src/app/api/session/init/route.js'
 import type { NextRequest } from 'next/server.js'
 
