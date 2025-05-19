@@ -25,7 +25,8 @@ const QuestionNumber = styled(Typography)(({ theme }) => ({
   fontWeight: 500, // medium weight (500)
   fontSize: '1rem',
   color: theme.palette.secondary.main,
-  marginBottom: theme.spacing(2),
+  marginBottom: theme.spacing(1), // 마진 감소
+  marginTop: theme.spacing(1), // 상단 마진 추가
   position: 'relative',
   display: 'inline-block',
 
@@ -167,7 +168,10 @@ export default function QuestionCard({
   // 질문이 없는 경우 로딩 표시
   if (!question) {
     return (
-      <TarotCard variant="primary" sx={{ maxWidth: 600, mx: 'auto', minHeight: 500, ...sx }}>
+      <TarotCard
+        variant="primary"
+        sx={{ width: '100%', maxWidth: 600, mx: 'auto', minHeight: 500, ...sx }}
+      >
         <QuestionContainer>
           <AnimatedElement animation="pulse" duration="slow">
             <Typography variant="h5" sx={{ textAlign: 'center', my: 10 }}>
@@ -184,6 +188,7 @@ export default function QuestionCard({
       ref={cardRef}
       variant="primary"
       sx={{
+        width: '100%',
         maxWidth: 600,
         mx: 'auto',
         minHeight: 500,
@@ -203,6 +208,7 @@ export default function QuestionCard({
               label={`질문 ${questionNumber}/${totalQuestions}`}
               totalSteps={totalQuestions}
               currentStep={questionNumber}
+              sx={{ mb: 0 }} // 하단 마진 제거
             />
           </AnimatedElement>
 

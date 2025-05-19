@@ -7,13 +7,12 @@ import {
   Divider,
   IconButton,
   useMediaQuery,
+  Tooltip,
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import Link from 'next/link';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import InstagramIcon from '@mui/icons-material/Instagram';
-import GitHubIcon from '@mui/icons-material/GitHub';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import Container from './Container';
 import { Grid, GridItem } from './Grid';
 
@@ -119,8 +118,8 @@ export default function Footer({ sx = {} }) {
   return (
     <StyledFooter component="footer" sx={sx}>
       <Container>
-        <Grid gutter="large">
-          <GridItem xs={12} md={4}>
+        <Box sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 4 }}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 60%' } }}>
             <FooterLogo variant="h6">달빛 연애 연구소</FooterLogo>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
               MBTI 기반의 연애 성향 분석과 궁합 정보를 제공하는 서비스입니다. 나와 잘 맞는 연인을
@@ -128,22 +127,39 @@ export default function Footer({ sx = {} }) {
             </Typography>
 
             <Box sx={{ display: 'flex', mt: 2 }}>
-              <SocialIconButton aria-label="facebook">
-                <FacebookIcon />
-              </SocialIconButton>
-              <SocialIconButton aria-label="twitter">
-                <TwitterIcon />
-              </SocialIconButton>
-              <SocialIconButton aria-label="instagram">
-                <InstagramIcon />
-              </SocialIconButton>
-              <SocialIconButton aria-label="github">
-                <GitHubIcon />
-              </SocialIconButton>
+              <Tooltip title="인스타그램" arrow placement="top">
+                <SocialIconButton
+                  aria-label="instagram"
+                  component="a"
+                  href="https://www.instagram.com/sometime.in.univ/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <InstagramIcon />
+                </SocialIconButton>
+              </Tooltip>
+              <Tooltip title="썸타임: 대학생 소개팅" arrow placement="top">
+                <SocialIconButton
+                  aria-label="sometime"
+                  component="a"
+                  href="https://some-in-univ.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  sx={{
+                    color: theme => theme.palette.error.main,
+                    '&:hover': {
+                      color: theme => theme.palette.error.dark,
+                      backgroundColor: theme => `${theme.palette.error.main}10`,
+                    },
+                  }}
+                >
+                  <FavoriteIcon />
+                </SocialIconButton>
+              </Tooltip>
             </Box>
-          </GridItem>
+          </Box>
 
-          <GridItem xs={6} md={2}>
+          <Box sx={{ flex: { xs: '1 1 100%', md: '1 1 40%' } }}>
             <FooterSectionTitle variant="subtitle2">서비스</FooterSectionTitle>
             <Link href="/" passHref>
               <FooterLink>홈</FooterLink>
@@ -159,8 +175,8 @@ export default function Footer({ sx = {} }) {
             >
               <FooterLink>썸타임: 대학생 소개팅</FooterLink>
             </Link>
-          </GridItem>
-        </Grid>
+          </Box>
+        </Box>
 
         <Divider sx={{ my: 4 }} />
 

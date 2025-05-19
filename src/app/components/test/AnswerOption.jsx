@@ -11,9 +11,14 @@ const OptionContainer = styled(Paper)(({ theme, selected, disabled }) => ({
   display: 'flex',
   alignItems: 'center',
   width: '100%',
-  padding: theme.spacing(2, 3),
+  padding: theme.spacing(2, 2.5),
   marginBottom: theme.spacing(2),
   borderRadius: theme.shape.borderRadius * 2,
+
+  // 반응형 패딩 조정
+  [theme.breakpoints.up('sm')]: {
+    padding: theme.spacing(2, 3),
+  },
   cursor: disabled ? 'default' : 'pointer',
   overflow: 'hidden',
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
@@ -32,7 +37,9 @@ const OptionContainer = styled(Paper)(({ theme, selected, disabled }) => ({
   // 호버 상태 (비활성화되지 않은 경우)
   ...(!disabled && {
     '&:hover': {
-      backgroundColor: selected ? `${theme.palette.primary.main}15` : `${theme.palette.background.default}80`,
+      backgroundColor: selected
+        ? `${theme.palette.primary.main}15`
+        : `${theme.palette.background.default}80`,
       borderColor: selected ? theme.palette.primary.main : theme.palette.primary.light,
       transform: 'translateY(-2px)',
       boxShadow: `0 4px 8px ${theme.palette.primary.main}20`,
@@ -58,7 +65,9 @@ const OptionContainer = styled(Paper)(({ theme, selected, disabled }) => ({
     left: 0,
     right: 0,
     bottom: 0,
-    background: selected ? `linear-gradient(135deg, ${theme.palette.primary.main}05, ${theme.palette.primary.main}15)` : 'transparent',
+    background: selected
+      ? `linear-gradient(135deg, ${theme.palette.primary.main}05, ${theme.palette.primary.main}15)`
+      : 'transparent',
     opacity: 0.5,
     zIndex: 0,
     transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
@@ -82,6 +91,12 @@ const OptionLabel = styled(Typography)(({ theme, selected }) => ({
   color: selected ? theme.palette.text.primary : theme.palette.text.secondary,
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
   zIndex: 1,
+  fontSize: '0.9rem', // 모바일에서 기본 폰트 크기 조정
+
+  // 반응형 폰트 크기
+  [theme.breakpoints.up('sm')]: {
+    fontSize: '1rem',
+  },
 }));
 
 // 스타일링된 옵션 마커
@@ -89,16 +104,23 @@ const OptionMarker = styled(Box)(({ theme, selected }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: 28,
-  height: 28,
+  width: 26, // 모바일에서 기본 크기 조정
+  height: 26, // 모바일에서 기본 크기 조정
   borderRadius: '50%',
   backgroundColor: selected ? theme.palette.primary.main : 'transparent',
   border: `2px solid ${selected ? theme.palette.primary.main : theme.palette.divider}`,
   color: selected ? theme.palette.primary.contrastText : theme.palette.text.secondary,
   fontWeight: 700, // bold (700)
-  marginRight: theme.spacing(2),
+  marginRight: theme.spacing(1.5), // 모바일에서 기본 마진 조정
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
   zIndex: 1,
+
+  // 반응형 크기 조정
+  [theme.breakpoints.up('sm')]: {
+    width: 28,
+    height: 28,
+    marginRight: theme.spacing(2),
+  },
 }));
 
 /**
@@ -135,7 +157,7 @@ const AnswerOption = forwardRef(function AnswerOption(props, ref) {
   };
 
   // 키보드 핸들러
-  const handleKeyDown = (event) => {
+  const handleKeyDown = event => {
     if (!disabled && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
       onChange(value);
@@ -157,9 +179,7 @@ const AnswerOption = forwardRef(function AnswerOption(props, ref) {
         elevation={selected ? 2 : 0}
         {...other}
       >
-        <OptionMarker selected={selected}>
-          {value}
-        </OptionMarker>
+        <OptionMarker selected={selected}>{value}</OptionMarker>
 
         <OptionLabel variant="body1" selected={selected}>
           {label}

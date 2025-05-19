@@ -24,14 +24,24 @@ const CardsContainer = styled(Box)(({ theme }) => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  marginBottom: theme.spacing(1),
+  marginBottom: theme.spacing(2),
   position: 'relative',
   perspective: '1000px',
-  minHeight: 100,
+  minHeight: 150, // 높이 증가
   overflow: 'hidden',
   width: '100%',
-  maxWidth: 600,
+  maxWidth: 800, // 최대 너비 증가
   margin: '0 auto',
+
+  // 반응형 크기 조정
+  [theme.breakpoints.down('md')]: {
+    minHeight: 120,
+    maxWidth: 700,
+  },
+  [theme.breakpoints.down('sm')]: {
+    minHeight: 100,
+    maxWidth: 600,
+  },
 }));
 
 // 스타일링된 카드 트랙
@@ -67,8 +77,9 @@ const CarouselNavButton = styled(IconButton)(({ theme, direction }) => ({
 
 // 스타일링된 미니 카드 (TarotCard 대신 직접 Card 사용)
 const MiniCard = styled(Card)(({ theme, active, isHovered, color }) => ({
-  maxWidth: 150, // 너비 설정
-  height: 60, // 카드 높이 더 줄임
+  width: '100%', // 너비를 100%로 설정하여 컨테이너에 맞춤
+  maxWidth: 280, // 최대 너비 증가
+  height: 100, // 카드 높이 증가
   margin: theme.spacing(0, 1), // 마진 줄임
   flex: '0 0 auto',
   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -80,11 +91,21 @@ const MiniCard = styled(Card)(({ theme, active, isHovered, color }) => ({
     isHovered || active
       ? `0 8px 16px rgba(0, 0, 0, 0.3), 0 0 15px ${color || theme.palette.primary.main}40`
       : `0 4px 10px rgba(0, 0, 0, 0.2)`,
-  borderRadius: 8,
+  borderRadius: 12,
   background: color
     ? `linear-gradient(135deg, ${color}, ${color}DD)`
     : `linear-gradient(135deg, ${theme.palette.primary.main}, ${theme.palette.primary.dark})`,
   overflow: 'hidden',
+
+  // 반응형 크기 조정
+  [theme.breakpoints.down('md')]: {
+    height: 80, // 태블릿에서는 높이 줄임
+    maxWidth: 220,
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: 70, // 모바일에서는 더 줄임
+    maxWidth: 180,
+  },
 
   // 그라데이션 효과
   '&::before': {
@@ -432,7 +453,7 @@ export default function IntroCallToAction() {
                           display: 'flex',
                           justifyContent: 'center',
                           alignItems: 'center',
-                          padding: 1,
+                          padding: { xs: 1.5, sm: 2, md: 2.5 },
                         }}
                       >
                         <MiniCard
@@ -442,14 +463,21 @@ export default function IntroCallToAction() {
                           onMouseEnter={() => handleCardHover(card.id)}
                           onMouseLeave={handleCardLeave}
                         >
-                          <CardContent sx={{ p: 0.75, height: '100%' }}>
+                          <CardContent
+                            sx={{
+                              p: { xs: 1, sm: 1.5, md: 2 },
+                              height: '100%',
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}
+                          >
                             <Box
                               sx={{
                                 display: 'flex',
                                 flexDirection: 'row',
                                 alignItems: 'center',
                                 justifyContent: 'flex-start',
-                                height: '100%',
+                                width: '100%',
                                 position: 'relative',
                               }}
                             >
@@ -457,8 +485,8 @@ export default function IntroCallToAction() {
                                 sx={{
                                   display: 'flex',
                                   alignItems: 'center',
-                                  mr: 0.75,
-                                  ml: 0.25,
+                                  mr: { xs: 1, sm: 1.5, md: 2 },
+                                  ml: { xs: 0.5, sm: 0.5, md: 0.5 },
                                 }}
                               >
                                 <AnimatedIcon
@@ -466,7 +494,7 @@ export default function IntroCallToAction() {
                                   duration="slow"
                                   infinite={isActive}
                                   color="white"
-                                  size="small"
+                                  size={isActive ? 'medium' : 'small'}
                                 >
                                   {card.icon}
                                 </AnimatedIcon>
@@ -478,10 +506,11 @@ export default function IntroCallToAction() {
                                   sx={{
                                     color: 'white',
                                     fontWeight: 'bold',
-                                    fontSize: '0.7rem',
-                                    lineHeight: 1.1,
-                                    mb: 0.1,
-                                    textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
+                                    fontSize: { xs: '0.9rem', sm: '1.1rem', md: '1.3rem' },
+                                    lineHeight: 1.2,
+                                    mb: 0.5,
+                                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)',
+                                    letterSpacing: '0.02em',
                                   }}
                                 >
                                   {card.title}
@@ -492,8 +521,8 @@ export default function IntroCallToAction() {
                                   sx={{
                                     color: 'white',
                                     fontWeight: 'medium',
-                                    fontSize: '0.5rem',
-                                    lineHeight: 1.1,
+                                    fontSize: { xs: '0.7rem', sm: '0.8rem', md: '0.9rem' },
+                                    lineHeight: 1.2,
                                     opacity: 0.9,
                                     textShadow: '0 1px 3px rgba(0, 0, 0, 0.2)',
                                   }}

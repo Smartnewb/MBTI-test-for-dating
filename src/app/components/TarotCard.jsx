@@ -6,7 +6,8 @@ import { styled } from '@mui/material/styles';
 // 스타일링된 타로 카드
 const StyledCard = styled(Card)(({ theme, variant, interactive = true }) => ({
   borderRadius: 16,
-  maxWidth: 380, // 최대 너비 증가: 350 -> 380
+  width: '100%', // 너비를 100%로 설정
+  maxWidth: 450, // 최대 너비 증가: 380 -> 450
   minHeight: 550, // 높이 증가: 450 -> 550
   margin: '0 auto',
   position: 'relative',
@@ -45,13 +46,13 @@ const StyledCard = styled(Card)(({ theme, variant, interactive = true }) => ({
   border: `1px solid ${theme.palette.primary.dark}`,
 
   // 호버 효과 (인터랙티브 모드일 때만)
-  ...((interactive && {
+  ...(interactive && {
     '&:hover': {
       transform: 'translateY(-5px)',
       boxShadow: '0 15px 30px rgba(0, 0, 0, 0.7)',
     },
     cursor: 'pointer',
-  })),
+  }),
 
   // 텍스처 효과
   '&::before': {
@@ -78,10 +79,11 @@ const StyledCard = styled(Card)(({ theme, variant, interactive = true }) => ({
       right: 0,
       bottom: 0,
       borderRadius: 16,
-      background: 'radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%)',
+      background:
+        'radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0) 50%)',
       pointerEvents: 'none',
-    }
-  })
+    },
+  }),
 }));
 
 // 카드 테두리 장식 (테두리 제거)
@@ -130,7 +132,7 @@ const CardCorner = styled(Box)(({ theme, position, variant }) => ({
       ...(position === 'top-right' && { top: 3, right: 3 }),
       ...(position === 'bottom-left' && { bottom: 3, left: 3 }),
       ...(position === 'bottom-right' && { bottom: 3, right: 3 }),
-    }
+    },
   }),
 }));
 
@@ -183,10 +185,10 @@ export default function TarotCard({
   interactive = true,
   onClick,
   ariaLabel,
-  sx = {}
+  sx = {},
 }) {
   // 접근성을 위한 키보드 이벤트 핸들러
-  const handleKeyDown = (event) => {
+  const handleKeyDown = event => {
     if (onClick && (event.key === 'Enter' || event.key === ' ')) {
       event.preventDefault();
       onClick();
@@ -211,9 +213,7 @@ export default function TarotCard({
       <CardCorner position="bottom-right" variant={variant} />
 
       {/* 심볼 장식 (result, mystical 변형에만 표시) */}
-      {(variant === 'result' || variant === 'mystical') && (
-        <CardSymbol variant={variant} />
-      )}
+      {(variant === 'result' || variant === 'mystical') && <CardSymbol variant={variant} />}
 
       <CardContent sx={{ p: 4, height: '100%', display: 'flex', flexDirection: 'column' }}>
         {title && (
@@ -224,14 +224,18 @@ export default function TarotCard({
               textAlign: 'center',
               mb: 3,
               fontWeight: 'bold',
-              color: variant === 'primary' || variant === 'secondary' || variant === 'mystical' || variant === 'result'
-                ? 'white'
-                : 'text.primary',
+              color:
+                variant === 'primary' ||
+                variant === 'secondary' ||
+                variant === 'mystical' ||
+                variant === 'result'
+                  ? 'white'
+                  : 'text.primary',
               textShadow: '0 2px 4px rgba(0,0,0,0.5)',
               ...(variant === 'result' && {
                 color: '#D4AF37',
                 letterSpacing: '0.05em',
-              })
+              }),
             }}
           >
             {title}
