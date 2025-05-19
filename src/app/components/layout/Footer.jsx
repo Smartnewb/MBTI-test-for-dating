@@ -1,6 +1,13 @@
 'use client';
 
-import { Box, Typography, Link as MuiLink, Divider, IconButton, useMediaQuery } from '@mui/material';
+import {
+  Box,
+  Typography,
+  Link as MuiLink,
+  Divider,
+  IconButton,
+  useMediaQuery,
+} from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import Link from 'next/link';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -116,8 +123,8 @@ export default function Footer({ sx = {} }) {
           <GridItem xs={12} md={4}>
             <FooterLogo variant="h6">달빛 연애 연구소</FooterLogo>
             <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              MBTI 기반의 연애 성향 분석과 궁합 정보를 제공하는 서비스입니다.
-              나와 잘 맞는 연인을 찾고, 더 나은 연애를 위한 인사이트를 얻어보세요.
+              MBTI 기반의 연애 성향 분석과 궁합 정보를 제공하는 서비스입니다. 나와 잘 맞는 연인을
+              찾고, 더 나은 연애를 위한 인사이트를 얻어보세요.
             </Typography>
 
             <Box sx={{ display: 'flex', mt: 2 }}>
@@ -137,80 +144,38 @@ export default function Footer({ sx = {} }) {
           </GridItem>
 
           <GridItem xs={6} md={2}>
-            <FooterSectionTitle variant="subtitle2">
-              서비스
-            </FooterSectionTitle>
+            <FooterSectionTitle variant="subtitle2">서비스</FooterSectionTitle>
             <Link href="/" passHref>
               <FooterLink>홈</FooterLink>
             </Link>
             <Link href="/test" passHref>
               <FooterLink>MBTI 테스트</FooterLink>
             </Link>
-            <Link href="/types" passHref>
-              <FooterLink>MBTI 유형</FooterLink>
+            <Link
+              href="https://some-in-univ.com"
+              passHref
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <FooterLink>썸타임: 대학생 소개팅</FooterLink>
             </Link>
-            <Link href="/compatibility" passHref>
-              <FooterLink>궁합 확인</FooterLink>
-            </Link>
-          </GridItem>
-
-          <GridItem xs={6} md={2}>
-            <FooterSectionTitle variant="subtitle2">
-              정보
-            </FooterSectionTitle>
-            <Link href="/about" passHref>
-              <FooterLink>소개</FooterLink>
-            </Link>
-            <Link href="/faq" passHref>
-              <FooterLink>자주 묻는 질문</FooterLink>
-            </Link>
-            <Link href="/privacy" passHref>
-              <FooterLink>개인정보처리방침</FooterLink>
-            </Link>
-            <Link href="/terms" passHref>
-              <FooterLink>이용약관</FooterLink>
-            </Link>
-          </GridItem>
-
-          <GridItem xs={12} md={4}>
-            <FooterSectionTitle variant="subtitle2">
-              뉴스레터 구독
-            </FooterSectionTitle>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
-              최신 MBTI 연애 팁과 관계 심리학 정보를 받아보세요.
-            </Typography>
-
-            {/* 뉴스레터 구독 폼은 추후 구현 */}
           </GridItem>
         </Grid>
 
         <Divider sx={{ my: 4 }} />
 
-        <Box sx={{
-          display: 'flex',
-          flexDirection: isMobile ? 'column' : 'row',
-          justifyContent: 'space-between',
-          alignItems: isMobile ? 'center' : 'flex-start',
-          textAlign: isMobile ? 'center' : 'left',
-        }}>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            justifyContent: 'space-between',
+            alignItems: isMobile ? 'center' : 'flex-start',
+            textAlign: isMobile ? 'center' : 'left',
+          }}
+        >
           <Typography variant="body2" color="text.secondary">
             © {currentYear} 달빛 연애 연구소. All rights reserved.
           </Typography>
-
-          {!isMobile && (
-            <Box sx={{ display: 'flex' }}>
-              <Link href="/privacy" passHref>
-                <MuiLink variant="body2" color="text.secondary" sx={{ mx: 1 }}>
-                  개인정보처리방침
-                </MuiLink>
-              </Link>
-              <Link href="/terms" passHref>
-                <MuiLink variant="body2" color="text.secondary" sx={{ mx: 1 }}>
-                  이용약관
-                </MuiLink>
-              </Link>
-            </Box>
-          )}
         </Box>
       </Container>
     </StyledFooter>

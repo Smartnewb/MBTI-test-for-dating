@@ -166,8 +166,7 @@ export default function Header({ transparent = false, sx = {} }) {
   const navLinks = [
     { text: '홈', href: '/' },
     { text: 'MBTI 테스트', href: '/test' },
-    { text: 'MBTI 유형', href: '/types' },
-    { text: '궁합 확인', href: '/compatibility' },
+    { text: '썸타임: 대학생 소개팅', href: 'https://some-in-univ.com' },
   ];
 
   // 모바일 드로어 내용
