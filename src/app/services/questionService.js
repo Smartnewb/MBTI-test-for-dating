@@ -4,14 +4,9 @@
  * Supabase에서 MBTI 질문 데이터를 가져오거나 샘플 데이터를 사용하는 서비스입니다.
  */
 
-import { createClient } from '@supabase/supabase-js';
 import sampleQuestions from '../utils/sampleQuestions';
 import { formatQuestionsFromSupabase } from '../utils/questions';
-
-// Supabase 클라이언트 생성
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import * as supabaseUtils from '../utils/supabase';
 
 /**
  * Supabase에서 MBTI 질문 데이터 가져오기
@@ -19,7 +14,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
  */
 export const fetchQuestionsFromSupabase = async () => {
   try {
-    const { data, error } = await supabase.getAllQuestions();
+    const { data, error } = await supabaseUtils.getAllQuestions();
 
     if (error) {
       console.error('Error fetching questions from Supabase:', error);
@@ -40,7 +35,7 @@ export const fetchQuestionsFromSupabase = async () => {
  */
 export const fetchQuestionsByDimension = async dimension => {
   try {
-    const { data, error } = await supabase.getQuestionsByDimension(dimension);
+    const { data, error } = await supabaseUtils.getQuestionsByDimension(dimension);
 
     if (error) {
       console.error(`Error fetching ${dimension} questions from Supabase:`, error);
@@ -116,10 +111,10 @@ export const saveUserResponse = async (sessionId, questionId, answer, userId = n
 
     if (userId) {
       // 인증된 사용자인 경우
-      result = await supabase.saveUserResponse(userId, questionId, answer);
+      result = await supabaseUtils.saveUserResponse(userId, questionId, answer);
     } else {
       // 익명 사용자인 경우
-      result = await supabase.saveAnonymousResponse(sessionId, questionId, answer);
+      result = await supabaseUtils.saveAnonymousResponse(sessionId, questionId, answer);
     }
 
     const { data, error } = result;
@@ -143,7 +138,7 @@ export const saveUserResponse = async (sessionId, questionId, answer, userId = n
  */
 export const saveTestResult = async resultData => {
   try {
-    const { data, error } = await supabase.saveTestResult(resultData);
+    const { data, error } = await supabaseUtils.saveTestResult(resultData);
 
     if (error) {
       console.error('Error saving test result:', error);
