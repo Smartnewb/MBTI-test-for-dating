@@ -13,8 +13,8 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Use standalone output for better compatibility with Vercel
-  output: 'standalone',
+  // Use standard output for better compatibility with Vercel
+  output: 'export',
   // Configure dynamic rendering for all pages
   experimental: {
     serverActions: {
@@ -26,8 +26,8 @@ const nextConfig = {
   skipMiddlewareUrlNormalize: true,
   // Exclude problematic pages from static generation
   excludeDefaultMomentLocales: true,
-  // Disable static generation for problematic design system pages
-  distDir: process.env.NODE_ENV === 'production' ? '.next-prod' : '.next',
+  // Use standard .next directory for Vercel compatibility
+  distDir: '.next',
   onDemandEntries: {
     // Keep pages in memory longer during development
     maxInactiveAge: 60 * 60 * 1000,
