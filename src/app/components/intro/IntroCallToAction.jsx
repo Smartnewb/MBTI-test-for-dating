@@ -226,8 +226,8 @@ export default function IntroCallToAction() {
   );
 
   return (
-    <MysticalSection variant="mystical" hasStars={false}>
-      <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+    <MysticalSection variant="mystical" hasStars={false} sx={{ pb: 8 }}>
+      <Box sx={{ position: 'relative', overflow: 'visible' }}>
         <AnimatedBackground type="stars" starCount={0} />
 
         {/* 별 장식 */}

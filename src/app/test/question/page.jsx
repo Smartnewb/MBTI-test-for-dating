@@ -28,7 +28,7 @@ export default function QuestionPage() {
     isTestCompleted,
     saveAnswer,
     goToPreviousQuestion,
-    handleCompleteTest
+    finishTest
   } = useMbtiTest();
 
   // 테스트 완료 시 결과 페이지로 이동
@@ -91,14 +91,8 @@ export default function QuestionPage() {
 
   // 응답 처리 핸들러
   const handleAnswer = (answer) => {
-    // 마지막 질문인 경우 테스트 완료 처리
-    if (currentQuestionIndex === questions.length - 1) {
-      saveAnswer(currentQuestion.id, answer);
-      handleCompleteTest();
-    } else {
-      // 다음 질문으로 이동
-      saveAnswer(currentQuestion.id, answer);
-    }
+    // saveAnswer 함수 내부에서 마지막 질문인 경우 finishTest를 호출함
+    saveAnswer(currentQuestion.id, answer);
   };
 
   return (

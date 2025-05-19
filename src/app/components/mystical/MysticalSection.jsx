@@ -11,7 +11,8 @@ const SectionContainer = styled(Box)(({ theme, variant }) => {
   const baseStyles = {
     position: 'relative',
     padding: theme.spacing(8, 0),
-    overflow: 'hidden'
+    overflow: 'visible', // hidden에서 visible로 변경
+    marginBottom: theme.spacing(4) // 하단 여백 추가
   };
 
   if (variant === 'dark') {

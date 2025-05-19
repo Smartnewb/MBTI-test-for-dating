@@ -17,18 +17,18 @@ const OptionContainer = styled(Paper)(({ theme, selected, disabled }) => ({
   cursor: disabled ? 'default' : 'pointer',
   overflow: 'hidden',
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
-  
+
   // 기본 스타일
   backgroundColor: theme.palette.background.paper,
   border: `1px solid ${theme.palette.divider}`,
-  
+
   // 선택된 상태
   ...(selected && {
     backgroundColor: `${theme.palette.primary.main}10`,
     borderColor: theme.palette.primary.main,
     boxShadow: `0 0 10px ${theme.palette.primary.main}40`,
   }),
-  
+
   // 호버 상태 (비활성화되지 않은 경우)
   ...(!disabled && {
     '&:hover': {
@@ -42,14 +42,14 @@ const OptionContainer = styled(Paper)(({ theme, selected, disabled }) => ({
       boxShadow: `0 2px 4px ${theme.palette.primary.main}20`,
     },
   }),
-  
+
   // 비활성화 상태
   ...(disabled && {
     opacity: 0.6,
     backgroundColor: theme.palette.action.disabledBackground,
     borderColor: theme.palette.action.disabled,
   }),
-  
+
   // 배경 효과
   '&::before': {
     content: '""',
@@ -78,7 +78,7 @@ const StyledRadio = styled(Radio)(({ theme, selected }) => ({
 const OptionLabel = styled(Typography)(({ theme, selected }) => ({
   flexGrow: 1,
   fontFamily: theme.typography.fontFamily.secondary,
-  fontWeight: selected ? theme.typography.fontWeight.medium : theme.typography.fontWeight.regular,
+  fontWeight: selected ? 500 : 400, // medium (500) or regular (400)
   color: selected ? theme.palette.text.primary : theme.palette.text.secondary,
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
   zIndex: 1,
@@ -95,7 +95,7 @@ const OptionMarker = styled(Box)(({ theme, selected }) => ({
   backgroundColor: selected ? theme.palette.primary.main : 'transparent',
   border: `2px solid ${selected ? theme.palette.primary.main : theme.palette.divider}`,
   color: selected ? theme.palette.primary.contrastText : theme.palette.text.secondary,
-  fontWeight: theme.typography.fontWeight.bold,
+  fontWeight: 700, // bold (700)
   marginRight: theme.spacing(2),
   transition: `all ${theme.transitions.duration.standard}ms ${theme.transitions.easing.easeInOut}`,
   zIndex: 1,
@@ -103,9 +103,9 @@ const OptionMarker = styled(Box)(({ theme, selected }) => ({
 
 /**
  * 답변 옵션 컴포넌트
- * 
+ *
  * MBTI 테스트 질문의 답변 옵션을 표시하는 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} props.value - 옵션 값 ('A' 또는 'B')
  * @param {string} props.label - 옵션 라벨
@@ -126,14 +126,14 @@ const AnswerOption = forwardRef(function AnswerOption(props, ref) {
     sx = {},
     ...other
   } = props;
-  
+
   // 클릭 핸들러
   const handleClick = () => {
     if (!disabled && onChange) {
       onChange(value);
     }
   };
-  
+
   // 키보드 핸들러
   const handleKeyDown = (event) => {
     if (!disabled && (event.key === 'Enter' || event.key === ' ')) {
@@ -141,7 +141,7 @@ const AnswerOption = forwardRef(function AnswerOption(props, ref) {
       onChange(value);
     }
   };
-  
+
   return (
     <AnimatedElement animation="slideRight" duration="normal" delay={index * 150}>
       <OptionContainer
@@ -160,11 +160,11 @@ const AnswerOption = forwardRef(function AnswerOption(props, ref) {
         <OptionMarker selected={selected}>
           {value}
         </OptionMarker>
-        
+
         <OptionLabel variant="body1" selected={selected}>
           {label}
         </OptionLabel>
-        
+
         <StyledRadio
           checked={selected}
           disabled={disabled}

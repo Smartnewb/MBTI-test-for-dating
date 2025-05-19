@@ -16,6 +16,7 @@ const StyledContainer = styled(Box)(({ theme, maxWidth, centered, fullHeight }) 
     marginRight: 'auto',
     paddingLeft: theme.spacing(2),
     paddingRight: theme.spacing(2),
+    overflow: 'visible', // 오버플로우 허용
 
     // 최대 너비 설정
     ...(maxWidth === 'xs' && {

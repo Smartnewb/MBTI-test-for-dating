@@ -13,7 +13,9 @@ const StyledPageLayout = styled(Box)(({ theme, variant }) => ({
   minHeight: '100vh',
   backgroundColor: theme.palette.background.default,
   position: 'relative',
-  
+  overflowX: 'hidden', // 가로 스크롤 방지
+  paddingBottom: '2rem', // 하단 여백 추가
+
   // 배경 효과
   '&::before': {
     content: '""',
@@ -22,13 +24,13 @@ const StyledPageLayout = styled(Box)(({ theme, variant }) => ({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: 
-      `radial-gradient(circle at 25% 25%, ${theme.palette.primary.main}15 0%, transparent 50%), 
+    backgroundImage:
+      `radial-gradient(circle at 25% 25%, ${theme.palette.primary.main}15 0%, transparent 50%),
        radial-gradient(circle at 75% 75%, ${theme.palette.secondary.main}10 0%, transparent 50%)`,
     zIndex: 0,
     pointerEvents: 'none',
   },
-  
+
   // 별 배경 효과
   '&::after': {
     content: '""',
@@ -37,7 +39,7 @@ const StyledPageLayout = styled(Box)(({ theme, variant }) => ({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: 
+    backgroundImage:
       `radial-gradient(circle at 15% 15%, #FFFFFF 0%, transparent 0.1%),
        radial-gradient(circle at 35% 45%, #FFFFFF 0%, transparent 0.05%),
        radial-gradient(circle at 55% 25%, #FFFFFF 0%, transparent 0.08%),
@@ -49,25 +51,25 @@ const StyledPageLayout = styled(Box)(({ theme, variant }) => ({
     zIndex: 0,
     pointerEvents: 'none',
   },
-  
+
   // 기본 변형
   ...(variant === 'default' && {
     // 기본 스타일
   }),
-  
+
   // 테스트 변형
   ...(variant === 'test' && {
     '&::before': {
-      backgroundImage: 
-        `radial-gradient(circle at 25% 25%, ${theme.palette.primary.main}20 0%, transparent 60%), 
+      backgroundImage:
+        `radial-gradient(circle at 25% 25%, ${theme.palette.primary.main}20 0%, transparent 60%),
          radial-gradient(circle at 75% 75%, ${theme.palette.secondary.main}15 0%, transparent 60%)`,
     },
   }),
-  
+
   // 결과 변형
   ...(variant === 'result' && {
     '&::before': {
-      backgroundImage: 
+      backgroundImage:
         `radial-gradient(circle at 50% 50%, ${theme.palette.secondary.main}20 0%, transparent 70%)`,
     },
   }),
@@ -82,9 +84,9 @@ const MainContent = styled(Box)(({ theme }) => ({
 
 /**
  * 페이지 레이아웃 컴포넌트
- * 
+ *
  * 전체 페이지 레이아웃을 구성하는 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {string} [props.variant='default'] - 레이아웃 변형 ('default', 'test', 'result')
  * @param {boolean} [props.hideHeader=false] - 헤더 숨김 여부
@@ -93,28 +95,28 @@ const MainContent = styled(Box)(({ theme }) => ({
  * @param {Object} [props.sx] - 추가 스타일
  */
 const PageLayout = forwardRef(function PageLayout(props, ref) {
-  const { 
-    variant = 'default', 
+  const {
+    variant = 'default',
     hideHeader = false,
     hideFooter = false,
-    children, 
-    sx = {}, 
-    ...other 
+    children,
+    sx = {},
+    ...other
   } = props;
-  
+
   return (
-    <StyledPageLayout 
+    <StyledPageLayout
       ref={ref}
       variant={variant}
       sx={sx}
       {...other}
     >
       {!hideHeader && <Header />}
-      
+
       <MainContent component="main">
         {children}
       </MainContent>
-      
+
       {!hideFooter && <Footer />}
     </StyledPageLayout>
   );

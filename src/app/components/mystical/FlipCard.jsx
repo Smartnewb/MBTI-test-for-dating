@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TarotCard from '../TarotCard';
@@ -33,9 +33,9 @@ const CardFace = styled(Box)(({ theme, isFront }) => ({
 
 /**
  * 플립 카드 컴포넌트
- * 
+ *
  * 클릭하면 뒤집히는 타로 카드 컴포넌트입니다.
- * 
+ *
  * @param {Object} props - 컴포넌트 속성
  * @param {React.ReactNode} props.front - 앞면 내용
  * @param {React.ReactNode} props.back - 뒷면 내용
@@ -63,35 +63,58 @@ export default function FlipCard({
   sx = {}
 }) {
   const [isFlipped, setIsFlipped] = useState(false);
-  
+
   // 자동 뒤집기
-  useState(() => {
+  useEffect(() => {
     if (autoFlip) {
       const timer = setTimeout(() => {
-        handleFlip();
+        setIsFlipped(true);
+
+        if (onFlip) {
+          onFlip(true);
+        }
       }, autoFlipDelay);
-      
+
       return () => clearTimeout(timer);
     }
-  }, [autoFlip, autoFlipDelay]);
-  
+  }, [autoFlip, autoFlipDelay, onFlip]);
+
   // 뒤집기 핸들러
   const handleFlip = () => {
     if (manualFlip) {
       setIsFlipped((prev) => !prev);
-      
+
       if (onFlip) {
         onFlip(!isFlipped);
       }
     }
   };
-  
+
+  // 클릭 이벤트 핸들러
+  const handleClick = (e) => {
+    // 탭, 버튼, 아이콘 버튼 클릭 시 이벤트 전파 방지
+    if (
+      e.target.closest('.MuiTab-root') ||
+      e.target.closest('.MuiTabs-root') ||
+      e.target.closest('.MuiButton-root') ||
+      e.target.closest('.MuiIconButton-root') ||
+      e.target.closest('button') ||
+      e.target.closest('a') || // 링크 요소도 제외
+      e.target.tagName === 'BUTTON' ||
+      e.target.tagName === 'A'
+    ) {
+      return;
+    }
+
+    handleFlip();
+  };
+
   return (
-    <CardContainer 
-      onClick={handleFlip} 
-      sx={{ 
+    <CardContainer
+      onClick={handleClick}
+      sx={{
         cursor: manualFlip ? 'pointer' : 'default',
-        ...sx 
+        ...sx
       }}
     >
       <CardInner isFlipped={isFlipped}>
@@ -101,7 +124,7 @@ export default function FlipCard({
             {front}
           </TarotCard>
         </CardFace>
-        
+
         {/* 뒷면 */}
         <CardFace>
           <TarotCard variant={backVariant} title={backTitle}>

@@ -14,8 +14,9 @@ import { Grid, GridItem } from './Grid';
 const StyledFooter = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
   borderTop: `1px solid ${theme.palette.divider}`,
-  padding: theme.spacing(6, 0),
+  padding: theme.spacing(4, 0, 2, 0), // 패딩 조정
   position: 'relative',
+  marginTop: 'auto', // 하단에 고정
 
   // 배경 그라데이션
   backgroundImage: `linear-gradient(to top, ${theme.palette.background.default}, ${theme.palette.background.paper})`,

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { Box, Typography, Button, Snackbar, Alert, TextField, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { Box, Typography, Button, Snackbar, Alert } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { AnimatedElement } from '../components/animations';
 import { PageLayout, Section } from '../components/layout';
@@ -12,7 +12,7 @@ import { saveTestResult, getTestResultByShareId } from '../services/resultServic
 import { getMbtiDescription } from '../utils/mbti';
 import { StarryBackground } from '../components/mystical';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import EmailIcon from '@mui/icons-material/Email';
+
 
 /**
  * MBTI 테스트 결과 페이지
@@ -28,9 +28,7 @@ function ResultContent() {
   const [isLoading, setIsLoading] = useState(true);
   const [showShareAlert, setShowShareAlert] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
-  const [showEmailDialog, setShowEmailDialog] = useState(false);
-  const [email, setEmail] = useState('');
-  const [emailError, setEmailError] = useState('');
+
   const [savedResult, setSavedResult] = useState(null);
 
   // URL에서 공유 ID 가져오기
@@ -70,7 +68,7 @@ function ResultContent() {
   }, [isTestCompleted, result, router, shareId]);
 
   // 결과 저장
-  const saveResult = async (userEmail = null) => {
+  const saveResult = async () => {
     if (!result) return;
 
     try {
@@ -78,8 +76,7 @@ function ResultContent() {
         result.scores,
         result.mbtiType,
         user?.id,
-        sessionId,
-        userEmail
+        sessionId
       );
 
       if (success && shareId) {
@@ -133,24 +130,7 @@ function ResultContent() {
       });
   };
 
-  // 이메일 저장 핸들러
-  const handleSaveEmail = () => {
-    // 이메일 유효성 검사
-    if (!email) {
-      setEmailError('이메일을 입력해주세요.');
-      return;
-    }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError('유효한 이메일 주소를 입력해주세요.');
-      return;
-    }
-
-    // 이메일로 결과 저장
-    saveResult(email);
-    setShowEmailDialog(false);
-  };
 
   // MBTI 유형 이름 가져오기
   const getMbtiName = (mbtiType) => {
@@ -194,7 +174,7 @@ function ResultContent() {
   const displayResult = savedResult || result;
   if (!displayResult || !displayResult.mbtiType) {
     return (
-      <PageLayout variant="result">
+      <PageLayout variant="result" hideHeader={true} hideFooter={true}>
         {/* 별 반짝임 배경 효과 */}
         <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
           <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
@@ -227,7 +207,7 @@ function ResultContent() {
   }
 
   return (
-    <PageLayout variant="result">
+    <PageLayout variant="result" hideHeader={true} hideFooter={true}>
       {/* 별 반짝임 배경 효과 */}
       <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
         <StarryBackground starCount={50} shootingStarCount={3} fogCount={5} />
@@ -250,55 +230,23 @@ function ResultContent() {
               당신의 MBTI 연애 유형 결과
             </Typography>
 
-            <TestResult
-              mbtiType={displayResult.mbtiType}
-              scores={displayResult.scores}
-              idealType={savedResult?.idealType || idealType}
-              worstMatch={savedResult?.worstMatch || worstMatch}
-              onRestart={handleRestart}
-              onShare={handleShare}
-            />
+            <Box sx={{ position: 'relative', mb: 8 }}>
+              <TestResult
+                mbtiType={displayResult.mbtiType}
+                scores={displayResult.scores}
+                idealType={savedResult?.idealType || idealType}
+                worstMatch={savedResult?.worstMatch || worstMatch}
+                onRestart={handleRestart}
+                onShare={handleShare}
+              />
+            </Box>
 
-            {!user && !shareId && (
-              <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
-                <Button
-                  variant="outlined"
-                  color="primary"
-                  startIcon={<EmailIcon />}
-                  onClick={() => setShowEmailDialog(true)}
-                >
-                  이메일로 결과 저장하기
-                </Button>
-              </Box>
-            )}
+
           </Box>
         </AnimatedElement>
       </Section>
 
-      {/* 이메일 입력 다이얼로그 */}
-      <Dialog open={showEmailDialog} onClose={() => setShowEmailDialog(false)}>
-        <DialogTitle>이메일로 결과 저장하기</DialogTitle>
-        <DialogContent>
-          <Typography variant="body2" sx={{ mb: 2 }}>
-            이메일을 입력하시면 결과를 저장하고 언제든지 다시 확인할 수 있습니다.
-          </Typography>
-          <TextField
-            margin="dense"
-            label="이메일"
-            type="email"
-            fullWidth
-            variant="outlined"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            error={!!emailError}
-            helperText={emailError}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setShowEmailDialog(false)}>취소</Button>
-          <Button onClick={handleSaveEmail} color="primary">저장</Button>
-        </DialogActions>
-      </Dialog>
+
 
       {/* 공유 알림 */}
       <Snackbar
@@ -322,7 +270,7 @@ function ResultContent() {
 export default function ResultPage() {
   return (
     <Suspense fallback={
-      <PageLayout variant="result">
+      <PageLayout variant="result" hideHeader={true} hideFooter={true}>
         {/* 별 반짝임 배경 효과 */}
         <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
           <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />

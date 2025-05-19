@@ -13,13 +13,14 @@ import PsychologyIcon from '@mui/icons-material/Psychology';
 // 스타일링된 조언 컨테이너
 const AdviceContainer = styled(Box)(({ theme }) => ({
   position: 'relative',
-  padding: theme.spacing(3),
+  padding: theme.spacing(4, 3),
   borderRadius: theme.shape.borderRadius * 2,
   background: `linear-gradient(135deg, ${theme.palette.background.paper} 0%, ${theme.palette.background.default} 100%)`,
   boxShadow: '0 8px 16px rgba(0, 0, 0, 0.2)',
   border: `1px solid ${theme.palette.primary.dark}`,
-  marginTop: theme.spacing(4),
-  marginBottom: theme.spacing(4),
+  marginTop: theme.spacing(12), // 상단 마진 크게 증가
+  marginBottom: theme.spacing(6),
+  zIndex: 10, // 높은 z-index 값 추가
   '&::before': {
     content: '""',
     position: 'absolute',
@@ -36,9 +37,9 @@ const AdviceContainer = styled(Box)(({ theme }) => ({
 
   // 모바일에서 더 작은 패딩과 마진
   [theme.breakpoints.down('sm')]: {
-    padding: theme.spacing(2),
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
+    padding: theme.spacing(3, 2),
+    marginTop: theme.spacing(10), // 모바일에서도 큰 상단 마진 유지
+    marginBottom: theme.spacing(4),
     borderRadius: theme.shape.borderRadius * 1.5,
     '&::before': {
       borderRadius: theme.shape.borderRadius * 1.5,

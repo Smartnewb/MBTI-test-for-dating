@@ -6,8 +6,8 @@ import { styled } from '@mui/material/styles';
 // 스타일링된 타로 카드
 const StyledCard = styled(Card)(({ theme, variant, interactive = true }) => ({
   borderRadius: 16,
-  maxWidth: 350,
-  minHeight: 450,
+  maxWidth: 380, // 최대 너비 증가: 350 -> 380
+  minHeight: 550, // 높이 증가: 450 -> 550
   margin: '0 auto',
   position: 'relative',
   overflow: 'visible',
@@ -84,49 +84,46 @@ const StyledCard = styled(Card)(({ theme, variant, interactive = true }) => ({
   })
 }));
 
-// 카드 테두리 장식
+// 카드 테두리 장식 (테두리 제거)
 const CardBorder = styled(Box)(({ theme, variant }) => ({
   position: 'absolute',
   top: 8,
   left: 8,
   right: 8,
   bottom: 8,
-  border: `1px solid ${variant === 'result' ? '#D4AF37' : theme.palette.secondary.main}`,
+  // border 속성 제거
   borderRadius: 12,
   pointerEvents: 'none',
 
-  // 결과 카드에 특별한 테두리 효과 추가
+  // 결과 카드에 특별한 효과 추가 (테두리 없이 그림자만)
   ...(variant === 'result' && {
-    boxShadow: '0 0 10px rgba(212, 175, 55, 0.3) inset',
+    boxShadow: '0 0 10px rgba(212, 175, 55, 0.2) inset',
   }),
 
-  // mystical 변형에 특별한 테두리 효과 추가
+  // mystical 변형에 특별한 효과 추가 (테두리 없이 그림자만)
   ...(variant === 'mystical' && {
-    boxShadow: '0 0 15px rgba(156, 39, 176, 0.3) inset',
+    boxShadow: '0 0 15px rgba(156, 39, 176, 0.2) inset',
   }),
 }));
 
-// 카드 모서리 장식
+// 카드 모서리 장식 (더 미묘하게 조정)
 const CardCorner = styled(Box)(({ theme, position, variant }) => ({
   position: 'absolute',
-  width: 20,
-  height: 20,
-  border: `1px solid ${variant === 'result' ? '#D4AF37' : theme.palette.secondary.main}`,
-  ...(position === 'top-left' && { top: 4, left: 4, borderRight: 'none', borderBottom: 'none', borderTopLeftRadius: 8 }),
-  ...(position === 'top-right' && { top: 4, right: 4, borderLeft: 'none', borderBottom: 'none', borderTopRightRadius: 8 }),
-  ...(position === 'bottom-left' && { bottom: 4, left: 4, borderRight: 'none', borderTop: 'none', borderBottomLeftRadius: 8 }),
-  ...(position === 'bottom-right' && { bottom: 4, right: 4, borderLeft: 'none', borderTop: 'none', borderBottomRightRadius: 8 }),
+  width: 16,
+  height: 16,
+  // border 속성 제거하고 opacity 추가
+  opacity: 0.5,
   pointerEvents: 'none',
 
-  // 결과 카드와 mystical 변형에 특별한 모서리 효과 추가
+  // 결과 카드와 mystical 변형에 특별한 모서리 효과만 유지
   ...((variant === 'result' || variant === 'mystical') && {
-    width: 25,
-    height: 25,
+    width: 20,
+    height: 20,
     '&::after': {
       content: '""',
       position: 'absolute',
-      width: 5,
-      height: 5,
+      width: 4,
+      height: 4,
       borderRadius: '50%',
       background: variant === 'result' ? '#D4AF37' : theme.palette.secondary.main,
       ...(position === 'top-left' && { top: 3, left: 3 }),
