@@ -18,7 +18,7 @@ export const DIMENSIONS = {
   'E-I': { positive: 'E', negative: 'I', name: '에너지 방향' },
   'S-N': { positive: 'S', negative: 'N', name: '인식 기능' },
   'T-F': { positive: 'T', negative: 'F', name: '판단 기능' },
-  'J-P': { positive: 'J', negative: 'P', name: '생활 양식' }
+  'J-P': { positive: 'J', negative: 'P', name: '생활 양식' },
 };
 
 /**
@@ -27,10 +27,10 @@ export const DIMENSIONS = {
  * 연애 성향에 더 중요한 차원에 높은 가중치를 부여합니다.
  */
 export const WEIGHTS = {
-  'E-I': 1.0,  // 외향성/내향성은 연애 스타일에 중요한 영향
-  'S-N': 1.2,  // 감각/직관은 데이트 취향과 관련이 깊음
-  'T-F': 1.5,  // 사고/감정은 연애 관계에서 가장 중요한 요소
-  'J-P': 1.3   // 판단/인식은 데이트 계획과 관계 진행에 영향
+  'E-I': 1.0, // 외향성/내향성은 연애 스타일에 중요한 영향
+  'S-N': 1.2, // 감각/직관은 데이트 취향과 관련이 깊음
+  'T-F': 1.5, // 사고/감정은 연애 관계에서 가장 중요한 요소
+  'J-P': 1.3, // 판단/인식은 데이트 계획과 관계 진행에 영향
 };
 
 /**
@@ -40,14 +40,14 @@ export const WEIGHTS = {
  */
 export const QUESTION_IMPORTANCE = {
   // 질문 ID를 키로 사용
-  1: 1.2,  // 연인과 함께 있을 때 에너지 얻는 방식 (중요도 높음)
-  2: 1.0,  // 데이트 장소 선호도 (보통)
-  3: 1.3,  // 갈등 해결 방식 (중요도 높음)
-  4: 0.9,  // 연인의 친구 만남 (중요도 낮음)
-  5: 1.4,  // 데이트 계획 방식 (중요도 높음)
-  6: 1.2,  // 약속에 대한 태도 (중요도 높음)
-  7: 1.1,  // 선물 선택 방식 (중요도 보통)
-  8: 1.5   // 의견 충돌 해결 방식 (중요도 매우 높음)
+  1: 1.2, // 연인과 함께 있을 때 에너지 얻는 방식 (중요도 높음)
+  2: 1.0, // 데이트 장소 선호도 (보통)
+  3: 1.3, // 갈등 해결 방식 (중요도 높음)
+  4: 0.9, // 연인의 친구 만남 (중요도 낮음)
+  5: 1.4, // 데이트 계획 방식 (중요도 높음)
+  6: 1.2, // 약속에 대한 태도 (중요도 높음)
+  7: 1.1, // 선물 선택 방식 (중요도 보통)
+  8: 1.5, // 의견 충돌 해결 방식 (중요도 매우 높음)
 };
 
 /**
@@ -56,7 +56,7 @@ export const QUESTION_IMPORTANCE = {
  */
 export const RESPONSE_RANGE = {
   MIN: 1,
-  MAX: 5
+  MAX: 5,
 };
 
 /**
@@ -68,10 +68,14 @@ export const RESPONSE_RANGE = {
 export const calculateMbtiScores = (questions, responses) => {
   // 초기 점수 설정
   const scores = {
-    E: 0, I: 0,
-    S: 0, N: 0,
-    T: 0, F: 0,
-    J: 0, P: 0
+    E: 0,
+    I: 0,
+    S: 0,
+    N: 0,
+    T: 0,
+    F: 0,
+    J: 0,
+    P: 0,
   };
 
   // 차원별 질문 수 카운트
@@ -79,7 +83,7 @@ export const calculateMbtiScores = (questions, responses) => {
     'E-I': 0,
     'S-N': 0,
     'T-F': 0,
-    'J-P': 0
+    'J-P': 0,
   };
 
   // 응답이 없는 경우 빈 점수 반환
@@ -136,34 +140,34 @@ export const calculateMbtiScores = (questions, responses) => {
     if (question.dimension === 'E-I') {
       if (question.direction === 'positive') {
         scores.E += score;
-        scores.I += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.I += RESPONSE_RANGE.MAX + 1 - score;
       } else {
         scores.I += score;
-        scores.E += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.E += RESPONSE_RANGE.MAX + 1 - score;
       }
     } else if (question.dimension === 'S-N') {
       if (question.direction === 'positive') {
         scores.S += score;
-        scores.N += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.N += RESPONSE_RANGE.MAX + 1 - score;
       } else {
         scores.N += score;
-        scores.S += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.S += RESPONSE_RANGE.MAX + 1 - score;
       }
     } else if (question.dimension === 'T-F') {
       if (question.direction === 'positive') {
         scores.T += score;
-        scores.F += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.F += RESPONSE_RANGE.MAX + 1 - score;
       } else {
         scores.F += score;
-        scores.T += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.T += RESPONSE_RANGE.MAX + 1 - score;
       }
     } else if (question.dimension === 'J-P') {
       if (question.direction === 'positive') {
         scores.J += score;
-        scores.P += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.P += RESPONSE_RANGE.MAX + 1 - score;
       } else {
         scores.P += score;
-        scores.J += (RESPONSE_RANGE.MAX + 1 - score);
+        scores.J += RESPONSE_RANGE.MAX + 1 - score;
       }
     }
   });
@@ -194,12 +198,12 @@ export const calculateMbtiScores = (questions, responses) => {
  * @param {Object} scores - MBTI 점수
  * @returns {Object} 차원별 점수 차이
  */
-export const calculateDimensionDifferences = (scores) => {
+export const calculateDimensionDifferences = scores => {
   return {
     'E-I': Math.abs(scores.E - scores.I),
     'S-N': Math.abs(scores.S - scores.N),
     'T-F': Math.abs(scores.T - scores.F),
-    'J-P': Math.abs(scores.J - scores.P)
+    'J-P': Math.abs(scores.J - scores.P),
   };
 };
 
@@ -208,14 +212,14 @@ export const calculateDimensionDifferences = (scores) => {
  * @param {Object} scores - MBTI 점수
  * @returns {Object} 차원별 확실성 (%)
  */
-export const calculateDimensionCertainty = (scores) => {
+export const calculateDimensionCertainty = scores => {
   const maxPossibleDifference = RESPONSE_RANGE.MAX; // 최대 가능한 차이
 
   return {
     'E-I': Math.round((Math.abs(scores.E - scores.I) / maxPossibleDifference) * 100),
     'S-N': Math.round((Math.abs(scores.S - scores.N) / maxPossibleDifference) * 100),
     'T-F': Math.round((Math.abs(scores.T - scores.F) / maxPossibleDifference) * 100),
-    'J-P': Math.round((Math.abs(scores.J - scores.P) / maxPossibleDifference) * 100)
+    'J-P': Math.round((Math.abs(scores.J - scores.P) / maxPossibleDifference) * 100),
   };
 };
 
@@ -224,10 +228,10 @@ export const calculateDimensionCertainty = (scores) => {
  * 동점일 경우 연애 성향에 더 적합한 유형을 선택합니다.
  */
 export const TIE_BREAKERS = {
-  'E-I': 'E',  // 동점일 경우 외향적(E) 성향 선택 (연애에서 더 적극적)
-  'S-N': 'N',  // 동점일 경우 직관적(N) 성향 선택 (연애에서 더 로맨틱)
-  'T-F': 'F',  // 동점일 경우 감정적(F) 성향 선택 (연애에서 더 공감적)
-  'J-P': 'P'   // 동점일 경우 인식적(P) 성향 선택 (연애에서 더 유연함)
+  'E-I': 'E', // 동점일 경우 외향적(E) 성향 선택 (연애에서 더 적극적)
+  'S-N': 'N', // 동점일 경우 직관적(N) 성향 선택 (연애에서 더 로맨틱)
+  'T-F': 'F', // 동점일 경우 감정적(F) 성향 선택 (연애에서 더 공감적)
+  'J-P': 'P', // 동점일 경우 인식적(P) 성향 선택 (연애에서 더 유연함)
 };
 
 /**
@@ -259,7 +263,7 @@ export const handleTieBreaker = (dimension, score1, score2, threshold = 0.5) => 
  * @param {Object} scores - MBTI 점수
  * @returns {string} MBTI 유형 (예: 'ENFJ')
  */
-export const calculateMbtiType = (scores) => {
+export const calculateMbtiType = scores => {
   const result = [];
 
   // 동점 처리 임계값
@@ -309,7 +313,7 @@ export const checkResponseCompleteness = (questions, responses) => {
     'E-I': { total: 0, answered: 0 },
     'S-N': { total: 0, answered: 0 },
     'T-F': { total: 0, answered: 0 },
-    'J-P': { total: 0, answered: 0 }
+    'J-P': { total: 0, answered: 0 },
   };
 
   // 응답을 Map으로 변환하여 빠른 조회
@@ -330,32 +334,35 @@ export const checkResponseCompleteness = (questions, responses) => {
 
   // 차원별 완성도 계산 (%)
   const completeness = {
-    'E-I': dimensionCounts['E-I'].total > 0
-      ? Math.round((dimensionCounts['E-I'].answered / dimensionCounts['E-I'].total) * 100)
-      : 0,
-    'S-N': dimensionCounts['S-N'].total > 0
-      ? Math.round((dimensionCounts['S-N'].answered / dimensionCounts['S-N'].total) * 100)
-      : 0,
-    'T-F': dimensionCounts['T-F'].total > 0
-      ? Math.round((dimensionCounts['T-F'].answered / dimensionCounts['T-F'].total) * 100)
-      : 0,
-    'J-P': dimensionCounts['J-P'].total > 0
-      ? Math.round((dimensionCounts['J-P'].answered / dimensionCounts['J-P'].total) * 100)
-      : 0
+    'E-I':
+      dimensionCounts['E-I'].total > 0
+        ? Math.round((dimensionCounts['E-I'].answered / dimensionCounts['E-I'].total) * 100)
+        : 0,
+    'S-N':
+      dimensionCounts['S-N'].total > 0
+        ? Math.round((dimensionCounts['S-N'].answered / dimensionCounts['S-N'].total) * 100)
+        : 0,
+    'T-F':
+      dimensionCounts['T-F'].total > 0
+        ? Math.round((dimensionCounts['T-F'].answered / dimensionCounts['T-F'].total) * 100)
+        : 0,
+    'J-P':
+      dimensionCounts['J-P'].total > 0
+        ? Math.round((dimensionCounts['J-P'].answered / dimensionCounts['J-P'].total) * 100)
+        : 0,
   };
 
   // 전체 완성도 계산
   const totalQuestions = questions.length;
   const totalAnswered = responses.length;
-  const overallCompleteness = totalQuestions > 0
-    ? Math.round((totalAnswered / totalQuestions) * 100)
-    : 0;
+  const overallCompleteness =
+    totalQuestions > 0 ? Math.round((totalAnswered / totalQuestions) * 100) : 0;
 
   return {
     dimensionCompleteness: completeness,
     overallCompleteness,
     isComplete: overallCompleteness === 100,
-    hasSufficientData: Object.values(completeness).every(percent => percent >= 50) // 각 차원별로 최소 50% 이상 응답
+    hasSufficientData: Object.values(completeness).every(percent => percent >= 50), // 각 차원별로 최소 50% 이상 응답
   };
 };
 
@@ -370,7 +377,7 @@ export const calculateResultReliability = (dimensionCertainty, completeness) => 
   const avgCertainty = Object.values(dimensionCertainty).reduce((sum, val) => sum + val, 0) / 4;
 
   // 응답 완성도 반영
-  const reliability = Math.round((avgCertainty * 0.7) + (completeness.overallCompleteness * 0.3));
+  const reliability = Math.round(avgCertainty * 0.7 + completeness.overallCompleteness * 0.3);
 
   // 0-100% 범위로 제한
   return Math.max(0, Math.min(100, reliability));
@@ -416,7 +423,7 @@ const _generateTestResult = (questions, responses) => {
     completeness,
     reliability,
     confidence,
-    timestamp: new Date().toISOString() // 결과 생성 시간 추가
+    timestamp: new Date().toISOString(), // 결과 생성 시간 추가
   };
 };
 
@@ -450,7 +457,7 @@ export const saveTestResult = async (result, userId = null, sessionId = null, em
       confidence_score: result.confidence?.score || 0,
       confidence_level: result.confidence?.level || 'medium',
       share_id: uuidv4(),
-      created_at: new Date().toISOString()
+      created_at: new Date().toISOString(),
     };
 
     // 상세 점수 데이터 추가
@@ -487,10 +494,7 @@ export const saveTestResult = async (result, userId = null, sessionId = null, em
     }
 
     // Supabase에 결과 저장
-    const { data, error } = await supabase
-      .from('test_results')
-      .insert([resultData])
-      .select();
+    const { data, error } = await supabase.from('test_results').insert([resultData]).select();
 
     if (error) {
       console.error('Error saving test result:', error);
@@ -504,7 +508,7 @@ export const saveTestResult = async (result, userId = null, sessionId = null, em
   }
 };
 
-export default {
+const mbtiAnalyzer = {
   DIMENSIONS,
   WEIGHTS,
   QUESTION_IMPORTANCE,
@@ -518,5 +522,7 @@ export default {
   checkResponseCompleteness,
   calculateResultReliability,
   generateTestResult,
-  saveTestResult
+  saveTestResult,
 };
+
+export default mbtiAnalyzer;

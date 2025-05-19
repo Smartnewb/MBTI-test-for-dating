@@ -6,7 +6,6 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import supabase from '../utils/supabase';
-import { calculateMbtiType } from '../utils/mbtiAnalyzer';
 import { getIdealType, getWorstMatch } from '../utils/mbti';
 
 /**
@@ -18,7 +17,13 @@ import { getIdealType, getWorstMatch } from '../utils/mbti';
  * @param {string} [email] - 이메일 (익명 사용자가 이메일을 입력한 경우)
  * @returns {Promise<Object>} 저장 결과
  */
-export const saveTestResult = async (scores, mbtiType, userId = null, sessionId = null, email = null) => {
+export const saveTestResult = async (
+  scores,
+  mbtiType,
+  userId = null,
+  sessionId = null,
+  email = null
+) => {
   try {
     // 결과 데이터 생성
     const resultData = {
@@ -27,7 +32,7 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
       s_n_score: scores.S - scores.N,
       t_f_score: scores.T - scores.F,
       j_p_score: scores.J - scores.P,
-      share_id: uuidv4()
+      share_id: uuidv4(),
     };
 
     // 사용자 ID 또는 세션 ID 추가
@@ -45,9 +50,7 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
     }
 
     // Supabase에 결과 저장
-    const { data, error } = await supabase
-      .from('test_results')
-      .insert([resultData]);
+    const { data, error } = await supabase.from('test_results').insert([resultData]);
 
     if (error) {
       console.error('Error saving test result:', error);
@@ -58,7 +61,7 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
       success: true,
       data: data[0],
       shareId: resultData.share_id,
-      sessionId: resultData.session_id
+      sessionId: resultData.session_id,
     };
   } catch (error) {
     console.error('Failed to save test result:', error);
@@ -71,10 +74,11 @@ export const saveTestResult = async (scores, mbtiType, userId = null, sessionId 
  * @param {string} shareId - 공유 ID
  * @returns {Promise<Object>} 테스트 결과
  */
-export const getTestResultByShareId = async (shareId) => {
+export const getTestResultByShareId = async shareId => {
   try {
-    const { data, error } = await supabase
-      .rpc('get_mbti_result_by_share_id', { share_uuid: shareId });
+    const { data, error } = await supabase.rpc('get_mbti_result_by_share_id', {
+      share_uuid: shareId,
+    });
 
     if (error) {
       console.error('Error fetching test result by share ID:', error);
@@ -89,7 +93,7 @@ export const getTestResultByShareId = async (shareId) => {
     const result = {
       ...data,
       idealType: getIdealType(data.mbtiType),
-      worstMatch: getWorstMatch(data.mbtiType)
+      worstMatch: getWorstMatch(data.mbtiType),
     };
 
     return result;
@@ -104,7 +108,7 @@ export const getTestResultByShareId = async (shareId) => {
  * @param {string} userId - 사용자 ID
  * @returns {Promise<Array>} 테스트 결과 배열
  */
-export const getTestResultsByUserId = async (userId) => {
+export const getTestResultsByUserId = async userId => {
   try {
     const { data, error } = await supabase
       .from('test_results')
@@ -129,7 +133,7 @@ export const getTestResultsByUserId = async (userId) => {
  * @param {string} sessionId - 세션 ID
  * @returns {Promise<Array>} 테스트 결과 배열
  */
-export const getTestResultsBySessionId = async (sessionId) => {
+export const getTestResultsBySessionId = async sessionId => {
   try {
     const { data, error } = await supabase
       .from('test_results')
@@ -154,10 +158,9 @@ export const getTestResultsBySessionId = async (sessionId) => {
  * @param {number} resultId - 결과 ID
  * @returns {Promise<Object>} 상세 테스트 결과
  */
-export const getDetailedTestResult = async (resultId) => {
+export const getDetailedTestResult = async resultId => {
   try {
-    const { data, error } = await supabase
-      .rpc('get_detailed_mbti_result', { result_id: resultId });
+    const { data, error } = await supabase.rpc('get_detailed_mbti_result', { result_id: resultId });
 
     if (error) {
       console.error('Error fetching detailed test result:', error);
@@ -172,7 +175,7 @@ export const getDetailedTestResult = async (resultId) => {
     const result = {
       ...data,
       idealType: getIdealType(data.mbtiType),
-      worstMatch: getWorstMatch(data.mbtiType)
+      worstMatch: getWorstMatch(data.mbtiType),
     };
 
     return result;
@@ -182,10 +185,12 @@ export const getDetailedTestResult = async (resultId) => {
   }
 };
 
-export default {
+const resultService = {
   saveTestResult,
   getTestResultByShareId,
   getTestResultsByUserId,
   getTestResultsBySessionId,
-  getDetailedTestResult
+  getDetailedTestResult,
 };
+
+export default resultService;

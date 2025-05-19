@@ -1,7 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { AppBar, Toolbar, Typography, Box, IconButton, Drawer, List, ListItem, ListItemText, useMediaQuery } from '@mui/material';
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useMediaQuery,
+} from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
@@ -21,8 +32,10 @@ const StyledAppBar = styled(AppBar)(({ theme, transparent, scrolled }) => {
     transition: 'all 0.3s ease',
 
     // 배경 그라데이션
-    backgroundImage: isTransparent && !isScrolled ? 'none' :
-      `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
+    backgroundImage:
+      isTransparent && !isScrolled
+        ? 'none'
+        : `linear-gradient(to bottom, ${theme.palette.background.default}, ${theme.palette.background.paper})`,
 
     // 테두리
     borderBottom: isTransparent && !isScrolled ? 'none' : `1px solid ${theme.palette.divider}`,
@@ -168,12 +181,12 @@ export default function Header({ transparent = false, sx = {} }) {
       </Box>
 
       <List>
-        {navLinks.map((link) => {
+        {navLinks.map(link => {
           // 불리언 속성을 문자열로 변환하지 않고 조건부로 전달
           const isActive = activePage === link.href;
           const navLinkProps = {
             button: true,
-            onClick: handleDrawerToggle
+            onClick: handleDrawerToggle,
           };
 
           // 불리언 값이 true인 경우에만 속성 추가
@@ -189,9 +202,11 @@ export default function Header({ transparent = false, sx = {} }) {
         })}
 
         <Box sx={{ mt: 2, px: 2 }}>
-          <MysticalButton variant="mystical" fullWidth>
-            테스트 시작하기
-          </MysticalButton>
+          <Link href="/test" passHref style={{ textDecoration: 'none', display: 'block' }}>
+            <MysticalButton variant="mystical" fullWidth onClick={handleDrawerToggle}>
+              테스트 시작하기
+            </MysticalButton>
+          </Link>
         </Box>
       </List>
     </Box>
@@ -199,9 +214,9 @@ export default function Header({ transparent = false, sx = {} }) {
 
   // 불리언 속성을 문자열로 변환하지 않고 조건부로 전달
   const appBarProps = {
-    position: "sticky",
+    position: 'sticky',
     elevation: 0,
-    sx
+    sx,
   };
 
   // 불리언 값이 true인 경우에만 속성 추가
@@ -228,28 +243,33 @@ export default function Header({ transparent = false, sx = {} }) {
           ) : (
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Box sx={{ display: 'flex' }}>
-                {navLinks.map((link) => {
+                {navLinks.map(link => {
                   // 불리언 속성을 문자열로 변환하지 않고 조건부로 전달
                   const isActive = activePage === link.href;
-                  const navLinkProps = { variant: "body2" };
+                  const navLinkProps = { variant: 'body2' };
 
                   // 불리언 값이 true인 경우에만 속성 추가
                   if (isActive) navLinkProps.active = isActive;
 
                   return (
-                    <Link href={link.href} key={link.href} passHref style={{ textDecoration: 'none' }}>
-                      <NavLink {...navLinkProps}>
-                        {link.text}
-                      </NavLink>
+                    <Link
+                      href={link.href}
+                      key={link.href}
+                      passHref
+                      style={{ textDecoration: 'none' }}
+                    >
+                      <NavLink {...navLinkProps}>{link.text}</NavLink>
                     </Link>
                   );
                 })}
               </Box>
 
               <Box sx={{ ml: 2 }}>
-                <MysticalButton variant="mystical" size="small">
-                  테스트 시작하기
-                </MysticalButton>
+                <Link href="/test" passHref style={{ textDecoration: 'none' }}>
+                  <MysticalButton variant="mystical" size="small">
+                    테스트 시작하기
+                  </MysticalButton>
+                </Link>
               </Box>
             </Box>
           )}

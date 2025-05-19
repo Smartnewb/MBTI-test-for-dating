@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 /**
  * 세션 관리 유틸리티
- * 
+ *
  * 이 모듈은 로그인 없이 MBTI 테스트를 진행하는 사용자를 위한 익명 세션을 관리합니다.
  * 브라우저 로컬 스토리지를 사용하여 세션 ID를 저장하고, Supabase에 테스트 결과를 연결합니다.
  */
@@ -35,7 +35,7 @@ export function getSessionId() {
     sessionId = uuidv4();
     const expiryDate = new Date();
     expiryDate.setHours(expiryDate.getHours() + SESSION_EXPIRY_HOURS);
-    
+
     localStorage.setItem(SESSION_ID_KEY, sessionId);
     localStorage.setItem(SESSION_EXPIRY_KEY, expiryDate.toISOString());
     localStorage.setItem(SESSION_DATA_KEY, JSON.stringify({}));
@@ -118,7 +118,7 @@ export function extendSession() {
  */
 export async function saveResponse(questionId, answer) {
   const sessionId = getSessionId();
-  
+
   if (!sessionId) {
     throw new Error('세션 ID를 가져올 수 없습니다.');
   }
@@ -131,15 +131,16 @@ export async function saveResponse(questionId, answer) {
 
   // Supabase에 응답 저장
   try {
-    const { data, error } = await supabase
-      .from('user_responses')
-      .upsert([
+    const { data, error } = await supabase.from('user_responses').upsert(
+      [
         {
           session_id: sessionId,
           question_id: questionId,
-          answer
-        }
-      ], { onConflict: 'session_id, question_id' });
+          answer,
+        },
+      ],
+      { onConflict: 'session_id, question_id' }
+    );
 
     if (error) {
       throw error;
@@ -159,7 +160,7 @@ export async function saveResponse(questionId, answer) {
  */
 export async function saveTestResult(result) {
   const sessionId = getSessionId();
-  
+
   if (!sessionId) {
     throw new Error('세션 ID를 가져올 수 없습니다.');
   }
@@ -169,9 +170,8 @@ export async function saveTestResult(result) {
 
   // Supabase에 결과 저장
   try {
-    const { data, error } = await supabase
-      .from('test_results')
-      .upsert([
+    const { data, error } = await supabase.from('test_results').upsert(
+      [
         {
           session_id: sessionId,
           mbti_type: result.mbtiType,
@@ -182,9 +182,11 @@ export async function saveTestResult(result) {
           t_score: result.scores.T,
           f_score: result.scores.F,
           j_score: result.scores.J,
-          p_score: result.scores.P
-        }
-      ], { onConflict: 'session_id' });
+          p_score: result.scores.P,
+        },
+      ],
+      { onConflict: 'session_id' }
+    );
 
     if (error) {
       throw error;
@@ -203,7 +205,7 @@ export async function saveTestResult(result) {
  */
 export async function getResponses() {
   const sessionId = getSessionId();
-  
+
   if (!sessionId) {
     return { data: [], error: new Error('세션 ID를 가져올 수 없습니다.') };
   }
@@ -221,18 +223,18 @@ export async function getResponses() {
     return { data, error: null };
   } catch (error) {
     console.error('Error getting responses:', error);
-    
+
     // 로컬 데이터로 폴백
     const sessionData = getSessionData();
     const responses = sessionData.responses || {};
-    
+
     // 배열 형태로 변환
     const responseArray = Object.entries(responses).map(([questionId, answer]) => ({
       question_id: parseInt(questionId),
       answer,
-      session_id: sessionId
+      session_id: sessionId,
     }));
-    
+
     return { data: responseArray, error };
   }
 }
@@ -243,7 +245,7 @@ export async function getResponses() {
  */
 export async function getTestResult() {
   const sessionId = getSessionId();
-  
+
   if (!sessionId) {
     return { data: null, error: new Error('세션 ID를 가져올 수 없습니다.') };
   }
@@ -255,21 +257,22 @@ export async function getTestResult() {
       .eq('session_id', sessionId)
       .single();
 
-    if (error && error.code !== 'PGRST116') { // PGRST116: 결과가 없음
+    if (error && error.code !== 'PGRST116') {
+      // PGRST116: 결과가 없음
       throw error;
     }
 
     return { data, error: null };
   } catch (error) {
     console.error('Error getting test result:', error);
-    
+
     // 로컬 데이터로 폴백
     const sessionData = getSessionData();
     return { data: sessionData.result || null, error };
   }
 }
 
-export default {
+const sessionUtils = {
   getSessionId,
   getSessionData,
   updateSessionData,
@@ -278,5 +281,7 @@ export default {
   saveResponse,
   saveTestResult,
   getResponses,
-  getTestResult
+  getTestResult,
 };
+
+export default sessionUtils;

@@ -1,6 +1,6 @@
 /**
  * MBTI 질문 데이터 구조 정의
- * 
+ *
  * 이 파일은 MBTI 테스트에 사용되는 질문 데이터 구조를 정의합니다.
  * 각 질문은 다음 속성을 가집니다:
  * - id: 질문 고유 ID
@@ -16,9 +16,9 @@
  */
 export const DIMENSIONS = {
   'E-I': 'Extraversion-Introversion', // 외향-내향
-  'S-N': 'Sensing-Intuition',         // 감각-직관
-  'T-F': 'Thinking-Feeling',          // 사고-감정
-  'J-P': 'Judging-Perceiving'         // 판단-인식
+  'S-N': 'Sensing-Intuition', // 감각-직관
+  'T-F': 'Thinking-Feeling', // 사고-감정
+  'J-P': 'Judging-Perceiving', // 판단-인식
 };
 
 /**
@@ -27,8 +27,8 @@ export const DIMENSIONS = {
  * - negative: 높은 점수가 두 번째 문자(I, N, F, P)에 해당
  */
 export const DIRECTIONS = {
-  'positive': 'positive',
-  'negative': 'negative'
+  positive: 'positive',
+  negative: 'negative',
 };
 
 /**
@@ -69,14 +69,14 @@ export const DIRECTIONS = {
  * @param {Array} supabaseQuestions - Supabase에서 가져온 질문 데이터
  * @returns {Array<Question>} 프론트엔드 형식의 질문 데이터
  */
-export const formatQuestionsFromSupabase = (supabaseQuestions) => {
+export const formatQuestionsFromSupabase = supabaseQuestions => {
   return supabaseQuestions.map(q => ({
     id: q.id,
     question: q.question,
     optionA: q.option_a,
     optionB: q.option_b,
     dimension: q.dimension,
-    direction: q.direction
+    direction: q.direction,
   }));
 };
 
@@ -89,20 +89,24 @@ export const formatQuestionsFromSupabase = (supabaseQuestions) => {
 export const calculateMbtiScores = (questions, responses) => {
   // 초기 점수 설정
   const scores = {
-    E: 0, I: 0,
-    S: 0, N: 0,
-    T: 0, F: 0,
-    J: 0, P: 0
+    E: 0,
+    I: 0,
+    S: 0,
+    N: 0,
+    T: 0,
+    F: 0,
+    J: 0,
+    P: 0,
   };
-  
+
   // 각 응답에 대해 점수 계산
   responses.forEach(response => {
     const question = questions.find(q => q.id === response.questionId);
     if (!question) return;
-    
+
     const { dimension, direction } = question;
     const answer = response.answer;
-    
+
     // 차원에 따라 점수 할당
     switch (dimension) {
       case 'E-I':
@@ -137,7 +141,7 @@ export const calculateMbtiScores = (questions, responses) => {
         break;
     }
   });
-  
+
   return scores;
 };
 
@@ -146,21 +150,21 @@ export const calculateMbtiScores = (questions, responses) => {
  * @param {Object} scores - MBTI 점수
  * @returns {string} MBTI 유형 (예: 'ENFJ')
  */
-export const calculateMbtiType = (scores) => {
+export const calculateMbtiType = scores => {
   const result = [];
-  
+
   // E vs I
   result.push(scores.E >= scores.I ? 'E' : 'I');
-  
+
   // S vs N
   result.push(scores.S >= scores.N ? 'S' : 'N');
-  
+
   // T vs F
   result.push(scores.T >= scores.F ? 'T' : 'F');
-  
+
   // J vs P
   result.push(scores.J >= scores.P ? 'J' : 'P');
-  
+
   return result.join('');
 };
 
@@ -173,18 +177,20 @@ export const calculateMbtiType = (scores) => {
 export const generateTestResult = (questions, responses) => {
   const scores = calculateMbtiScores(questions, responses);
   const mbtiType = calculateMbtiType(scores);
-  
+
   return {
     mbtiType,
-    scores
+    scores,
   };
 };
 
-export default {
+const questionsUtils = {
   DIMENSIONS,
   DIRECTIONS,
   formatQuestionsFromSupabase,
   calculateMbtiScores,
   calculateMbtiType,
-  generateTestResult
+  generateTestResult,
 };
+
+export default questionsUtils;

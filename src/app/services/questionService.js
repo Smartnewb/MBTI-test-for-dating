@@ -38,7 +38,7 @@ export const fetchQuestionsFromSupabase = async () => {
  * @param {string} dimension - MBTI 차원 (E-I, S-N, T-F, J-P)
  * @returns {Promise<Array>} 질문 데이터 배열
  */
-export const fetchQuestionsByDimension = async (dimension) => {
+export const fetchQuestionsByDimension = async dimension => {
   try {
     const { data, error } = await supabase.getQuestionsByDimension(dimension);
 
@@ -93,7 +93,7 @@ export const getQuestionsByDimension = (questions, dimension) => {
  * @param {Array} questions - 질문 데이터 배열
  * @returns {Array} 섞인 질문 데이터 배열
  */
-export const shuffleQuestions = (questions) => {
+export const shuffleQuestions = questions => {
   const shuffled = [...questions];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -141,7 +141,7 @@ export const saveUserResponse = async (sessionId, questionId, answer, userId = n
  * @param {Object} resultData - 테스트 결과 데이터
  * @returns {Promise<Object>} 저장 결과
  */
-export const saveTestResult = async (resultData) => {
+export const saveTestResult = async resultData => {
   try {
     const { data, error } = await supabase.saveTestResult(resultData);
 
@@ -157,11 +157,13 @@ export const saveTestResult = async (resultData) => {
   }
 };
 
-export default {
+const questionService = {
   getQuestions,
   getSampleQuestions,
   fetchQuestionsFromSupabase,
   getQuestionsByDimension,
   shuffleQuestions,
-  saveUserResponse
+  saveUserResponse,
 };
+
+export default questionService;
