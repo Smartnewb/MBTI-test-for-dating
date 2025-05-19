@@ -59,62 +59,51 @@ export const getSampleQuestions = () => {
 
 /**
  * MBTI 질문 데이터 가져오기
- * 개발 환경에서는 샘플 데이터를 사용하고, 프로덕션 환경에서는 Supabase에서 데이터를 가져옵니다.
- * @param {boolean} useSample - 샘플 데이터 사용 여부
- * @param {number} limit - 가져올 질문 수 제한 (기본값: 24)
+ * Supabase에서 ID 34~57번 질문을 순서대로 가져옵니다.
+ * @param {boolean} useSample - 샘플 데이터 사용 여부 (사용하지 않음)
+ * @param {number} limit - 가져올 질문 수 제한 (사용하지 않음)
  * @returns {Promise<Array>} 질문 데이터 배열
  */
 export const getQuestions = async (useSample = false, limit = 24) => {
-  let questions;
+  try {
+    // Supabase에서 ID 34~57번 질문 가져오기
+    const { data, error } = await supabaseUtils.supabase
+      .from('mbti_questions')
+      .select('*')
+      .gte('id', 34)
+      .lte('id', 57)
+      .order('id', { ascending: true });
 
-  // 개발 환경이거나 useSample이 true인 경우 샘플 데이터 사용
-  if (process.env.NODE_ENV === 'development' || useSample) {
-    questions = getSampleQuestions();
-  } else {
-    // 프로덕션 환경에서는 Supabase에서 데이터 가져오기
-    questions = await fetchQuestionsFromSupabase();
-  }
+    if (error) {
+      console.error('Error fetching specific questions from Supabase:', error);
+      throw error;
+    }
 
-  // 각 MBTI 차원별로 균등하게 질문 선택 (E-I, S-N, T-F, J-P 각각 6개씩)
-  if (questions.length > limit) {
-    const dimensionQuestions = {
-      'E-I': [],
-      'S-N': [],
-      'T-F': [],
-      'J-P': [],
-    };
+    // 질문 데이터 포맷팅
+    const formattedQuestions = formatQuestionsFromSupabase(data);
 
-    // 차원별로 질문 분류
-    questions.forEach(q => {
-      if (dimensionQuestions[q.dimension]) {
-        dimensionQuestions[q.dimension].push(q);
-      }
+    // 차원별로 정렬 (E-I, S-N, T-F, J-P 순서)
+    const dimensionOrder = ['E-I', 'S-N', 'T-F', 'J-P'];
+    const sortedQuestions = [];
+
+    // 각 차원별로 질문 추가
+    dimensionOrder.forEach(dimension => {
+      const dimensionQuestions = formattedQuestions.filter(q => q.dimension === dimension);
+      sortedQuestions.push(...dimensionQuestions);
     });
 
-    // 각 차원별로 균등하게 질문 선택 (각 차원별로 limit/4개)
-    const questionsPerDimension = Math.floor(limit / 4);
-    const selectedQuestions = [];
+    return sortedQuestions;
+  } catch (error) {
+    console.error('Failed to fetch specific questions:', error);
 
-    Object.keys(dimensionQuestions).forEach(dimension => {
-      const dimensionQs = dimensionQuestions[dimension];
-      // 차원별 질문이 충분하지 않은 경우 모두 선택
-      if (dimensionQs.length <= questionsPerDimension) {
-        selectedQuestions.push(...dimensionQs);
-      } else {
-        // 랜덤하게 선택
-        const selected = [];
-        while (selected.length < questionsPerDimension && dimensionQs.length > 0) {
-          const randomIndex = Math.floor(Math.random() * dimensionQs.length);
-          selected.push(dimensionQs.splice(randomIndex, 1)[0]);
-        }
-        selectedQuestions.push(...selected);
-      }
-    });
+    // 오류 발생 시 샘플 데이터 사용
+    if (useSample || process.env.NODE_ENV === 'development') {
+      console.log('Using sample questions due to error');
+      return getSampleQuestions();
+    }
 
-    return selectedQuestions;
+    return [];
   }
-
-  return questions;
 };
 
 /**
