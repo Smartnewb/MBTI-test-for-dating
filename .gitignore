@@ -48,7 +48,9 @@ scripts/task-complexity-report.json
 
 # Next.js build output
 .next/
+.next-prod/
 out/
 
 # Added by Claude Task Master
 # Environment variables
+.vercel
