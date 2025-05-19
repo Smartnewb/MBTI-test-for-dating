@@ -58,13 +58,15 @@ export const saveTestResult = async (
       resultData.email = email;
     }
 
-    // Supabase에 결과 저장
-    const { data, error } = await supabase.from('test_results').insert([resultData]);
+    // Supabase에 결과 저장하고 저장된 데이터 반환받기
+    const { data, error } = await supabase.from('test_results').insert([resultData]).select();
 
     if (error) {
       console.error('Error saving test result:', error);
       throw error;
     }
+
+    console.log('Saved test result data:', data);
 
     // 공유 URL 생성 - 이제 /result?id= 대신 /result/[id] 형식 사용
     // 로컬호스트 환경에서도 제대로 작동하도록 수정

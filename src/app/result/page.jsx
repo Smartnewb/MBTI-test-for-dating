@@ -33,6 +33,8 @@ function ResultContent() {
   // URL에서 공유 ID 가져오기 - 쿼리 파라미터 지원 유지 (이전 링크 호환성)
   const shareId = searchParams.get('id');
 
+  console.log('URL shareId from query params:', shareId);
+
   // 페이지 로드 시 테스트 완료 여부 확인 또는 공유된 결과 가져오기
   useEffect(() => {
     const loadResult = async () => {
@@ -102,12 +104,13 @@ function ResultContent() {
 
       const {
         success,
+        data,
         shareId,
         shareUrl,
         sessionId: resultSessionId,
       } = await saveTestResult(result.scores, result.mbtiType, user?.id, sessionId);
 
-      console.log('Save result response:', { success, shareId, shareUrl });
+      console.log('Save result response:', { success, data, shareId, shareUrl });
 
       if (success) {
         // 공유 URL 설정
@@ -118,15 +121,27 @@ function ResultContent() {
 
         // 저장된 결과에 shareId 추가
         if (shareId && result) {
-          const updatedResult = {
+          // 서버에서 반환된 데이터 사용
+          const updatedResult = data ? {
             ...result,
-            shareId: shareId,
+            id: data.id,
+            shareId: data.share_id || shareId,
+            createdAt: data.created_at
+          } : {
+            ...result,
+            shareId: shareId
           };
 
-          console.log('Updating savedResult with shareId:', shareId);
+          console.log('Updating savedResult with data:', updatedResult);
           setSavedResult(updatedResult);
 
-          return { success: true, shareId, shareUrl };
+          // 실제 저장된 shareId 반환
+          const actualShareId = data?.share_id || shareId;
+          return {
+            success: true,
+            shareId: actualShareId,
+            shareUrl: `${window.location.origin}/result/${actualShareId}`
+          };
         }
       }
 
@@ -156,41 +171,48 @@ function ResultContent() {
     const shareText = `내 MBTI 연애 유형은 ${mbtiType}(${mbtiName})! 달빛 연애 연구소에서 당신의 MBTI 연애 유형도 알아보세요!`;
 
     // 디버깅 정보 출력
-    console.log('savedResult:', savedResult);
-    console.log('shareUrl:', shareUrl);
-    console.log('Current URL:', window.location.href);
+    console.log('Before share - savedResult:', savedResult);
+    console.log('Before share - shareUrl:', shareUrl);
+    console.log('Before share - Current URL:', window.location.href);
 
-    // 공유 URL 설정 - 저장된 shareUrl 사용 또는 현재 URL 사용
-    let url = shareUrl || window.location.href;
+    // 먼저 결과가 저장되어 있는지 확인하고, 저장되어 있지 않으면 저장
+    let finalShareId = savedResult?.shareId;
+    let url;
 
-    // URL이 /result로 끝나는 경우 (공유 ID가 없는 경우) 처리
-    if ((url.endsWith('/result') || url.includes('/result?')) && savedResult?.shareId) {
-      url = `${window.location.origin}/result/${savedResult.shareId}`;
-      console.log('Fixed share URL:', url);
-    }
-
-    // 테스트 결과가 있지만 shareId가 없는 경우 (아직 저장되지 않은 경우)
-    if (!savedResult?.shareId && result) {
-      console.log('No shareId found, saving result...');
+    if (!finalShareId && result) {
+      console.log('No shareId found, saving result before sharing...');
       try {
+        // 결과 저장 및 shareId 가져오기
         const saveResponse = await saveResult();
-        console.log('Save response:', saveResponse);
+        console.log('Save response before sharing:', saveResponse);
 
         if (saveResponse.success && saveResponse.shareId) {
-          url = `${window.location.origin}/result/${saveResponse.shareId}`;
-          console.log('Generated new share URL after saving:', url);
+          finalShareId = saveResponse.shareId;
+          console.log('Got shareId after saving:', finalShareId);
         }
       } catch (error) {
         console.error('Error saving result before sharing:', error);
       }
     }
 
-    console.log('Final sharing URL:', url);
+    // shareId가 있으면 새 URL 형식 사용
+    if (finalShareId) {
+      url = `${window.location.origin}/result/${finalShareId}`;
+      console.log('Using shareId for URL:', finalShareId);
 
-    // 공유 URL이 여전히 /result로 끝나는 경우 (shareId를 얻지 못한 경우)
-    if (url.endsWith('/result') || url.includes('/result?')) {
-      console.log('Still no shareId, using current URL as fallback');
+      // 현재 URL 업데이트 (사용자가 보는 URL 변경)
+      if (typeof window !== 'undefined' &&
+          (window.location.pathname === '/result' || window.location.search.includes('id='))) {
+        console.log('Updating browser URL to:', url);
+        window.history.replaceState({ path: url }, '', url);
+      }
+    } else {
+      // shareId가 없으면 현재 URL 사용 (fallback)
+      url = window.location.href;
+      console.log('No shareId available, using current URL as fallback:', url);
     }
+
+    console.log('Final sharing URL:', url);
 
     try {
       if (navigator.share) {
