@@ -38,30 +38,47 @@ function ResultContent() {
     const loadResult = async () => {
       try {
         setIsLoading(true);
+        console.log('Loading result with shareId:', shareId);
+        console.log('isTestCompleted:', isTestCompleted);
+        console.log('result:', result);
 
         // 공유 ID가 있는 경우 해당 결과 가져오기
         if (shareId) {
+          console.log('Fetching result by shareId:', shareId);
           const sharedResult = await getTestResultByShareId(shareId);
+          console.log('Fetched shared result:', sharedResult);
 
           if (sharedResult) {
             setSavedResult(sharedResult);
 
             // 쿼리 파라미터 방식으로 접근한 경우 새 URL 형식으로 리다이렉트
             // 하지만 SEO에 영향을 주지 않도록 history.replaceState 사용
-            if (typeof window !== 'undefined') {
+            if (typeof window !== 'undefined' && window.location.search.includes('id=')) {
               const newUrl = `${window.location.origin}/result/${shareId}`;
+              console.log('Redirecting to new URL format:', newUrl);
               window.history.replaceState({ path: newUrl }, '', newUrl);
             }
           } else {
             // 결과가 없는 경우 테스트 페이지로 이동
+            console.log('No result found for shareId:', shareId);
             router.push('/test');
           }
         } else if (!isTestCompleted && !result) {
           // 테스트를 완료하지 않은 경우 테스트 페이지로 이동
+          console.log('Test not completed, redirecting to test page');
           router.push('/test');
         } else if (result && !savedResult) {
           // 결과가 있고 아직 저장되지 않은 경우 결과 저장
-          saveResult();
+          console.log('Result exists but not saved, saving result...');
+          const saveResponse = await saveResult();
+          console.log('Save response:', saveResponse);
+
+          // 저장 후 URL 업데이트
+          if (saveResponse.success && saveResponse.shareId && typeof window !== 'undefined') {
+            const newUrl = `${window.location.origin}/result/${saveResponse.shareId}`;
+            console.log('Updating URL after saving result:', newUrl);
+            window.history.replaceState({ path: newUrl }, '', newUrl);
+          }
         }
       } catch (error) {
         console.error('Error loading result:', error);
@@ -75,15 +92,22 @@ function ResultContent() {
 
   // 결과 저장
   const saveResult = async () => {
-    if (!result) return;
+    if (!result) {
+      console.log('No result to save');
+      return { success: false };
+    }
 
     try {
+      console.log('Saving result with scores:', result.scores, 'and type:', result.mbtiType);
+
       const {
         success,
         shareId,
         shareUrl,
         sessionId: resultSessionId,
       } = await saveTestResult(result.scores, result.mbtiType, user?.id, sessionId);
+
+      console.log('Save result response:', { success, shareId, shareUrl });
 
       if (success) {
         // 공유 URL 설정
@@ -94,14 +118,22 @@ function ResultContent() {
 
         // 저장된 결과에 shareId 추가
         if (shareId && result) {
-          setSavedResult(prev => ({
-            ...prev,
+          const updatedResult = {
+            ...result,
             shareId: shareId,
-          }));
+          };
+
+          console.log('Updating savedResult with shareId:', shareId);
+          setSavedResult(updatedResult);
+
+          return { success: true, shareId, shareUrl };
         }
       }
+
+      return { success, shareId, shareUrl };
     } catch (error) {
       console.error('Error saving result:', error);
+      return { success: false, error };
     }
   };
 
@@ -118,34 +150,61 @@ function ResultContent() {
   };
 
   // 결과 공유 핸들러
-  const handleShare = () => {
+  const handleShare = async () => {
     const mbtiType = savedResult?.mbtiType || result?.mbtiType;
     const mbtiName = getMbtiName(mbtiType);
     const shareText = `내 MBTI 연애 유형은 ${mbtiType}(${mbtiName})! 달빛 연애 연구소에서 당신의 MBTI 연애 유형도 알아보세요!`;
+
+    // 디버깅 정보 출력
+    console.log('savedResult:', savedResult);
+    console.log('shareUrl:', shareUrl);
+    console.log('Current URL:', window.location.href);
 
     // 공유 URL 설정 - 저장된 shareUrl 사용 또는 현재 URL 사용
     let url = shareUrl || window.location.href;
 
     // URL이 /result로 끝나는 경우 (공유 ID가 없는 경우) 처리
-    if (url.endsWith('/result') && savedResult?.shareId) {
+    if ((url.endsWith('/result') || url.includes('/result?')) && savedResult?.shareId) {
       url = `${window.location.origin}/result/${savedResult.shareId}`;
       console.log('Fixed share URL:', url);
     }
 
-    console.log('Sharing URL:', url);
+    // 테스트 결과가 있지만 shareId가 없는 경우 (아직 저장되지 않은 경우)
+    if (!savedResult?.shareId && result) {
+      console.log('No shareId found, saving result...');
+      try {
+        const saveResponse = await saveResult();
+        console.log('Save response:', saveResponse);
 
-    if (navigator.share) {
-      navigator
-        .share({
+        if (saveResponse.success && saveResponse.shareId) {
+          url = `${window.location.origin}/result/${saveResponse.shareId}`;
+          console.log('Generated new share URL after saving:', url);
+        }
+      } catch (error) {
+        console.error('Error saving result before sharing:', error);
+      }
+    }
+
+    console.log('Final sharing URL:', url);
+
+    // 공유 URL이 여전히 /result로 끝나는 경우 (shareId를 얻지 못한 경우)
+    if (url.endsWith('/result') || url.includes('/result?')) {
+      console.log('Still no shareId, using current URL as fallback');
+    }
+
+    try {
+      if (navigator.share) {
+        await navigator.share({
           title: `내 MBTI 연애 유형은 ${mbtiType}!`,
           text: shareText,
           url: url,
-        })
-        .catch(error => {
-          console.error('공유 실패:', error);
-          copyToClipboard(shareText, url);
         });
-    } else {
+        console.log('Successfully shared');
+      } else {
+        copyToClipboard(shareText, url);
+      }
+    } catch (error) {
+      console.error('공유 실패:', error);
       copyToClipboard(shareText, url);
     }
   };
