@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import useTestStore from '../store/testStore';
 import { getQuestions, saveUserResponse } from '../services/questionService';
 import { getIdealType, getWorstMatch } from '../utils/mbti';
-import { saveTestResult } from '../utils/mbtiAnalyzer';
+// mbtiAnalyzer의 saveTestResult 대신 resultService의 saveTestResult 사용
+import { saveTestResult } from '../services/resultService';
 import { useSupabase } from '../contexts/SupabaseContext';
 
 /**
@@ -145,14 +146,32 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
 
       // Supabase에 결과 저장
       try {
-        await saveTestResult(testResult, user?.id, sessionId);
+        console.log('Saving test result from finishTest:', testResult);
+
+        // resultService의 saveTestResult 함수 호출
+        const saveResponse = await saveTestResult(
+          testResult.scores,
+          testResult.mbtiType,
+          user?.id,
+          sessionId
+        );
+
+        console.log('Save response from finishTest:', saveResponse);
+
+        // 저장 성공 시 shareId를 URL에 포함하여 결과 페이지로 이동
+        if (saveResponse.success && saveResponse.shareId) {
+          // 결과 페이지로 이동 (shareId를 포함한 URL 사용)
+          router.push(`/result/${saveResponse.shareId}`);
+          return { ...testResult, shareId: saveResponse.shareId };
+        } else {
+          // 저장은 실패했지만 UI 흐름은 계속 진행
+          router.push('/result');
+        }
       } catch (err) {
         console.error('Failed to save test result to Supabase:', err);
         // 저장 실패 시에도 UI 흐름은 계속 진행
+        router.push('/result');
       }
-
-      // 결과 페이지로 이동
-      router.push('/result');
     }
 
     return testResult;

@@ -35,6 +35,14 @@ function ResultContent() {
 
   console.log('URL shareId from query params:', shareId);
 
+  // 쿼리 파라미터로 접근한 경우 새 URL 형식으로 리다이렉트
+  useEffect(() => {
+    if (shareId && typeof window !== 'undefined') {
+      console.log('Redirecting from query param to path param:', shareId);
+      router.replace(`/result/${shareId}`);
+    }
+  }, [shareId, router]);
+
   // 페이지 로드 시 테스트 완료 여부 확인 또는 공유된 결과 가져오기
   useEffect(() => {
     const loadResult = async () => {
@@ -43,43 +51,34 @@ function ResultContent() {
         console.log('Loading result with shareId:', shareId);
         console.log('isTestCompleted:', isTestCompleted);
         console.log('result:', result);
+        console.log('Current URL:', typeof window !== 'undefined' ? window.location.href : 'SSR');
 
-        // 공유 ID가 있는 경우 해당 결과 가져오기
-        if (shareId) {
-          console.log('Fetching result by shareId:', shareId);
-          const sharedResult = await getTestResultByShareId(shareId);
-          console.log('Fetched shared result:', sharedResult);
+        // 쿼리 파라미터로 접근한 경우 새 URL 형식으로 리다이렉트하고 함수 종료
+        if (shareId && typeof window !== 'undefined' && window.location.search.includes('id=')) {
+          console.log('Redirecting from query param to path param in loadResult');
+          // router.replace는 다른 useEffect에서 처리하므로 여기서는 함수 종료
+          return;
+        }
 
-          if (sharedResult) {
-            setSavedResult(sharedResult);
-
-            // 쿼리 파라미터 방식으로 접근한 경우 새 URL 형식으로 리다이렉트
-            // 하지만 SEO에 영향을 주지 않도록 history.replaceState 사용
-            if (typeof window !== 'undefined' && window.location.search.includes('id=')) {
-              const newUrl = `${window.location.origin}/result/${shareId}`;
-              console.log('Redirecting to new URL format:', newUrl);
-              window.history.replaceState({ path: newUrl }, '', newUrl);
-            }
-          } else {
-            // 결과가 없는 경우 테스트 페이지로 이동
-            console.log('No result found for shareId:', shareId);
-            router.push('/test');
-          }
-        } else if (!isTestCompleted && !result) {
-          // 테스트를 완료하지 않은 경우 테스트 페이지로 이동
+        // 테스트를 완료하지 않았고 결과도 없는 경우 테스트 페이지로 이동
+        if (!isTestCompleted && !result) {
           console.log('Test not completed, redirecting to test page');
           router.push('/test');
-        } else if (result && !savedResult) {
-          // 결과가 있고 아직 저장되지 않은 경우 결과 저장
+          return;
+        }
+
+        // 결과가 있고 아직 저장되지 않은 경우 결과 저장
+        if (result && !savedResult) {
           console.log('Result exists but not saved, saving result...');
           const saveResponse = await saveResult();
           console.log('Save response:', saveResponse);
 
-          // 저장 후 URL 업데이트
-          if (saveResponse.success && saveResponse.shareId && typeof window !== 'undefined') {
-            const newUrl = `${window.location.origin}/result/${saveResponse.shareId}`;
-            console.log('Updating URL after saving result:', newUrl);
-            window.history.replaceState({ path: newUrl }, '', newUrl);
+          // 저장 성공 시 새 URL 형식으로 리다이렉트
+          if (saveResponse.success && saveResponse.shareId) {
+            const newUrl = `/result/${saveResponse.shareId}`;
+            console.log('Redirecting to new URL after saving:', newUrl);
+            router.replace(newUrl);
+            return;
           }
         }
       } catch (error) {
@@ -90,7 +89,7 @@ function ResultContent() {
     };
 
     loadResult();
-  }, [isTestCompleted, result, router, shareId]);
+  }, [isTestCompleted, result, router, shareId, savedResult]);
 
   // 결과 저장
   const saveResult = async () => {
@@ -189,6 +188,14 @@ function ResultContent() {
         if (saveResponse.success && saveResponse.shareId) {
           finalShareId = saveResponse.shareId;
           console.log('Got shareId after saving:', finalShareId);
+
+          // 저장 성공 시 새 URL 형식으로 리다이렉트
+          const newUrl = `/result/${saveResponse.shareId}`;
+          console.log('Redirecting to new URL after saving in share handler:', newUrl);
+          router.replace(newUrl);
+
+          // 리다이렉트 중이므로 공유 작업 중단
+          return;
         }
       } catch (error) {
         console.error('Error saving result before sharing:', error);
@@ -199,17 +206,30 @@ function ResultContent() {
     if (finalShareId) {
       url = `${window.location.origin}/result/${finalShareId}`;
       console.log('Using shareId for URL:', finalShareId);
-
-      // 현재 URL 업데이트 (사용자가 보는 URL 변경)
-      if (typeof window !== 'undefined' &&
-          (window.location.pathname === '/result' || window.location.search.includes('id='))) {
-        console.log('Updating browser URL to:', url);
-        window.history.replaceState({ path: url }, '', url);
-      }
     } else {
       // shareId가 없으면 현재 URL 사용 (fallback)
+      // 하지만 이 경우는 거의 발생하지 않아야 함
       url = window.location.href;
       console.log('No shareId available, using current URL as fallback:', url);
+
+      // 현재 URL이 /result로 끝나는 경우 (공유 ID가 없는 경우)
+      // 다시 한번 저장 시도
+      if (url.endsWith('/result') && result) {
+        console.log('URL ends with /result, trying to save again...');
+        try {
+          const saveResponse = await saveResult();
+          if (saveResponse.success && saveResponse.shareId) {
+            url = `${window.location.origin}/result/${saveResponse.shareId}`;
+            console.log('Updated URL after saving again:', url);
+
+            // 저장 성공 시 새 URL 형식으로 리다이렉트
+            router.replace(`/result/${saveResponse.shareId}`);
+            return;
+          }
+        } catch (error) {
+          console.error('Error saving result before sharing (second attempt):', error);
+        }
+      }
     }
 
     console.log('Final sharing URL:', url);
