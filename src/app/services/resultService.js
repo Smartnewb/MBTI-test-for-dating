@@ -26,13 +26,22 @@ export const saveTestResult = async (
 ) => {
   try {
     // 결과 데이터 생성
+    const shareId = uuidv4();
     const resultData = {
       mbti_type: mbtiType,
       e_i_score: scores.E - scores.I,
       s_n_score: scores.S - scores.N,
       t_f_score: scores.T - scores.F,
       j_p_score: scores.J - scores.P,
-      share_id: uuidv4(),
+      share_id: shareId,
+      e_score: scores.E,
+      i_score: scores.I,
+      s_score: scores.S,
+      n_score: scores.N,
+      t_score: scores.T,
+      f_score: scores.F,
+      j_score: scores.J,
+      p_score: scores.P,
     };
 
     // 사용자 ID 또는 세션 ID 추가
@@ -57,10 +66,20 @@ export const saveTestResult = async (
       throw error;
     }
 
+    // 공유 URL 생성 - 이제 /result?id= 대신 /result/[id] 형식 사용
+    // 로컬호스트 환경에서도 제대로 작동하도록 수정
+    const shareUrl =
+      typeof window !== 'undefined'
+        ? `${window.location.origin}/result/${shareId}`
+        : `/result/${shareId}`;
+
+    console.log('Generated share URL:', shareUrl);
+
     return {
       success: true,
       data: data[0],
-      shareId: resultData.share_id,
+      shareId: shareId,
+      shareUrl: shareUrl,
       sessionId: resultData.session_id,
     };
   } catch (error) {

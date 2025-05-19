@@ -30,7 +30,7 @@ function ResultContent() {
 
   const [savedResult, setSavedResult] = useState(null);
 
-  // URL에서 공유 ID 가져오기
+  // URL에서 공유 ID 가져오기 - 쿼리 파라미터 지원 유지 (이전 링크 호환성)
   const shareId = searchParams.get('id');
 
   // 페이지 로드 시 테스트 완료 여부 확인 또는 공유된 결과 가져오기
@@ -45,6 +45,13 @@ function ResultContent() {
 
           if (sharedResult) {
             setSavedResult(sharedResult);
+
+            // 쿼리 파라미터 방식으로 접근한 경우 새 URL 형식으로 리다이렉트
+            // 하지만 SEO에 영향을 주지 않도록 history.replaceState 사용
+            if (typeof window !== 'undefined') {
+              const newUrl = `${window.location.origin}/result/${shareId}`;
+              window.history.replaceState({ path: newUrl }, '', newUrl);
+            }
           } else {
             // 결과가 없는 경우 테스트 페이지로 이동
             router.push('/test');
@@ -74,13 +81,24 @@ function ResultContent() {
       const {
         success,
         shareId,
+        shareUrl,
         sessionId: resultSessionId,
       } = await saveTestResult(result.scores, result.mbtiType, user?.id, sessionId);
 
-      if (success && shareId) {
-        // 공유 URL 생성
-        const url = `${window.location.origin}/result?id=${shareId}`;
-        setShareUrl(url);
+      if (success) {
+        // 공유 URL 설정
+        if (shareUrl) {
+          setShareUrl(shareUrl);
+          console.log('Saved share URL:', shareUrl);
+        }
+
+        // 저장된 결과에 shareId 추가
+        if (shareId && result) {
+          setSavedResult(prev => ({
+            ...prev,
+            shareId: shareId,
+          }));
+        }
       }
     } catch (error) {
       console.error('Error saving result:', error);
@@ -93,12 +111,28 @@ function ResultContent() {
     router.push('/test');
   };
 
+  // MBTI 유형 이름 가져오기
+  const getMbtiName = type => {
+    const description = getMbtiDescription(type);
+    return description?.name || type;
+  };
+
   // 결과 공유 핸들러
   const handleShare = () => {
     const mbtiType = savedResult?.mbtiType || result?.mbtiType;
     const mbtiName = getMbtiName(mbtiType);
     const shareText = `내 MBTI 연애 유형은 ${mbtiType}(${mbtiName})! 달빛 연애 연구소에서 당신의 MBTI 연애 유형도 알아보세요!`;
-    const url = shareUrl || window.location.href;
+
+    // 공유 URL 설정 - 저장된 shareUrl 사용 또는 현재 URL 사용
+    let url = shareUrl || window.location.href;
+
+    // URL이 /result로 끝나는 경우 (공유 ID가 없는 경우) 처리
+    if (url.endsWith('/result') && savedResult?.shareId) {
+      url = `${window.location.origin}/result/${savedResult.shareId}`;
+      console.log('Fixed share URL:', url);
+    }
+
+    console.log('Sharing URL:', url);
 
     if (navigator.share) {
       navigator
@@ -128,12 +162,6 @@ function ResultContent() {
       .catch(error => {
         console.error('클립보드 복사 실패:', error);
       });
-  };
-
-  // MBTI 유형 이름 가져오기
-  const getMbtiName = mbtiType => {
-    const mbtiDescription = getMbtiDescription(mbtiType);
-    return mbtiDescription?.name || '';
   };
 
   // 로딩 중 표시

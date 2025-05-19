@@ -1029,6 +1029,19 @@ export default function TestResult({
                   '&:hover': {
                     backgroundColor: 'secondary.main',
                   },
+                  position: 'relative',
+                  overflow: 'hidden',
+                  '&::after': {
+                    content: '""',
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    background:
+                      'radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)',
+                    opacity: 0.7,
+                  },
                 }}
               >
                 <ShareIcon fontSize="large" />
