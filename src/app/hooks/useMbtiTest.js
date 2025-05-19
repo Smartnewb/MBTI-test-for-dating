@@ -133,9 +133,17 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
    * 테스트 완료 및 결과 계산
    */
   const finishTest = useCallback(async () => {
-    const testResult = completeTest();
+    try {
+      // 테스트 결과 계산
+      const testResult = completeTest();
+      console.log('Test completed with result:', testResult);
 
-    if (testResult && testResult.mbtiType) {
+      if (!testResult || !testResult.mbtiType) {
+        console.error('Invalid test result:', testResult);
+        router.push('/test');
+        return null;
+      }
+
       // 이상형 MBTI 계산
       const ideal = getIdealType(testResult.mbtiType);
       setIdealType(ideal);
@@ -145,36 +153,58 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
       setWorstMatch(worst);
 
       // Supabase에 결과 저장
-      try {
-        console.log('Saving test result from finishTest:', testResult);
+      console.log('Saving test result to Supabase:', {
+        scores: testResult.scores,
+        mbtiType: testResult.mbtiType,
+        userId: user?.id,
+        sessionId
+      });
 
-        // resultService의 saveTestResult 함수 호출
-        const saveResponse = await saveTestResult(
-          testResult.scores,
-          testResult.mbtiType,
-          user?.id,
-          sessionId
-        );
+      // resultService의 saveTestResult 함수 호출
+      const saveResponse = await saveTestResult(
+        testResult.scores,
+        testResult.mbtiType,
+        user?.id,
+        sessionId
+      );
 
-        console.log('Save response from finishTest:', saveResponse);
+      console.log('Save response from Supabase:', saveResponse);
 
-        // 저장 성공 시 shareId를 URL에 포함하여 결과 페이지로 이동
-        if (saveResponse.success && saveResponse.shareId) {
-          // 결과 페이지로 이동 (shareId를 포함한 URL 사용)
-          router.push(`/result/${saveResponse.shareId}`);
-          return { ...testResult, shareId: saveResponse.shareId };
+      // 저장 성공 시 shareId를 URL에 포함하여 결과 페이지로 이동
+      if (saveResponse && saveResponse.success && saveResponse.shareId) {
+        const shareId = saveResponse.shareId;
+        console.log('Generated shareId:', shareId);
+
+        // 결과 객체에 shareId 추가
+        const resultWithShareId = {
+          ...testResult,
+          shareId: shareId
+        };
+
+        // 결과 페이지로 이동 (shareId를 포함한 URL 사용)
+        const resultUrl = `/result/${shareId}`;
+        console.log('Redirecting to:', resultUrl);
+
+        // 강제로 페이지 이동 (router.push 대신 window.location 사용)
+        if (typeof window !== 'undefined') {
+          window.location.href = resultUrl;
         } else {
-          // 저장은 실패했지만 UI 흐름은 계속 진행
-          router.push('/result');
+          router.push(resultUrl);
         }
-      } catch (err) {
-        console.error('Failed to save test result to Supabase:', err);
-        // 저장 실패 시에도 UI 흐름은 계속 진행
-        router.push('/result');
-      }
-    }
 
-    return testResult;
+        return resultWithShareId;
+      } else {
+        console.error('Failed to get shareId from save response:', saveResponse);
+        // 저장은 실패했지만 UI 흐름은 계속 진행
+        router.push('/result');
+        return testResult;
+      }
+    } catch (error) {
+      console.error('Error in finishTest:', error);
+      // 오류 발생 시에도 UI 흐름은 계속 진행
+      router.push('/result');
+      return null;
+    }
   }, [completeTest, router, user, sessionId]);
 
   /**

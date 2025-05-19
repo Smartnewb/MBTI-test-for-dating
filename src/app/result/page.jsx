@@ -52,23 +52,31 @@ function ResultContent() {
         console.log('isTestCompleted:', isTestCompleted);
         console.log('result:', result);
         console.log('Current URL:', typeof window !== 'undefined' ? window.location.href : 'SSR');
+        console.log('Current pathname:', typeof window !== 'undefined' ? window.location.pathname : 'SSR');
 
         // 쿼리 파라미터로 접근한 경우 새 URL 형식으로 리다이렉트하고 함수 종료
         if (shareId && typeof window !== 'undefined' && window.location.search.includes('id=')) {
           console.log('Redirecting from query param to path param in loadResult');
-          // router.replace는 다른 useEffect에서 처리하므로 여기서는 함수 종료
+          const newUrl = `/result/${shareId}`;
+          console.log('New URL:', newUrl);
+          window.location.href = newUrl;
           return;
         }
 
+        // 현재 URL이 이미 /result/[id] 형식인지 확인
+        const isPathFormat = typeof window !== 'undefined' &&
+                            window.location.pathname.match(/^\/result\/[a-zA-Z0-9-]+$/);
+        console.log('Is path format:', isPathFormat);
+
         // 테스트를 완료하지 않았고 결과도 없는 경우 테스트 페이지로 이동
-        if (!isTestCompleted && !result) {
+        if (!isTestCompleted && !result && !isPathFormat) {
           console.log('Test not completed, redirecting to test page');
           router.push('/test');
           return;
         }
 
         // 결과가 있고 아직 저장되지 않은 경우 결과 저장
-        if (result && !savedResult) {
+        if (result && !savedResult && !isPathFormat) {
           console.log('Result exists but not saved, saving result...');
           const saveResponse = await saveResult();
           console.log('Save response:', saveResponse);
@@ -77,7 +85,7 @@ function ResultContent() {
           if (saveResponse.success && saveResponse.shareId) {
             const newUrl = `/result/${saveResponse.shareId}`;
             console.log('Redirecting to new URL after saving:', newUrl);
-            router.replace(newUrl);
+            window.location.href = newUrl;
             return;
           }
         }
@@ -173,6 +181,11 @@ function ResultContent() {
     console.log('Before share - savedResult:', savedResult);
     console.log('Before share - shareUrl:', shareUrl);
     console.log('Before share - Current URL:', window.location.href);
+    console.log('Current pathname:', window.location.pathname);
+
+    // 현재 URL이 이미 /result/[id] 형식인지 확인
+    const isPathFormat = window.location.pathname.match(/^\/result\/[a-zA-Z0-9-]+$/);
+    console.log('Is path format:', isPathFormat);
 
     // 먼저 결과가 저장되어 있는지 확인하고, 저장되어 있지 않으면 저장
     let finalShareId = savedResult?.shareId;
@@ -189,10 +202,10 @@ function ResultContent() {
           finalShareId = saveResponse.shareId;
           console.log('Got shareId after saving:', finalShareId);
 
-          // 저장 성공 시 새 URL 형식으로 리다이렉트
+          // 저장 성공 시 새 URL 형식으로 리다이렉트 (window.location.href 사용)
           const newUrl = `/result/${saveResponse.shareId}`;
           console.log('Redirecting to new URL after saving in share handler:', newUrl);
-          router.replace(newUrl);
+          window.location.href = newUrl;
 
           // 리다이렉트 중이므로 공유 작업 중단
           return;
@@ -206,6 +219,13 @@ function ResultContent() {
     if (finalShareId) {
       url = `${window.location.origin}/result/${finalShareId}`;
       console.log('Using shareId for URL:', finalShareId);
+
+      // 현재 URL이 /result/[id] 형식이 아니면 리다이렉트
+      if (!isPathFormat) {
+        console.log('Current URL is not in path format, redirecting to:', url);
+        window.location.href = url;
+        return;
+      }
     } else {
       // shareId가 없으면 현재 URL 사용 (fallback)
       // 하지만 이 경우는 거의 발생하지 않아야 함
@@ -214,7 +234,7 @@ function ResultContent() {
 
       // 현재 URL이 /result로 끝나는 경우 (공유 ID가 없는 경우)
       // 다시 한번 저장 시도
-      if (url.endsWith('/result') && result) {
+      if ((url.endsWith('/result') || url === `${window.location.origin}/result`) && result) {
         console.log('URL ends with /result, trying to save again...');
         try {
           const saveResponse = await saveResult();
@@ -222,8 +242,8 @@ function ResultContent() {
             url = `${window.location.origin}/result/${saveResponse.shareId}`;
             console.log('Updated URL after saving again:', url);
 
-            // 저장 성공 시 새 URL 형식으로 리다이렉트
-            router.replace(`/result/${saveResponse.shareId}`);
+            // 저장 성공 시 새 URL 형식으로 리다이렉트 (window.location.href 사용)
+            window.location.href = url;
             return;
           }
         } catch (error) {
