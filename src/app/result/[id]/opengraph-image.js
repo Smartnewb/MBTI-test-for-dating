@@ -23,6 +23,15 @@ export default async function Image({ params }) {
     const shareId = params.id;
     const result = await getTestResultByShareId(shareId);
 
+    // 폰트 로드
+    const notoSansKR = await fetch(
+      new URL('../../../../public/fonts/NotoSansKR-Bold.ttf', import.meta.url)
+    ).then(res => res.arrayBuffer());
+
+    const playfairDisplay = await fetch(
+      new URL('../../../../public/fonts/PlayfairDisplay-Bold.ttf', import.meta.url)
+    ).then(res => res.arrayBuffer());
+
     // 결과가 없는 경우 기본 이미지 반환
     if (!result || !result.mbtiType) {
       return new ImageResponse(
@@ -46,6 +55,7 @@ export default async function Image({ params }) {
                 fontWeight: 'bold',
                 marginBottom: 20,
                 textAlign: 'center',
+                fontFamily: 'Noto Sans KR',
               }}
             >
               달빛 연애 연구소
@@ -56,13 +66,30 @@ export default async function Image({ params }) {
                 color: 'white',
                 fontWeight: 'bold',
                 textAlign: 'center',
+                fontFamily: 'Playfair Display',
               }}
             >
               MBTI 연애 테스트 결과
             </div>
           </div>
         ),
-        { ...size }
+        {
+          ...size,
+          fonts: [
+            {
+              name: 'Noto Sans KR',
+              data: notoSansKR,
+              style: 'normal',
+              weight: 700,
+            },
+            {
+              name: 'Playfair Display',
+              data: playfairDisplay,
+              style: 'normal',
+              weight: 700,
+            },
+          ],
+        }
       );
     }
 
@@ -122,6 +149,7 @@ export default async function Image({ params }) {
                 fontSize: 24,
                 color: '#E91E63',
                 fontWeight: 'bold',
+                fontFamily: 'Noto Sans KR',
               }}
             >
               달빛 연애 연구소
@@ -145,6 +173,7 @@ export default async function Image({ params }) {
                 fontWeight: 'bold',
                 marginBottom: 10,
                 textAlign: 'center',
+                fontFamily: 'Noto Sans KR',
               }}
             >
               내 MBTI 연애 유형은
@@ -157,6 +186,7 @@ export default async function Image({ params }) {
                 fontWeight: 'bold',
                 marginBottom: 10,
                 textShadow: '0 0 10px rgba(255, 255, 255, 0.3)',
+                fontFamily: 'Playfair Display',
               }}
             >
               {result.mbtiType}
@@ -168,6 +198,7 @@ export default async function Image({ params }) {
                 color: '#D4AF37',
                 fontWeight: 'bold',
                 textAlign: 'center',
+                fontFamily: 'Noto Sans KR',
               }}
             >
               {mbtiName}
@@ -182,6 +213,7 @@ export default async function Image({ params }) {
               textAlign: 'center',
               maxWidth: 800,
               lineHeight: 1.4,
+              fontFamily: 'Noto Sans KR',
             }}
           >
             {mbtiDescription?.description?.substring(0, 100)}...
@@ -202,6 +234,7 @@ export default async function Image({ params }) {
               style={{
                 fontSize: 20,
                 color: 'rgba(255, 255, 255, 0.7)',
+                fontFamily: 'Noto Sans KR',
               }}
             >
               당신의 MBTI 연애 유형도 알아보세요!
@@ -209,7 +242,23 @@ export default async function Image({ params }) {
           </div>
         </div>
       ),
-      { ...size }
+      {
+        ...size,
+        fonts: [
+          {
+            name: 'Noto Sans KR',
+            data: notoSansKR,
+            style: 'normal',
+            weight: 700,
+          },
+          {
+            name: 'Playfair Display',
+            data: playfairDisplay,
+            style: 'normal',
+            weight: 700,
+          },
+        ],
+      }
     );
   } catch (error) {
     console.error('Error generating OG image:', error);
@@ -236,6 +285,7 @@ export default async function Image({ params }) {
               fontWeight: 'bold',
               marginBottom: 20,
               textAlign: 'center',
+              fontFamily: 'Noto Sans KR',
             }}
           >
             달빛 연애 연구소
@@ -246,13 +296,30 @@ export default async function Image({ params }) {
               color: 'white',
               fontWeight: 'bold',
               textAlign: 'center',
+              fontFamily: 'Playfair Display',
             }}
           >
             MBTI 연애 테스트 결과
           </div>
         </div>
       ),
-      { ...size }
+      {
+        ...size,
+        fonts: [
+          {
+            name: 'Noto Sans KR',
+            data: notoSansKR,
+            style: 'normal',
+            weight: 700,
+          },
+          {
+            name: 'Playfair Display',
+            data: playfairDisplay,
+            style: 'normal',
+            weight: 700,
+          },
+        ],
+      }
     );
   }
 }

@@ -25,11 +25,11 @@ export async function GET(request) {
 
     // 폰트 로드
     const notoSansKR = await fetch(
-      new URL('/public/fonts/NotoSansKR-Bold.ttf', import.meta.url)
+      new URL('../../../../public/fonts/NotoSansKR-Bold.ttf', import.meta.url)
     ).then(res => res.arrayBuffer());
 
     const playfairDisplay = await fetch(
-      new URL('/public/fonts/PlayfairDisplay-Bold.ttf', import.meta.url)
+      new URL('../../../../public/fonts/PlayfairDisplay-Bold.ttf', import.meta.url)
     ).then(res => res.arrayBuffer());
 
     // 이미지 생성
