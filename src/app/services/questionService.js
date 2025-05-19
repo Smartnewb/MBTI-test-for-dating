@@ -61,16 +61,60 @@ export const getSampleQuestions = () => {
  * MBTI 질문 데이터 가져오기
  * 개발 환경에서는 샘플 데이터를 사용하고, 프로덕션 환경에서는 Supabase에서 데이터를 가져옵니다.
  * @param {boolean} useSample - 샘플 데이터 사용 여부
+ * @param {number} limit - 가져올 질문 수 제한 (기본값: 24)
  * @returns {Promise<Array>} 질문 데이터 배열
  */
-export const getQuestions = async (useSample = false) => {
+export const getQuestions = async (useSample = false, limit = 24) => {
+  let questions;
+
   // 개발 환경이거나 useSample이 true인 경우 샘플 데이터 사용
   if (process.env.NODE_ENV === 'development' || useSample) {
-    return getSampleQuestions();
+    questions = getSampleQuestions();
+  } else {
+    // 프로덕션 환경에서는 Supabase에서 데이터 가져오기
+    questions = await fetchQuestionsFromSupabase();
   }
 
-  // 프로덕션 환경에서는 Supabase에서 데이터 가져오기
-  return await fetchQuestionsFromSupabase();
+  // 각 MBTI 차원별로 균등하게 질문 선택 (E-I, S-N, T-F, J-P 각각 6개씩)
+  if (questions.length > limit) {
+    const dimensionQuestions = {
+      'E-I': [],
+      'S-N': [],
+      'T-F': [],
+      'J-P': [],
+    };
+
+    // 차원별로 질문 분류
+    questions.forEach(q => {
+      if (dimensionQuestions[q.dimension]) {
+        dimensionQuestions[q.dimension].push(q);
+      }
+    });
+
+    // 각 차원별로 균등하게 질문 선택 (각 차원별로 limit/4개)
+    const questionsPerDimension = Math.floor(limit / 4);
+    const selectedQuestions = [];
+
+    Object.keys(dimensionQuestions).forEach(dimension => {
+      const dimensionQs = dimensionQuestions[dimension];
+      // 차원별 질문이 충분하지 않은 경우 모두 선택
+      if (dimensionQs.length <= questionsPerDimension) {
+        selectedQuestions.push(...dimensionQs);
+      } else {
+        // 랜덤하게 선택
+        const selected = [];
+        while (selected.length < questionsPerDimension && dimensionQs.length > 0) {
+          const randomIndex = Math.floor(Math.random() * dimensionQs.length);
+          selected.push(dimensionQs.splice(randomIndex, 1)[0]);
+        }
+        selectedQuestions.push(...selected);
+      }
+    });
+
+    return selectedQuestions;
+  }
+
+  return questions;
 };
 
 /**

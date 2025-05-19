@@ -6,9 +6,9 @@ import { styled } from '@mui/material/styles';
 import Container from './Container';
 
 // 스타일링된 섹션 컴포넌트
-const StyledSection = styled(Box)(({ theme, variant, fullHeight }) => ({
+const StyledSection = styled(Box)(({ theme, variant, fullHeight, reducedPadding }) => ({
   position: 'relative',
-  paddingTop: theme.spacing(4),
+  paddingTop: reducedPadding ? theme.spacing(2) : theme.spacing(4),
   paddingBottom: theme.spacing(8), // 하단 패딩 증가
   overflow: 'visible', // 오버플로우 허용
 
@@ -58,12 +58,12 @@ const StyledSection = styled(Box)(({ theme, variant, fullHeight }) => ({
 
   // 반응형 패딩
   [theme.breakpoints.up('sm')]: {
-    paddingTop: theme.spacing(8),
+    paddingTop: reducedPadding ? theme.spacing(3) : theme.spacing(8),
     paddingBottom: theme.spacing(8),
   },
 
   [theme.breakpoints.up('md')]: {
-    paddingTop: theme.spacing(10),
+    paddingTop: reducedPadding ? theme.spacing(4) : theme.spacing(10),
     paddingBottom: theme.spacing(10),
   },
 }));
@@ -116,6 +116,7 @@ const SectionSubtitle = styled(Typography)(({ theme, centered }) => ({
  * @param {string} [props.subtitle] - 섹션 부제목
  * @param {boolean} [props.centered=false] - 중앙 정렬 여부
  * @param {boolean} [props.fullHeight=false] - 전체 높이 여부
+ * @param {boolean} [props.reducedPadding=false] - 상단 패딩 감소 여부
  * @param {string} [props.maxWidth='lg'] - 최대 너비 ('xs', 'sm', 'md', 'lg', 'xl')
  * @param {React.ReactNode} props.children - 섹션 내용
  * @param {Object} [props.sx] - 추가 스타일
@@ -127,6 +128,7 @@ const Section = forwardRef(function Section(props, ref) {
     subtitle,
     centered = false,
     fullHeight = false,
+    reducedPadding = false,
     maxWidth = 'lg',
     children,
     sx = {},
@@ -138,6 +140,7 @@ const Section = forwardRef(function Section(props, ref) {
       ref={ref}
       variant={variant}
       fullHeight={fullHeight}
+      reducedPadding={reducedPadding}
       component="section"
       sx={sx}
       {...other}

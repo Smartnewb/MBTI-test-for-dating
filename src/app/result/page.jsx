@@ -13,7 +13,6 @@ import { getMbtiDescription } from '../utils/mbti';
 import { StarryBackground } from '../components/mystical';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
-
 /**
  * MBTI 테스트 결과 페이지
  *
@@ -72,12 +71,11 @@ function ResultContent() {
     if (!result) return;
 
     try {
-      const { success, shareId, sessionId: resultSessionId } = await saveTestResult(
-        result.scores,
-        result.mbtiType,
-        user?.id,
-        sessionId
-      );
+      const {
+        success,
+        shareId,
+        sessionId: resultSessionId,
+      } = await saveTestResult(result.scores, result.mbtiType, user?.id, sessionId);
 
       if (success && shareId) {
         // 공유 URL 생성
@@ -103,15 +101,16 @@ function ResultContent() {
     const url = shareUrl || window.location.href;
 
     if (navigator.share) {
-      navigator.share({
-        title: `내 MBTI 연애 유형은 ${mbtiType}!`,
-        text: shareText,
-        url: url,
-      })
-      .catch((error) => {
-        console.error('공유 실패:', error);
-        copyToClipboard(shareText, url);
-      });
+      navigator
+        .share({
+          title: `내 MBTI 연애 유형은 ${mbtiType}!`,
+          text: shareText,
+          url: url,
+        })
+        .catch(error => {
+          console.error('공유 실패:', error);
+          copyToClipboard(shareText, url);
+        });
     } else {
       copyToClipboard(shareText, url);
     }
@@ -121,19 +120,18 @@ function ResultContent() {
   const copyToClipboard = (text, url) => {
     const shareText = `${text} ${url}`;
 
-    navigator.clipboard.writeText(shareText)
+    navigator.clipboard
+      .writeText(shareText)
       .then(() => {
         setShowShareAlert(true);
       })
-      .catch((error) => {
+      .catch(error => {
         console.error('클립보드 복사 실패:', error);
       });
   };
 
-
-
   // MBTI 유형 이름 가져오기
-  const getMbtiName = (mbtiType) => {
+  const getMbtiName = mbtiType => {
     const mbtiDescription = getMbtiDescription(mbtiType);
     return mbtiDescription?.name || '';
   };
@@ -143,13 +141,24 @@ function ResultContent() {
     return (
       <PageLayout variant="result">
         {/* 별 반짝임 배경 효과 */}
-        <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            overflow: 'hidden',
+          }}
+        >
           <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
         </Box>
 
-        <Section centered fullHeight>
+        <Section centered fullHeight reducedPadding>
           <AnimatedElement animation="pulse" duration="slow">
-            <Box component="img"
+            <Box
+              component="img"
               src="/images/tarot-back.svg"
               alt="타로 카드"
               sx={{
@@ -159,8 +168,8 @@ function ResultContent() {
                 animation: 'spin 3s linear infinite',
                 '@keyframes spin': {
                   '0%': { transform: 'rotateY(0deg)' },
-                  '100%': { transform: 'rotateY(360deg)' }
-                }
+                  '100%': { transform: 'rotateY(360deg)' },
+                },
               }}
             />
           </AnimatedElement>
@@ -176,11 +185,21 @@ function ResultContent() {
     return (
       <PageLayout variant="result" hideHeader={true} hideFooter={true}>
         {/* 별 반짝임 배경 효과 */}
-        <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+        <Box
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: -1,
+            overflow: 'hidden',
+          }}
+        >
           <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
         </Box>
 
-        <Section centered fullHeight>
+        <Section centered fullHeight reducedPadding>
           <AnimatedElement animation="fadeIn" duration="normal">
             <Typography variant="h4">테스트 결과가 없습니다</Typography>
             <Typography variant="body1" sx={{ mt: 2, mb: 4, textAlign: 'center' }}>
@@ -209,24 +228,36 @@ function ResultContent() {
   return (
     <PageLayout variant="result" hideHeader={true} hideFooter={true}>
       {/* 별 반짝임 배경 효과 */}
-      <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
+      <Box
+        sx={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: -1,
+          overflow: 'hidden',
+        }}
+      >
         <StarryBackground starCount={50} shootingStarCount={3} fogCount={5} />
       </Box>
 
-      <Section centered>
+      <Section centered reducedPadding>
         <AnimatedElement animation="fadeIn" duration="normal">
-          <Box sx={{ maxWidth: 800, mx: 'auto', my: 4 }}>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 4 }}>
+          <Box sx={{ maxWidth: 800, mx: 'auto', my: 2 }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
               <AnimatedElement animation="pulse" duration="slow">
-                <FavoriteIcon sx={{
-                  fontSize: 60,
-                  color: 'secondary.main',
-                  filter: 'drop-shadow(0 0 10px rgba(156, 39, 176, 0.5))'
-                }} />
+                <FavoriteIcon
+                  sx={{
+                    fontSize: 50,
+                    color: 'secondary.main',
+                    filter: 'drop-shadow(0 0 10px rgba(156, 39, 176, 0.5))',
+                  }}
+                />
               </AnimatedElement>
             </Box>
 
-            <Typography variant="h3" sx={{ textAlign: 'center', mb: 4 }}>
+            <Typography variant="h3" sx={{ textAlign: 'center', mb: 3 }}>
               당신의 MBTI 연애 유형 결과
             </Typography>
 
@@ -240,13 +271,9 @@ function ResultContent() {
                 onShare={handleShare}
               />
             </Box>
-
-
           </Box>
         </AnimatedElement>
       </Section>
-
-
 
       {/* 공유 알림 */}
       <Snackbar
@@ -255,11 +282,7 @@ function ResultContent() {
         onClose={() => setShowShareAlert(false)}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
       >
-        <Alert
-          onClose={() => setShowShareAlert(false)}
-          severity="success"
-          sx={{ width: '100%' }}
-        >
+        <Alert onClose={() => setShowShareAlert(false)} severity="success" sx={{ width: '100%' }}>
           결과 링크가 클립보드에 복사되었습니다!
         </Alert>
       </Snackbar>
@@ -269,34 +292,47 @@ function ResultContent() {
 
 export default function ResultPage() {
   return (
-    <Suspense fallback={
-      <PageLayout variant="result" hideHeader={true} hideFooter={true}>
-        {/* 별 반짝임 배경 효과 */}
-        <Box sx={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, zIndex: -1, overflow: 'hidden' }}>
-          <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
-        </Box>
+    <Suspense
+      fallback={
+        <PageLayout variant="result" hideHeader={true} hideFooter={true}>
+          {/* 별 반짝임 배경 효과 */}
+          <Box
+            sx={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: -1,
+              overflow: 'hidden',
+            }}
+          >
+            <StarryBackground starCount={30} shootingStarCount={2} fogCount={3} />
+          </Box>
 
-        <Section centered fullHeight>
-          <AnimatedElement animation="pulse" duration="slow">
-            <Box component="img"
-              src="/images/tarot-back.svg"
-              alt="타로 카드"
-              sx={{
-                width: 150,
-                height: 225,
-                mb: 4,
-                animation: 'spin 3s linear infinite',
-                '@keyframes spin': {
-                  '0%': { transform: 'rotateY(0deg)' },
-                  '100%': { transform: 'rotateY(360deg)' }
-                }
-              }}
-            />
-          </AnimatedElement>
-          <Typography variant="h4">결과를 불러오는 중...</Typography>
-        </Section>
-      </PageLayout>
-    }>
+          <Section centered fullHeight reducedPadding>
+            <AnimatedElement animation="pulse" duration="slow">
+              <Box
+                component="img"
+                src="/images/tarot-back.svg"
+                alt="타로 카드"
+                sx={{
+                  width: 150,
+                  height: 225,
+                  mb: 4,
+                  animation: 'spin 3s linear infinite',
+                  '@keyframes spin': {
+                    '0%': { transform: 'rotateY(0deg)' },
+                    '100%': { transform: 'rotateY(360deg)' },
+                  },
+                }}
+              />
+            </AnimatedElement>
+            <Typography variant="h4">결과를 불러오는 중...</Typography>
+          </Section>
+        </PageLayout>
+      }
+    >
       <ResultContent />
     </Suspense>
   );

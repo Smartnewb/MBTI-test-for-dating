@@ -58,7 +58,7 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
     getProgress,
     getCurrentQuestionResponse,
     setSessionId,
-    resetStore
+    resetStore,
   } = useTestStore();
 
   /**
@@ -67,7 +67,8 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
   const fetchQuestions = useCallback(async () => {
     try {
       setLoading(true);
-      const data = await getQuestions(useSampleData);
+      // 질문 수를 24개로 제한
+      const data = await getQuestions(useSampleData, 24);
       setQuestions(data);
       setError(null);
     } catch (err) {
@@ -89,40 +90,43 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
   /**
    * 응답 추가 및 저장
    */
-  const saveAnswer = useCallback(async (questionIndex, answer) => {
-    const currentQuestion = getCurrentQuestion();
-    if (!currentQuestion) return;
+  const saveAnswer = useCallback(
+    async (questionIndex, answer) => {
+      const currentQuestion = getCurrentQuestion();
+      if (!currentQuestion) return;
 
-    // 응답 추가
-    addResponse(currentQuestion.id, answer);
+      // 응답 추가
+      addResponse(currentQuestion.id, answer);
 
-    // 자동 저장 활성화 및 세션 ID가 있는 경우 응답 저장
-    if (autoSave && (sessionId || user)) {
-      try {
-        await saveUserResponse(sessionId, currentQuestion.id, answer, user?.id);
-      } catch (err) {
-        console.error('Failed to save response:', err);
-        // 저장 실패 시에도 UI 흐름은 계속 진행
+      // 자동 저장 활성화 및 세션 ID가 있는 경우 응답 저장
+      if (autoSave && (sessionId || user)) {
+        try {
+          await saveUserResponse(sessionId, currentQuestion.id, answer, user?.id);
+        } catch (err) {
+          console.error('Failed to save response:', err);
+          // 저장 실패 시에도 UI 흐름은 계속 진행
+        }
       }
-    }
 
-    // 마지막 질문인 경우 결과 페이지로 이동
-    if (currentQuestionIndex === questions.length - 1) {
-      finishTest();
-    } else {
-      // 다음 질문으로 이동
-      goToNextQuestion();
-    }
-  }, [
-    getCurrentQuestion,
-    addResponse,
-    autoSave,
-    sessionId,
-    user,
-    currentQuestionIndex,
-    questions.length,
-    goToNextQuestion
-  ]);
+      // 마지막 질문인 경우 결과 페이지로 이동
+      if (currentQuestionIndex === questions.length - 1) {
+        finishTest();
+      } else {
+        // 다음 질문으로 이동
+        goToNextQuestion();
+      }
+    },
+    [
+      getCurrentQuestion,
+      addResponse,
+      autoSave,
+      sessionId,
+      user,
+      currentQuestionIndex,
+      questions.length,
+      goToNextQuestion,
+    ]
+  );
 
   /**
    * 테스트 완료 및 결과 계산
@@ -223,6 +227,6 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
     finishTest,
     goToQuestion,
     clearResponses,
-    resetStore
+    resetStore,
   };
 }
