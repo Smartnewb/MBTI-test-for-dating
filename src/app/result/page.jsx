@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from 'react';
 import { Box, Typography, Button, Snackbar, Alert } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
 import { AnimatedElement } from '../components/animations';
 import { PageLayout, Section } from '../components/layout';
 import TestResult from '../components/test/TestResult';
@@ -12,6 +13,7 @@ import { saveTestResult, getTestResultByShareId } from '../services/resultServic
 import { getMbtiDescription } from '../utils/mbti';
 import { StarryBackground } from '../components/mystical';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { logError } from '../utils/errorLogger';
 
 /**
  * MBTI 테스트 결과 페이지
@@ -75,50 +77,103 @@ function ResultContent() {
           return;
         }
 
-        // 결과가 있고 아직 저장되지 않은 경우 결과 저장
-        if (result && !savedResult && !isPathFormat) {
-          console.log('Result exists but not saved, saving result...');
+        // 결과가 있는 경우 항상 저장하고 /result/[id] 페이지로 리다이렉트
+        if (result) {
+          console.log('Result exists, saving and redirecting to result/[id] page');
           const saveResponse = await saveResult();
           console.log('Save response:', saveResponse);
 
-          // 저장 성공 시 새 URL 형식으로 리다이렉트
-          if (saveResponse.success && saveResponse.shareId) {
+          // 저장 성공 또는 실패 시에도 shareId가 있으면 리다이렉트
+          if (saveResponse.shareId) {
             const newUrl = `/result/${saveResponse.shareId}`;
-            console.log('Redirecting to new URL after saving:', newUrl);
-            window.location.href = newUrl;
-            return;
+            console.log('Redirecting to result/[id] page:', newUrl);
+
+            // 현재 URL이 /result/[id] 형식이 아닌 경우에만 리다이렉트
+            if (!isPathFormat) {
+              if (typeof window !== 'undefined') {
+                window.location.href = newUrl;
+              } else {
+                router.push(newUrl);
+              }
+              return;
+            }
+          } else {
+            console.error('No shareId returned after saving result');
           }
+        } else if (!isPathFormat) {
+          // 결과가 없고 현재 URL이 /result/[id] 형식이 아닌 경우 테스트 페이지로 이동
+          console.log('No result and not on result/[id] page, redirecting to test page');
+          router.push('/test');
+          return;
         }
       } catch (error) {
-        console.error('Error loading result:', error);
+        // 오류 로깅 및 추적
+        logError(error, 'loadResult', {
+          shareId,
+          isTestCompleted,
+          hasResult: !!result,
+          errorType: 'RESULT_PAGE_LOAD_ERROR'
+        });
+
+        // 오류 발생 시 테스트 페이지로 이동
+        if (typeof window !== 'undefined') {
+          // 오류 정보 저장 (이미 logError에서 처리됨)
+          // 추가 정보가 필요한 경우에만 여기에 추가
+          sessionStorage.setItem('mbti_result_page_error', JSON.stringify({
+            message: error.message,
+            timestamp: new Date().toISOString(),
+            page: 'result',
+            shareId
+          }));
+        }
+
+        router.push('/test');
       } finally {
         setIsLoading(false);
       }
     };
 
+    // 페이지 로드 시 즉시 실행
     loadResult();
   }, [isTestCompleted, result, router, shareId, savedResult]);
 
-  // 결과 저장
+  /**
+   * 결과 저장 함수
+   *
+   * 개선된 버전:
+   * 1. 항상 shareId를 반환하도록 보장
+   * 2. 저장 실패 시에도 임시 ID 생성하여 반환
+   * 3. 세션 스토리지에 결과 백업
+   */
   const saveResult = async () => {
+    // 결과가 없는 경우 임시 ID 생성하여 반환
     if (!result) {
       console.log('No result to save');
-      return { success: false };
+      const fallbackId = uuidv4();
+      return {
+        success: false,
+        shareId: fallbackId,
+        error: 'No result to save',
+        isFallback: true
+      };
     }
 
     try {
       console.log('Saving result with scores:', result.scores, 'and type:', result.mbtiType);
 
+      // resultService의 saveTestResult 함수 호출
       const {
         success,
         data,
         shareId,
         shareUrl,
         sessionId: resultSessionId,
+        error
       } = await saveTestResult(result.scores, result.mbtiType, user?.id, sessionId);
 
-      console.log('Save result response:', { success, data, shareId, shareUrl });
+      console.log('Save result response:', { success, data, shareId, shareUrl, error });
 
+      // 저장 성공 시
       if (success) {
         // 공유 URL 설정
         if (shareUrl) {
@@ -142,6 +197,16 @@ function ResultContent() {
           console.log('Updating savedResult with data:', updatedResult);
           setSavedResult(updatedResult);
 
+          // 세션 스토리지에 결과 백업 (클라이언트 사이드에서만)
+          if (typeof window !== 'undefined') {
+            try {
+              sessionStorage.setItem(`mbti_result_${shareId}`, JSON.stringify(updatedResult));
+              console.log('Result backed up to session storage');
+            } catch (storageError) {
+              console.warn('Failed to backup result to session storage:', storageError);
+            }
+          }
+
           // 실제 저장된 shareId 반환
           const actualShareId = data?.share_id || shareId;
           return {
@@ -152,10 +217,85 @@ function ResultContent() {
         }
       }
 
-      return { success, shareId, shareUrl };
+      // 저장 실패했지만 shareId가 있는 경우
+      if (!success && shareId) {
+        console.warn('Save failed but shareId is available:', shareId);
+
+        // 임시 결과 객체 생성
+        const fallbackResult = {
+          ...result,
+          shareId: shareId,
+          isFallback: true,
+          error: error
+        };
+
+        // 세션 스토리지에 임시 결과 저장 (클라이언트 사이드에서만)
+        if (typeof window !== 'undefined') {
+          try {
+            sessionStorage.setItem(`mbti_result_${shareId}`, JSON.stringify(fallbackResult));
+            console.log('Fallback result saved to session storage');
+          } catch (storageError) {
+            console.warn('Failed to save fallback result to session storage:', storageError);
+          }
+        }
+
+        return {
+          success: false,
+          shareId: shareId,
+          error: error,
+          isFallback: true
+        };
+      }
+
+      // shareId가 없는 경우 임시 ID 생성
+      const fallbackId = uuidv4();
+      console.warn('No shareId returned, using fallback ID:', fallbackId);
+
+      return {
+        success: false,
+        shareId: fallbackId,
+        error: error || 'No shareId returned',
+        isFallback: true
+      };
     } catch (error) {
-      console.error('Error saving result:', error);
-      return { success: false, error };
+      // 오류 로깅 및 추적
+      const errorInfo = logError(error, 'saveResult', {
+        mbtiType: result?.mbtiType,
+        userId: user?.id,
+        sessionId,
+        errorType: 'RESULT_SAVE_ERROR'
+      });
+
+      // 오류 발생 시 임시 ID 생성
+      const errorFallbackId = uuidv4();
+      console.warn('Error occurred, using error fallback ID:', errorFallbackId);
+
+      // 임시 결과 객체 생성
+      const fallbackResult = result ? {
+        ...result,
+        shareId: errorFallbackId,
+        isFallback: true,
+        error: error.message,
+        errorId: errorInfo.timestamp
+      } : null;
+
+      // 오류 정보와 함께 세션 스토리지에 저장 (클라이언트 사이드에서만)
+      if (typeof window !== 'undefined' && fallbackResult) {
+        try {
+          // 임시 결과 저장
+          sessionStorage.setItem(`mbti_result_${errorFallbackId}`, JSON.stringify(fallbackResult));
+        } catch (storageError) {
+          console.warn('Failed to save fallback result to session storage:', storageError);
+        }
+      }
+
+      return {
+        success: false,
+        shareId: errorFallbackId,
+        error: error.message || 'Unknown error',
+        errorId: errorInfo.timestamp,
+        isFallback: true
+      };
     }
   };
 
@@ -171,26 +311,45 @@ function ResultContent() {
     return description?.name || type;
   };
 
-  // 결과 공유 핸들러
+  /**
+   * 결과 공유 핸들러
+   *
+   * 개선된 버전:
+   * 1. 항상 /result/[ID] 형식의 URL 사용
+   * 2. 공유 전 결과가 저장되어 있지 않으면 저장 후 공유
+   * 3. 오류 처리 및 로깅 개선
+   */
   const handleShare = async () => {
+    // 공유할 MBTI 정보 준비
     const mbtiType = savedResult?.mbtiType || result?.mbtiType;
     const mbtiName = getMbtiName(mbtiType);
     const shareText = `내 MBTI 연애 유형은 ${mbtiType}(${mbtiName})! 달빛 연애 연구소에서 당신의 MBTI 연애 유형도 알아보세요!`;
 
     // 디버깅 정보 출력
-    console.log('Before share - savedResult:', savedResult);
-    console.log('Before share - shareUrl:', shareUrl);
-    console.log('Before share - Current URL:', window.location.href);
-    console.log('Current pathname:', window.location.pathname);
+    console.log('Share handler - Current state:', {
+      savedResult,
+      shareUrl,
+      currentUrl: typeof window !== 'undefined' ? window.location.href : 'SSR',
+      pathname: typeof window !== 'undefined' ? window.location.pathname : 'SSR'
+    });
 
     // 현재 URL이 이미 /result/[id] 형식인지 확인
-    const isPathFormat = window.location.pathname.match(/^\/result\/[a-zA-Z0-9-]+$/);
-    console.log('Is path format:', isPathFormat);
+    const isPathFormat = typeof window !== 'undefined' &&
+                         window.location.pathname.match(/^\/result\/[a-zA-Z0-9-]+$/);
+    console.log('Is current URL in path format:', isPathFormat);
 
-    // 먼저 결과가 저장되어 있는지 확인하고, 저장되어 있지 않으면 저장
-    let finalShareId = savedResult?.shareId;
-    let url;
+    // 현재 URL에서 ID 추출 (이미 /result/[id] 형식인 경우)
+    let idFromPath = null;
+    if (isPathFormat && typeof window !== 'undefined') {
+      const pathParts = window.location.pathname.split('/');
+      idFromPath = pathParts[pathParts.length - 1];
+      console.log('ID extracted from current path:', idFromPath);
+    }
 
+    // 공유에 사용할 최종 shareId 결정
+    let finalShareId = savedResult?.shareId || idFromPath;
+
+    // shareId가 없는 경우 결과 저장 시도
     if (!finalShareId && result) {
       console.log('No shareId found, saving result before sharing...');
       try {
@@ -198,76 +357,70 @@ function ResultContent() {
         const saveResponse = await saveResult();
         console.log('Save response before sharing:', saveResponse);
 
-        if (saveResponse.success && saveResponse.shareId) {
+        // 저장 성공 또는 실패 시에도 shareId가 있으면 사용
+        if (saveResponse.shareId) {
           finalShareId = saveResponse.shareId;
           console.log('Got shareId after saving:', finalShareId);
 
-          // 저장 성공 시 새 URL 형식으로 리다이렉트 (window.location.href 사용)
-          const newUrl = `/result/${saveResponse.shareId}`;
-          console.log('Redirecting to new URL after saving in share handler:', newUrl);
-          window.location.href = newUrl;
-
-          // 리다이렉트 중이므로 공유 작업 중단
-          return;
+          // 현재 URL이 /result/[id] 형식이 아니면 리다이렉트
+          if (!isPathFormat && typeof window !== 'undefined') {
+            const newUrl = `/result/${finalShareId}`;
+            console.log('Redirecting to result/[id] page before sharing:', newUrl);
+            window.location.href = newUrl;
+            return; // 리다이렉트 중이므로 공유 작업 중단
+          }
+        } else {
+          console.error('No shareId returned after saving result');
+          // 임시 ID 생성 (최후의 수단)
+          finalShareId = uuidv4();
+          console.warn('Using generated UUID as fallback shareId:', finalShareId);
         }
       } catch (error) {
         console.error('Error saving result before sharing:', error);
+        // 오류 발생 시 임시 ID 생성
+        finalShareId = uuidv4();
+        console.warn('Using generated UUID as error fallback shareId:', finalShareId);
       }
     }
 
-    // shareId가 있으면 새 URL 형식 사용
-    if (finalShareId) {
-      url = `${window.location.origin}/result/${finalShareId}`;
-      console.log('Using shareId for URL:', finalShareId);
+    // 최종 공유 URL 생성
+    const origin = typeof window !== 'undefined' ? window.location.origin : '';
+    const shareUrl = `${origin}/result/${finalShareId}`;
+    console.log('Final sharing URL:', shareUrl);
 
-      // 현재 URL이 /result/[id] 형식이 아니면 리다이렉트
-      if (!isPathFormat) {
-        console.log('Current URL is not in path format, redirecting to:', url);
-        window.location.href = url;
-        return;
-      }
-    } else {
-      // shareId가 없으면 현재 URL 사용 (fallback)
-      // 하지만 이 경우는 거의 발생하지 않아야 함
-      url = window.location.href;
-      console.log('No shareId available, using current URL as fallback:', url);
-
-      // 현재 URL이 /result로 끝나는 경우 (공유 ID가 없는 경우)
-      // 다시 한번 저장 시도
-      if ((url.endsWith('/result') || url === `${window.location.origin}/result`) && result) {
-        console.log('URL ends with /result, trying to save again...');
-        try {
-          const saveResponse = await saveResult();
-          if (saveResponse.success && saveResponse.shareId) {
-            url = `${window.location.origin}/result/${saveResponse.shareId}`;
-            console.log('Updated URL after saving again:', url);
-
-            // 저장 성공 시 새 URL 형식으로 리다이렉트 (window.location.href 사용)
-            window.location.href = url;
-            return;
-          }
-        } catch (error) {
-          console.error('Error saving result before sharing (second attempt):', error);
-        }
-      }
+    // 현재 URL이 /result/[id] 형식이 아니고 finalShareId가 있으면 리다이렉트
+    if (!isPathFormat && finalShareId && typeof window !== 'undefined') {
+      const newUrl = `/result/${finalShareId}`;
+      console.log('Current URL is not in path format, redirecting before sharing:', newUrl);
+      window.location.href = newUrl;
+      return; // 리다이렉트 중이므로 공유 작업 중단
     }
 
-    console.log('Final sharing URL:', url);
-
+    // 공유 기능 실행
     try {
-      if (navigator.share) {
+      // Web Share API 지원 여부 확인
+      if (typeof navigator !== 'undefined' && navigator.share) {
         await navigator.share({
           title: `내 MBTI 연애 유형은 ${mbtiType}!`,
           text: shareText,
-          url: url,
+          url: shareUrl,
         });
-        console.log('Successfully shared');
+        console.log('Successfully shared via Web Share API');
       } else {
-        copyToClipboard(shareText, url);
+        // Web Share API를 지원하지 않는 경우 클립보드에 복사
+        copyToClipboard(shareText, shareUrl);
       }
     } catch (error) {
-      console.error('공유 실패:', error);
-      copyToClipboard(shareText, url);
+      // 오류 로깅 및 추적
+      logError(error, 'handleShare', {
+        mbtiType,
+        shareUrl,
+        errorType: 'SHARE_ERROR'
+      });
+
+      console.error('Share failed:', error);
+      // 공유 실패 시 클립보드에 복사 (fallback)
+      copyToClipboard(shareText, shareUrl);
     }
   };
 
@@ -281,6 +434,11 @@ function ResultContent() {
         setShowShareAlert(true);
       })
       .catch(error => {
+        // 오류 로깅 및 추적
+        logError(error, 'copyToClipboard', {
+          errorType: 'CLIPBOARD_ERROR'
+        });
+
         console.error('클립보드 복사 실패:', error);
       });
   };

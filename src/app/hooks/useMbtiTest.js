@@ -2,12 +2,14 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { v4 as uuidv4 } from 'uuid';
 import useTestStore from '../store/testStore';
 import { getQuestions, saveUserResponse } from '../services/questionService';
 import { getIdealType, getWorstMatch } from '../utils/mbti';
 // mbtiAnalyzer의 saveTestResult 대신 resultService의 saveTestResult 사용
 import { saveTestResult } from '../services/resultService';
 import { useSupabase } from '../contexts/SupabaseContext';
+import { logError } from '../utils/errorLogger';
 
 /**
  * MBTI 테스트 관련 커스텀 훅
@@ -131,6 +133,11 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
 
   /**
    * 테스트 완료 및 결과 계산
+   *
+   * 개선된 버전:
+   * 1. 결과를 먼저 저장하고 저장된 결과의 ID를 사용하여 결과 페이지로 이동
+   * 2. 저장 실패 시에도 적절한 오류 처리 및 대체 경로 제공
+   * 3. 항상 /result/[ID] 형식의 URL 사용
    */
   const finishTest = useCallback(async () => {
     try {
@@ -152,7 +159,7 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
       const worst = getWorstMatch(testResult.mbtiType);
       setWorstMatch(worst);
 
-      // Supabase에 결과 저장
+      // Supabase에 결과 저장 - 이 단계를 먼저 수행하여 ID를 확보
       console.log('Saving test result to Supabase:', {
         scores: testResult.scores,
         mbtiType: testResult.mbtiType,
@@ -161,12 +168,42 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
       });
 
       // resultService의 saveTestResult 함수 호출
-      const saveResponse = await saveTestResult(
-        testResult.scores,
-        testResult.mbtiType,
-        user?.id,
-        sessionId
-      );
+      let saveResponse;
+      let retryCount = 0;
+      const MAX_RETRIES = 2;
+
+      // 저장 실패 시 최대 2회까지 재시도
+      while (retryCount <= MAX_RETRIES) {
+        try {
+          saveResponse = await saveTestResult(
+            testResult.scores,
+            testResult.mbtiType,
+            user?.id,
+            sessionId
+          );
+
+          if (saveResponse && saveResponse.success) {
+            break; // 성공하면 루프 종료
+          }
+
+          retryCount++;
+          console.log(`Save attempt ${retryCount} failed, retrying...`);
+
+          if (retryCount > MAX_RETRIES) {
+            throw new Error('Maximum retry attempts reached');
+          }
+
+          // 재시도 전 짧은 대기 시간
+          await new Promise(resolve => setTimeout(resolve, 500));
+        } catch (saveError) {
+          console.error(`Error in save attempt ${retryCount}:`, saveError);
+          retryCount++;
+
+          if (retryCount > MAX_RETRIES) {
+            throw saveError;
+          }
+        }
+      }
 
       console.log('Save response from Supabase:', saveResponse);
 
@@ -195,14 +232,74 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
         return resultWithShareId;
       } else {
         console.error('Failed to get shareId from save response:', saveResponse);
-        // 저장은 실패했지만 UI 흐름은 계속 진행
-        router.push('/result');
-        return testResult;
+
+        // 저장 실패 시 임시 ID 생성하여 사용 (fallback)
+        const fallbackShareId = uuidv4();
+        console.warn('Using fallback shareId:', fallbackShareId);
+
+        // 결과 객체에 임시 shareId 추가
+        const resultWithFallbackId = {
+          ...testResult,
+          shareId: fallbackShareId,
+          isFallback: true // 이 결과가 임시 ID를 사용하는 것을 표시
+        };
+
+        // 임시 ID를 사용하여 결과 페이지로 이동
+        const fallbackUrl = `/result/${fallbackShareId}`;
+        console.log('Redirecting to fallback URL:', fallbackUrl);
+
+        if (typeof window !== 'undefined') {
+          // 세션 스토리지에 임시 결과 저장 (페이지 새로고침 시에도 유지)
+          sessionStorage.setItem(`mbti_result_${fallbackShareId}`, JSON.stringify(resultWithFallbackId));
+          window.location.href = fallbackUrl;
+        } else {
+          router.push(fallbackUrl);
+        }
+
+        return resultWithFallbackId;
       }
     } catch (error) {
-      console.error('Error in finishTest:', error);
-      // 오류 발생 시에도 UI 흐름은 계속 진행
-      router.push('/result');
+      // 오류 로깅 및 추적
+      const errorInfo = logError(error, 'finishTest', {
+        mbtiType: testResult?.mbtiType,
+        userId: user?.id,
+        sessionId,
+        errorType: 'TEST_COMPLETION_ERROR'
+      });
+
+      // 오류 발생 시 임시 ID 생성하여 사용 (fallback)
+      try {
+        const errorFallbackId = uuidv4();
+        console.warn('Using error fallback shareId:', errorFallbackId);
+
+        // 임시 결과 객체 생성
+        const fallbackResult = {
+          mbtiType: 'XXXX', // 오류 표시용 임시 타입
+          scores: { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 },
+          shareId: errorFallbackId,
+          isFallback: true,
+          error: error.message,
+          errorId: errorInfo.timestamp
+        };
+
+        if (typeof window !== 'undefined') {
+          // 오류 정보와 함께 세션 스토리지에 저장
+          sessionStorage.setItem(`mbti_result_${errorFallbackId}`, JSON.stringify(fallbackResult));
+          window.location.href = `/result/${errorFallbackId}`;
+        } else {
+          router.push(`/result/${errorFallbackId}`);
+        }
+      } catch (fallbackError) {
+        // 이중 오류 발생 시 로깅
+        logError(fallbackError, 'finishTest_fallback', {
+          originalError: error.message,
+          errorType: 'FALLBACK_ERROR'
+        });
+
+        console.error('Even fallback failed:', fallbackError);
+        router.push('/result');
+      }
+
       return null;
     }
   }, [completeTest, router, user, sessionId]);
