@@ -29,8 +29,8 @@ export default function SharedResultPage({ params }) {
   const [error, setError] = useState(null);
   const [showShareAlert, setShowShareAlert] = useState(false);
 
-  // 공유 ID
-  const shareId = params.id;
+  // 공유 ID (문자열로 정규화)
+  const shareId = params.id ? String(params.id).trim() : null;
 
   // 페이지 로드 시 공유된 결과 가져오기
   useEffect(() => {

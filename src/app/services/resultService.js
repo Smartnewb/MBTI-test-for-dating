@@ -180,13 +180,40 @@ export const getTestResultByShareId = async shareId => {
     return null;
   }
 
+  // shareId를 문자열로 변환 (일관성 유지)
+  const shareIdStr = String(shareId).trim();
+  console.log('Normalized shareId:', shareIdStr);
+
   try {
     // 먼저 세션 스토리지에서 임시 저장된 결과가 있는지 확인 (클라이언트 사이드에서만)
     if (typeof window !== 'undefined') {
-      const sessionResult = sessionStorage.getItem(`mbti_result_${shareId}`);
-      if (sessionResult) {
+      // 정확한 키로 조회
+      const sessionResult = sessionStorage.getItem(`mbti_result_${shareIdStr}`);
+
+      // 정확한 키가 없으면 유사한 키 찾기
+      let finalSessionResult = sessionResult;
+      if (!finalSessionResult) {
+        console.log('Exact session storage key not found, searching for similar keys');
+
+        // 모든 세션 스토리지 키 검색
+        for (let i = 0; i < sessionStorage.length; i++) {
+          const key = sessionStorage.key(i);
+          if (key && key.startsWith('mbti_result_')) {
+            const keyId = key.replace('mbti_result_', '');
+            // ID의 일부가 일치하는지 확인
+            if (keyId.includes(shareIdStr.substring(0, 8)) ||
+                shareIdStr.includes(keyId.substring(0, 8))) {
+              console.log('Found similar session storage key:', key);
+              finalSessionResult = sessionStorage.getItem(key);
+              break;
+            }
+          }
+        }
+      }
+
+      if (finalSessionResult) {
         try {
-          const parsedResult = JSON.parse(sessionResult);
+          const parsedResult = JSON.parse(finalSessionResult);
           console.log('Found result in session storage:', parsedResult);
 
           // 세션 스토리지에서 가져온 결과에 이상형 및 최악의 궁합 정보 추가
@@ -212,7 +239,7 @@ export const getTestResultByShareId = async shareId => {
     let { data: directData, error: directError } = await supabase
       .from('test_results')
       .select('*')
-      .eq('share_id', shareId)
+      .eq('share_id', shareIdStr)
       .single();
 
     if (directError && directError.code !== 'PGRST116') { // PGRST116: 결과가 없는 경우
@@ -258,7 +285,7 @@ export const getTestResultByShareId = async shareId => {
     // 직접 조회 실패 시 RPC 함수 사용
     console.log('Direct query failed, trying RPC function');
     const { data, error } = await supabase.rpc('get_mbti_result_by_share_id', {
-      share_uuid: shareId,
+      share_id_param: shareIdStr,
     });
 
     if (error) {
@@ -275,7 +302,7 @@ export const getTestResultByShareId = async shareId => {
         const { data: fallbackData, error: fallbackError } = await supabase
           .from('test_results')
           .select('*')
-          .filter('share_id::text', 'eq', shareId)
+          .filter('share_id::text', 'eq', shareIdStr)
           .single();
 
         if (!fallbackError && fallbackData) {
@@ -335,9 +362,15 @@ export const getTestResultByShareId = async shareId => {
           console.log('Recent results:', allResults.map(r => ({ id: r.id, share_id: r.share_id })));
 
           // shareId와 유사한 결과 찾기
-          const similarResult = allResults.find(r =>
-            r.share_id && r.share_id.toString().includes(shareId.substring(0, 8))
-          );
+          const similarResult = allResults.find(r => {
+            if (!r.share_id) return false;
+
+            const resultIdStr = String(r.share_id);
+            const shortRequestId = shareIdStr.substring(0, Math.min(8, shareIdStr.length));
+            const shortResultId = resultIdStr.substring(0, Math.min(8, resultIdStr.length));
+
+            return resultIdStr.includes(shortRequestId) || shareIdStr.includes(shortResultId);
+          });
 
           if (similarResult) {
             console.log('Found similar result:', similarResult);
@@ -364,7 +397,7 @@ export const getTestResultByShareId = async shareId => {
               },
               createdAt: similarResult.created_at,
               shareId: similarResult.share_id,
-              recoveredFrom: shareId // 원래 요청한 ID 기록
+              recoveredFrom: shareIdStr // 원래 요청한 ID 기록
             };
 
             return {
@@ -395,7 +428,7 @@ export const getTestResultByShareId = async shareId => {
     // 클라이언트 사이드에서는 세션 스토리지에도 저장 (캐싱)
     if (typeof window !== 'undefined') {
       try {
-        sessionStorage.setItem(`mbti_result_${shareId}`, JSON.stringify(result));
+        sessionStorage.setItem(`mbti_result_${shareIdStr}`, JSON.stringify(result));
       } catch (storageError) {
         console.warn('Failed to cache result in session storage:', storageError);
       }
@@ -405,7 +438,7 @@ export const getTestResultByShareId = async shareId => {
   } catch (error) {
     // 오류 로깅 및 추적
     const errorInfo = logError(error, 'getTestResultByShareId', {
-      shareId: shareId,
+      shareId: shareIdStr,
       errorType: 'FETCH_ERROR'
     });
 
@@ -413,7 +446,7 @@ export const getTestResultByShareId = async shareId => {
     return {
       error: true,
       message: error.message || 'Failed to fetch test result',
-      shareId: shareId,
+      shareId: shareIdStr,
       errorId: errorInfo.timestamp, // 오류 추적을 위한 고유 ID
       timestamp: new Date().toISOString()
     };
