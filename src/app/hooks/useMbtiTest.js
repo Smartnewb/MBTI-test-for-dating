@@ -218,6 +218,27 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
           shareId: shareId
         };
 
+        // 세션 스토리지에 결과 저장 (클라이언트 사이드에서만)
+        if (typeof window !== 'undefined') {
+          try {
+            // 결과 저장
+            sessionStorage.setItem(`mbti_result_${shareId}`, JSON.stringify(resultWithShareId));
+            console.log('Result saved to session storage with key:', `mbti_result_${shareId}`);
+
+            // 최근 결과 ID 저장 (다른 페이지에서 참조할 수 있도록)
+            sessionStorage.setItem('mbti_latest_result_id', shareId);
+
+            // 백업 저장 (ID가 변경되어도 찾을 수 있도록)
+            const timestamp = new Date().getTime();
+            sessionStorage.setItem(`mbti_result_backup_${timestamp}`, JSON.stringify({
+              ...resultWithShareId,
+              timestamp
+            }));
+          } catch (storageError) {
+            console.warn('Failed to save result to session storage:', storageError);
+          }
+        }
+
         // 결과 페이지로 이동 (shareId를 포함한 URL 사용)
         const resultUrl = `/result/${shareId}`;
         console.log('Redirecting to:', resultUrl);

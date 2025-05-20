@@ -207,6 +207,56 @@ export const getTestResultByShareId = async shareId => {
 
     // 세션 스토리지에 없으면 데이터베이스에서 조회
     console.log('Fetching result from database with shareId:', shareId);
+
+    // 먼저 직접 테이블에서 조회 시도
+    let { data: directData, error: directError } = await supabase
+      .from('test_results')
+      .select('*')
+      .eq('share_id', shareId)
+      .single();
+
+    if (directError && directError.code !== 'PGRST116') { // PGRST116: 결과가 없는 경우
+      console.warn('Error fetching directly from test_results:', directError);
+    }
+
+    // 직접 조회 성공 시 데이터 변환
+    if (directData) {
+      console.log('Found result directly from test_results:', directData);
+
+      // 결과 데이터 변환
+      const directResult = {
+        id: directData.id,
+        mbtiType: directData.mbti_type,
+        scores: {
+          E: directData.e_score || 0,
+          I: directData.i_score || 0,
+          S: directData.s_score || 0,
+          N: directData.n_score || 0,
+          T: directData.t_score || 0,
+          F: directData.f_score || 0,
+          J: directData.j_score || 0,
+          P: directData.p_score || 0
+        },
+        dimensionScores: {
+          'E-I': directData.e_i_score,
+          'S-N': directData.s_n_score,
+          'T-F': directData.t_f_score,
+          'J-P': directData.j_p_score
+        },
+        createdAt: directData.created_at,
+        shareId: directData.share_id
+      };
+
+      return {
+        ...directResult,
+        idealType: getIdealType(directResult.mbtiType),
+        worstMatch: getWorstMatch(directResult.mbtiType),
+        source: 'database_direct'
+      };
+    }
+
+    // 직접 조회 실패 시 RPC 함수 사용
+    console.log('Direct query failed, trying RPC function');
     const { data, error } = await supabase.rpc('get_mbti_result_by_share_id', {
       share_uuid: shareId,
     });
@@ -217,11 +267,118 @@ export const getTestResultByShareId = async shareId => {
         shareId: shareId,
         errorType: 'FETCH_FAILURE'
       });
+      console.error('RPC function error:', error);
+
+      // 오류 발생 시 다시 직접 쿼리 시도 (UUID 형식 문제일 수 있음)
+      try {
+        console.log('Trying direct query again with string comparison');
+        const { data: fallbackData, error: fallbackError } = await supabase
+          .from('test_results')
+          .select('*')
+          .filter('share_id::text', 'eq', shareId)
+          .single();
+
+        if (!fallbackError && fallbackData) {
+          console.log('Found result with string comparison:', fallbackData);
+
+          // 결과 데이터 변환
+          const fallbackResult = {
+            id: fallbackData.id,
+            mbtiType: fallbackData.mbti_type,
+            scores: {
+              E: fallbackData.e_score || 0,
+              I: fallbackData.i_score || 0,
+              S: fallbackData.s_score || 0,
+              N: fallbackData.n_score || 0,
+              T: fallbackData.t_score || 0,
+              F: fallbackData.f_score || 0,
+              J: fallbackData.j_score || 0,
+              P: fallbackData.p_score || 0
+            },
+            dimensionScores: {
+              'E-I': fallbackData.e_i_score,
+              'S-N': fallbackData.s_n_score,
+              'T-F': fallbackData.t_f_score,
+              'J-P': fallbackData.j_p_score
+            },
+            createdAt: fallbackData.created_at,
+            shareId: fallbackData.share_id
+          };
+
+          return {
+            ...fallbackResult,
+            idealType: getIdealType(fallbackResult.mbtiType),
+            worstMatch: getWorstMatch(fallbackResult.mbtiType),
+            source: 'database_fallback'
+          };
+        }
+      } catch (fallbackError) {
+        console.error('Fallback query also failed:', fallbackError);
+      }
+
       throw error;
     }
 
     if (!data) {
       console.warn('No result found in database for shareId:', shareId);
+
+      // 마지막 시도: 모든 결과를 가져와서 ID 비교
+      try {
+        console.log('Last attempt: fetching recent results to find match');
+        const { data: allResults, error: allError } = await supabase
+          .from('test_results')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(10);
+
+        if (!allError && allResults && allResults.length > 0) {
+          console.log('Recent results:', allResults.map(r => ({ id: r.id, share_id: r.share_id })));
+
+          // shareId와 유사한 결과 찾기
+          const similarResult = allResults.find(r =>
+            r.share_id && r.share_id.toString().includes(shareId.substring(0, 8))
+          );
+
+          if (similarResult) {
+            console.log('Found similar result:', similarResult);
+
+            // 결과 데이터 변환
+            const recoveredResult = {
+              id: similarResult.id,
+              mbtiType: similarResult.mbti_type,
+              scores: {
+                E: similarResult.e_score || 0,
+                I: similarResult.i_score || 0,
+                S: similarResult.s_score || 0,
+                N: similarResult.n_score || 0,
+                T: similarResult.t_score || 0,
+                F: similarResult.f_score || 0,
+                J: similarResult.j_score || 0,
+                P: similarResult.p_score || 0
+              },
+              dimensionScores: {
+                'E-I': similarResult.e_i_score,
+                'S-N': similarResult.s_n_score,
+                'T-F': similarResult.t_f_score,
+                'J-P': similarResult.j_p_score
+              },
+              createdAt: similarResult.created_at,
+              shareId: similarResult.share_id,
+              recoveredFrom: shareId // 원래 요청한 ID 기록
+            };
+
+            return {
+              ...recoveredResult,
+              idealType: getIdealType(recoveredResult.mbtiType),
+              worstMatch: getWorstMatch(recoveredResult.mbtiType),
+              source: 'database_recovered'
+            };
+          }
+        }
+      } catch (lastError) {
+        console.error('Last attempt also failed:', lastError);
+      }
+
       return null;
     }
 

@@ -38,6 +38,8 @@ export default function SharedResultPage({ params }) {
       try {
         setIsLoading(true);
         console.log('Fetching shared result with ID:', shareId);
+        console.log('Current URL:', typeof window !== 'undefined' ? window.location.href : 'SSR');
+        console.log('Current pathname:', typeof window !== 'undefined' ? window.location.pathname : 'SSR');
 
         if (!shareId) {
           throw new Error('공유 ID가 없습니다.');
@@ -45,11 +47,12 @@ export default function SharedResultPage({ params }) {
 
         // 먼저 세션 스토리지에서 결과 확인 (클라이언트 사이드에서만)
         if (typeof window !== 'undefined') {
+          // 1. 정확한 ID로 결과 찾기
           const sessionResult = sessionStorage.getItem(`mbti_result_${shareId}`);
           if (sessionResult) {
             try {
               const parsedResult = JSON.parse(sessionResult);
-              console.log('Found result in session storage:', parsedResult);
+              console.log('Found result in session storage with exact ID:', parsedResult);
 
               if (parsedResult.mbtiType) {
                 setResult(parsedResult);
@@ -58,6 +61,95 @@ export default function SharedResultPage({ params }) {
               }
             } catch (parseError) {
               console.error('Error parsing session storage result:', parseError);
+            }
+          }
+
+          // 2. 최근 결과 ID로 찾기
+          const latestResultId = sessionStorage.getItem('mbti_latest_result_id');
+          if (latestResultId) {
+            console.log('Found latest result ID in session storage:', latestResultId);
+            const latestResult = sessionStorage.getItem(`mbti_result_${latestResultId}`);
+
+            if (latestResult) {
+              try {
+                const parsedLatestResult = JSON.parse(latestResult);
+                console.log('Found latest result in session storage:', parsedLatestResult);
+
+                if (parsedLatestResult.mbtiType) {
+                  // 현재 ID로 다시 저장 (캐싱)
+                  sessionStorage.setItem(`mbti_result_${shareId}`, JSON.stringify({
+                    ...parsedLatestResult,
+                    shareId: shareId, // 현재 ID로 업데이트
+                    recoveredFrom: latestResultId // 원래 ID 기록
+                  }));
+
+                  setResult({
+                    ...parsedLatestResult,
+                    shareId: shareId,
+                    recoveredFrom: latestResultId
+                  });
+                  setIsLoading(false);
+                  return;
+                }
+              } catch (parseError) {
+                console.error('Error parsing latest result:', parseError);
+              }
+            }
+          }
+
+          // 3. 백업 결과 찾기
+          console.log('Searching for backup results in session storage');
+          const backupKeys = [];
+
+          // 세션 스토리지의 모든 키 검색
+          for (let i = 0; i < sessionStorage.length; i++) {
+            const key = sessionStorage.key(i);
+            if (key && key.startsWith('mbti_result_backup_')) {
+              backupKeys.push(key);
+            }
+          }
+
+          // 백업 키가 있으면 가장 최근 것 사용
+          if (backupKeys.length > 0) {
+            console.log('Found backup keys:', backupKeys);
+
+            // 타임스탬프로 정렬 (최신순)
+            backupKeys.sort((a, b) => {
+              const timeA = parseInt(a.replace('mbti_result_backup_', ''));
+              const timeB = parseInt(b.replace('mbti_result_backup_', ''));
+              return timeB - timeA; // 내림차순 (최신순)
+            });
+
+            // 가장 최근 백업 사용
+            const latestBackupKey = backupKeys[0];
+            const backupResult = sessionStorage.getItem(latestBackupKey);
+
+            if (backupResult) {
+              try {
+                const parsedBackupResult = JSON.parse(backupResult);
+                console.log('Using latest backup result:', parsedBackupResult);
+
+                if (parsedBackupResult.mbtiType) {
+                  // 현재 ID로 다시 저장 (캐싱)
+                  sessionStorage.setItem(`mbti_result_${shareId}`, JSON.stringify({
+                    ...parsedBackupResult,
+                    shareId: shareId, // 현재 ID로 업데이트
+                    recoveredFrom: 'backup', // 백업에서 복구됨을 표시
+                    backupTimestamp: parsedBackupResult.timestamp
+                  }));
+
+                  setResult({
+                    ...parsedBackupResult,
+                    shareId: shareId,
+                    recoveredFrom: 'backup',
+                    backupTimestamp: parsedBackupResult.timestamp
+                  });
+                  setIsLoading(false);
+                  return;
+                }
+              } catch (parseError) {
+                console.error('Error parsing backup result:', parseError);
+              }
             }
           }
         }
