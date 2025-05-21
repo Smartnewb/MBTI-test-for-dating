@@ -164,7 +164,7 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
         scores: testResult.scores,
         mbtiType: testResult.mbtiType,
         userId: user?.id,
-        sessionId
+        sessionId,
       });
 
       // resultService의 saveTestResult 함수 호출
@@ -212,10 +212,12 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
         const shareId = saveResponse.shareId;
         console.log('Generated shareId:', shareId);
 
-        // 결과 객체에 shareId 추가
+        // 결과 객체에 shareId, idealType, worstMatch 추가
         const resultWithShareId = {
           ...testResult,
-          shareId: shareId
+          shareId: shareId,
+          idealType: saveResponse.idealType || ideal,
+          worstMatch: saveResponse.worstMatch || worst,
         };
 
         // 세션 스토리지에 결과 저장 (클라이언트 사이드에서만)
@@ -230,10 +232,13 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
 
             // 백업 저장 (ID가 변경되어도 찾을 수 있도록)
             const timestamp = new Date().getTime();
-            sessionStorage.setItem(`mbti_result_backup_${timestamp}`, JSON.stringify({
-              ...resultWithShareId,
-              timestamp
-            }));
+            sessionStorage.setItem(
+              `mbti_result_backup_${timestamp}`,
+              JSON.stringify({
+                ...resultWithShareId,
+                timestamp,
+              })
+            );
           } catch (storageError) {
             console.warn('Failed to save result to session storage:', storageError);
           }
@@ -258,11 +263,13 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
         const fallbackShareId = uuidv4();
         console.warn('Using fallback shareId:', fallbackShareId);
 
-        // 결과 객체에 임시 shareId 추가
+        // 결과 객체에 임시 shareId, idealType, worstMatch 추가
         const resultWithFallbackId = {
           ...testResult,
           shareId: fallbackShareId,
-          isFallback: true // 이 결과가 임시 ID를 사용하는 것을 표시
+          idealType: ideal,
+          worstMatch: worst,
+          isFallback: true, // 이 결과가 임시 ID를 사용하는 것을 표시
         };
 
         // 임시 ID를 사용하여 결과 페이지로 이동
@@ -271,7 +278,10 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
 
         if (typeof window !== 'undefined') {
           // 세션 스토리지에 임시 결과 저장 (페이지 새로고침 시에도 유지)
-          sessionStorage.setItem(`mbti_result_${fallbackShareId}`, JSON.stringify(resultWithFallbackId));
+          sessionStorage.setItem(
+            `mbti_result_${fallbackShareId}`,
+            JSON.stringify(resultWithFallbackId)
+          );
           window.location.href = fallbackUrl;
         } else {
           router.push(fallbackUrl);
@@ -282,10 +292,10 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
     } catch (error) {
       // 오류 로깅 및 추적
       const errorInfo = logError(error, 'finishTest', {
-        mbtiType: testResult?.mbtiType,
+        mbtiType: result?.mbtiType,
         userId: user?.id,
         sessionId,
-        errorType: 'TEST_COMPLETION_ERROR'
+        errorType: 'TEST_COMPLETION_ERROR',
       });
 
       // 오류 발생 시 임시 ID 생성하여 사용 (fallback)
@@ -298,9 +308,11 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
           mbtiType: 'XXXX', // 오류 표시용 임시 타입
           scores: { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 },
           shareId: errorFallbackId,
+          idealType: 'ENFP', // 기본 이상형
+          worstMatch: 'ESTJ', // 기본 최악의 궁합
           isFallback: true,
           error: error.message,
-          errorId: errorInfo.timestamp
+          errorId: errorInfo.timestamp,
         };
 
         if (typeof window !== 'undefined') {
@@ -314,7 +326,7 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
         // 이중 오류 발생 시 로깅
         logError(fallbackError, 'finishTest_fallback', {
           originalError: error.message,
-          errorType: 'FALLBACK_ERROR'
+          errorType: 'FALLBACK_ERROR',
         });
 
         console.error('Even fallback failed:', fallbackError);

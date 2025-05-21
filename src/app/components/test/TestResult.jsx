@@ -343,8 +343,26 @@ export default function TestResult({
 
   // MBTI 유형 설명 가져오기
   const mbtiDescription = getMbtiDescription(mbtiType);
-  const idealTypeDescription = getMbtiDescription(idealType);
-  const worstMatchDescription = getMbtiDescription(worstMatch);
+
+  // idealType과 worstMatch가 없는 경우 기본값 설정
+  const safeIdealType = idealType || (mbtiType ? (mbtiType === 'INFP' ? 'ENFJ' : 'ENFP') : 'ENFP');
+  const safeWorstMatch =
+    worstMatch || (mbtiType ? (mbtiType === 'ENFP' ? 'ISTJ' : 'ESTJ') : 'ESTJ');
+
+  // 설명 가져오기
+  const idealTypeDescription = getMbtiDescription(safeIdealType);
+  const worstMatchDescription = getMbtiDescription(safeWorstMatch);
+
+  // 콘솔에 디버그 정보 출력
+  console.log('MBTI 정보:', {
+    mbtiType,
+    idealType,
+    worstMatch,
+    safeIdealType,
+    safeWorstMatch,
+    hasIdealTypeDesc: !!idealTypeDescription,
+    hasWorstMatchDesc: !!worstMatchDescription,
+  });
 
   // MBTI 유형 색상 가져오기
   const mbtiColor = mbtiDescription?.color || '#6B3FA0';
@@ -772,7 +790,7 @@ export default function TestResult({
                       <>
                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                           <Typography variant="h6" color="secondary.main" sx={{ mr: 1 }}>
-                            {idealType}
+                            {safeIdealType}
                           </Typography>
                           <Typography variant="subtitle1">{idealTypeDescription.name}</Typography>
                         </Box>
@@ -802,7 +820,7 @@ export default function TestResult({
                       <>
                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
                           <Typography variant="h6" color="error" sx={{ mr: 1 }}>
-                            {worstMatch}
+                            {safeWorstMatch}
                           </Typography>
                           <Typography variant="subtitle1">{worstMatchDescription.name}</Typography>
                         </Box>

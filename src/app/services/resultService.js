@@ -40,8 +40,16 @@ export const saveTestResult = async (
       throw new Error('Invalid input: scores and mbtiType are required');
     }
 
-    if (!scores.E || !scores.I || !scores.S || !scores.N ||
-        !scores.T || !scores.F || !scores.J || !scores.P) {
+    if (
+      !scores.E ||
+      !scores.I ||
+      !scores.S ||
+      !scores.N ||
+      !scores.T ||
+      !scores.F ||
+      !scores.J ||
+      !scores.P
+    ) {
       console.warn('Some score values are missing or invalid:', scores);
       // 누락된 점수는 0으로 설정
       scores = {
@@ -113,7 +121,7 @@ export const saveTestResult = async (
         mbtiType,
         userId,
         sessionId: resultData.session_id,
-        saveTime
+        saveTime,
       });
 
       // 오류 발생 시에도 shareId 반환
@@ -133,6 +141,10 @@ export const saveTestResult = async (
 
     console.log('Generated share URL:', shareUrl);
 
+    // 이상형 및 최악의 궁합 계산
+    const idealType = getIdealType(mbtiType);
+    const worstMatch = getWorstMatch(mbtiType);
+
     // 저장 성공 시 반환 데이터
     return {
       success: true,
@@ -140,6 +152,9 @@ export const saveTestResult = async (
       shareId: shareId,
       shareUrl: shareUrl,
       sessionId: resultData.session_id,
+      mbtiType: mbtiType,
+      idealType: idealType,
+      worstMatch: worstMatch,
     };
   } catch (error) {
     // 오류 로깅 및 추적
@@ -148,8 +163,17 @@ export const saveTestResult = async (
       mbtiType,
       userId,
       sessionId,
-      errorType: 'SAVE_FAILURE'
+      errorType: 'SAVE_FAILURE',
     });
+
+    // 이상형 및 최악의 궁합 계산 (가능한 경우)
+    let idealType = null;
+    let worstMatch = null;
+
+    if (mbtiType && typeof mbtiType === 'string' && mbtiType.length === 4) {
+      idealType = getIdealType(mbtiType);
+      worstMatch = getWorstMatch(mbtiType);
+    }
 
     // 오류 발생 시에도 shareId 반환 (클라이언트에서 임시 저장 처리 가능하도록)
     return {
@@ -158,7 +182,10 @@ export const saveTestResult = async (
       shareId: shareId, // 오류 발생해도 shareId 반환
       errorCode: error.code || 'UNKNOWN_ERROR',
       errorId: errorInfo.timestamp, // 오류 추적을 위한 고유 ID
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
+      mbtiType: mbtiType,
+      idealType: idealType,
+      worstMatch: worstMatch,
     };
   }
 };
@@ -201,8 +228,10 @@ export const getTestResultByShareId = async shareId => {
           if (key && key.startsWith('mbti_result_')) {
             const keyId = key.replace('mbti_result_', '');
             // ID의 일부가 일치하는지 확인
-            if (keyId.includes(shareIdStr.substring(0, 8)) ||
-                shareIdStr.includes(keyId.substring(0, 8))) {
+            if (
+              keyId.includes(shareIdStr.substring(0, 8)) ||
+              shareIdStr.includes(keyId.substring(0, 8))
+            ) {
               console.log('Found similar session storage key:', key);
               finalSessionResult = sessionStorage.getItem(key);
               break;
@@ -242,7 +271,8 @@ export const getTestResultByShareId = async shareId => {
       .eq('share_id', shareIdStr)
       .single();
 
-    if (directError && directError.code !== 'PGRST116') { // PGRST116: 결과가 없는 경우
+    if (directError && directError.code !== 'PGRST116') {
+      // PGRST116: 결과가 없는 경우
       console.warn('Error fetching directly from test_results:', directError);
     }
 
@@ -262,23 +292,23 @@ export const getTestResultByShareId = async shareId => {
           T: directData.t_score || 0,
           F: directData.f_score || 0,
           J: directData.j_score || 0,
-          P: directData.p_score || 0
+          P: directData.p_score || 0,
         },
         dimensionScores: {
           'E-I': directData.e_i_score,
           'S-N': directData.s_n_score,
           'T-F': directData.t_f_score,
-          'J-P': directData.j_p_score
+          'J-P': directData.j_p_score,
         },
         createdAt: directData.created_at,
-        shareId: directData.share_id
+        shareId: directData.share_id,
       };
 
       return {
         ...directResult,
         idealType: getIdealType(directResult.mbtiType),
         worstMatch: getWorstMatch(directResult.mbtiType),
-        source: 'database_direct'
+        source: 'database_direct',
       };
     }
 
@@ -292,7 +322,7 @@ export const getTestResultByShareId = async shareId => {
       // 오류 로깅 및 추적
       logError(error, 'getTestResultByShareId', {
         shareId: shareId,
-        errorType: 'FETCH_FAILURE'
+        errorType: 'FETCH_FAILURE',
       });
       console.error('RPC function error:', error);
 
@@ -320,23 +350,23 @@ export const getTestResultByShareId = async shareId => {
               T: fallbackData.t_score || 0,
               F: fallbackData.f_score || 0,
               J: fallbackData.j_score || 0,
-              P: fallbackData.p_score || 0
+              P: fallbackData.p_score || 0,
             },
             dimensionScores: {
               'E-I': fallbackData.e_i_score,
               'S-N': fallbackData.s_n_score,
               'T-F': fallbackData.t_f_score,
-              'J-P': fallbackData.j_p_score
+              'J-P': fallbackData.j_p_score,
             },
             createdAt: fallbackData.created_at,
-            shareId: fallbackData.share_id
+            shareId: fallbackData.share_id,
           };
 
           return {
             ...fallbackResult,
             idealType: getIdealType(fallbackResult.mbtiType),
             worstMatch: getWorstMatch(fallbackResult.mbtiType),
-            source: 'database_fallback'
+            source: 'database_fallback',
           };
         }
       } catch (fallbackError) {
@@ -359,7 +389,10 @@ export const getTestResultByShareId = async shareId => {
           .limit(10);
 
         if (!allError && allResults && allResults.length > 0) {
-          console.log('Recent results:', allResults.map(r => ({ id: r.id, share_id: r.share_id })));
+          console.log(
+            'Recent results:',
+            allResults.map(r => ({ id: r.id, share_id: r.share_id }))
+          );
 
           // shareId와 유사한 결과 찾기
           const similarResult = allResults.find(r => {
@@ -387,24 +420,24 @@ export const getTestResultByShareId = async shareId => {
                 T: similarResult.t_score || 0,
                 F: similarResult.f_score || 0,
                 J: similarResult.j_score || 0,
-                P: similarResult.p_score || 0
+                P: similarResult.p_score || 0,
               },
               dimensionScores: {
                 'E-I': similarResult.e_i_score,
                 'S-N': similarResult.s_n_score,
                 'T-F': similarResult.t_f_score,
-                'J-P': similarResult.j_p_score
+                'J-P': similarResult.j_p_score,
               },
               createdAt: similarResult.created_at,
               shareId: similarResult.share_id,
-              recoveredFrom: shareIdStr // 원래 요청한 ID 기록
+              recoveredFrom: shareIdStr, // 원래 요청한 ID 기록
             };
 
             return {
               ...recoveredResult,
               idealType: getIdealType(recoveredResult.mbtiType),
               worstMatch: getWorstMatch(recoveredResult.mbtiType),
-              source: 'database_recovered'
+              source: 'database_recovered',
             };
           }
         }
@@ -422,7 +455,7 @@ export const getTestResultByShareId = async shareId => {
       ...data,
       idealType: getIdealType(data.mbtiType),
       worstMatch: getWorstMatch(data.mbtiType),
-      source: 'database' // 데이터베이스에서 가져온 결과임을 표시
+      source: 'database', // 데이터베이스에서 가져온 결과임을 표시
     };
 
     // 클라이언트 사이드에서는 세션 스토리지에도 저장 (캐싱)
@@ -439,7 +472,7 @@ export const getTestResultByShareId = async shareId => {
     // 오류 로깅 및 추적
     const errorInfo = logError(error, 'getTestResultByShareId', {
       shareId: shareIdStr,
-      errorType: 'FETCH_ERROR'
+      errorType: 'FETCH_ERROR',
     });
 
     // 오류 발생 시 오류 정보 반환
@@ -448,7 +481,7 @@ export const getTestResultByShareId = async shareId => {
       message: error.message || 'Failed to fetch test result',
       shareId: shareIdStr,
       errorId: errorInfo.timestamp, // 오류 추적을 위한 고유 ID
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
 };
