@@ -12,7 +12,7 @@ import TarotCard from '../TarotCard';
 import MysticalButton from '../MysticalButton';
 import RelationshipAdvice from './RelationshipAdvice';
 import { AnimatedElement } from '../animations';
-import { getMbtiDescription } from '../../utils/mbti';
+import { getMbtiDescription, MBTI_DESCRIPTIONS } from '../../utils/mbti';
 import useResponsive from '../../hooks/useResponsive';
 import { FlipCard, StarryBackground } from '../mystical';
 
@@ -425,17 +425,34 @@ export default function TestResult({
 
   // MBTI 유형 정보가 없는 경우
   if (!mbtiDescription) {
+    // XXXX 유형인 경우 특별 처리 (오류 상태)
+    const isErrorState = mbtiType === 'XXXX';
+    const errorDescription = isErrorState ? MBTI_DESCRIPTIONS.XXXX : null;
+
     return (
       <TarotCard variant="result" title="테스트 결과">
         <ResultContainer>
           <Typography variant="h4" sx={{ textAlign: 'center', my: 4 }}>
-            결과를 불러올 수 없습니다
+            {isErrorState ? '일시적인 오류가 발생했습니다' : '결과를 불러올 수 없습니다'}
           </Typography>
 
           {mbtiType && (
             <Typography variant="h5" sx={{ textAlign: 'center', mb: 4 }}>
-              당신의 MBTI 유형: {mbtiType}
+              {isErrorState
+                ? '테스트 결과를 처리하는 중 문제가 발생했습니다'
+                : `당신의 MBTI 유형: ${mbtiType}`}
             </Typography>
+          )}
+
+          {isErrorState && errorDescription && (
+            <Box sx={{ textAlign: 'center', mb: 4, px: 2 }}>
+              <Typography variant="body1" sx={{ mb: 2 }}>
+                {errorDescription.description}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                테스트를 다시 시도하면 정확한 결과를 얻을 수 있습니다.
+              </Typography>
+            </Box>
           )}
 
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>

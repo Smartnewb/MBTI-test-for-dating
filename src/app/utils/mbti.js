@@ -52,6 +52,15 @@ export const DIMENSION_DESCRIPTIONS = {
  * MBTI 유형 설명
  */
 export const MBTI_DESCRIPTIONS = {
+  // 오류 상태를 위한 특별 유형
+  XXXX: {
+    name: '분석 중',
+    description: '테스트 결과를 분석하는 중입니다. 일시적인 오류가 발생했을 수 있습니다.',
+    strengths: ['다시 시도하기', '인내심 갖기', '새로운 시작', '열린 마음'],
+    weaknesses: ['기술적 문제', '일시적 오류', '연결 문제', '데이터 손실'],
+    datingStyle: '테스트를 다시 시도하여 정확한 연애 스타일을 확인해보세요.',
+    color: '#6B3FA0', // 기본 보라색 사용
+  },
   INTJ: {
     name: '전략가',
     description: '독립적이고 분석적인 당신은 논리와 전략적 사고를 중요시합니다.',

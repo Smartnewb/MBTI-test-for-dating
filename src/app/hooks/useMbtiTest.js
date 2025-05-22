@@ -303,16 +303,33 @@ export default function useMbtiTest({ useSampleData = false, autoSave = true } =
         const errorFallbackId = uuidv4();
         console.warn('Using error fallback shareId:', errorFallbackId);
 
+        // 가능한 경우 기존 결과 데이터 활용
+        let fallbackMbtiType = 'XXXX'; // 기본 오류 표시용 타입
+        let fallbackScores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+
+        // 기존 결과가 있으면 활용
+        if (result && result.mbtiType && result.mbtiType.length === 4) {
+          fallbackMbtiType = result.mbtiType;
+          if (result.scores) {
+            fallbackScores = result.scores;
+          }
+        }
+
+        // 이상형 및 최악의 궁합 계산
+        const fallbackIdealType = getIdealType(fallbackMbtiType);
+        const fallbackWorstMatch = getWorstMatch(fallbackMbtiType);
+
         // 임시 결과 객체 생성
         const fallbackResult = {
-          mbtiType: 'XXXX', // 오류 표시용 임시 타입
-          scores: { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 },
+          mbtiType: fallbackMbtiType,
+          scores: fallbackScores,
           shareId: errorFallbackId,
-          idealType: 'ENFP', // 기본 이상형
-          worstMatch: 'ESTJ', // 기본 최악의 궁합
+          idealType: fallbackIdealType,
+          worstMatch: fallbackWorstMatch,
           isFallback: true,
           error: error.message,
           errorId: errorInfo.timestamp,
+          errorRecovery: fallbackMbtiType !== 'XXXX', // 복구 성공 여부
         };
 
         if (typeof window !== 'undefined') {
